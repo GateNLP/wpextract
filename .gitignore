@@ -2,6 +2,7 @@
 test_site/
 *.ipynb
 /*.csv
+/out.json
 
 ## == PYCHARM ==
 .idea/

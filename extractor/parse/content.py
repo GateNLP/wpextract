@@ -99,9 +99,7 @@ def extract_images(doc: BeautifulSoup, self_netloc: str) -> Images:
     return media_uses
 
 
-def extract_content_data(
-    doc: BeautifulSoup, self_link: str
-) -> pd.Series[str, InternalLinks, ExternalLinks, Embeds, Images]:
+def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
     """Extract the links, embeds, images and text content of the document.
 
     Args:

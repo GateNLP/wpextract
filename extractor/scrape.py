@@ -23,7 +23,7 @@ def find_path(scrape_root: Path, link: str) -> Optional[Path]:
         # /scrape/my/path/.html
         PosixPath('/scrape/my/path.index.html')
 
-    # TODO: try trimming bits of path off and see if it results in an HTML file
+    # TODO: Eliminate this by pre-crawling scrape and collecting canonical URLs
 
     Args:
         scrape_root: The path of a scrape folder

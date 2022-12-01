@@ -1,15 +1,13 @@
-from typing import List, Optional
+from typing import Optional
 
 import pandas as pd
 from bs4 import BeautifulSoup
-from langcodes import Language
 
 import extractor.parse.translations._pickers as pickers
-from extractor.parse.translations._resolver import TranslationLink
 
 RESOLVERS = [pickers.Polylang, pickers.GenericLangSwitcher]
 
-PageTranslationData = pd.Series[Optional[Language], Optional[List[TranslationLink]]]
+PageTranslationData = pd.Series
 
 
 def extract_translations(page_doc: Optional[BeautifulSoup]) -> PageTranslationData:
