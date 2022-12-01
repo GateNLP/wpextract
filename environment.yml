@@ -1,0 +1,10 @@
+name: ps
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pandas
+  - ca-certificates
+  - openssl
+  - pytest
+  - pytest-datadir
