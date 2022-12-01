@@ -8,3 +8,15 @@ dependencies:
   - openssl
   - pytest
   - pytest-datadir
+  - tqdm
+  - langcodes
+  - beautifulsoup4
+  - lxml
+  # Dev dependencies:
+  - black
+  - flake8
+  - flake8-isort
+  - flake8-docstrings
+  - flake8-bugbear
+  - flake8-rst-docstrings
+  - darglint
