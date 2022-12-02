@@ -7,6 +7,7 @@ from pandas import DataFrame
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.media import load_media
 from extractor.extractors.posts import load_posts
+from extractor.extractors.tags import load_tags
 from extractor.scrape.crawler import ScrapeCrawl
 from extractor.util.file import prefix_filename
 from extractor.util.json import export_df
@@ -41,6 +42,8 @@ class WPExtractor:
         self._extract_media()
         logging.info("Beginning post extraction")
         self._extract_posts()
+        logging.info("Beginning tag extraction")
+        self._extract_tags()
 
     def _crawl_scrape(self):
         crawl = ScrapeCrawl(self.scrape_root)
@@ -55,7 +58,12 @@ class WPExtractor:
         json_file = self.json_root / prefix_filename("media.json", self.json_prefix)
         self.media = load_media(json_file)
 
+    def _extract_tags(self):
+        json_file = self.json_root / prefix_filename("tags.json", self.json_prefix)
+        self.tags = load_tags(json_file, self.link_registry)
+
     def export(self, out_dir: Path) -> None:
         """Save scrape results to ``out_dir``."""
         export_df(self.posts, out_dir / "posts.json")
         export_df(self.media, out_dir / "media.json")
+        export_df(self.tags, out_dir / "tags.json")

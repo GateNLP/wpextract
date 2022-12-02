@@ -5,6 +5,8 @@ from langcodes import standardize_tag, tag_is_valid
 
 from extractor.util.str import remove_ends
 
+EXCLUDED_TAGS = {"tag"}  # Tagoi
+
 
 def extract_locale(link: str) -> Optional[str]:
     """Extract a locale string from a URL.
@@ -31,7 +33,11 @@ def extract_locale(link: str) -> Optional[str]:
     path_stripped = remove_ends(parsed_link.path, "/")
     path_parts = path_stripped.split("/")
 
-    if len(path_parts) > 1 and tag_is_valid(path_parts[0]):
+    if (
+        len(path_parts) > 1
+        and tag_is_valid(path_parts[0])
+        and not path_parts[0] in EXCLUDED_TAGS
+    ):
         return standardize_tag(path_parts[0])
 
     return None
