@@ -3,7 +3,7 @@ from typing import Optional
 
 from bs4 import Tag
 
-from extractor.links import Linkable
+from extractor.extractors.data.links import Linkable
 
 
 def get_caption(img: Tag) -> Optional[str]:

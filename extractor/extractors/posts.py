@@ -4,7 +4,7 @@ from typing import Dict
 import pandas as pd
 from tqdm.auto import tqdm
 
-from extractor.links import LinkRegistry
+from extractor.extractors.data.links import LinkRegistry
 from extractor.parse.content import extract_content_data
 from extractor.parse.translations import extract_translations
 from extractor.scrape.scrape import load_scrape
@@ -55,7 +55,7 @@ def load_posts(
     The JSON file is expected to be in the response format of the WordPress posts API.
 
     Args:
-        path: The path to the JSON file on disk
+        path: The path to the JSON file
         link_registry: The Link Registry to populate
         scrape_urls_files: A dictionary of site URLs to scrape file paths
 

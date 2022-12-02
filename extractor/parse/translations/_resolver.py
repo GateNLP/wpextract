@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from langcodes import Language
 
-from extractor.links import ResolvableLink
+from extractor.extractors.data.links import ResolvableLink
 
 
 @dataclass

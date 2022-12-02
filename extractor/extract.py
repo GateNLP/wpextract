@@ -1,10 +1,12 @@
+import logging
 from pathlib import Path
 from typing import Dict, Optional
 
 from pandas import DataFrame
 
-from extractor.links import LinkRegistry
-from extractor.posts import load_posts
+from extractor.extractors.data.links import LinkRegistry
+from extractor.extractors.media import load_media
+from extractor.extractors.posts import load_posts
 from extractor.scrape.crawler import ScrapeCrawl
 from extractor.util.file import prefix_filename
 from extractor.util.json import export_df
@@ -33,7 +35,11 @@ class WPExtractor:
 
     def extract(self) -> None:
         """Perform the extraction."""
+        logging.info("Beginning scrape crawl")
         self._crawl_scrape()
+        logging.info("Beginning media extraction")
+        self._extract_media()
+        logging.info("Beginning post extraction")
         self._extract_posts()
 
     def _crawl_scrape(self):
@@ -45,6 +51,11 @@ class WPExtractor:
         json_file = self.json_root / prefix_filename("posts.json", self.json_prefix)
         self.posts = load_posts(json_file, self.link_registry, self.scrape_url_mapping)
 
+    def _extract_media(self):
+        json_file = self.json_root / prefix_filename("media.json", self.json_prefix)
+        self.media = load_media(json_file)
+
     def export(self, out_dir: Path) -> None:
         """Save scrape results to ``out_dir``."""
         export_df(self.posts, out_dir / "posts.json")
+        export_df(self.media, out_dir / "media.json")

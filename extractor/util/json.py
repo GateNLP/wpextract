@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 from typing import Any, List
 
+import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from pandas import Timestamp as PdTimestamp
@@ -94,6 +95,31 @@ def df_denormalize_to_dict(df: pd.DataFrame, sep: str = "."):
     return result
 
 
+def _remove_nan(value: Any) -> Any:
+    """Replaces NA and NaN values with None.
+
+    Supports replacing the values of lists and dictionaries.
+
+    Args:
+        value: The value to check
+
+    Returns:
+        The value with NA and NaN replaced.
+    """
+    if type(value) == dict:
+        for dkey, dvalue in value.items():
+            value[dkey] = _remove_nan(dvalue)
+    elif type(value) == list:
+        for i, item in enumerate(value):
+            value[i] = _remove_nan(item)
+    elif type(value) == float and value is np.NaN:
+        value = None
+    elif value is pd.NA:
+        value = None
+
+    return value
+
+
 class JSONEncoder(json.JSONEncoder):
     """Custom JSONEncoder to serialise site data."""
 
@@ -116,7 +142,7 @@ class JSONEncoder(json.JSONEncoder):
 
 def _export_file(raw: Any, path: Path):
     with open(path, "w") as f:
-        json.dump(raw, f, cls=JSONEncoder, indent=2)
+        json.dump(raw, f, cls=JSONEncoder, indent=2, allow_nan=False)
 
 
 def export_df(df: DataFrame, path: Path) -> None:
@@ -129,5 +155,5 @@ def export_df(df: DataFrame, path: Path) -> None:
         path: the destination path
     """
     out_df = df.reset_index(names="id")
-    denormalized = df_denormalize_to_dict(out_df)
+    denormalized = _remove_nan(df_denormalize_to_dict(out_df))
     _export_file(denormalized, path)

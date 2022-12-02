@@ -5,8 +5,8 @@ from typing import List, Tuple
 import pandas as pd
 from bs4 import BeautifulSoup, NavigableString
 
-from extractor.images import MediaUse, ResolvableMediaUse, get_caption
-from extractor.links import Link, ResolvableLink
+from extractor.extractors.data.images import MediaUse, ResolvableMediaUse, get_caption
+from extractor.extractors.data.links import Link, ResolvableLink
 
 EXCLUDED_CONTENT_TAGS = {"figcaption"}
 
