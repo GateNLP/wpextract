@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from extractor.util.html import extract_html_text
-from extractor.util.json import load_df
+from extractor.extractors.io import load_df
+from extractor.parse.html import extract_html_text
 
 EXPORT_COLUMNS = [
     "alt_text",

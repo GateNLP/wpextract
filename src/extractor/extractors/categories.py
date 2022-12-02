@@ -3,7 +3,7 @@ from pathlib import Path
 import numpy as np
 
 from extractor.extractors.data.links import LinkRegistry
-from extractor.util.json import load_df
+from extractor.extractors.io import load_df
 from extractor.util.locale import extract_locale
 
 EXPORT_COLUMNS = [

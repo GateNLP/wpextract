@@ -5,11 +5,11 @@ import pandas as pd
 from tqdm.auto import tqdm
 
 from extractor.extractors.data.links import LinkRegistry
+from extractor.extractors.io import load_df
 from extractor.parse.content import extract_content_data
+from extractor.parse.html import extract_html_text, parse_html
 from extractor.parse.translations import extract_translations
 from extractor.scrape.scrape import load_scrape
-from extractor.util.html import extract_html_text, parse_html
-from extractor.util.json import load_df
 from extractor.util.locale import extract_locale
 
 EXPORT_COLUMNS = [

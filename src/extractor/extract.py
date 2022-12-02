@@ -5,12 +5,12 @@ from typing import Dict, Optional
 from pandas import DataFrame
 
 from extractor.extractors.data.links import LinkRegistry
+from extractor.extractors.io import export_df
 from extractor.extractors.media import load_media
 from extractor.extractors.posts import load_posts
 from extractor.extractors.tags import load_tags
 from extractor.scrape.crawler import ScrapeCrawl
 from extractor.util.file import prefix_filename
-from extractor.util.json import export_df
 
 
 class WPExtractor:
