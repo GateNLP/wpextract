@@ -1,7 +1,11 @@
+import dataclasses
 import json
 from pathlib import Path
+from typing import Any, List
 
 import pandas as pd
+from pandas import DataFrame
+from pandas import Timestamp as PdTimestamp
 
 
 def load_from_path(path: Path) -> dict:
@@ -33,3 +37,97 @@ def load_df(path: Path, index_col: str = "id") -> pd.DataFrame:
     data_raw = load_from_path(path)
 
     return pd.json_normalize(data_raw).set_index(index_col)
+
+
+def _set_nested_keys(row_dict: dict, split_key: List[str], val: Any):
+    """Set a value in the dictionary with nested keys.
+
+    Args:
+        row_dict: The dictionary to set the value
+        split_key: A list of 0 or more nested keys
+        val: The value to set
+
+    Raises:
+        ValueError: If part of the nested key is already set to a value (for example,
+            the dataframe has columns ``a`` and ``a.b``)
+
+    Returns:
+        The dictionary with the nested value set
+    """
+    current = row_dict
+    for i in range(len(split_key)):
+        key = split_key[i]
+        if key not in current:
+            if i == len(split_key) - 1:
+                current[key] = val
+            else:
+                current[key] = {}
+        else:
+            if type(current[key]) is not dict:
+                raise ValueError(f"Dictionary key {current[key]} is already set.")
+
+        current = current[key]
+
+    return row_dict
+
+
+def df_denormalize_to_dict(df: pd.DataFrame, sep: str = "."):
+    """Unflatten a dataframe with dot notation keys into a nested dictionary.
+
+    Opposite of ``pd.json_normalize``.
+
+    Args:
+        df: the dataframe
+        sep: the key separator
+
+    Returns:
+        A list of dictionaries with unflattened keys.
+    """
+    result = []
+    for _, row in df.iterrows():
+        parsed_row = {}
+        for idx, val in row.items():
+            keys = str(idx).split(sep)
+            parsed_row = _set_nested_keys(parsed_row, keys, val)
+
+        result.append(parsed_row)
+    return result
+
+
+class JSONEncoder(json.JSONEncoder):
+    """Custom JSONEncoder to serialise site data."""
+
+    def default(self, o: Any) -> Any:
+        """Serialise custom objects.
+
+        .. list-table
+            :header-rows: 1
+            * Type, Strategy
+            * - ``pd.Timestamp``, ``isoformat()``
+            * - Dataclasses, ``dataclasses.asdict()``
+        """
+        if type(o) == PdTimestamp:
+            return o.isoformat()
+        if dataclasses.is_dataclass(o):
+            return dataclasses.asdict(o)
+
+        return super().default(o)
+
+
+def _export_file(raw: Any, path: Path):
+    with open(path, "w") as f:
+        json.dump(raw, f, cls=JSONEncoder, indent=2)
+
+
+def export_df(df: DataFrame, path: Path) -> None:
+    """Export a dataframe to the path as JSON.
+
+    Nests dot-notation columns into nested dictionaries.
+
+    Args:
+        df: the dataframe
+        path: the destination path
+    """
+    out_df = df.reset_index(names="id")
+    denormalized = df_denormalize_to_dict(out_df)
+    _export_file(denormalized, path)

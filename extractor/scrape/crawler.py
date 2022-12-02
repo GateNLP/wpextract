@@ -63,6 +63,7 @@ class ScrapeCrawl:
     def crawl(self) -> None:
         """Perform the crawl or use the cached result."""
         if self.crawled:
+            logging.info("Skipping scrape crawl, cached results available.")
             return
 
         files = list(self.root_path.glob("**/*.html"))
@@ -88,3 +89,17 @@ class ScrapeCrawl:
             self.found_pages[relative_path] = doc_url
 
         self._export()
+
+    def get_link_abs_path(self) -> Dict[str, Path]:
+        """Get the mapping as original link to absolute file path.
+
+        Absolute paths are resolved with the ``root_path`` and relative path from the
+        crawl. Webpages may not exist if the crawl was loaded from cache.
+
+        Returns:
+            Dictionary of URLs to absolute paths.
+        """
+        return {
+            link: (self.root_path / Path(relative_path)).resolve()
+            for relative_path, link in self.found_pages.items()
+        }

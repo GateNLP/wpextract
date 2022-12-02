@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Dict
 
 import pandas as pd
 from tqdm.auto import tqdm
@@ -11,7 +12,7 @@ from extractor.util.html import extract_html_text, parse_html
 from extractor.util.json import load_df
 from extractor.util.locale import extract_locale
 
-EXPORT_COLUMNS = {
+EXPORT_COLUMNS = [
     "author",
     "categories",
     "comment_status",
@@ -36,7 +37,7 @@ EXPORT_COLUMNS = {
     "title.rendered",
     "title.text",
     "yoast_head_json.title",
-}
+]
 
 RENAME_COLUMNS = {
     "title.rendered": "title.html",
@@ -47,7 +48,7 @@ RENAME_COLUMNS = {
 
 
 def load_posts(
-    path: Path, link_registry: LinkRegistry, scrape_root: Path
+    path: Path, link_registry: LinkRegistry, scrape_urls_files: Dict[str, Path]
 ) -> pd.DataFrame:
     """Load the posts from a JSON file.
 
@@ -56,13 +57,12 @@ def load_posts(
     Args:
         path: The path to the JSON file on disk
         link_registry: The Link Registry to populate
-        scrape_root: The root directory of the site scrape
+        scrape_urls_files: A dictionary of site URLs to scrape file paths
 
     Returns:
         A dataframe of the posts.
     """
-    # TODO: remove head
-    posts_df = load_df(path).head(10)
+    posts_df = load_df(path)
 
     # Convert times
     posts_df["date_gmt"] = pd.to_datetime(posts_df["date_gmt"])
@@ -85,7 +85,7 @@ def load_posts(
 
     tqdm.pandas(desc="Parsing Scrape")
     posts_df["scrape_bs"] = posts_df["link"].progress_apply(
-        lambda link: load_scrape(scrape_root, link)
+        lambda link: load_scrape(scrape_urls_files, link)
     )
     posts_df[["language", "translations"]] = posts_df["scrape_bs"].apply(
         extract_translations

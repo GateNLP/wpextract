@@ -92,9 +92,9 @@ def extract_images(doc: BeautifulSoup, self_netloc: str) -> Images:
         }
 
         if src_parsed.netloc == self_netloc:
-            media_uses.append(ResolvableMediaUse(*media_data))
+            media_uses.append(ResolvableMediaUse(**media_data))
         else:
-            media_uses.append(MediaUse(*media_data))
+            media_uses.append(MediaUse(**media_data))
 
     return media_uses
 
