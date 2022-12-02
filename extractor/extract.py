@@ -17,6 +17,9 @@ class WPExtractor:
     """Main class to extract data."""
 
     posts: DataFrame
+    media: DataFrame
+    tags: DataFrame
+    categories: DataFrame
     scrape_url_mapping: Dict[str, Path]
 
     def __init__(
@@ -44,6 +47,8 @@ class WPExtractor:
         self._extract_posts()
         logging.info("Beginning tag extraction")
         self._extract_tags()
+        logging.info("Beginning categories extraction")
+        self._extract_categories()
 
     def _crawl_scrape(self):
         crawl = ScrapeCrawl(self.scrape_root)
@@ -62,8 +67,15 @@ class WPExtractor:
         json_file = self.json_root / prefix_filename("tags.json", self.json_prefix)
         self.tags = load_tags(json_file, self.link_registry)
 
+    def _extract_categories(self):
+        json_file = self.json_root / prefix_filename(
+            "categories.json", self.json_prefix
+        )
+        self.categories = load_tags(json_file, self.link_registry)
+
     def export(self, out_dir: Path) -> None:
         """Save scrape results to ``out_dir``."""
         export_df(self.posts, out_dir / "posts.json")
         export_df(self.media, out_dir / "media.json")
         export_df(self.tags, out_dir / "tags.json")
+        export_df(self.categories, out_dir / "categories.json")
