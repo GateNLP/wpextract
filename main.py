@@ -1,15 +1,21 @@
-from pathlib import Path
+import argparse
 
 from tqdm.auto import tqdm
 
-from extractor.links import LinkRegistry
-from extractor.posts import load_posts
+from extractor.util.args import directory, empty_directory
 
 tqdm.pandas()
 
-links = LinkRegistry()
-df = load_posts(
-    Path("test_site/json/20221125-waronfakes/20221125-waronfakes-posts.json"),
-    links,
-    Path("test_site/web/20221125-waronfakes"),
-)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        prog="wordpress-site-extractor",
+        description="Extracts posts from wordpress dump",
+    )
+
+    parser.add_argument("json_root", help="JSON dump of the site", type=directory)
+    parser.add_argument("scrape_dir", help="HTML scrape of the site", type=directory)
+    parser.add_argument("out_dir", help="Output directory", type=empty_directory)
+
+    args = parser.parse_args()
+
+    print(args)
