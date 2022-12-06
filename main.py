@@ -1,9 +1,17 @@
 import argparse
+import os
+import sys
 
 from tqdm.auto import tqdm
 
-from extractor.extract import WPExtractor
-from extractor.util.args import directory, empty_directory
+try:
+    from extractor.extract import WPExtractor
+    from extractor.util.args import directory, empty_directory
+except ImportError:
+    sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/src")
+    from extractor.extract import WPExtractor
+    from extractor.util.args import directory, empty_directory
+
 
 tqdm.pandas()
 

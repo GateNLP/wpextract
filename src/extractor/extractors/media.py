@@ -1,6 +1,8 @@
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
+from bs4 import Tag
 
 from extractor.extractors.io import load_df
 from extractor.parse.html import extract_html_text
@@ -84,3 +86,30 @@ def load_media(path: Path) -> pd.DataFrame:
     media_df = media_df.rename(columns=RENAME_COLUMNS)
 
     return media_df
+
+
+def get_caption(img: Tag) -> Optional[str]:
+    """Get the caption of an image tag.
+
+    Searches adjacent tags for a <figcaption>.
+
+    TODO: A heuristic to find likely non-figcaption captions.
+
+    Raises:
+        ValueError: if a non-image tag is passed.
+
+    Args:
+        img: An img tag
+
+    Returns:
+        The caption text or None if there is no caption.
+    """
+    if img.name != "img":
+        raise ValueError("Attempting to get caption of non-image")
+
+    caption = img.parent.find("figcaption")
+
+    if caption is None:
+        return None
+
+    return caption.get_text()

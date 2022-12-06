@@ -12,3 +12,7 @@ isort:
 
 .PHONY: lint
 lint: isort black flake8
+
+.PHONY: test
+test:
+	pytest

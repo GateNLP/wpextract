@@ -5,6 +5,7 @@ from typing import Any, List
 
 import numpy as np
 import pandas as pd
+from langcodes import Language
 from pandas import DataFrame
 from pandas import Timestamp as PdTimestamp
 
@@ -136,6 +137,8 @@ class JSONEncoder(json.JSONEncoder):
             return o.isoformat()
         if dataclasses.is_dataclass(o):
             return dataclasses.asdict(o)
+        if type(o) == Language:
+            return str(o)
 
         return super().default(o)
 

@@ -27,6 +27,8 @@ def extract_translations(page_doc: Optional[BeautifulSoup]) -> PageTranslationDa
         if not resolver.matches():
             continue
 
+        resolver.extract()
+
         return pd.Series([resolver.current_language, resolver.translations])
 
     return pd.Series([None, None])

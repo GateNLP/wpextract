@@ -11,7 +11,7 @@ class LangPicker(ABC):
     """Abstract class of a language picker style."""
 
     root_el: Tag
-    translations: List[TranslationLink] = []
+    translations: List[TranslationLink]
     current_language: Language
 
     def __init__(self, page_doc: BeautifulSoup):
@@ -21,6 +21,7 @@ class LangPicker(ABC):
             page_doc: The document to extract a language picker from.
         """
         self.page_doc = page_doc
+        self.translations = []
 
     def matches(self) -> bool:
         """Checks if this picker can extract from the document.
@@ -40,6 +41,7 @@ class LangPicker(ABC):
 
         if type(root) is Tag or len(root.children) == 1:
             self.root_el = root
+            return True
         else:
             raise TypeError(f"Root is not a tag, is {type(root)}")
 
@@ -108,7 +110,7 @@ class Polylang(LangPicker):
         Returns:
             The .widget_polylang tag
         """
-        return self.page_doc.find(".widget_polylang")
+        return self.page_doc.select_one(".widget_polylang")
 
     def extract(self) -> None:
         """Extract the translation links.
@@ -121,7 +123,7 @@ class Polylang(LangPicker):
             will usually go to the language's homepage
         * have the ``.current-lang`` class - this is the current language.
         """
-        current_lang = self.root_el.find(".lang-item.current-lang a")
+        current_lang = self.root_el.select_one(".lang-item.current-lang a")
         self.set_current_lang(current_lang["lang"])
 
         other_langs = self.root_el.select(
@@ -158,7 +160,7 @@ class GenericLangSwitcher(LangPicker):
         Returns:
             The lang switcher root.
         """
-        return self.page_doc.find(".header-lang_switcher")
+        return self.page_doc.select_one(".header-lang_switcher")
 
     def extract(self) -> None:
         """Extract the translation links.
@@ -167,10 +169,10 @@ class GenericLangSwitcher(LangPicker):
         * have the ``.no-translation`` class
         * have the ``current-lang`` class
         """
-        current_lang = self.root_el.find(".current-lang-switcher")
-        self.set_current_lang(current_lang.get_text())
+        current_lang = self.root_el.select_one(".current-lang-switcher")
+        self.set_current_lang(current_lang.get_text().strip())
 
-        other_langs = self.root_el.select(".lang-item:not(.no-translation)")
+        other_langs = self.root_el.select(".lang-item:not(.no-translation) a")
 
         for lang_a in other_langs:
             href = lang_a["href"]

@@ -1,12 +1,13 @@
 import copy
-import urllib.parse
 from typing import List, Tuple
+from urllib.parse import urljoin, urlparse, urlunparse
 
 import pandas as pd
 from bs4 import BeautifulSoup, NavigableString
 
-from extractor.extractors.data.images import MediaUse, ResolvableMediaUse, get_caption
+from extractor.extractors.data.images import MediaUse, ResolvableMediaUse
 from extractor.extractors.data.links import Link, ResolvableLink
+from extractor.extractors.media import get_caption
 
 EXCLUDED_CONTENT_TAGS = {"figcaption"}
 
@@ -15,13 +16,13 @@ ExternalLinks = List[Link]
 
 
 def extract_links(
-    doc: BeautifulSoup, self_netloc: str
+    doc: BeautifulSoup, self_link: str
 ) -> Tuple[InternalLinks, ExternalLinks]:
     """Get the internal and external links of the document.
 
     Args:
         doc: A parsed document
-        self_netloc: The netloc that should be considered internal
+        self_link: The netloc that should be considered internal
 
     Returns:
         A list of internal and a list of external link objects.
@@ -36,12 +37,12 @@ def extract_links(
             external_links.append(Link(link.get_text(), None))
             continue
 
-        href_parsed = urllib.parse.urlparse(link["href"])
-
-        if href_parsed.netloc == self_netloc:
+        href_parsed = urlparse(urljoin(self_link, link["href"]))
+        self_link_parsed = urlparse(self_link)
+        if href_parsed.netloc == self_link_parsed.netloc:
             internal_links.append(
                 ResolvableLink(
-                    text=link.get_text(), href=link["href"], destination=None
+                    text=link.get_text(), href=urlunparse(href_parsed), destination=None
                 )
             )
         else:
@@ -62,7 +63,7 @@ def extract_embeds(doc: BeautifulSoup) -> Embeds:
     Returns:
         A list of URLs
     """
-    return [iframe["src"] for iframe in doc.find_all("iframes")]
+    return [iframe["src"] for iframe in doc.find_all("iframe")]
 
 
 Images = List[MediaUse]
@@ -83,7 +84,7 @@ def extract_images(doc: BeautifulSoup, self_netloc: str) -> Images:
     media_uses = []
 
     for img in images:
-        src_parsed = urllib.parse.urlparse(img["src"])
+        src_parsed = urlparse(img["src"])
 
         media_data = {
             "src": img["src"],
@@ -109,9 +110,9 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
     Returns:
         A series with the text, internal links, external links, embeds and images.
     """
-    self_netloc = urllib.parse.urlparse(self_link).netloc
+    self_netloc = urlparse(self_link).netloc
 
-    internal_links, external_links = extract_links(doc, self_netloc)
+    internal_links, external_links = extract_links(doc, self_link)
     embeds = extract_embeds(doc)
     images = extract_images(doc, self_netloc)
 

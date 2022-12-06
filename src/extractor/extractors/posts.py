@@ -24,6 +24,7 @@ EXPORT_COLUMNS = [
     "excerpt.text",
     "featured_media",
     "images",
+    "language",
     "link",
     "link_locale",
     "links.external",
@@ -36,6 +37,7 @@ EXPORT_COLUMNS = [
     "tags",
     "title.rendered",
     "title.text",
+    "translations",
     "yoast_head_json.title",
 ]
 

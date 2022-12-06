@@ -29,7 +29,11 @@ class ResolvableLink(Link):
 class LinkRegistry:
     """A collection of all known links on the site."""
 
-    links: List[Linkable] = []
+    links: List[Linkable]
+
+    def __init__(self):
+        """Init a new registry."""
+        self.links = []
 
     def add_linkable(self, url: str, data_type: str, idx: str) -> None:
         """Add a single linkable item to the registry.
