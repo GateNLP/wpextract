@@ -3,7 +3,6 @@ from datetime import datetime
 import pandas as pd
 import pytest
 
-from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.media import load_media
 
 

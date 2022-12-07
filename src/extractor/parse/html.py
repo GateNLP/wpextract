@@ -2,6 +2,8 @@ import re
 
 from bs4 import BeautifulSoup
 
+from extractor.util.str import squash_whitespace
+
 PROBABLY_HTML = re.compile(r"<|&\S+;")
 
 
@@ -32,4 +34,4 @@ def extract_html_text(html: str) -> str:
     if PROBABLY_HTML.search(html) is None:
         return html
 
-    return parse_html(html).get_text().strip()
+    return squash_whitespace(parse_html(html).get_text())

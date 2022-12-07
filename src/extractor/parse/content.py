@@ -8,8 +8,10 @@ from bs4 import BeautifulSoup, NavigableString
 from extractor.extractors.data.images import MediaUse, ResolvableMediaUse
 from extractor.extractors.data.links import Link, ResolvableLink
 from extractor.extractors.media import get_caption
+from extractor.util.str import squash_whitespace
 
 EXCLUDED_CONTENT_TAGS = {"figcaption"}
+
 
 InternalLinks = List[ResolvableLink]
 ExternalLinks = List[Link]
@@ -36,18 +38,22 @@ def extract_links(
 
     for link in links:
         if not link.has_attr("href"):
-            external_links.append(Link(link.get_text(), None))
+            external_links.append(Link(squash_whitespace(link.get_text()), None))
             continue
 
         href_parsed = urlparse(urljoin(self_link, link["href"]))
         if href_parsed.netloc == self_link_parsed.netloc:
             internal_links.append(
                 ResolvableLink(
-                    text=link.get_text(), href=urlunparse(href_parsed), destination=None
+                    text=squash_whitespace(link.get_text()),
+                    href=urlunparse(href_parsed),
+                    destination=None,
                 )
             )
         else:
-            external_links.append(Link(text=link.get_text(), href=link["href"]))
+            external_links.append(
+                Link(text=squash_whitespace(link.get_text()), href=link["href"])
+            )
 
     return internal_links, external_links
 
@@ -125,6 +131,6 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
         if child.name in EXCLUDED_CONTENT_TAGS:
             child.extract()
 
-    content_text = "\n".join([text for text in doc_c.stripped_strings])
+    content_text = squash_whitespace(doc_c.get_text())
 
     return pd.Series([content_text, internal_links, external_links, embeds, images])

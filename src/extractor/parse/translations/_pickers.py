@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup, PageElement, Tag
 from langcodes import Language
 
 from extractor.parse.translations._resolver import TranslationLink
+from extractor.util.str import squash_whitespace
 
 
 class LangPicker(ABC):
@@ -170,7 +171,7 @@ class GenericLangSwitcher(LangPicker):
         * have the ``current-lang`` class
         """
         current_lang = self.root_el.select_one(".current-lang-switcher")
-        self.set_current_lang(current_lang.get_text().strip())
+        self.set_current_lang(squash_whitespace(current_lang.get_text()))
 
         other_langs = self.root_el.select(".lang-item:not(.no-translation) a")
 
