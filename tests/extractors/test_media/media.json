@@ -1,0 +1,126 @@
+[
+  {
+    "id": 1,
+    "date": "2022-12-07T10:00:00",
+    "date_gmt": "2022-12-07T10:00:00",
+    "guid": {
+      "rendered": "https://example.or/wp-content/uploads/2022/12/test-image.jpg"
+    },
+    "modified": "2022-12-07T10:00:00",
+    "modified_gmt": "2022-12-07T10:00:00",
+    "slug": "test-image",
+    "status": "inherit",
+    "type": "attachment",
+    "link": "https://waronfakes.com/some-post/attachment/test-image/",
+    "title": {
+      "rendered": "test-image"
+    },
+    "author": 1,
+    "comment_status": "closed",
+    "ping_status": "closed",
+    "template": "",
+    "meta": [],
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "test-image - example.org",
+      "robots": {
+        "index": "noindex",
+        "follow": "follow"
+      },
+      "og_locale": "en_US",
+      "og_type": "article",
+      "og_title": "40-5 - waronfakes.com",
+      "og_url": "https://example.org/wp-content/uploads/2022/12/test-image.jpg",
+      "og_site_name": "waronfakes.com",
+      "og_image": [
+        {
+          "width": 500,
+          "height": 500,
+          "url": "https://waronfakes.com/wp-content/uploads/2022/12/test-image.jpg",
+          "type": "image/jpeg"
+        }
+      ],
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "description": {
+      "rendered": "<p class=\"attachment\"><a href='https://waronfakes.com/wp-content/uploads/2022/12/test-image.jpg'><img /></a> Some Text</p>\n"
+    },
+    "caption": {
+      "rendered": "<p>Some <em>caption text</em></p>"
+    },
+    "alt_text": "",
+    "media_type": "image",
+    "mime_type": "image/jpeg",
+    "media_details": {
+      "width": 500,
+      "height": 500,
+      "file": "2022/12/test-image.jpg",
+      "filesize": 40000,
+      "sizes": {
+        "medium": {
+          "file": "test-image-300x300.jpg",
+          "width": 300,
+          "height": 300,
+          "filesize": 21000,
+          "mime_type": "image/jpeg",
+          "source_url": "https://example.org/wp-content/uploads/2022/12/test-image-300x300.jpg"
+        },
+        "thumbnail": {
+          "file": "test-image-150x150.jpg",
+          "width": 150,
+          "height": 150,
+          "filesize": 7000,
+          "mime_type": "image/jpeg",
+          "source_url": "https://example.org/wp-content/uploads/2022/12/test-image-150x150.jpg"
+        },
+        "full": {
+          "file": "test-image.jpg",
+          "width": 500,
+          "height": 500,
+          "mime_type": "image/jpeg",
+          "source_url": "https://waronfakes.com/wp-content/uploads/2022/12/test-image.jpg"
+        }
+      },
+      "image_meta": {
+        "aperture": "0",
+        "credit": "",
+        "camera": "",
+        "caption": "",
+        "created_timestamp": "0",
+        "copyright": "",
+        "focal_length": "0",
+        "iso": "0",
+        "shutter_speed": "0",
+        "title": "",
+        "orientation": "0",
+        "keywords": []
+      }
+    },
+    "post": 1,
+    "source_url": "https://example.org/wp-content/uploads/2022/12/test-image.jpg",
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/media/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/media"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/types/attachment"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://example.org/wp-json/wp/v2/users/1"
+        }
+      ]
+    }
+  }
+]

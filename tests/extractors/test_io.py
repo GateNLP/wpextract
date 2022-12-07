@@ -43,4 +43,6 @@ def test_export_df(datadir, tmp_path):
     out_path = tmp_path / "out.json"
     export_df(df, out_path)
     assert out_path.exists()
-    assert out_path.read_text() == (datadir / "expected_export.json").read_text()
+
+    out_loaded = load_df(out_path)
+    assert df.equals(out_loaded)

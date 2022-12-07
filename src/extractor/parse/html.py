@@ -32,4 +32,4 @@ def extract_html_text(html: str) -> str:
     if PROBABLY_HTML.search(html) is None:
         return html
 
-    return parse_html(html).get_text()
+    return parse_html(html).get_text().strip()
