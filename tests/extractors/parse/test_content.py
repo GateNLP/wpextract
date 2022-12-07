@@ -2,17 +2,20 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+from extractor.extractors.data.images import MediaUse, ResolvableMediaUse
 from extractor.extractors.data.links import Link, ResolvableLink
-from extractor.parse.content import extract_embeds, extract_links
+from extractor.parse.content import (
+    extract_content_data,
+    extract_embeds,
+    extract_images,
+    extract_links,
+)
 
 
 def test_extract_links(datadir: Path):
     doc = BeautifulSoup((datadir / "links.html").read_text(), "lxml")
 
     internal, external = extract_links(doc, "https://example.org/home")
-
-    print(internal)
-    print(external)
 
     assert internal == [
         ResolvableLink(
@@ -39,3 +42,44 @@ def test_extract_embeds(datadir: Path):
     embeds = extract_embeds(doc)
 
     assert embeds == ["https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"]
+
+
+def test_extract_images(datadir: Path):
+    doc = BeautifulSoup((datadir / "images.html").read_text(), "lxml")
+
+    images = extract_images(doc, "https://example.org/home")
+
+    assert images == [
+        ResolvableMediaUse(
+            src="https://example.org/justimg.png", alt="The alt text", caption=None
+        ),
+        ResolvableMediaUse(
+            src="https://example.org/img-fig.png",
+            alt="The alt text",
+            caption="A caption",
+        ),
+        ResolvableMediaUse(
+            src="https://example.org/relative-img.png",
+            alt="A relative image",
+            caption=None,
+        ),
+        MediaUse(
+            src="https://example.com/external-img.png",
+            alt="An external image",
+            caption=None,
+        ),
+    ]
+
+
+def test_extract_content(datadir: Path):
+    doc = BeautifulSoup((datadir / "content_extraction.html").read_text(), "lxml")
+
+    content_series = extract_content_data(doc, "https://example.org/home")
+    text = content_series[0]
+
+    assert (
+        text == "The first paragraph.\n"
+        "The second paragraph.\n"
+        "Not in a paragraph.\n"
+        "Heavily nested."
+    )

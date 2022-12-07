@@ -22,7 +22,7 @@ def extract_links(
 
     Args:
         doc: A parsed document
-        self_link: The netloc that should be considered internal
+        self_link: The link of the page
 
     Returns:
         A list of internal and a list of external link objects.
@@ -32,13 +32,14 @@ def extract_links(
 
     links = doc.find_all("a")
 
+    self_link_parsed = urlparse(self_link)
+
     for link in links:
         if not link.has_attr("href"):
             external_links.append(Link(link.get_text(), None))
             continue
 
         href_parsed = urlparse(urljoin(self_link, link["href"]))
-        self_link_parsed = urlparse(self_link)
         if href_parsed.netloc == self_link_parsed.netloc:
             internal_links.append(
                 ResolvableLink(
@@ -69,12 +70,12 @@ def extract_embeds(doc: BeautifulSoup) -> Embeds:
 Images = List[MediaUse]
 
 
-def extract_images(doc: BeautifulSoup, self_netloc: str) -> Images:
+def extract_images(doc: BeautifulSoup, self_link: str) -> Images:
     """Get a list of images in the document.
 
     Args:
         doc: A parsed document
-        self_netloc: The netloc of the page.
+        self_link: The link of the page.
 
     Returns:
         A list of MediaUse objects. Internal images are returned as ResolvableMedia.
@@ -83,16 +84,18 @@ def extract_images(doc: BeautifulSoup, self_netloc: str) -> Images:
 
     media_uses = []
 
+    self_link_parsed = urlparse(self_link)
+
     for img in images:
-        src_parsed = urlparse(img["src"])
+        src_parsed = urlparse(urljoin(self_link, img["src"]))
 
         media_data = {
-            "src": img["src"],
+            "src": urlunparse(src_parsed),
             "alt": img.get("alt"),
             "caption": get_caption(img),
         }
 
-        if src_parsed.netloc == self_netloc:
+        if src_parsed.netloc == self_link_parsed.netloc:
             media_uses.append(ResolvableMediaUse(**media_data))
         else:
             media_uses.append(MediaUse(**media_data))
@@ -110,20 +113,18 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
     Returns:
         A series with the text, internal links, external links, embeds and images.
     """
-    self_netloc = urlparse(self_link).netloc
-
     internal_links, external_links = extract_links(doc, self_link)
     embeds = extract_embeds(doc)
-    images = extract_images(doc, self_netloc)
+    images = extract_images(doc, self_link)
 
     doc_c = copy.copy(doc)
-    for child in doc_c.children:
+    for child in doc_c.descendants:
         if type(child) == NavigableString:
             continue
 
         if child.name in EXCLUDED_CONTENT_TAGS:
             child.extract()
 
-    content_text = doc_c.get_text()
+    content_text = "\n".join([text for text in doc_c.stripped_strings])
 
     return pd.Series([content_text, internal_links, external_links, embeds, images])

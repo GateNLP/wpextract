@@ -107,7 +107,12 @@ def get_caption(img: Tag) -> Optional[str]:
     if img.name != "img":
         raise ValueError("Attempting to get caption of non-image")
 
-    caption = img.parent.find("figcaption")
+    parent_caption = img.find_parent("figure")
+
+    if parent_caption is None:
+        return None
+
+    caption = parent_caption.find("figcaption")
 
     if caption is None:
         return None
