@@ -29,12 +29,15 @@ def test_ensure_suffix():
     assert ensure_suffix("pythonfoo", "foo") == "pythonfoo"
 
 
-@pytest.mark.parametrize("trial,expected,message", [
-    ("foo\n\nbar", "foo\nbar", "should remove adjacent newlines"),
-    ("  foo  ", "foo", "should remove start and end whitespace"),
-    ("foo\n bar", "foo\nbar", "should remove start of line whitespace"),
-    ("foo\n\t\tbar", "foo\nbar", "should remove tabs"),
-    ("foo\n  \nbar", "foo\nbar", "should remove whitespace-only lines")
-])
+@pytest.mark.parametrize(
+    ("trial", "expected", "message"),
+    [
+        ("foo\n\nbar", "foo\nbar", "should remove adjacent newlines"),
+        ("  foo  ", "foo", "should remove start and end whitespace"),
+        ("foo\n bar", "foo\nbar", "should remove start of line whitespace"),
+        ("foo\n\t\tbar", "foo\nbar", "should remove tabs"),
+        ("foo\n  \nbar", "foo\nbar", "should remove whitespace-only lines"),
+    ],
+)
 def test_squash_whitespace(trial, expected, message):
     assert squash_whitespace(trial) == expected, message
