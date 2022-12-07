@@ -56,3 +56,8 @@ MANIFEST
 
 # Jupyter Notebook
 .ipynb_checkpoints
+
+
+## == JAVASCRIPT ==
+
+node_modules/

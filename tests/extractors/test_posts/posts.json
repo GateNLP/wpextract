@@ -29,12 +29,8 @@
     "template": "",
     "format": "standard",
     "meta": [],
-    "categories": [
-      1
-    ],
-    "tags": [
-      1
-    ],
+    "categories": [1],
+    "tags": [1],
     "yoast_head": "<!-- whole load of stuff -->",
     "yoast_head_json": {
       "title": "An Example Post - example.org",
@@ -164,12 +160,8 @@
     "template": "",
     "format": "standard",
     "meta": [],
-    "categories": [
-      2
-    ],
-    "tags": [
-      2
-    ],
+    "categories": [2],
+    "tags": [2],
     "yoast_head": "<!-- whole load of stuff -->",
     "yoast_head_json": {
       "title": "An Example Post Translation - example.org",
@@ -193,7 +185,7 @@
           "url": "https://example.org/wp-content/uploads/2022/12/og-image-large.jpg",
           "type": "image/jpeg"
         },
-       {
+        {
           "width": 250,
           "height": 250,
           "url": "https://example.org/wp-content/uploads/2022/12/og-image-small.jpg",
@@ -305,12 +297,8 @@
     "template": "",
     "format": "standard",
     "meta": [],
-    "categories": [
-      1
-    ],
-    "tags": [
-      1
-    ],
+    "categories": [1],
+    "tags": [1],
     "yoast_head": "<!-- whole load of stuff -->",
     "yoast_head_json": {
       "title": "An Unrelated Post - example.org",
