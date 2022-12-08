@@ -1,4 +1,5 @@
 from typing import List, Optional
+from urllib.parse import urlparse, urlunparse
 
 from extractor.extractors.data.links import LinkRegistry, ResolvableLink
 
@@ -20,10 +21,17 @@ def resolve_link(
     if link.destination is not None:
         return link
 
-    linkable = registry.query_link(link.href)
+    href_parsed = urlparse(link.href)
+    if "preview_id" in href_parsed.query:
+        href_parsed = href_parsed._replace(query="")
+        href = urlunparse(href_parsed)
+    else:
+        href = link.href
+
+    linkable = registry.query_link(href)
 
     if linkable is None:
-        print(f"Could not find link {link.href}")
+        print(f"Could not find link {href}")
         return link
 
     link.destination = linkable
