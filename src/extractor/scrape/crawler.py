@@ -6,7 +6,7 @@ from typing import Dict, List
 from bs4 import BeautifulSoup
 from tqdm.auto import tqdm
 
-from extractor.scrape.processor import extract_self_url
+from extractor.scrape.processor import extract_self_url, self_url_strainer
 
 
 class ScrapeCrawl:
@@ -25,8 +25,8 @@ class ScrapeCrawl:
             not be discovered.
     """
 
-    found_pages: Dict[str, str] = {}
-    failed_docs: List[str] = []
+    found_pages: Dict[str, str]
+    failed_docs: List[str]
     crawled = False
 
     def __init__(self, root_path: Path):
@@ -42,6 +42,8 @@ class ScrapeCrawl:
             raise ValueError(f"Root path {root_path} is not a directory")
 
         self.root_path = root_path
+        self.found_pages = {}
+        self.failed_docs = []
 
         if self._get_cache_path().is_file():
             self._import()
@@ -71,7 +73,7 @@ class ScrapeCrawl:
         for path in tqdm(files, desc="Crawling Scrape"):
             relative_path = str(path.relative_to(self.root_path))
 
-            doc = BeautifulSoup(path.read_text(), "lxml")
+            doc = BeautifulSoup(path.read_text(), "lxml", parse_only=self_url_strainer)
             doc_url = extract_self_url(doc)
 
             if doc_url is None:

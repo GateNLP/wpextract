@@ -1,7 +1,9 @@
 import urllib.parse
 from typing import Optional
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, SoupStrainer
+
+self_url_strainer = SoupStrainer(["head", "link", "meta"])
 
 
 def _is_url_valid(url: str) -> bool:
