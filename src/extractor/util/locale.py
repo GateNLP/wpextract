@@ -34,8 +34,7 @@ def extract_locale(link: str) -> Optional[str]:
     path_parts = path_stripped.split("/")
 
     if (
-        len(path_parts) > 1
-        and tag_is_valid(path_parts[0])
+        tag_is_valid(path_parts[0])
         and not path_parts[0] in EXCLUDED_TAGS
     ):
         return standardize_tag(path_parts[0])
