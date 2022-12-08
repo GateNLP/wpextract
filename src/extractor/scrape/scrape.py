@@ -71,7 +71,7 @@ def load_scrape(
         link: The link of the page to find.
 
     Returns:
-        The parsed document or None if it ould not be found.
+        The parsed document or None if it could not be found.
     """
     path = scrape_urls_files.get(link)
 

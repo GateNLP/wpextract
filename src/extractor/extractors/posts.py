@@ -2,8 +2,10 @@ from pathlib import Path
 from typing import Dict
 
 import pandas as pd
+from pandas import DataFrame
 from tqdm.auto import tqdm
 
+from extractor.extractors.data.link_resolver import resolve_links
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.io import load_df
 from extractor.parse.content import extract_content_data
@@ -106,5 +108,22 @@ def load_posts(
 
     posts_df = posts_df[EXPORT_COLUMNS]
     posts_df = posts_df.rename(columns=RENAME_COLUMNS)
+
+    return posts_df
+
+
+def resolve_post_links(registry: LinkRegistry, posts_df: DataFrame):
+    """Look up the internal links of each post in the registry.
+
+    Args:
+        registry: A filled link registry
+        posts_df: The processed posts dataframe
+
+    Returns:
+        The posts dataframe with link data resolved.
+    """
+    posts_df["links.internal"] = posts_df["links.internal"].apply(
+        lambda links: resolve_links(registry, links)
+    )
 
     return posts_df

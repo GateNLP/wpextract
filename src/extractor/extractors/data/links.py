@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 
 @dataclass
@@ -30,12 +30,15 @@ class LinkRegistry:
     """A collection of all known links on the site."""
 
     links: List[Linkable]
+    url_index_cache: Dict[str, int]
 
     def __init__(self):
         """Init a new registry."""
         self.links = []
 
-    def add_linkable(self, url: str, data_type: str, idx: str) -> None:
+    def add_linkable(
+        self, url: str, data_type: str, idx: str, _refresh_cache=True
+    ) -> None:
         """Add a single linkable item to the registry.
 
         The URL will be compared later against a list of links that
@@ -48,8 +51,13 @@ class LinkRegistry:
             url: The URL of the destination
             data_type: A unique identifier for this type of item.
             idx: A unique identifier within the data type.
+            _refresh_cache: Whether the link cache should be updated. Should be left as
+                True unless multiple links are being added together.
         """
         self.links.append(Linkable(link=url, data_type=data_type, idx=idx))
+
+        if _refresh_cache:
+            self._refresh_cache()
 
     def add_linkables(self, data_type: str, links: List[str], idxes: List[str]) -> None:
         """Add multiple linkable items at once.
@@ -69,4 +77,29 @@ class LinkRegistry:
             )
 
         for link, idx in zip(links, idxes):
-            self.add_linkable(data_type=data_type, url=link, idx=idx)
+            self.add_linkable(
+                data_type=data_type, url=link, idx=idx, _refresh_cache=False
+            )
+        self._refresh_cache()
+
+    def _refresh_cache(self):
+        self.url_index_cache = {}
+
+        for i, link in enumerate(self.links):
+            self.url_index_cache[link.link] = i
+
+    def query_link(self, href: str) -> Optional[Linkable]:
+        """Find a linkable item by the URL in the registry.
+
+        Returns None if no URL matches.
+
+        Args:
+            href: A URL to search
+
+        Returns:
+            A matching linkable
+        """
+        if href in self.url_index_cache:
+            return self.links[self.url_index_cache[href]]
+        else:
+            return None

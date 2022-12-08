@@ -7,7 +7,7 @@ from tqdm.auto import tqdm
 try:
     from extractor.extract import WPExtractor
     from extractor.util.args import directory, empty_directory
-except ImportError:
+except ModuleNotFoundError:
     sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/src")
     from extractor.extract import WPExtractor
     from extractor.util.args import directory, empty_directory
