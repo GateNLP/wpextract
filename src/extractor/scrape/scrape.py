@@ -1,4 +1,4 @@
-import urllib.parse
+import logging
 from pathlib import Path
 from typing import Dict, Optional
 
@@ -20,7 +20,7 @@ def load_scrape(
     path = scrape_urls_files.get(link)
 
     if path is None:
-        print("Failed to resolve link", link)
+        logging.debug(f"Unable to find scrape file for {link}")
         return None
 
     html_raw = path.read_text()

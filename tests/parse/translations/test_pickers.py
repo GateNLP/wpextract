@@ -29,8 +29,6 @@ def test_picker(datadir: Path, picker_cls: Type[pickers.LangPicker], picker_file
         == Language.get("en-US", normalize=True).language
     )
 
-    print(picker.translations[0])
-
     assert picker.translations[0] == TranslationLink(
         text=None,
         href="https://example.org/fr/translation-page/",

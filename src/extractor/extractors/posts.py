@@ -91,8 +91,8 @@ def load_posts(
     posts_df["scrape_bs"] = posts_df["link"].progress_apply(
         lambda link: load_scrape(scrape_urls_files, link)
     )
-    posts_df[["language", "translations"]] = posts_df["scrape_bs"].apply(
-        extract_translations
+    posts_df[["language", "translations"]] = posts_df.apply(
+        lambda r: extract_translations(r["scrape_bs"], r["link"]), axis=1
     )
 
     link_registry.add_linkables(

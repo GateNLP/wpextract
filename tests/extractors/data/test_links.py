@@ -17,8 +17,6 @@ LINKS = [f"https://example.org/post{idx}" for idx in IDXES]
 
 def test_add_links():
     r = LinkRegistry()
-    print(r.links)
-    print(LINKS, IDXES)
     r.add_linkables("post", LINKS, IDXES)
 
     assert len(r.links) == 3

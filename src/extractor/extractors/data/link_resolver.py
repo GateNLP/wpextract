@@ -1,3 +1,4 @@
+import logging
 from typing import List, Optional
 from urllib.parse import urlparse, urlunparse
 
@@ -31,7 +32,7 @@ def resolve_link(
     linkable = registry.query_link(href)
 
     if linkable is None:
-        print(f"Could not find link {href}")
+        logging.debug(f"Could not resolve link {href}")
         return link
 
     link.destination = linkable

@@ -13,7 +13,7 @@ from extractor.extractors.posts import load_posts
 from extractor.parse.translations._resolver import TranslationLink
 
 
-def mock_translation_extractor(post_bs: BeautifulSoup):
+def mock_translation_extractor(post_bs: BeautifulSoup, link: str):
     id_meta = post_bs.find("meta", attrs={"name": "post_id_for_mock"})
     post_id = int(id_meta["content"])
     if post_id == 1:
@@ -129,7 +129,6 @@ def test_translations(posts_df):
         None if translation is None else len(translation)
         for translation in posts_df["translations"]
     ]
-    print(translations)
     assert translations == [1, 1, None]
 
 

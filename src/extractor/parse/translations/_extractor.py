@@ -1,3 +1,4 @@
+import logging
 from typing import Optional
 
 import pandas as pd
@@ -10,11 +11,14 @@ RESOLVERS = [pickers.Polylang, pickers.GenericLangSwitcher]
 PageTranslationData = pd.Series
 
 
-def extract_translations(page_doc: Optional[BeautifulSoup]) -> PageTranslationData:
+def extract_translations(
+    page_doc: Optional[BeautifulSoup], link: str
+) -> PageTranslationData:
     """Get a list of URLs linked as translations.
 
     Args:
         page_doc: The full scrape document
+        link: The link to the post
 
     Returns:
         The doc's language and list of translation links
@@ -30,5 +34,7 @@ def extract_translations(page_doc: Optional[BeautifulSoup]) -> PageTranslationDa
         resolver.extract()
 
         return pd.Series([resolver.current_language, resolver.translations])
+
+    logging.debug(f"No resolvers matched {link}, unable to extract translations.")
 
     return pd.Series([None, None])

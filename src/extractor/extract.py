@@ -42,6 +42,7 @@ class WPExtractor:
 
     def extract(self) -> None:
         """Perform the extraction."""
+        logging.info("Beginning extraction")
         logging.info("Beginning scrape crawl")
         self._crawl_scrape()
         logging.info("Beginning media extraction")
@@ -52,8 +53,14 @@ class WPExtractor:
         self._extract_tags()
         logging.info("Beginning categories extraction")
         self._extract_categories()
+        logging.info("Beginning user extraction")
+        self._extract_users()
         logging.info("Beginning post link matching")
         self._resolve_post_links()
+        logging.info("Extraction complete")
+
+    def _prefix_filename(self, file_name):
+        return prefix_filename(file_name, self.json_prefix)
 
     def _crawl_scrape(self):
         crawl = ScrapeCrawl(self.scrape_root)
@@ -61,25 +68,23 @@ class WPExtractor:
         self.scrape_url_mapping = crawl.get_link_abs_path()
 
     def _extract_posts(self):
-        json_file = self.json_root / prefix_filename("posts.json", self.json_prefix)
+        json_file = self.json_root / self._prefix_filename("posts.json")
         self.posts = load_posts(json_file, self.link_registry, self.scrape_url_mapping)
 
     def _extract_media(self):
-        json_file = self.json_root / prefix_filename("media.json", self.json_prefix)
+        json_file = self.json_root / self._prefix_filename("media.json")
         self.media = load_media(json_file)
 
     def _extract_tags(self):
-        json_file = self.json_root / prefix_filename("tags.json", self.json_prefix)
+        json_file = self.json_root / self._prefix_filename("tags.json")
         self.tags = load_tags(json_file, self.link_registry)
 
     def _extract_categories(self):
-        json_file = self.json_root / prefix_filename(
-            "categories.json", self.json_prefix
-        )
+        json_file = self.json_root / self._prefix_filename("categories.json")
         self.categories = load_tags(json_file, self.link_registry)
 
     def _extract_users(self):
-        json_file = self.json_root / prefix_filename("users.json", self.json_prefix)
+        json_file = self.json_root / self._prefix_filename("users.json")
         self.users = load_users(json_file)
 
     def _resolve_post_links(self):
@@ -87,8 +92,10 @@ class WPExtractor:
 
     def export(self, out_dir: Path) -> None:
         """Save scrape results to ``out_dir``."""
-        export_df(self.posts, out_dir / "posts.json")
-        export_df(self.media, out_dir / "media.json")
-        export_df(self.tags, out_dir / "tags.json")
-        export_df(self.categories, out_dir / "categories.json")
-        export_df(self.users, out_dir / "users.json")
+        logging.info("Beginning export")
+        export_df(self.posts, out_dir / self._prefix_filename("posts.json"))
+        export_df(self.media, out_dir / self._prefix_filename("media.json"))
+        export_df(self.tags, out_dir / self._prefix_filename("tags.json"))
+        export_df(self.categories, out_dir / self._prefix_filename("categories.json"))
+        export_df(self.users, out_dir / self._prefix_filename("users.json"))
+        logging.info("Completed export")
