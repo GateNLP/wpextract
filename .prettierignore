@@ -1,3 +1,4 @@
-/**/*.*
-!tests/**/*.html
-!tests/**/*.json
+out/*
+Pipfile.lock
+.pytest_cache/*
+test_site/*

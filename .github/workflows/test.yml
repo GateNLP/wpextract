@@ -2,39 +2,38 @@ name: Python application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.8"
-        cache: "pipenv"
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
-    - name: Install Pipenv
-      run: python -m pip install --upgrade pipenv wheel
-    - name: Install Python dependencies
-      run: pipenv install --deploy --dev
-    - name: Install Node dependencies
-      run: npm ci
-    - name: Lint with Black
-      run: pipenv run black --check .
-    - name: Lint with Flake8
-      run: pipenv run flake8 .
-    - name: Lint with Prettier
-      run: npx prettier --check .
-    - name: Tests
-      run: pipenv run pytest
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.8"
+          cache: "pipenv"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install Pipenv
+        run: python -m pip install --upgrade pipenv wheel
+      - name: Install Python dependencies
+        run: pipenv install --deploy --dev
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Lint with Black
+        run: pipenv run black --check .
+      - name: Lint with Flake8
+        run: pipenv run flake8 .
+      - name: Lint with Prettier
+        run: npx prettier --check .
+      - name: Tests
+        run: pipenv run pytest
