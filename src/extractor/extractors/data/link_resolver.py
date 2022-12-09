@@ -32,7 +32,7 @@ def resolve_link(
     linkable = registry.query_link(href)
 
     if linkable is None:
-        logging.debug(f"Could not resolve link \"{href}\"")
+        logging.debug(f'Could not resolve link "{href}"')
         return link
 
     link.destination = linkable

@@ -20,7 +20,7 @@ def load_scrape(
     path = scrape_urls_files.get(link)
 
     if path is None:
-        logging.debug(f"Unable to find scrape file for \"{link}\"")
+        logging.debug(f'Unable to find scrape file for "{link}"')
         return None
 
     html_raw = path.read_text()

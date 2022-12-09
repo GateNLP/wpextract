@@ -78,7 +78,7 @@ class ScrapeCrawl:
 
             if doc_url is None:
                 self.failed_docs.append(path)
-                logging.warning(f"Failed to find self-URL in doc \"{path}\"")
+                logging.warning(f'Failed to find self-URL in doc "{path}"')
                 continue
 
             if doc_url in self.found_pages:
