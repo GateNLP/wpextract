@@ -35,6 +35,6 @@ jobs:
     - name: Lint with Flake8
       run: pipenv run flake8 .
     - name: Lint with Prettier
-      run: npx prettier .
+      run: npx prettier --check .
     - name: Tests
       run: pipenv run pytest
