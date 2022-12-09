@@ -35,6 +35,6 @@ def extract_translations(
 
         return pd.Series([resolver.current_language, resolver.translations])
 
-    logging.debug(f"No resolvers matched {link}, unable to extract translations.")
+    logging.debug(f"No resolvers matched \"{link}\", unable to extract translations.")
 
     return pd.Series([None, None])

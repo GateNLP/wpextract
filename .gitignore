@@ -4,6 +4,7 @@ test_site/
 /*.csv
 out/
 /out.json
+*.log
 
 ## == PYCHARM ==
 .idea/
