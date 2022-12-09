@@ -1,18 +1,11 @@
 import argparse
 import logging
-import os
-import sys
 
 from tqdm.auto import tqdm
 from tqdm.contrib.logging import logging_redirect_tqdm
 
-try:
-    from extractor.extract import WPExtractor
-    from extractor.util.args import directory, empty_directory
-except ModuleNotFoundError:
-    sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/src")
-    from extractor.extract import WPExtractor
-    from extractor.util.args import directory, empty_directory
+from extractor.extract import WPExtractor
+from extractor.util.args import directory, empty_directory
 
 
 def _do_extract(args):
@@ -25,7 +18,8 @@ def _do_extract(args):
     extractor.export(args.out_dir)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Entrypoint for CLI."""
     parser = argparse.ArgumentParser(
         prog="wordpress-site-extractor",
         description="Extracts posts from wordpress dump",

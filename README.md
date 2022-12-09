@@ -4,13 +4,22 @@ Processes a scraped WordPress site, including text extraction and internal link 
 
 ## Installing
 
-Prerequisites:
+1. Download and extract the project
+2. Create a virtual environment (with `venv`, `Pipenv` or a similar tool)
+3. Run `python setup.py` to install the package and dependencies
+4. Check it has installed with `wpextract --help`
 
-- Python 3.8 (does not have to be the active Python, it just has to be available somewhere)
+### Installing Development Environment
+
+**Prerequisites**:
+
+- Python 3.8
 - Pipenv
 
 1. Clone the repository
-2. Run `pipenv install`
+2. Run `pipenv install --dev`
+   - You may need to add the argument `--python path/to/bin/python` if Python 3.8 is not on your path
+3. Run the CLI with the `wpextract-dev` helper
 
 ## Input Format
 
@@ -71,7 +80,7 @@ Finally, you could run a standard recursive `wget` scrape, although this is less
 To run the tool, use the `main.py` script:
 
 ```shell
-python main.py path_to_json/ path_to_scrape/ path_to_out/
+wpextract path_to_json/ path_to_scrape/ path_to_out/
 ```
 
 ### JSON Prefixes
@@ -79,7 +88,7 @@ python main.py path_to_json/ path_to_scrape/ path_to_out/
 If the JSON files have a name prefix (e.g. `20221209-exampleorg-posts.json`, use the `--json-prefix` argument:
 
 ```shell
-python main.py path_to_json/ path_to_scrape/ path_to_out/ --json-prefix 202212-09-exampleorg-
+wpextract path_to_json/ path_to_scrape/ path_to_out/ --json-prefix 202212-09-exampleorg-
 ```
 
 This prefix will also be added to the output files.
@@ -95,4 +104,6 @@ Basic progress logging and tqdm progress bars are shown in stdout and stderr res
 
 The extractor can also be used as a library instead of on the command line.
 
-The [`main.py`](main.py) CLI tool simply instantiates an instance of [`WPExtractor`](src/extractor/extract.py) and calls its `extract()` and `export()` methods. If using as a library, the `extract()` function could be called and the dataframes could be retrieved from the class's attributes.
+Typically, you would instantiate a new [`WPExtractor`](src/extractor/extract.py) instance and call its `extract` method. The dataframes can then be accessed as class attributes or exported with the `export` method.
+
+An example usage is available in the CLI script ([`extractor.cli`](src/extractor/cli.py))

@@ -23,6 +23,7 @@ pytest = "~=7.2.0"
 flake8-pytest-style = "~=1.6.0"
 pytest-datadir = "~=1.4.1"
 pytest-mock = "~=3.10.0"
+build = "~=0.9.0"
 
 [requires]
 python_version = "3.8"

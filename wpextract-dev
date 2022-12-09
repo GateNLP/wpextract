@@ -1,0 +1,13 @@
+#!python3
+import os.path
+import sys
+
+try:
+    from extractor.cli import main
+except ModuleNotFoundError:
+    print("== Running from local package code ==")
+    print("   This is expected for development")
+    sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/src")
+    from extractor.cli import main
+
+main()
