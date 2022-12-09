@@ -9,6 +9,7 @@ from extractor.extractors.io import export_df
 from extractor.extractors.media import load_media
 from extractor.extractors.posts import load_posts, resolve_post_links
 from extractor.extractors.tags import load_tags
+from extractor.extractors.users import load_users
 from extractor.scrape.crawler import ScrapeCrawl
 from extractor.util.file import prefix_filename
 
@@ -21,6 +22,7 @@ class WPExtractor:
     media: DataFrame
     tags: DataFrame
     categories: DataFrame
+    users: DataFrame
     scrape_url_mapping: Dict[str, Path]
 
     def __init__(
@@ -76,6 +78,10 @@ class WPExtractor:
         )
         self.categories = load_tags(json_file, self.link_registry)
 
+    def _extract_users(self):
+        json_file = self.json_root / prefix_filename("users.json", self.json_prefix)
+        self.users = load_users(json_file)
+
     def _resolve_post_links(self):
         self.posts = resolve_post_links(self.link_registry, self.posts)
 
@@ -85,3 +91,4 @@ class WPExtractor:
         export_df(self.media, out_dir / "media.json")
         export_df(self.tags, out_dir / "tags.json")
         export_df(self.categories, out_dir / "categories.json")
+        export_df(self.users, out_dir / "users.json")
