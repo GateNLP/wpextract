@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "date": "2022-12-11T10:00:00",
+    "date_gmt": "2022-12-11T10:00:00",
+    "modified": "2022-12-11T10:00:00",
+    "modified_gmt": "2022-12-11T10:00:00",
+    "slug": "test-page",
+    "type": "page",
+    "link": "https://example.org/test-page",
+    "title": {
+      "rendered": "Test Page"
+    },
+    "content": {
+      "rendered": "<p>This is a page.</p><p>It has two paragraphs</p>"
+    },
+    "excerpt": {
+      "rendered": "<p>This is the excerpt</p>"
+    },
+    "author": 1,
+    "featured_media": 0,
+    "parent": 0,
+    "template": "page-templates/full.php",
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "example.org - Test Page",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/test-page/",
+      "og_locale": "en_US",
+      "og_type": "article",
+      "og_title": "example.org - Test Page",
+      "og_url": "https://example.org/test-page/",
+      "og_site_name": "example.org",
+      "article_modified_time": "2022-12-11T10:00:00",
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/pages/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/pages"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/types/page"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://example.org/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://example.org/wp-json/wp/v2/comments?post=1"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 2,
+          "href": "https://example.org/wp-json/wp/v2/pages/1/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 1,
+          "href": "https://example.org/wp-json/wp/v2/pages/1/revisions/1"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/media?parent=1"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "date": "2022-12-11T11:00:00",
+    "date_gmt": "2022-12-11T11:00:00",
+    "modified": "2022-12-11T11:00:00",
+    "modified_gmt": "2022-12-11T11:00:00",
+    "slug": "test-page-translated",
+    "type": "page",
+    "link": "https://example.org/fr/test-page-translated/",
+    "title": {
+      "rendered": "Test Page Translated"
+    },
+    "content": {
+      "rendered": "<p>This is a translated page.</p><p>It has two paragraphs</p>"
+    },
+    "excerpt": {
+      "rendered": "<p>This is the excerpt of the translated page</p>"
+    },
+    "author": 1,
+    "featured_media": 0,
+    "parent": 0,
+    "template": "page-templates/full.php",
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "example.org - Test Page Translated",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/fr/test-page-translated/",
+      "og_locale": "en_US",
+      "og_type": "article",
+      "og_title": "example.org - Test Page",
+      "og_url": "https://example.org/fr/test-page-translated/",
+      "og_site_name": "example.org",
+      "article_modified_time": "2022-12-11T10:00:00",
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/pages/2"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/pages"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/types/page"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://example.org/wp-json/wp/v2/users/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://example.org/wp-json/wp/v2/comments?post=2"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 2,
+          "href": "https://example.org/wp-json/wp/v2/pages/2/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 2,
+          "href": "https://example.org/wp-json/wp/v2/pages/2/revisions/2"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/media?parent=1"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]
