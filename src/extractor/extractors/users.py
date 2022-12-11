@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 
@@ -7,7 +8,7 @@ from extractor.extractors.io import load_df
 EXPORT_COLUMNS = ["avatar", "description", "link", "name", "slug", "url"]
 
 
-def load_users(path: Path) -> pd.DataFrame:
+def load_users(path: Path) -> Optional[pd.DataFrame]:
     """Load the users from a JSON file.
 
     Args:
@@ -17,6 +18,9 @@ def load_users(path: Path) -> pd.DataFrame:
         Dataframe of users
     """
     users_df = load_df(path)
+
+    if users_df is None:
+        return None
 
     users_df["avatar"] = users_df["yoast_head_json.og_image"].apply(
         lambda image: image[0]["url"] if len(image) > 0 else None

@@ -1,6 +1,8 @@
 from pathlib import Path
+from typing import Optional
 
 import numpy as np
+import pandas as pd
 
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.io import load_df
@@ -17,7 +19,7 @@ EXPORT_COLUMNS = [
 ]
 
 
-def load_categories(path: Path, link_registry: LinkRegistry):
+def load_categories(path: Path, link_registry: LinkRegistry) -> Optional[pd.DataFrame]:
     """Load the categories from a JSON file.
 
     The JSON file is expected to be in the response format of the WordPress
@@ -31,6 +33,9 @@ def load_categories(path: Path, link_registry: LinkRegistry):
         A dataframe of the categories.
     """
     categories_df = load_df(path)
+
+    if categories_df is None:
+        return None
 
     categories_df["parent"] = categories_df["parent"].replace(0, np.nan)
     categories_df["link_locale"] = categories_df["link"].apply(extract_locale)

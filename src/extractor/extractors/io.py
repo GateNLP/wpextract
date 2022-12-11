@@ -1,7 +1,7 @@
 import dataclasses
 import json
 from pathlib import Path
-from typing import Any, List
+from typing import Any, List, Optional
 
 import numpy as np
 import pandas as pd
@@ -23,7 +23,7 @@ def load_from_path(path: Path) -> dict:
         return json.load(f)
 
 
-def load_df(path: Path, index_col: str = "id") -> pd.DataFrame:
+def load_df(path: Path, index_col: str = "id") -> Optional[pd.DataFrame]:
     """Load a JSON file from a path into a dataframe and normalize.
 
     Will flatten the structure an infinite number of levels by
@@ -37,6 +37,9 @@ def load_df(path: Path, index_col: str = "id") -> pd.DataFrame:
         A dataframe with the flattened JSON.
     """
     data_raw = load_from_path(path)
+
+    if len(data_raw) == 0:
+        return None
 
     return pd.json_normalize(data_raw).set_index(index_col)
 
@@ -148,7 +151,7 @@ def _export_file(raw: Any, path: Path):
         json.dump(raw, f, cls=JSONEncoder, indent=2, allow_nan=False)
 
 
-def export_df(df: DataFrame, path: Path) -> None:
+def export_df(df: Optional[DataFrame], path: Path) -> None:
     """Export a dataframe to the path as JSON.
 
     Nests dot-notation columns into nested dictionaries.
@@ -157,6 +160,10 @@ def export_df(df: DataFrame, path: Path) -> None:
         df: the dataframe
         path: the destination path
     """
-    out_df = df.reset_index(names="id")
-    denormalized = _remove_nan(df_denormalize_to_dict(out_df))
-    _export_file(denormalized, path)
+
+    if df is None:
+        _export_file([], path)
+    else:
+        out_df = df.reset_index(names="id")
+        denormalized = _remove_nan(df_denormalize_to_dict(out_df))
+        _export_file(denormalized, path)

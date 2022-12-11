@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 
 import pandas as pd
 from pandas import DataFrame
@@ -53,7 +53,7 @@ RENAME_COLUMNS = {
 
 def load_posts(
     path: Path, link_registry: LinkRegistry, scrape_urls_files: Dict[str, Path]
-) -> pd.DataFrame:
+) -> Optional[pd.DataFrame]:
     """Load the posts from a JSON file.
 
     The JSON file is expected to be in the response format of the WordPress posts API.
@@ -67,6 +67,9 @@ def load_posts(
         A dataframe of the posts.
     """
     posts_df = load_df(path)
+
+    if posts_df is None:
+        return None
 
     # Convert times
     posts_df["date_gmt"] = pd.to_datetime(posts_df["date_gmt"])

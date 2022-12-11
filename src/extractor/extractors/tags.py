@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 
@@ -16,7 +17,7 @@ EXPORT_COLUMNS = [
 ]
 
 
-def load_tags(path: Path, link_registry: LinkRegistry) -> pd.DataFrame:
+def load_tags(path: Path, link_registry: LinkRegistry) -> Optional[pd.DataFrame]:
     """Load the tags from a JSON file.
 
     The JSON file is expected to be in the response format of the WordPress tags API.
@@ -29,6 +30,10 @@ def load_tags(path: Path, link_registry: LinkRegistry) -> pd.DataFrame:
         A dataframe of the tags.
     """
     tags_df = load_df(path)
+
+    if tags_df is None:
+        return None
+
     tags_df["link_locale"] = tags_df["link"].apply(extract_locale)
     tags_df = tags_df[tags_df.columns.intersection(EXPORT_COLUMNS)]
 

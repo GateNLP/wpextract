@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 from tqdm.auto import tqdm
@@ -40,7 +41,7 @@ RENAME_COLUMNS = {
 }
 
 
-def load_pages(path: Path, link_registry: LinkRegistry) -> pd.DataFrame:
+def load_pages(path: Path, link_registry: LinkRegistry) -> Optional[pd.DataFrame]:
     """Load the pages from a JSON file.
 
     The JSON file is expected to be in the response format of the WordPress posts API.
@@ -53,6 +54,9 @@ def load_pages(path: Path, link_registry: LinkRegistry) -> pd.DataFrame:
         A dataframe of the pages
     """
     pages_df = load_df(path)
+
+    if pages_df is None:
+        return None
 
     pages_df["date_gmt"] = pd.to_datetime(pages_df["date_gmt"])
     pages_df["modified_gmt"] = pd.to_datetime(pages_df["modified_gmt"])

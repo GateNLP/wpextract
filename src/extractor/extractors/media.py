@@ -52,7 +52,7 @@ RENAME_COLUMNS = {
 }
 
 
-def load_media(path: Path) -> pd.DataFrame:
+def load_media(path: Path) -> Optional[pd.DataFrame]:
     """Load media from a JSON file.
 
     The JSON file is expected to be in the response format of the WordPress media API.
@@ -64,6 +64,9 @@ def load_media(path: Path) -> pd.DataFrame:
         A dataframe of the media
     """
     media_df = load_df(path)
+
+    if media_df is None:
+        return None
 
     # Convert times
     media_df["date_gmt"] = pd.to_datetime(media_df["date_gmt"])
