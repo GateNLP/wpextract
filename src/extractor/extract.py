@@ -7,6 +7,7 @@ from pandas import DataFrame
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.io import export_df
 from extractor.extractors.media import load_media
+from extractor.extractors.pages import load_pages
 from extractor.extractors.posts import load_posts, resolve_post_links
 from extractor.extractors.tags import load_tags
 from extractor.extractors.users import load_users
@@ -18,11 +19,12 @@ class WPExtractor:
     """Main class to extract data."""
 
     link_registry: LinkRegistry
-    posts: DataFrame
-    media: DataFrame
-    tags: DataFrame
-    categories: DataFrame
-    users: DataFrame
+    posts: Optional[DataFrame]
+    media: Optional[DataFrame]
+    tags: Optional[DataFrame]
+    categories: Optional[DataFrame]
+    users: Optional[DataFrame]
+    pages: Optional[DataFrame]
     scrape_url_mapping: Dict[str, Path]
 
     def __init__(
@@ -49,6 +51,8 @@ class WPExtractor:
         self._extract_media()
         logging.info("Beginning post extraction")
         self._extract_posts()
+        logging.info("Beginning page extraction")
+        self._extract_pages()
         logging.info("Beginning tag extraction")
         self._extract_tags()
         logging.info("Beginning categories extraction")
@@ -87,6 +91,10 @@ class WPExtractor:
         json_file = self.json_root / self._prefix_filename("users.json")
         self.users = load_users(json_file)
 
+    def _extract_pages(self):
+        json_file = self.json_root / self._prefix_filename("pages.json")
+        self.pages = load_pages(json_file, self.link_registry)
+
     def _resolve_post_links(self):
         self.posts = resolve_post_links(self.link_registry, self.posts)
 
@@ -94,6 +102,7 @@ class WPExtractor:
         """Save scrape results to ``out_dir``."""
         logging.info("Beginning export")
         export_df(self.posts, out_dir / self._prefix_filename("posts.json"))
+        export_df(self.pages, out_dir / self._prefix_filename("pages.json"))
         export_df(self.media, out_dir / self._prefix_filename("media.json"))
         export_df(self.tags, out_dir / self._prefix_filename("tags.json"))
         export_df(self.categories, out_dir / self._prefix_filename("categories.json"))
