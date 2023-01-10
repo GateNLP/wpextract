@@ -160,7 +160,6 @@ def export_df(df: Optional[DataFrame], path: Path) -> None:
         df: the dataframe
         path: the destination path
     """
-
     if df is None:
         _export_file([], path)
     else:
