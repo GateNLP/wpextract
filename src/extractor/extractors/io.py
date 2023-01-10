@@ -116,7 +116,7 @@ def _remove_nan(value: Any) -> Any:
     elif type(value) == list:
         for i, item in enumerate(value):
             value[i] = _remove_nan(item)
-    elif type(value) == float and value is np.NaN:
+    elif type(value) == float and np.isnan(value):
         value = None
     elif value is pd.NA:
         value = None
