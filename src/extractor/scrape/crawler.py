@@ -73,7 +73,11 @@ class ScrapeCrawl:
         for path in tqdm(files, desc="Crawling Scrape"):
             relative_path = str(path.relative_to(self.root_path))
 
-            doc = BeautifulSoup(path.read_text(), "lxml", parse_only=self_url_strainer)
+            doc = BeautifulSoup(
+                path.read_text(errors="ignore"),
+                "lxml",
+                parse_only=self_url_strainer,
+            )
             doc_url = extract_self_url(doc)
 
             if doc_url is None:
