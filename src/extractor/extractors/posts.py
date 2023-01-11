@@ -79,7 +79,9 @@ def load_posts(
     # yoast_head_json.og_image is a list containing 0 or 1 image dictionaries
     # Get the "url" property if there is an image
     posts_df["og_image_url"] = posts_df["yoast_head_json.og_image"].apply(
-        lambda image: image[0]["url"] if pd.notnull(image).all() and len(image) > 0 else None
+        lambda image: image[0]["url"]
+        if pd.notnull(image).all() and len(image) > 0
+        else None
     )
 
     posts_df["link_locale"] = posts_df["link"].apply(extract_locale)
