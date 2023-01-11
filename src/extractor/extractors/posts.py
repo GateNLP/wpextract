@@ -115,7 +115,7 @@ def load_posts(
     return posts_df
 
 
-def resolve_post_links(registry: LinkRegistry, posts_df: DataFrame):
+def resolve_post_links(registry: LinkRegistry, posts_df: DataFrame) -> DataFrame:
     """Look up the internal links of each post in the registry.
 
     Args:
@@ -127,6 +127,23 @@ def resolve_post_links(registry: LinkRegistry, posts_df: DataFrame):
     """
     posts_df["links.internal"] = posts_df["links.internal"].apply(
         lambda links: resolve_links(registry, links)
+    )
+
+    return posts_df
+
+
+def resolve_post_translations(registry: LinkRegistry, posts_df: DataFrame) -> DataFrame:
+    """Look up the translation links of each post in the registry.
+
+    Args:
+        registry: A filled link registry
+        posts_df: The processed posts dataframe
+
+    Returns:
+        The posts dataframe with link data resolved
+    """
+    posts_df["translations"] = posts_df["translations"].apply(
+        lambda ts: resolve_links(registry, ts)
     )
 
     return posts_df
