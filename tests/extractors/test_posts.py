@@ -8,8 +8,8 @@ from helpers.df import ordered_col
 from pytest_mock import MockerFixture
 
 import extractor
-from extractor.extractors.data.links import LinkRegistry
-from extractor.extractors.posts import load_posts
+from extractor.extractors.data.links import Linkable, LinkRegistry
+from extractor.extractors.posts import load_posts, resolve_post_translations
 from extractor.parse.translations._resolver import TranslationLink
 
 
@@ -124,14 +124,6 @@ def test_language(posts_df):
     assert posts_df["language"].equals(ordered_col(["en", "fr", None]))
 
 
-def test_translations(posts_df):
-    translations = [
-        None if translation is None else len(translation)
-        for translation in posts_df["translations"]
-    ]
-    assert translations == [1, 1, None]
-
-
 @pytest.fixture
 def spy_extractor_data(mocker: MockerFixture):
     return mocker.spy(extractor.extractors.posts, "extract_content_data")
@@ -149,3 +141,24 @@ def test_adds_link_registry(posts_df_and_registry):
     posts_df, registry = posts_df_and_registry
 
     assert len(registry.links) == 3
+
+
+def test_translations(posts_df_and_registry):
+    posts_df, registry = posts_df_and_registry
+    posts_df = resolve_post_translations(registry, posts_df)
+
+    assert len(posts_df.loc[1]["translations"]) == 1
+    assert posts_df.loc[1]["translations"][0].destination == Linkable(
+        link="https://example.org/fr/an-example-post-translation/",
+        data_type="post",
+        idx=2,
+    )
+    assert posts_df.loc[1]["translations"][0].lang == "fr"
+
+    assert len(posts_df.loc[2]["translations"]) == 1
+    assert posts_df.loc[2]["translations"][0].destination == Linkable(
+        link="https://example.org/an-example-post/", data_type="post", idx=1
+    )
+    assert posts_df.loc[2]["translations"][0].lang == "en"
+
+    assert len(posts_df.loc[3]["translations"]) == 0
