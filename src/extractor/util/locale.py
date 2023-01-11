@@ -1,7 +1,7 @@
 import urllib.parse
 from typing import Optional
 
-from langcodes import standardize_tag, tag_is_valid
+from langcodes import Language, tag_is_valid
 
 from extractor.util.str import remove_ends
 
@@ -32,8 +32,14 @@ def extract_locale(link: str) -> Optional[str]:
     parsed_link = urllib.parse.urlparse(link)
     path_stripped = remove_ends(parsed_link.path, "/")
     path_parts = path_stripped.split("/")
-
     if tag_is_valid(path_parts[0]) and not path_parts[0] in EXCLUDED_TAGS:
-        return standardize_tag(path_parts[0])
+        lang = Language.get(path_parts[0], normalize=True)
+        if lang.extensions is not None:
+            # Language tag extensions are very unlikely to be used
+            # Probably a mis-parse
+            return None
+
+        lang.prefer_macrolanguage()
+        return lang.simplify_script().to_tag()
 
     return None

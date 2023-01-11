@@ -13,6 +13,7 @@ from extractor.util.locale import extract_locale
         ("https://example.org/fr-fr/slug", "fr-FR"),
         ("https://example.org/tag/my-tag", None),
         ("https://example.org/fr/tag/my-tag", "fr"),
+        ("https://example.org/don-t-let-ukraine-join-nato/", None),
     ],
 )
 def test_lang_extract(url, expected):
