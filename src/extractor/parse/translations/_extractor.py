@@ -24,7 +24,7 @@ def extract_translations(
         The doc's language and list of translation links
     """
     if page_doc is None:
-        return pd.Series([None, None])
+        return pd.Series([None, []])
     for resolver_class in RESOLVERS:
         resolver = resolver_class(page_doc)
 
@@ -37,4 +37,4 @@ def extract_translations(
 
     logging.debug(f'No resolvers matched "{link}", unable to extract translations.')
 
-    return pd.Series([None, None])
+    return pd.Series([None, []])
