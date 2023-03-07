@@ -3,6 +3,7 @@ from typing import List, Optional
 from urllib.parse import urlparse, urlunparse
 
 from extractor.extractors.data.links import LinkRegistry, ResolvableLink
+from extractor.util.str import remove_ends
 
 
 def resolve_link(
@@ -30,6 +31,30 @@ def resolve_link(
         href = link.href
 
     linkable = registry.query_link(href)
+
+    if linkable is None:
+        # Heuristic to fix case when category slug has been removed from URL
+        path_parts = remove_ends(href_parsed.path, "/").split("/")
+
+        lang = None
+        # Case /fr/category/article/
+        if len(path_parts) == 3 and (len(path_parts[0]) == 2):
+            lang = path_parts.pop(0)
+
+        # Case /category/an-article-slug/
+        if len(path_parts) == 2:
+            path_parts.pop(0)
+            if lang is not None:
+                path_parts.insert(0, lang)
+            whole_path = f"/{'/'.join(path_parts)}/"
+            href_parsed = href_parsed._replace(path=whole_path)
+            url = urlunparse(href_parsed)
+            linkable = registry.query_link(url)
+
+            if linkable is None:
+                logging.debug(
+                    f'Could not resolve with category removal heuristic: "{url}"'
+                )
 
     if linkable is None:
         logging.debug(f'Could not resolve link "{href}"')

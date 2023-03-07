@@ -38,6 +38,28 @@ def test_link_resolver_preview_page():
     assert resolve_link(registry, resolvable).destination == registry.links[0]
 
 
+def test_category_slug_removed_from_url():
+    registry = LinkRegistry()
+    registry.add_linkable("https://example.org/a-test-article/", "post", "1")
+
+    resolvable = ResolvableLink(
+        "test", "https://example.org/news/a-test-article/", None
+    )
+
+    assert resolve_link(registry, resolvable).destination == registry.links[0]
+
+
+def test_category_slug_removed_from_url_with_lang():
+    registry = LinkRegistry()
+    registry.add_linkable("https://example.org/fr/a-test-article/", "post", "1")
+
+    resolvable = ResolvableLink(
+        "test", "https://example.org/fr/news/a-test-article/", None
+    )
+
+    assert resolve_link(registry, resolvable).destination == registry.links[0]
+
+
 @pytest.mark.skip(reason="TODO: allow relative links")
 def test_link_resolver_relative():
     registry = LinkRegistry()
