@@ -71,6 +71,16 @@ def test_extract_images(datadir: Path):
     ]
 
 
+def test_extract_image_without_src(datadir: Path):
+    doc = BeautifulSoup("<img alt='No src'>", "lxml")
+
+    images = extract_images(doc, "https://example.org/home")
+
+    assert images == [
+        MediaUse(src="", alt="No src", caption=None),
+    ]
+
+
 def test_extract_content(datadir: Path):
     doc = BeautifulSoup((datadir / "content_extraction.html").read_text(), "lxml")
 

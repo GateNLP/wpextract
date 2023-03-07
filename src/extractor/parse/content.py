@@ -1,4 +1,5 @@
 import copy
+import logging
 from typing import List, Tuple
 from urllib.parse import urljoin, urlparse, urlunparse
 
@@ -93,6 +94,13 @@ def extract_images(doc: BeautifulSoup, self_link: str) -> Images:
     self_link_parsed = urlparse(self_link)
 
     for img in images:
+        if not img.has_attr("src"):
+            logging.warning(f"Image without source in {self_link}")
+            media_uses.append(
+                MediaUse(src="", alt=img.get("alt"), caption=get_caption(img))
+            )
+            continue
+
         src_parsed = urlparse(urljoin(self_link, img["src"]))
 
         media_data = {
