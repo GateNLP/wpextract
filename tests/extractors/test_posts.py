@@ -9,7 +9,11 @@ from pytest_mock import MockerFixture
 
 import extractor
 from extractor.extractors.data.links import Linkable, LinkRegistry
-from extractor.extractors.posts import load_posts, resolve_post_translations
+from extractor.extractors.posts import (
+    ensure_translations_undirected,
+    load_posts,
+    resolve_post_translations,
+)
 from extractor.parse.translations._resolver import TranslationLink
 
 
@@ -162,3 +166,20 @@ def test_translations(posts_df_and_registry):
     assert posts_df.loc[2]["translations"][0].lang == "en"
 
     assert len(posts_df.loc[3]["translations"]) == 0
+
+
+def test_translations_bidirectional(posts_df_and_registry):
+    posts_df, registry = posts_df_and_registry
+    posts_df = resolve_post_translations(registry, posts_df)
+    # Currently 1 <-> 2, let's remove 1 <- 2
+    posts_df.at[2, "translations"] = []
+
+    posts_df = ensure_translations_undirected(posts_df)
+
+    assert len(posts_df.loc[2, "translations"]) == 1
+
+    posts_df = resolve_post_translations(registry, posts_df)
+    assert posts_df.loc[2]["translations"][0].lang == "en"
+    assert posts_df.loc[2]["translations"][0].destination == Linkable(
+        link="https://example.org/an-example-post/", data_type="post", idx=1
+    )

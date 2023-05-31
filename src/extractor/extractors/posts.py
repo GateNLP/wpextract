@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from typing import Dict, Optional
 
@@ -11,6 +12,7 @@ from extractor.extractors.io import load_df
 from extractor.parse.content import extract_content_data
 from extractor.parse.html import extract_html_text, parse_html
 from extractor.parse.translations import extract_translations
+from extractor.parse.translations._resolver import TranslationLink
 from extractor.scrape.scrape import load_scrape
 from extractor.util.locale import extract_locale
 
@@ -130,6 +132,60 @@ def resolve_post_links(registry: LinkRegistry, posts_df: DataFrame) -> DataFrame
     posts_df["links.internal"] = posts_df["links.internal"].apply(
         lambda links: resolve_links(registry, links)
     )
+
+    return posts_df
+
+
+def ensure_translations_undirected(posts_df: DataFrame) -> DataFrame:
+    """Create translation relationships if they are not bidirectional.
+
+    For example, if A -> B, but B -> A does not exist, then create B -> A.
+
+    Translations will need to be resolved again after this step.
+
+    Args:
+        posts_df: A processed posts dataframe.
+
+    Returns:
+        The posts dataframe with bidirectional translations.
+    """
+    new_translations = []
+    for post in posts_df.itertuples():
+        for translation_obj in post.translations:
+            if translation_obj.destination is None:
+                logging.debug(
+                    f"Unable to verify translation for {post.Index}, unresolved."
+                )
+                continue
+
+            translation_id = translation_obj.destination.idx
+            translation_post = posts_df.loc[translation_id]
+
+            if not any(
+                [
+                    translation.destination is not None
+                    and translation.destination.idx == post.Index
+                    for translation in translation_post.translations
+                ]
+            ):
+                logging.debug(
+                    f"{post.Index} -> {translation_obj.destination.idx} existed "
+                    "but reverse did not"
+                )
+                new_translations.append(
+                    (
+                        translation_id,
+                        TranslationLink(
+                            text=None,
+                            href=post.link,
+                            lang=post.language,
+                            destination=None,
+                        ),
+                    )
+                )
+
+    for new_t_id, new_t_link in new_translations:
+        posts_df.loc[new_t_id, "translations"].append(new_t_link)
 
     return posts_df
 

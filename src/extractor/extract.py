@@ -9,6 +9,7 @@ from extractor.extractors.io import export_df
 from extractor.extractors.media import load_media
 from extractor.extractors.pages import load_pages
 from extractor.extractors.posts import (
+    ensure_translations_undirected,
     load_posts,
     resolve_post_links,
     resolve_post_translations,
@@ -101,6 +102,8 @@ class WPExtractor:
 
     def _resolve_post_links(self):
         self.posts = resolve_post_links(self.link_registry, self.posts)
+        self.posts = resolve_post_translations(self.link_registry, self.posts)
+        self.posts = ensure_translations_undirected(self.posts)
         self.posts = resolve_post_translations(self.link_registry, self.posts)
 
     def export(self, out_dir: Path) -> None:
