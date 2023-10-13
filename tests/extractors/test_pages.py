@@ -21,7 +21,7 @@ def pages_df(pages_df_and_registry):
 
 
 def test_equals_expected(datadir, pages_df):
-    expected_df = pd.read_pickle(datadir / "pages_df_out.pickle")
+    expected_df = pd.read_json(datadir / "pages_df_out.json", orient="table")
 
     assert pages_df.equals(expected_df)
 

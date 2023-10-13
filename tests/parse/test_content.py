@@ -93,3 +93,21 @@ def test_extract_content(datadir: Path):
         "Not in a paragraph.\n"
         "Heavily nested."
     )
+
+
+def test_extract_content_br_newline(datadir: Path):
+    doc = BeautifulSoup((datadir / "whitespace_br.html").read_text(), "lxml")
+
+    content_series = extract_content_data(doc, "https://example.org/home")
+    text = content_series[0]
+
+    assert text == "Before break\nAfter break"
+
+
+def test_extract_content_whitespace_collapse(datadir: Path):
+    doc = BeautifulSoup((datadir / "whitespace_collapse.html").read_text(), "lxml")
+
+    content_series = extract_content_data(doc, "https://example.org/home")
+    text = content_series[0]
+
+    assert text == "First para.\nAfter empty.\nAfter gap in doc."

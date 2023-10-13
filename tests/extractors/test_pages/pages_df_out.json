@@ -1,0 +1,134 @@
+{
+  "schema": {
+    "fields": [
+      {
+        "name": "id",
+        "type": "integer"
+      },
+      {
+        "name": "date_gmt",
+        "type": "datetime"
+      },
+      {
+        "name": "modified_gmt",
+        "type": "datetime"
+      },
+      {
+        "name": "slug",
+        "type": "string"
+      },
+      {
+        "name": "link",
+        "type": "string"
+      },
+      {
+        "name": "author",
+        "type": "integer"
+      },
+      {
+        "name": "featured_media",
+        "type": "integer"
+      },
+      {
+        "name": "parent",
+        "type": "integer"
+      },
+      {
+        "name": "template",
+        "type": "string"
+      },
+      {
+        "name": "title.html",
+        "type": "string"
+      },
+      {
+        "name": "content.html",
+        "type": "string"
+      },
+      {
+        "name": "excerpt.html",
+        "type": "string"
+      },
+      {
+        "name": "page_title",
+        "type": "string"
+      },
+      {
+        "name": "link_locale",
+        "type": "string"
+      },
+      {
+        "name": "excerpt.text",
+        "type": "string"
+      },
+      {
+        "name": "content.text",
+        "type": "string"
+      },
+      {
+        "name": "links.internal",
+        "type": "string"
+      },
+      {
+        "name": "links.external",
+        "type": "string"
+      },
+      {
+        "name": "embeds",
+        "type": "string"
+      },
+      {
+        "name": "images",
+        "type": "string"
+      }
+    ],
+    "primaryKey": ["id"],
+    "pandas_version": "1.4.0"
+  },
+  "data": [
+    {
+      "id": 1,
+      "date_gmt": "2022-12-11T10:00:00.000",
+      "modified_gmt": "2022-12-11T10:00:00.000",
+      "slug": "test-page",
+      "link": "https://example.org/test-page",
+      "author": 1,
+      "featured_media": 0,
+      "parent": 0,
+      "template": "page-templates/full.php",
+      "title.html": "Test Page",
+      "content.html": "<p>This is a page.</p><p>It has two paragraphs</p>",
+      "excerpt.html": "<p>This is the excerpt</p>",
+      "page_title": "example.org - Test Page",
+      "link_locale": null,
+      "excerpt.text": "This is the excerpt",
+      "content.text": "This is a page.\nIt has two paragraphs",
+      "links.internal": [],
+      "links.external": [],
+      "embeds": [],
+      "images": []
+    },
+    {
+      "id": 2,
+      "date_gmt": "2022-12-11T11:00:00.000",
+      "modified_gmt": "2022-12-11T11:00:00.000",
+      "slug": "test-page-translated",
+      "link": "https://example.org/fr/test-page-translated/",
+      "author": 1,
+      "featured_media": 0,
+      "parent": 0,
+      "template": "page-templates/full.php",
+      "title.html": "Test Page Translated",
+      "content.html": "<p>This is a translated page.</p><p>It has two paragraphs</p>",
+      "excerpt.html": "<p>This is the excerpt of the translated page</p>",
+      "page_title": "example.org - Test Page Translated",
+      "link_locale": "fr",
+      "excerpt.text": "This is the excerpt of the translated page",
+      "content.text": "This is a translated page.\nIt has two paragraphs",
+      "links.internal": [],
+      "links.external": [],
+      "embeds": [],
+      "images": []
+    }
+  ]
+}

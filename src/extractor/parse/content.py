@@ -139,6 +139,6 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
         if child.name in EXCLUDED_CONTENT_TAGS:
             child.extract()
 
-    content_text = squash_whitespace(doc_c.get_text())
+    content_text = squash_whitespace(doc_c.get_text(separator="\n"))
 
     return pd.Series([content_text, internal_links, external_links, embeds, images])
