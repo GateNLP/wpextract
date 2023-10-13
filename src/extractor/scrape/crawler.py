@@ -8,6 +8,9 @@ from tqdm.auto import tqdm
 
 from extractor.scrape.processor import extract_self_url, self_url_strainer
 
+# Increment to invalidate old caches
+SCRAPE_CRAWL_VERSION = 1
+
 
 class ScrapeCrawl:
     """Crawl a scraped website to get original page URLs.
@@ -53,11 +56,23 @@ class ScrapeCrawl:
 
     def _export(self):
         with open(self._get_cache_path(), "w") as f:
-            json.dump({"found": self.found_pages, "failed": self.failed_docs}, f)
+            json.dump(
+                {
+                    "found": self.found_pages,
+                    "failed": self.failed_docs,
+                    "version": SCRAPE_CRAWL_VERSION,
+                },
+                f,
+            )
 
     def _import(self):
         with open(self._get_cache_path(), "r") as f:
             data = json.load(f)
+
+        if "version" not in data or data["version"] != SCRAPE_CRAWL_VERSION:
+            logging.info("Scrape crawl cache is out of date, re-crawling.")
+            return
+
         self.found_pages = data["found"]
         self.failed_docs = data["failed"]
         self.crawled = True

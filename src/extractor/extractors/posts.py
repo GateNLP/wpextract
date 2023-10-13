@@ -11,7 +11,7 @@ from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.io import load_df
 from extractor.parse.content import extract_content_data
 from extractor.parse.html import extract_html_text, parse_html
-from extractor.parse.translations import extract_translations
+from extractor.parse.translations import PickerListType, extract_translations
 from extractor.parse.translations._resolver import TranslationLink
 from extractor.scrape.scrape import load_scrape
 from extractor.util.locale import extract_locale
@@ -54,7 +54,10 @@ RENAME_COLUMNS = {
 
 
 def load_posts(
-    path: Path, link_registry: LinkRegistry, scrape_urls_files: Dict[str, Path]
+    path: Path,
+    link_registry: LinkRegistry,
+    scrape_urls_files: Dict[str, Path],
+    translation_pickers: Optional[PickerListType],
 ) -> Optional[pd.DataFrame]:
     """Load the posts from a JSON file.
 
@@ -64,6 +67,7 @@ def load_posts(
         path: The path to the JSON file
         link_registry: The Link Registry to populate
         scrape_urls_files: A dictionary of site URLs to scrape file paths
+        translation_pickers: Custom list of translation pickers.
 
     Returns:
         A dataframe of the posts.
@@ -99,7 +103,8 @@ def load_posts(
         lambda link: load_scrape(scrape_urls_files, link)
     )
     posts_df[["language", "translations"]] = posts_df.apply(
-        lambda r: extract_translations(r["scrape_bs"], r["link"]), axis=1
+        lambda r: extract_translations(r["scrape_bs"], r["link"], translation_pickers),
+        axis=1,
     )
 
     link_registry.add_linkables(

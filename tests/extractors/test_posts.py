@@ -17,7 +17,7 @@ from extractor.extractors.posts import (
 from extractor.parse.translations._resolver import TranslationLink
 
 
-def mock_translation_extractor(post_bs: BeautifulSoup, link: str):
+def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pickers):
     id_meta = post_bs.find("meta", attrs={"name": "post_id_for_mock"})
     post_id = int(id_meta["content"])
     if post_id == 1:
@@ -73,7 +73,7 @@ def scrape_urls_files(datadir: Path):
 def posts_df_and_registry(_do_mock_translation_extractor, datadir, scrape_urls_files):
     link_registry = LinkRegistry()
     return (
-        load_posts(datadir / "posts.json", link_registry, scrape_urls_files),
+        load_posts(datadir / "posts.json", link_registry, scrape_urls_files, None),
         link_registry,
     )
 

@@ -16,6 +16,7 @@ from extractor.extractors.posts import (
 )
 from extractor.extractors.tags import load_tags
 from extractor.extractors.users import load_users
+from extractor.parse.translations import PickerListType
 from extractor.scrape.crawler import ScrapeCrawl
 from extractor.util.file import prefix_filename
 
@@ -31,9 +32,14 @@ class WPExtractor:
     users: Optional[DataFrame]
     pages: Optional[DataFrame]
     scrape_url_mapping: Dict[str, Path]
+    translation_pickers: Optional[PickerListType]
 
     def __init__(
-        self, json_root: Path, scrape_root: Path, json_prefix: Optional[str] = None
+        self,
+        json_root: Path,
+        scrape_root: Path,
+        json_prefix: Optional[str] = None,
+        translation_pickers: Optional[PickerListType] = None,
     ):
         """Create a new extractor.
 
@@ -41,11 +47,13 @@ class WPExtractor:
             json_root: Path to directory of JSON files
             scrape_root: Path to scrape directory
             json_prefix: Prefix of files in ``json_root``
+            translation_pickers: Supply a custom list of translation pickers
         """
         self.json_root = json_root
         self.scrape_root = scrape_root
         self.json_prefix = json_prefix
         self.link_registry = LinkRegistry()
+        self.translation_pickers = translation_pickers
 
     def extract(self) -> None:
         """Perform the extraction."""
@@ -78,7 +86,12 @@ class WPExtractor:
 
     def _extract_posts(self):
         json_file = self.json_root / self._prefix_filename("posts.json")
-        self.posts = load_posts(json_file, self.link_registry, self.scrape_url_mapping)
+        self.posts = load_posts(
+            path=json_file,
+            link_registry=self.link_registry,
+            scrape_urls_files=self.scrape_url_mapping,
+            translation_pickers=self.translation_pickers,
+        )
 
     def _extract_media(self):
         json_file = self.json_root / self._prefix_filename("media.json")
