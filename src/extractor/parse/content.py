@@ -4,7 +4,7 @@ from typing import List, Tuple
 from urllib.parse import urljoin, urlparse, urlunparse
 
 import pandas as pd
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup, Comment, NavigableString
 
 from extractor.extractors.data.images import MediaUse, ResolvableMediaUse
 from extractor.extractors.data.links import Link, ResolvableLink
@@ -12,6 +12,7 @@ from extractor.extractors.media import get_caption
 from extractor.util.str import squash_whitespace
 
 EXCLUDED_CONTENT_TAGS = {"figcaption"}
+NEWLINE_TAGS = {"br", "p"}
 
 
 InternalLinks = List[ResolvableLink]
@@ -117,6 +118,21 @@ def extract_images(doc: BeautifulSoup, self_link: str) -> Images:
     return media_uses
 
 
+def _get_text(doc: BeautifulSoup) -> str:
+    """Custom function to get document text.
+
+    Extracts text from all elements, inserting newlines for <p> and <br> tags.
+    """
+    text = ""
+    for e in doc.descendants:
+        # Comments are a subtype of NavigableString, they need to be excluded
+        if isinstance(e, NavigableString) and not isinstance(e, Comment):
+            text += e
+        elif e.name in NEWLINE_TAGS:
+            text += "\n"
+    return text
+
+
 def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
     """Extract the links, embeds, images and text content of the document.
 
@@ -139,6 +155,6 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
         if child.name in EXCLUDED_CONTENT_TAGS:
             child.extract()
 
-    content_text = squash_whitespace(doc_c.get_text(separator="\n"))
+    content_text = squash_whitespace(_get_text(doc_c))
 
     return pd.Series([content_text, internal_links, external_links, embeds, images])

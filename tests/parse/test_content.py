@@ -90,6 +90,7 @@ def test_extract_content(datadir: Path):
     assert (
         text == "The first paragraph.\n"
         "The second paragraph.\n"
+        "The third paragraph.\n"
         "Not in a paragraph.\n"
         "Heavily nested."
     )
@@ -101,7 +102,10 @@ def test_extract_content_br_newline(datadir: Path):
     content_series = extract_content_data(doc, "https://example.org/home")
     text = content_series[0]
 
-    assert text == "Before break\nAfter break"
+    assert (
+        text
+        == "Before break\nAfter break. Don't break here.\nBefore break\nAfter break."
+    )
 
 
 def test_extract_content_whitespace_collapse(datadir: Path):
