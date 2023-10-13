@@ -10,12 +10,8 @@ flake8:
 isort:
 	isort .
 
-.PHONY: prettier
-prettier:
-	npx prettier --write .
-
 .PHONY: lint
-lint: isort black prettier flake8
+lint: isort black flake8
 
 
 .PHONY: test

@@ -1,4 +1,0 @@
-out/*
-Pipfile.lock
-.pytest_cache/*
-test_site/*
