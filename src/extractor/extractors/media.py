@@ -4,6 +4,7 @@ from typing import Optional
 import pandas as pd
 from bs4 import Tag
 
+from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.io import load_df
 from extractor.parse.html import extract_html_text
 
@@ -33,6 +34,7 @@ EXPORT_COLUMNS = [
     "modified_gmt",
     "post",
     "slug",
+    "source_url",
     "title.rendered",
     "title.text",
     "yoast_head_json.og_url",
@@ -46,19 +48,19 @@ RENAME_COLUMNS = {
     "post": "post_id",
     "title.rendered": "title.html",
     "yoast_head_json.title": "page_title",
-    "media_details.file": "file_path",
     "media_details.parent_image.attachment_id": "parent_image_id",
     "yoast_head_json.og_url": "og_url",
 }
 
 
-def load_media(path: Path) -> Optional[pd.DataFrame]:
+def load_media(path: Path, link_registry: LinkRegistry) -> Optional[pd.DataFrame]:
     """Load media from a JSON file.
 
     The JSON file is expected to be in the response format of the WordPress media API.
 
     Args:
         path: The path to the JSON file
+        link_registry: A link registry to populate
 
     Returns:
         A dataframe of the media
@@ -87,6 +89,10 @@ def load_media(path: Path) -> Optional[pd.DataFrame]:
     media_df = media_df[media_df.columns.intersection(EXPORT_COLUMNS)]
 
     media_df = media_df.rename(columns=RENAME_COLUMNS)
+
+    link_registry.add_linkables(
+        "media", media_df["source_url"].to_list(), media_df.index.to_list()
+    )
 
     return media_df
 

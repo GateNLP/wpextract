@@ -6,6 +6,7 @@ import pandas as pd
 from pandas import DataFrame
 from tqdm.auto import tqdm
 
+from extractor.extractors.data.images import resolve_images
 from extractor.extractors.data.link_resolver import resolve_links
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.io import load_df
@@ -136,6 +137,23 @@ def resolve_post_links(registry: LinkRegistry, posts_df: DataFrame) -> DataFrame
     """
     posts_df["links.internal"] = posts_df["links.internal"].apply(
         lambda links: resolve_links(registry, links)
+    )
+
+    return posts_df
+
+
+def resolve_post_media(registry: LinkRegistry, posts_df: DataFrame) -> DataFrame:
+    """Look up the images of each post.
+
+    Args:
+        registry: A filled link registry
+        posts_df: The processed posts dataframe
+
+    Returns:
+        The posts dataframe with link data resolved.
+    """
+    posts_df["images"] = posts_df["images"].apply(
+        lambda media: resolve_images(registry, media)
     )
 
     return posts_df

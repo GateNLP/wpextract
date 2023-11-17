@@ -43,7 +43,7 @@ def load_categories(path: Path, link_registry: LinkRegistry) -> Optional[pd.Data
     categories_df = categories_df[categories_df.columns.intersection(EXPORT_COLUMNS)]
 
     link_registry.add_linkables(
-        "tag", categories_df["link"].to_list(), categories_df.index.to_list()
+        "category", categories_df["link"].to_list(), categories_df.index.to_list()
     )
 
     return categories_df

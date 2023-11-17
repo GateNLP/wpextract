@@ -3,12 +3,20 @@ from datetime import datetime
 import pandas as pd
 import pytest
 
+from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.media import load_media
 
 
 @pytest.fixture
-def media_df(datadir):
-    return load_media(datadir / "media.json")
+def media_df_and_registry(datadir):
+    link_registry = LinkRegistry()
+    return load_media(datadir / "media.json", link_registry), link_registry
+
+
+@pytest.fixture
+def media_df(media_df_and_registry):
+    media_df, _ = media_df_and_registry
+    return media_df
 
 
 def test_media_times(media_df):
@@ -45,3 +53,13 @@ def test_title_extraction(media_df):
 
 def test_columns_removed(media_df):
     assert "_links" not in media_df.columns
+
+
+def test_adds_link_registry(media_df_and_registry):
+    media_df, registry = media_df_and_registry
+
+    assert len(registry.links) == 1
+    assert (
+        registry.links[0].link
+        == "https://example.org/wp-content/uploads/2022/12/test-image.jpg"
+    )

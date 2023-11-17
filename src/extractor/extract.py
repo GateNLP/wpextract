@@ -4,6 +4,7 @@ from typing import Dict, Optional
 
 from pandas import DataFrame
 
+from extractor.extractors.categories import load_categories
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.io import export_df
 from extractor.extractors.media import load_media
@@ -95,7 +96,7 @@ class WPExtractor:
 
     def _extract_media(self):
         json_file = self.json_root / self._prefix_filename("media.json")
-        self.media = load_media(json_file)
+        self.media = load_media(json_file, self.link_registry)
 
     def _extract_tags(self):
         json_file = self.json_root / self._prefix_filename("tags.json")
@@ -103,7 +104,7 @@ class WPExtractor:
 
     def _extract_categories(self):
         json_file = self.json_root / self._prefix_filename("categories.json")
-        self.categories = load_tags(json_file, self.link_registry)
+        self.categories = load_categories(json_file, self.link_registry)
 
     def _extract_users(self):
         json_file = self.json_root / self._prefix_filename("users.json")

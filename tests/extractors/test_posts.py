@@ -12,6 +12,7 @@ from extractor.extractors.data.links import Linkable, LinkRegistry
 from extractor.extractors.posts import (
     ensure_translations_undirected,
     load_posts,
+    resolve_post_media,
     resolve_post_translations,
 )
 from extractor.parse.translations._resolver import TranslationLink
@@ -182,4 +183,19 @@ def test_translations_bidirectional(posts_df_and_registry):
     assert posts_df.loc[2]["translations"][0].lang == "en"
     assert posts_df.loc[2]["translations"][0].destination == Linkable(
         link="https://example.org/an-example-post/", data_type="post", idx=1
+    )
+
+
+def test_resolves_media(posts_df_and_registry):
+    posts_df, registry = posts_df_and_registry
+    registry.add_linkable(
+        "https://example.org/wp-content/uploads/2022/12/test-image.jpg", "media", 1
+    )
+
+    posts_df = resolve_post_media(registry, posts_df)
+
+    assert posts_df.loc[1]["images"][0].destination == Linkable(
+        link="https://example.org/wp-content/uploads/2022/12/test-image.jpg",
+        data_type="media",
+        idx=1,
     )

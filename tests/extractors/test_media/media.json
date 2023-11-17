@@ -11,7 +11,7 @@
     "slug": "test-image",
     "status": "inherit",
     "type": "attachment",
-    "link": "https://waronfakes.com/some-post/attachment/test-image/",
+    "link": "https://example.org/some-post/attachment/test-image/",
     "title": {
       "rendered": "test-image"
     },
@@ -29,14 +29,14 @@
       },
       "og_locale": "en_US",
       "og_type": "article",
-      "og_title": "40-5 - waronfakes.com",
+      "og_title": "40-5 - example.org",
       "og_url": "https://example.org/wp-content/uploads/2022/12/test-image.jpg",
-      "og_site_name": "waronfakes.com",
+      "og_site_name": "example.org",
       "og_image": [
         {
           "width": 500,
           "height": 500,
-          "url": "https://waronfakes.com/wp-content/uploads/2022/12/test-image.jpg",
+          "url": "https://example.org/wp-content/uploads/2022/12/test-image.jpg",
           "type": "image/jpeg"
         }
       ],
@@ -44,7 +44,7 @@
       "schema": "..."
     },
     "description": {
-      "rendered": "<p class=\"attachment\"><a href='https://waronfakes.com/wp-content/uploads/2022/12/test-image.jpg'><img /></a> Some Text</p>\n"
+      "rendered": "<p class=\"attachment\"><a href='https://example.org/wp-content/uploads/2022/12/test-image.jpg'><img /></a> Some Text</p>\n"
     },
     "caption": {
       "rendered": "<p>Some <em>caption text</em></p>"
@@ -79,7 +79,7 @@
           "width": 500,
           "height": 500,
           "mime_type": "image/jpeg",
-          "source_url": "https://waronfakes.com/wp-content/uploads/2022/12/test-image.jpg"
+          "source_url": "https://example.org/wp-content/uploads/2022/12/test-image.jpg"
         }
       },
       "image_meta": {

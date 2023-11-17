@@ -32,7 +32,7 @@ The scrape should be in a 'merged pages' format, i.e. the pages of the list endp
 The following files should be placed in a directory. Their names may be prefixed by a consistent string (e.g. to record the date).
 
 | File Name         | Endpoint                               |
-| ----------------- | -------------------------------------- |
+|-------------------|----------------------------------------|
 | `categories.json` | [`/wp/v2/categories`][categories_path] |
 | `comments.json`   | [`/wp/v2/comments`][comments_path]     |
 | `media.json`      | [`/wp/v2/media`][media_path]           |
