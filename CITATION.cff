@@ -1,14 +1,14 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-  - given-names: Heppell
-    family-names: Freddy
+  - given-names: Freddy
+    family-names: Heppell
     orcid: 'https://orcid.org/0009-0003-7241-5846'
-  - given-names: Bontcheva
-    family-names: Kalina
+  - given-names: Kalina
+    family-names: Bontcheva
     orcid: 'https://orcid.org/0000-0001-6152-9600'
-  - given-names: Scarton
-    family-names: Carolina
+  - given-names: Carolina
+    family-names: Scarton
     orcid: 'https://orcid.org/0000-0002-0103-4072'
 title: "wordpress-site-extractor"
 version: 1.0.0
@@ -18,14 +18,14 @@ url: "https://github.com/GateNLP/wordpress-site-extractor"
 preferred-citation:
   type: conference-paper
   authors:
-  - given-names: Heppell
-    family-names: Freddy
+  - given-names: Freddy
+    family-names: Heppell
     orcid: 'https://orcid.org/0009-0003-7241-5846'
-  - given-names: Bontcheva
-    family-names: Kalina
+  - given-names: Kalina
+    family-names: Bontcheva
     orcid: 'https://orcid.org/0000-0001-6152-9600'
-  - given-names: Scarton
-    family-names: Carolina
+  - given-names: Carolina
+    family-names: Scarton
     orcid: 'https://orcid.org/0000-0002-0103-4072'
   collection-title: "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing"
   title: "Analysing State-Backed Propaganda Websites: a New Dataset and Linguistic Study"
