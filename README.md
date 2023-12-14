@@ -1,6 +1,41 @@
 # WordPress Site Extractor
 
-Processes a scraped WordPress site, including text extraction and internal link resolution
+Processes an API dump of a WordPress site into a dataset, including identifying parallel multilingual articles, and resolving internal links and media.
+
+> [!NOTE]  
+> This software was developed for our EMNLP 2023 paper [_Analysing State-Backed Propaganda Websites: a New Dataset and Linguistic Study_](https://aclanthology.org/2023.emnlp-main.349/). The code has been updated since the paper was written; for archival purposes, the precise version used for the study is [available on Zenodo](https://zenodo.org/records/10008086).
+
+## Referencing
+
+We'd love to hear about your use of our tool, you can [email us](mailto:frheppell1@sheffield.ac.uk) to let us know! Feel free to create issues and/or pull requests for new features or bugs.
+
+If you use this tool in published work, please cite [our EMNLP paper](https://aclanthology.org/2023.emnlp-main.349/):
+
+
+<details>
+   <summary>BibTeX Citation</summary>
+   
+```bibtex
+@inproceedings{heppell-etal-2023-analysing,
+    title = "Analysing State-Backed Propaganda Websites: a New Dataset and Linguistic Study",
+    author = "Heppell, Freddy  and
+      Bontcheva, Kalina  and
+      Scarton, Carolina",
+    editor = "Bouamor, Houda  and
+      Pino, Juan  and
+      Bali, Kalika",
+    booktitle = "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.emnlp-main.349",
+    pages = "5729--5741",
+    doi = "10.18653/v1/2023.emnlp-main.349"
+}
+```
+</details>
+
 
 ## Installing
 
@@ -23,11 +58,11 @@ Processes a scraped WordPress site, including text extraction and internal link 
 
 ## Input Format
 
-This tool takes a scrape of the API JSON and HTML pages of the site.
+This tool takes a dump of the API JSON and (optionally) HTML pages of the site.
 
-### API Scrape
+### API Dump
 
-The scrape should be in a 'merged pages' format, i.e. the pages of the list endpoint should be iterated and each page merged together into one list. This can be done by a tool such as [WPJSONScraper](https://github.com/freddyheppell/wp-json-scraper).
+The dump should be in a 'merged pages' format, i.e. the pages of the list endpoint should be iterated and each page merged together into one list. This can be done by a tool such as [WPJSONScraper](https://github.com/freddyheppell/wp-json-scraper).
 
 The following files should be placed in a directory. Their names may be prefixed by a consistent string (e.g. to record the date).
 
@@ -53,7 +88,7 @@ The following files should be placed in a directory. Their names may be prefixed
 
 This should be a scrape of the site's posts (at least), which will be used to extract data which is not present in the API response.
 
-Currently, this is limited to translations of posts. If the site you are scraping does not have translations, the scrape is not required and an empty directory can be used.
+Currently, this is only used to extract translations of posts. If the site you are scraping does not have translations, the scrape is not required and an empty directory can be used.
 
 An example of an easy way to do this (given the `posts.json` file described above) is
 
@@ -116,7 +151,7 @@ This section contains an overview of the extraction process for data.
 
 ### 1. Scrape Crawling
 
-Website scraping tools may store a webpage at path which is not easy to derive from the URL, for reasons such as path length limits. For this reason, we crawl the scrape directory and build a mapping of URL to path.
+Website scraping tools may store a webpage at a path that is not easy to derive from the URL (e.g. because of path length limits). For this reason, we crawl the scrape directory and build a mapping of URL to path.
 
 For every html file at any depth in the scrape directory, we:
 1. Perform a limited parse of only the link and meta tags in the file's head.
@@ -124,7 +159,7 @@ For every html file at any depth in the scrape directory, we:
 3. Check the URL has not previously been seen, warn and skip if it has
 4. Add the URL to the map with the absolute path of the file
 
-This map is then saved as `url_cache.json` in the scrape directory. If an existing cache file is detected, it will be used instead of scraping again.
+This map is then saved as `url_cache.json` in the scrape directory. If an existing cache file is detected, it will be used instead of scraping again, unless a breaking change has been made to the file schema.
 
 ### 2. Content Extraction
 
@@ -162,7 +197,7 @@ For every resolution, the following steps are performed:
 1. Remove the `preview_id` query parameter from the URL if present
 2. Attempt to look up the URL in the link registry
 3. If unsuccessful, use a heuristic to detect category slugs in the URL and try without them
-   * We do this in case sites have removed category slugs from the URL at some point.
+   * We do this in case sites have removed category slugs from the permalink at some point.
 4. If unsuccessful, warn that the URL is unresolvable
 
 For each resolved link, translation, or media, a destination is set containing its normalised URL, data type, and ID.
