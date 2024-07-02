@@ -172,7 +172,7 @@ def test_translations_bidirectional(posts_df_and_registry):
     posts_df, registry = posts_df_and_registry
     posts_df = resolve_post_translations(registry, posts_df)
     # Currently 1 <-> 2, let's remove 1 <- 2
-    posts_df.loc[2, "translations"] = []
+    posts_df.at[2, "translations"] = []  # noqa: PD008
 
     posts_df = ensure_translations_undirected(posts_df)
 
