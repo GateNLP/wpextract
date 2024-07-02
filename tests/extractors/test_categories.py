@@ -26,7 +26,7 @@ def test_equals_expected(datadir, categories_df):
 
 
 def test_parent_nan_replacement(categories_df):
-    assert categories_df["parent"].equals(ordered_col([np.NaN, np.NaN, 2]))
+    assert categories_df["parent"].equals(ordered_col([np.nan, np.nan, 2]))
 
 
 def test_link_locale(categories_df):
