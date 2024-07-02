@@ -650,7 +650,11 @@ files = [
 ]
 
 [package.dependencies]
-numpy = {version = ">=1.20.3", markers = "python_version < \"3.10\""}
+numpy = [
+    {version = ">=1.20.3", markers = "python_version < \"3.10\""},
+    {version = ">=1.23.2", markers = "python_version >= \"3.11\""},
+    {version = ">=1.21.0", markers = "python_version >= \"3.10\" and python_version < \"3.11\""},
+]
 python-dateutil = ">=2.8.1"
 pytz = ">=2020.1"
 
@@ -1040,5 +1044,5 @@ reference = "pypi-public"
 
 [metadata]
 lock-version = "2.0"
-python-versions = "~3.8.1"
-content-hash = "c27ce4a9f2ba3376a4260118b5750a8818cfab71ff61b922db0fb14cd1d5936c"
+python-versions = ">=3.8.1,<3.13"
+content-hash = "bcfa1ec6bf5c638f9c1e788e9c2de7e7dfb7d71925529f7eba3b1904efbe8326"
