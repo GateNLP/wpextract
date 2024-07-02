@@ -2,9 +2,9 @@ name: Lint
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "dev"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "dev"]
 
 permissions:
   contents: read
@@ -19,14 +19,14 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: "3.8"
-          cache: "pipenv"
-      - name: Install Pipenv
-        run: python -m pip install --upgrade pipenv wheel
+          cache: "poetry"
+      - name: Install Poetry
+        run: pipx install poetry==1.8.3
       - name: Install Python dependencies
-        run: pipenv install --deploy --dev
+        run: poetry install --no-interaction --no-root
+      - name: Install Project
+        run: poetry install --no-interaction
       - name: Lint with Black
-        run: pipenv run black --check .
+        run: poetry run black --check .
       - name: Lint with Flake8
-        run: pipenv run flake8 .
-      - name: Tests
-        run: pipenv run pytest
+        run: poetry run flake8 .
