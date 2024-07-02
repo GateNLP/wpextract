@@ -18,7 +18,7 @@ def tags_df(tags_df_and_registry):
 
 
 def test_equals_expected(datadir, tags_df):
-    expected_df = pd.read_pickle(datadir / "tags_df_out.pickle")
+    expected_df = pd.read_json(datadir / "tags_df_out.json", orient="table")
 
     assert tags_df.equals(expected_df)
 

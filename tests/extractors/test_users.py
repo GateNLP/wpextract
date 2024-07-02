@@ -9,5 +9,5 @@ def users_df(datadir):
 
 
 def test_user_load(datadir, users_df):
-    expected_df = pd.read_pickle(datadir / "users_df_out.pickle")
+    expected_df = pd.read_json(datadir / "users_df_out.json", orient="table")
     assert users_df.equals(expected_df)

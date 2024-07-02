@@ -19,7 +19,7 @@ def categories_df(categories_df_and_registry):
 
 
 def test_equals_expected(datadir, categories_df):
-    expected_df = pd.read_pickle(datadir / "categories_df_out.pickle")
+    expected_df = pd.read_json(datadir / "categories_df_out.json", orient="table")
 
     assert categories_df.equals(expected_df)
 
