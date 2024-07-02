@@ -22,9 +22,12 @@ def load_users(path: Path) -> Optional[pd.DataFrame]:
     if users_df is None:
         return None
 
-    users_df["avatar"] = users_df["yoast_head_json.og_image"].apply(
-        lambda image: image[0]["url"] if len(image) > 0 else None
-    )
+    if "yoast_head_json.og_image" in users_df.columns:
+        users_df["avatar"] = users_df["yoast_head_json.og_image"].apply(
+            lambda image: image[0]["url"] if len(image) > 0 else None
+        )
+    else:
+        users_df["avatar"] = None
 
     users_df = users_df[users_df.columns.intersection(EXPORT_COLUMNS)]
 
