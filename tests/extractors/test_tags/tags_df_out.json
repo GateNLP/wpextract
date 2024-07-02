@@ -1,0 +1,67 @@
+{
+  "schema":{
+    "fields":[
+      {
+        "name":"id",
+        "type":"integer"
+      },
+      {
+        "name":"count",
+        "type":"integer"
+      },
+      {
+        "name":"description",
+        "type":"string"
+      },
+      {
+        "name":"link",
+        "type":"string"
+      },
+      {
+        "name":"name",
+        "type":"string"
+      },
+      {
+        "name":"slug",
+        "type":"string"
+      },
+      {
+        "name":"link_locale",
+        "type":"string"
+      }
+    ],
+    "primaryKey":[
+      "id"
+    ],
+    "pandas_version":"1.4.0"
+  },
+  "data":[
+    {
+      "id":1,
+      "count":3,
+      "description":"About Test Tag One",
+      "link":"https:\/\/example.org\/tag\/test-tag-one\/",
+      "name":"Test Tag One",
+      "slug":"test-tag-one",
+      "link_locale":null
+    },
+    {
+      "id":2,
+      "count":3,
+      "description":"About Test Tag Two",
+      "link":"https:\/\/example.org\/fr\/test-tag-two\/",
+      "name":"Test Tag Two",
+      "slug":"test-tag-two",
+      "link_locale":"fr"
+    },
+    {
+      "id":3,
+      "count":3,
+      "description":"About Test Tag Three",
+      "link":"https:\/\/example.org\/fr\/tag\/test-tag-three\/",
+      "name":"Test Tag Three",
+      "slug":"test-tag-three",
+      "link_locale":"fr"
+    }
+  ]
+}
