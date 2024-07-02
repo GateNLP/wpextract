@@ -85,11 +85,14 @@ def load_posts(
 
     # yoast_head_json.og_image is a list containing 0 or 1 image dictionaries
     # Get the "url" property if there is an image
-    posts_df["og_image_url"] = posts_df["yoast_head_json.og_image"].apply(
-        lambda image: image[0]["url"]
-        if not isinstance(image, float) and len(image) > 0
-        else None
-    )
+    if "yoast_head_json.title" in posts_df.columns:
+        posts_df["og_image_url"] = posts_df["yoast_head_json.og_image"].apply(
+            lambda image: image[0]["url"]
+            if not isinstance(image, float) and len(image) > 0
+            else None
+        )
+    else:
+        posts_df["og_image_url"] = None
 
     posts_df["link_locale"] = posts_df["link"].apply(extract_locale)
 
@@ -119,8 +122,8 @@ def load_posts(
         lambda r: extract_content_data(r["content.bs"], r["link"]), axis=1
     )
 
-    posts_df = posts_df[EXPORT_COLUMNS]
-    posts_df = posts_df.rename(columns=RENAME_COLUMNS)
+    posts_df = posts_df[posts_df.columns.intersection(EXPORT_COLUMNS)]
+    posts_df = posts_df.rename(columns=RENAME_COLUMNS, errors="ignore")
 
     return posts_df
 
