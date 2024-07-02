@@ -123,7 +123,7 @@ def load_posts(
     )
 
     posts_df = posts_df[posts_df.columns.intersection(EXPORT_COLUMNS)]
-    posts_df = posts_df.rename(columns=RENAME_COLUMNS, errors='ignore')
+    posts_df = posts_df.rename(columns=RENAME_COLUMNS, errors="ignore")
 
     return posts_df
 

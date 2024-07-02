@@ -78,7 +78,7 @@ def load_pages(path: Path, link_registry: LinkRegistry) -> Optional[pd.DataFrame
     )
 
     pages_df = pages_df[pages_df.columns.intersection(EXPORT_COLUMNS)]
-    pages_df = pages_df.rename(columns=RENAME_COLUMNS, errors='ignore')
+    pages_df = pages_df.rename(columns=RENAME_COLUMNS, errors="ignore")
 
     link_registry.add_linkables(
         "pages", pages_df["link"].to_list(), pages_df.index.to_list()

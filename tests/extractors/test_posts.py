@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 from pathlib import Path
 
@@ -15,9 +14,8 @@ from extractor.extractors.posts import (
 )
 from extractor.parse.translations._resolver import TranslationLink
 from helpers.df import ordered_col
-from pytest_mock import MockerFixture
-
 from helpers.file import json_without_cols
+from pytest_mock import MockerFixture
 
 
 def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pickers):
@@ -202,8 +200,9 @@ def test_resolves_media(posts_df_and_registry):
         idx=1,
     )
 
+
 def test_no_yoast_columns(datadir, scrape_urls_files):
-    path = json_without_cols(datadir / "posts.json", {'yoast_head', 'yoast_head_json'})
+    path = json_without_cols(datadir / "posts.json", {"yoast_head", "yoast_head_json"})
 
     posts_df = load_posts(path, LinkRegistry(), scrape_urls_files, None)
     assert posts_df.iloc[0].og_image_url is None

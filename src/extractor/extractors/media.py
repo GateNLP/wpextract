@@ -88,7 +88,7 @@ def load_media(path: Path, link_registry: LinkRegistry) -> Optional[pd.DataFrame
 
     media_df = media_df[media_df.columns.intersection(EXPORT_COLUMNS)]
 
-    media_df = media_df.rename(columns=RENAME_COLUMNS, errors='ignore')
+    media_df = media_df.rename(columns=RENAME_COLUMNS, errors="ignore")
 
     link_registry.add_linkables(
         "media", media_df["source_url"].to_list(), media_df.index.to_list()
