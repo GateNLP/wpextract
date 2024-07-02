@@ -39,22 +39,24 @@ If you use this tool in published work, please cite [our EMNLP paper](https://ac
 
 ## Installing
 
-1. Download and extract the project
-2. Create a Python 3.8 virtual environment (with `venv`, `Pipenv` or a similar tool)
-3. Run `pip install .` to install the package and dependencies
-4. Check it has installed with `wpextract --help`
+WordPress Site Extractor is currently not available from PyPI, but can instead be installed from a prebuilt wheel.
 
+1. Go to the [latest release](https://github.com/GateNLP/wordpress-site-extractor/releases/latest) and download the `.whl` file
+2. Create a new Python 3.8 virtual environment
+3. Install the package with `pip install /path/to/wp_site_extractor-x.y.z-py3-none-any.whl`
+4. Run with the `wpextract` command
+   
 ### Installing Development Environment
 
 **Prerequisites**:
 
 - Python 3.8
-- Pipenv
+- [Poetry](https://python-poetry.org/)
 
 1. Clone the repository
-2. Run `pipenv install --dev`
-   - You may need to add the argument `--python path/to/bin/python` if Python 3.8 is not on your path
-3. Run the CLI with the `wpextract-dev` helper
+2. Run `poetry install`
+   - You may need to first run `poetry env use /path/to/python` if Python 3.8 is not on your path
+3. Run the CLI with `poetry run wpextract`
 
 ## Input Format
 
