@@ -1,13 +1,10 @@
 from datetime import datetime
 from pathlib import Path
 
+import extractor
 import pandas as pd
 import pytest
 from bs4 import BeautifulSoup
-from helpers.df import ordered_col
-from pytest_mock import MockerFixture
-
-import extractor
 from extractor.extractors.data.links import Linkable, LinkRegistry
 from extractor.extractors.posts import (
     ensure_translations_undirected,
@@ -16,6 +13,8 @@ from extractor.extractors.posts import (
     resolve_post_translations,
 )
 from extractor.parse.translations._resolver import TranslationLink
+from helpers.df import ordered_col
+from pytest_mock import MockerFixture
 
 
 def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pickers):
@@ -49,14 +48,14 @@ def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pi
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def _do_mock_translation_extractor(mocker: MockerFixture):
     mocker.patch(
         "extractor.extractors.posts.extract_translations", mock_translation_extractor
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def scrape_urls_files(datadir: Path):
     def _scrape_path(slug):
         return (datadir / "scrape" / slug / "index.html").resolve()
@@ -70,7 +69,7 @@ def scrape_urls_files(datadir: Path):
     }
 
 
-@pytest.fixture
+@pytest.fixture()
 def posts_df_and_registry(_do_mock_translation_extractor, datadir, scrape_urls_files):
     link_registry = LinkRegistry()
     return (
@@ -79,7 +78,7 @@ def posts_df_and_registry(_do_mock_translation_extractor, datadir, scrape_urls_f
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def posts_df(posts_df_and_registry):
     posts_df, _ = posts_df_and_registry
     return posts_df
@@ -129,7 +128,7 @@ def test_language(posts_df):
     assert posts_df["language"].equals(ordered_col(["en", "fr", None]))
 
 
-@pytest.fixture
+@pytest.fixture()
 def spy_extractor_data(mocker: MockerFixture):
     return mocker.spy(extractor.extractors.posts, "extract_content_data")
 

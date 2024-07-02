@@ -1,18 +1,17 @@
 import pandas as pd
 import pytest
-from helpers.df import ordered_col
-
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.tags import load_tags
+from helpers.df import ordered_col
 
 
-@pytest.fixture
+@pytest.fixture()
 def tags_df_and_registry(datadir):
     link_registry = LinkRegistry()
     return load_tags(datadir / "tags.json", link_registry), link_registry
 
 
-@pytest.fixture
+@pytest.fixture()
 def tags_df(tags_df_and_registry):
     tags_df, _ = tags_df_and_registry
     return tags_df

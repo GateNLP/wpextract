@@ -1,7 +1,6 @@
 from argparse import ArgumentTypeError
 
 import pytest
-
 from extractor.util.args import directory, empty_directory
 
 

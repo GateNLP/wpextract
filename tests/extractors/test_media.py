@@ -2,18 +2,17 @@ from datetime import datetime
 
 import pandas as pd
 import pytest
-
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.media import load_media
 
 
-@pytest.fixture
+@pytest.fixture()
 def media_df_and_registry(datadir):
     link_registry = LinkRegistry()
     return load_media(datadir / "media.json", link_registry), link_registry
 
 
-@pytest.fixture
+@pytest.fixture()
 def media_df(media_df_and_registry):
     media_df, _ = media_df_and_registry
     return media_df

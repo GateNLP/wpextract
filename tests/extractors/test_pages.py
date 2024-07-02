@@ -2,19 +2,18 @@ from datetime import datetime
 
 import pandas as pd
 import pytest
-from helpers.df import ordered_col
-
 from extractor.extractors.data.links import LinkRegistry
 from extractor.extractors.pages import load_pages
+from helpers.df import ordered_col
 
 
-@pytest.fixture
+@pytest.fixture()
 def pages_df_and_registry(datadir):
     link_registry = LinkRegistry()
     return load_pages(datadir / "pages.json", link_registry), link_registry
 
 
-@pytest.fixture
+@pytest.fixture()
 def pages_df(pages_df_and_registry):
     pages_df, _ = pages_df_and_registry
     return pages_df

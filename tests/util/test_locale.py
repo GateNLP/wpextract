@@ -1,5 +1,4 @@
 import pytest
-
 from extractor.util.locale import extract_locale
 
 

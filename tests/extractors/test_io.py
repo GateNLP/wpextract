@@ -1,12 +1,11 @@
 import pandas as pd
-from helpers.df import ordered_col
-
 from extractor.extractors.io import (
     df_denormalize_to_dict,
     export_df,
     load_df,
     load_from_path,
 )
+from helpers.df import ordered_col
 
 
 def test_load_from_path(datadir):
