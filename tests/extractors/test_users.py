@@ -1,10 +1,9 @@
 import pandas as pd
 import pytest
-
 from extractor.extractors.users import load_users
 
 
-@pytest.fixture
+@pytest.fixture()
 def users_df(datadir):
     return load_users(datadir / "users.json")
 

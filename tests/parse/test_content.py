@@ -1,7 +1,6 @@
 from pathlib import Path
 
 from bs4 import BeautifulSoup
-
 from extractor.extractors.data.images import MediaUse, ResolvableMediaUse
 from extractor.extractors.data.links import Link, ResolvableLink
 from extractor.parse.content import (

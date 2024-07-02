@@ -1,19 +1,18 @@
 import numpy as np
 import pandas as pd
 import pytest
-from helpers.df import ordered_col
-
 from extractor.extractors.categories import load_categories
 from extractor.extractors.data.links import LinkRegistry
+from helpers.df import ordered_col
 
 
-@pytest.fixture
+@pytest.fixture()
 def categories_df_and_registry(datadir):
     link_registry = LinkRegistry()
     return load_categories(datadir / "categories.json", link_registry), link_registry
 
 
-@pytest.fixture
+@pytest.fixture()
 def categories_df(categories_df_and_registry):
     categories_df, _ = categories_df_and_registry
     return categories_df

@@ -110,13 +110,13 @@ def _remove_nan(value: Any) -> Any:
     Returns:
         The value with NA and NaN replaced.
     """
-    if type(value) == dict:
+    if isinstance(value, dict):
         for dkey, dvalue in value.items():
             value[dkey] = _remove_nan(dvalue)
-    elif type(value) == list:
+    elif isinstance(value, list):
         for i, item in enumerate(value):
             value[i] = _remove_nan(item)
-    elif type(value) == float and np.isnan(value):
+    elif isinstance(value, float) and np.isnan(value):
         value = None
     elif value is pd.NA:
         value = None

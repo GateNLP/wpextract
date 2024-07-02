@@ -87,7 +87,7 @@ def load_posts(
     # Get the "url" property if there is an image
     posts_df["og_image_url"] = posts_df["yoast_head_json.og_image"].apply(
         lambda image: image[0]["url"]
-        if type(image) != float and len(image) > 0
+        if not isinstance(image, float) and len(image) > 0
         else None
     )
 

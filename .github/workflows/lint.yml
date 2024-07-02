@@ -26,7 +26,10 @@ jobs:
         run: poetry install --no-interaction --no-root
       - name: Install Project
         run: poetry install --no-interaction
-      - name: Lint with Black
-        run: poetry run black --check .
-      - name: Lint with Flake8
-        run: poetry run flake8 .
+      - name: Ruff Format Check
+        run: poetry run ruff format --check
+        id: format
+      - name: Ruff Lint Check
+        run: poetry run ruff check --output-format=github
+        # Still run if format check fails
+        if: success() || steps.format.conclusion == 'failure'

@@ -1,5 +1,4 @@
 import pytest
-
 from extractor.util.str import (
     ensure_suffix,
     remove_ends,

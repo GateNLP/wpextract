@@ -1,5 +1,4 @@
 import pytest
-
 from extractor.extractors.data.link_resolver import resolve_link
 from extractor.extractors.data.links import LinkRegistry, ResolvableLink
 

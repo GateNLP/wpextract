@@ -32,7 +32,7 @@ def extract_locale(link: str) -> Optional[str]:
     parsed_link = urllib.parse.urlparse(link)
     path_stripped = remove_ends(parsed_link.path, "/")
     path_parts = path_stripped.split("/")
-    if tag_is_valid(path_parts[0]) and not path_parts[0] in EXCLUDED_TAGS:
+    if tag_is_valid(path_parts[0]) and path_parts[0] not in EXCLUDED_TAGS:
         lang = Language.get(path_parts[0], normalize=True)
         if lang.extensions is not None:
             # Language tag extensions are very unlikely to be used

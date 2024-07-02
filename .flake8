@@ -1,8 +1,0 @@
-[flake8]
-max-line-length = 88
-extend-ignore = E203, D104, D100, RST201, RST203, RST301, RST213, RST210
-docstring-convention = google
-strictness = long
-per-file-ignores =
-    tests/*.py:D103
-pytest-fixture-no-parentheses=true
