@@ -8,7 +8,7 @@ packages=[
 ]
 
 [tool.poetry.scripts]
-wpextract = {reference = "extractor.cli:main", type = "console"}
+wpextract = "extractor.cli:main"
 
 # Workaround for https://github.com/python-poetry/poetry/issues/9293
 [[tool.poetry.source]]
