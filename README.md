@@ -42,7 +42,7 @@ If you use this tool in published work, please cite [our EMNLP paper](https://ac
 WordPress Site Extractor is currently not available from PyPI, but can instead be installed from a prebuilt wheel.
 
 1. Go to the [latest release](https://github.com/GateNLP/wordpress-site-extractor/releases/latest) and download the `.whl` file
-2. Create a new Python 3.8 virtual environment
+2. Create a new Python 3.9 or greater virtual environment
 3. Install the package with `pip install /path/to/wp_site_extractor-x.y.z-py3-none-any.whl`
 4. Run with the `wpextract` command
    
@@ -50,7 +50,7 @@ WordPress Site Extractor is currently not available from PyPI, but can instead b
 
 **Prerequisites**:
 
-- Python 3.8
+- Python 3.9 or greater
 - [Poetry](https://python-poetry.org/)
 
 1. Clone the repository
