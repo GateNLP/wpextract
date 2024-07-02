@@ -84,8 +84,9 @@ class LangPicker(ABC):
 
 
 class Polylang(LangPicker):
-    """Language picker from the plugin \
-    `Polylang <https://wordpress.org/plugins/polylang/>`.
+    """Language picker from the plugin Polylang.
+
+     `WordPress plugin page <https://wordpress.org/plugins/polylang/>`.
 
     Has the structure::
 

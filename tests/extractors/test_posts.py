@@ -86,8 +86,8 @@ def posts_df(posts_df_and_registry):
 
 def test_post_times(posts_df):
     post_1 = posts_df.loc[1]
-    assert type(post_1.date_gmt) == pd.Timestamp
-    assert type(post_1.modified_gmt) == pd.Timestamp
+    assert isinstance(post_1.date_gmt, pd.Timestamp)
+    assert isinstance(post_1.modified_gmt, pd.Timestamp)
 
     assert post_1.date_gmt.tzinfo is None, "date_gmt had timezone information"
     assert post_1.modified_gmt.tzinfo is None, "modified_gmt had timezone information"
@@ -172,7 +172,7 @@ def test_translations_bidirectional(posts_df_and_registry):
     posts_df, registry = posts_df_and_registry
     posts_df = resolve_post_translations(registry, posts_df)
     # Currently 1 <-> 2, let's remove 1 <- 2
-    posts_df.at[2, "translations"] = []
+    posts_df.loc[2, "translations"] = []
 
     posts_df = ensure_translations_undirected(posts_df)
 

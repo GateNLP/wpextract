@@ -20,8 +20,8 @@ def media_df(media_df_and_registry):
 
 def test_media_times(media_df):
     media_1 = media_df.loc[1]
-    assert type(media_1.date_gmt) == pd.Timestamp
-    assert type(media_1.modified_gmt) == pd.Timestamp
+    assert isinstance(media_1.date_gmt, pd.Timestamp)
+    assert isinstance(media_1.modified_gmt, pd.Timestamp)
 
     assert media_1.date_gmt.tzinfo is None, "date_gmt had timezone information"
     assert media_1.modified_gmt.tzinfo is None, "modified_gmt had timezone information"
