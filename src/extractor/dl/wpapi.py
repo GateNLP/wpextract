@@ -70,10 +70,12 @@ class WPApi:
 
     def __init__(self, target, api_path="wp-json/", session=None, search_terms=None):
         """Creates a new instance of WPApi
-        param target: the target of the scan
-        param api_path: the api path, if non-default
-        param session: the requests session object to use for HTTP requests
-        param search_terms : the terms of the keyword search, if any
+
+        Args:
+            target: the target of the scan
+            api_path: the api path, if non-default
+            session: the requests session object to use for HTTP requests
+            search_terms : the terms of the keyword search, if any
         """
         self.api_path = api_path
         self.search_terms = search_terms
@@ -101,6 +103,7 @@ class WPApi:
     @staticmethod
     def str_type_to_native(str_type):
         """Converts a single object type as str to its corresponding native type.
+
         If the object type is unknown, this returns None as a fallback.
         This may have to be modified in cases of bugs.
 
@@ -140,9 +143,7 @@ class WPApi:
 
     @staticmethod
     def convert_obj_types_to_list(str_types):
-        """Converts a list of object type as list to a list of native constants
-        representing the object types.
-        """
+        """Converts a list of object type as list to a list of native constants representing the object types."""
         out = []
         if str_types is None or len(str_types) == 0 or "all" in str_types:
             return [WPApi.ALL_TYPES]
@@ -164,8 +165,8 @@ class WPApi:
 
         try:
             req = self.s.get(rest_url)
-        except Exception:
-            raise NoWordpressApi
+        except Exception as e:
+            raise NoWordpressApi from e
         if req.status_code >= 400:
             raise NoWordpressApi
         self.basic_info = get_content_as_json(req)
@@ -187,9 +188,7 @@ class WPApi:
     def crawl_pages(
         self, url, start=None, num=None, search_terms=None, display_progress=True
     ):
-        """Crawls all pages while there is at least one result for the given
-        endpoint or tries to get pages from start to end
-        """
+        """Crawls all pages while there is at least one result for the given endpoint or tries to get pages from start to end."""
         if search_terms is None:
             search_terms = self.search_terms
         page = 1
@@ -227,8 +226,8 @@ class WPApi:
                         start = total_entries - 1
             except HTTPError400:
                 break
-            except Exception:
-                raise WordPressApiNotV2
+            except Exception as e:
+                raise WordPressApiNotV2 from e
             try:
                 json_content = get_content_as_json(req)
                 if type(json_content) is list and len(json_content) > 0:
@@ -292,8 +291,8 @@ class WPApi:
             return None
         except HTTPError404:
             return None
-        except Exception:
-            raise WordPressApiNotV2
+        except Exception as e:
+            raise WordPressApiNotV2 from e
         try:
             content = get_content_as_json(req)
         except JSONDecodeError:
@@ -340,7 +339,7 @@ class WPApi:
 
         return None
 
-    def update_cache(self, cache, values, total_entries, start=None, num=None):
+    def update_cache(self, cache, values, total_entries, start=None, num=None):  # noqa: D102
         if cache is None:
             cache = values
         elif len(values) > 0:
@@ -565,7 +564,7 @@ class WPApi:
                     continue
                 keep = True
                 if len(endpoint["args"]) > 0 and type(endpoint["args"]) is dict:
-                    for name, arg in endpoint["args"].items():
+                    for name, arg in endpoint["args"].items():  # noqa: B007
                         if arg["required"]:
                             keep = False
                 if keep:
@@ -577,7 +576,7 @@ class WPApi:
                         continue
         return ns_data
 
-    def get_obj_by_id_helper(self, cache, obj_id, url, use_cache=True):
+    def get_obj_by_id_helper(self, cache, obj_id, url, use_cache=True):  # noqa: D102
         if use_cache and cache is not None:
             obj = get_by_id(cache, obj_id)
             if obj is not None:
@@ -628,7 +627,7 @@ class WPApi:
             )
         return []
 
-    def get_obj_list(self, obj_type, start, limit, cache, kwargs={}):
+    def get_obj_list(self, obj_type, start, limit, cache, kwargs=None):
         """Returns a list of maximum limit objects specified by the starting object offset.
 
         Args:
@@ -639,6 +638,8 @@ class WPApi:
             kwargs: additional parameters to pass to the function (for
                 POST only)
         """
+        kwargs = kwargs or {}
+
         get_func = None
         if obj_type == WPApi.USER:
             get_func = self.get_users

@@ -24,10 +24,14 @@ from urllib.parse import urlsplit, urlunsplit
 
 
 def get_by_id(value, id):
-    """Utility function to retrieve a value by and ID in a list of dicts, returns
-    None of no correspondance have been made
-    param value: the dict to process
-    param id: the id to get
+    """Utility function to retrieve a value by and ID in a list of dicts.
+
+    Args:
+        value: the dict to process
+        id: the id to get
+
+    Returns:
+        The matching value or None if no match is found
     """
     if value is None:
         return None
@@ -63,16 +67,16 @@ def first(sequence, default=""):
 def print_progress_bar(
     iteration, total, prefix="", suffix="", decimals=1, length=100, fill="█"
 ):
-    """Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent \
-        complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
+    """Call in a loop to create terminal progress bar.
+
+    Args:
+        iteration: current iteration (Int)
+        total: total iterations (Int)
+        prefix: prefix string (Str)
+        suffix: suffix string (Str)
+        decimals: positive number of decimals in percent complete
+        length: character length of bar (Int)
+        fill: bar fill character (Str)
     """
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
@@ -84,10 +88,13 @@ def print_progress_bar(
 
 
 def get_content_as_json(response_obj):
-    """When a BOM is present (see issue #2), UTF-8 is not properly decoded by
-    Response.json() method. This is a helper function that returns a json value
-    even if a BOM is present in UTF-8 text
-    @params:
+    """Returns a json value even if a BOM is present in UTF-8 text.
+
+    When a BOM is present (see issue #2), UTF-8 is not properly decoded by
+    Response.json() method.
+
+
+    Args:
         response_obj: a requests Response instance
 
     Returns:
@@ -99,5 +106,5 @@ def get_content_as_json(response_obj):
     else:
         try:
             return response_obj.json()
-        except:
+        except:  # noqa: E722
             return {}

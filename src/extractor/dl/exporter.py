@@ -278,10 +278,10 @@ class Exporter:
         Args:
             posts: the posts to export
             fmt: the export format (JSON or CSV)
+            filename: filename to use
             tags_list: a list of tags to associate them with tag ids
             categories_list: a list of categories to associate them with
-            user_list: a list of users to associate them with author id
-        category ids
+            users_list: a list of users to associate them with author id
 
         Returns:
             the length of the list written to the file
@@ -444,6 +444,7 @@ class Exporter:
         Args:
             media: the media to export
             fmt: the export format (JSON or CSV)
+            filename: file to export to
             users: a list of users to associate them with author ids
 
         Returns:
@@ -484,6 +485,7 @@ class Exporter:
         Args:
             namespaces: the namespaces to export
             fmt: the export format (JSON or CSV)
+            filename: file to export to
 
         Returns:
             the length of the list written to the file
@@ -545,7 +547,7 @@ class Exporter:
             tags_list: a list of tags to associate them with tag ids
             categories_list: a list of categories to associate them with
                 category ids
-            user_list: a list of users to associate them with author id
+            users_list: a list of users to associate them with author id
 
         Returns:
             the length of the list written to the file
@@ -639,7 +641,7 @@ class Exporter:
                     categories += "</li>"
             elif "categories" in post.keys():
                 categories = ""
-                for cat in post["categories"]:
+                for cat in post["categories"]:  # noqa: B007
                     categories += "<li>" + str(post["categories"]) + "</li>"
 
             tags = "<li>Unknown</li>"
@@ -659,7 +661,7 @@ class Exporter:
                     tags += "</li>"
             elif "tags" in post.keys():
                 tags = ""
-                for cat in post["tags"]:
+                for cat in post["tags"]:  # noqa: B007
                     tags += "<li>" + str(post["categories"]) + "</li>"
 
             buffer = """<!DOCTYPE html>
@@ -746,7 +748,7 @@ class Exporter:
         return exported_comments
 
     @staticmethod
-    def export_comments_helper(comment, post, export_folder):
+    def export_comments_helper(comment, post, export_folder):  # noqa: D102
         date_format = "%Y-%m-%dT%H:%M:%S-%Z"
         if not os.path.isdir(export_folder):
             os.mkdir(export_folder)

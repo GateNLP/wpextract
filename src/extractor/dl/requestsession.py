@@ -74,12 +74,11 @@ class RequestSession:
 
     def __init__(self, proxy=None, cookies=None, authorization=None):
         """Creates a new RequestSession instance
-        param proxy: a dict containing a proxy server string for HTTP and/or
-        HTTPS connection
-        param cookies: a string in the format of the Cookie header
-        param authorization: a tuple containing login and password or
-        requests.auth.HTTPBasicAuth for basic authentication or
-        requests.auth.HTTPDigestAuth for NTLM-like authentication
+
+        Args:
+            proxy: a dict containing a proxy server string for HTTP and/or HTTPS connection
+            cookies: a string in the format of the Cookie header
+            authorization: a tuple containing login and password or requests.auth.HTTPBasicAuth for basic authentication or requests.auth.HTTPDigestAuth for NTLM-like authentication
         """
         self.s = requests.Session()
         if proxy is not None:
@@ -95,21 +94,15 @@ class RequestSession:
             self.s.auth = authorization
 
     def get(self, url):
-        """Calls the get function from requests but handles errors to raise proper
-        exception following the context
-        """
+        """Calls the get function from requests but handles errors to raise proper exception following the context."""
         return self.do_request("get", url)
 
     def post(self, url, data=None):
-        """Calls the post function from requests but handles errors to raise proper
-        exception following the context
-        """
+        """Calls the post function from requests but handles errors to raise proper exception following the context."""
         return self.do_request("post", url, data)
 
     def do_request(self, method, url, data=None):
-        """Helper class to regroup requests and handle exceptions at the same
-        location
-        """
+        """Helper class to regroup requests and handle exceptions at the same location."""
         headers = {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
         }
@@ -122,13 +115,13 @@ class RequestSession:
         except requests.ConnectionError as e:
             if "Errno -5" in str(e) or "Errno -2" in str(e) or "Errno -3" in str(e):
                 Console.log_error("Could not resolve host %s" % url)
-                raise ConnectionCouldNotResolve
+                raise ConnectionCouldNotResolve from e
             elif "Errno 111" in str(e):
                 Console.log_error("Connection refused by %s" % url)
-                raise ConnectionRefused
+                raise ConnectionRefused from e
             elif "RemoteDisconnected" in str(e):
                 Console.log_error("Connection reset by %s" % url)
-                raise ConnectionReset
+                raise ConnectionReset from e
             else:
                 print(e)
                 raise e
@@ -174,20 +167,20 @@ class RequestSession:
         for key, m in c.items():
             self.s.cookies.set(key, m.value)
 
-    def get_cookies(self):
+    def get_cookies(self):  # noqa: D102
         return self.s.cookies.get_dict()
 
-    def set_proxy(self, proxy):
+    def set_proxy(self, proxy):  # noqa: D102
         prot = "http"
         if proxy[:5].lower() == "https":
             prot = "https"
         self.s.proxies = {prot: proxy}
 
-    def get_proxies(self):
+    def get_proxies(self):  # noqa: D102
         return self.s.proxies
 
-    def set_creds(self, credentials):
+    def set_creds(self, credentials):  # noqa: D102
         self.s.auth = credentials
 
-    def get_creds(self):
+    def get_creds(self):  # noqa: D102
         return self.s.auth

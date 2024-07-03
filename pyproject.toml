@@ -60,6 +60,12 @@ ignore = [
     "D103", # Ignore method docstring errors in tests
     "PD901", # Allow `df` variable name in tests
 ]
+"src/extractor/dl/*" = [
+    "D415",
+    "D103",
+    "D101",
+    "D107"
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

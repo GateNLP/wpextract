@@ -42,7 +42,7 @@ class ArgumentParser(argparse.ArgumentParser):
         self.add_argument("--help", "-h", help="print this help", action="store_true")
         self.should_help = True
 
-    def custom_parse_args(self, args):
+    def custom_parse_args(self, args):  # noqa: D102
         args = self.parse_args(shlex.split(args))
         if args.help:
             if self.should_help:
@@ -55,7 +55,7 @@ class ArgumentParser(argparse.ArgumentParser):
         else:
             return None
 
-    def error(self, message):
+    def error(self, message):  # noqa: D102
         if self.should_help:
             self.print_help(sys.stdout)
             print()
@@ -81,7 +81,10 @@ class InteractiveShell(cmd.Cmd):
         self.scanner = WPApi(self.target, session=session)
 
     @staticmethod
-    def export_decorator(export_func, is_all, export_str, json, csv, values, kwargs={}):
+    def export_decorator(
+        export_func, is_all, export_str, json, csv, values, kwargs=None
+    ):  # noqa: D102
+        kwargs = kwargs or {}
         if json is not None:
             json_file = json
             if is_all:
@@ -100,8 +103,7 @@ class InteractiveShell(cmd.Cmd):
             export_func(*args, **kwargs)
 
     def get_fetch_or_list_type(self, obj_type, plural=False):
-        """Returns a dict containing all necessary metadata
-         about the obj_type to list and fetch data
+        """Returns a dict containing all necessary metadata about the obj_type to list and fetch data
 
         Args:
             obj_type: the type of the object

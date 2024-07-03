@@ -39,7 +39,9 @@ class Console:
     @staticmethod
     def log_info(text):
         """Prints information log to the console
-        param text: the text to display
+
+        Args:
+            text: the text to display
         """
         print()
         print(Console.blue + "[*] " + text + Console.normal)
@@ -47,7 +49,9 @@ class Console:
     @staticmethod
     def log_error(text):
         """Prints error log to the console
-        param text: the text to display
+
+        Args:
+            text: the text to display
         """
         print()
         print(Console.red + "[!] " + text + Console.normal)
@@ -55,6 +59,8 @@ class Console:
     @staticmethod
     def log_success(text):
         """Prints error log to the console
-        param text: the text to display
+
+        Args:
+            text: the text to display
         """
         print(Console.green + "[+] " + text + Console.normal)

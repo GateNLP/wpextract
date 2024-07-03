@@ -31,8 +31,10 @@ class InfoDisplayer:
 
     @staticmethod
     def display_basic_info(information):
-        """Displays basic information about the WordPress instance
-        param information: information as a JSON object
+        """Displays basic information about the WordPress instance.
+
+        Args:
+            information: information as a JSON object
         """
         print()
 
@@ -69,7 +71,7 @@ class InfoDisplayer:
                         url = row[2]
                     ns_ref[row[0]] = {"desc": desc, "url": url}
                 ns_ref_file.close()
-            except:
+            except:  # noqa: E722
                 Console.log_error("Could not load namespaces reference file")
             for ns in information["namespaces"]:
                 tip = ""
@@ -104,7 +106,9 @@ class InfoDisplayer:
     @staticmethod
     def display_endpoints(information):
         """Displays endpoint documentation of the WordPress API
-        param information: information as a JSON object
+
+        Args:
+            information: information as a JSON object
         """
         print()
 
@@ -149,10 +153,15 @@ class InfoDisplayer:
             print()
 
     @staticmethod
-    def display_posts(information, orphan_comments=[], details=False):
+    def display_posts(information, orphan_comments=None, details=False):
         """Displays posts published on the WordPress instance
-        param information: information as a JSON object
+
+        Args:
+            information: information as a JSON object
+            orphan_comments: orphaned comments (may not be used)
+            details: show additional information
         """
+        orphan_comments = orphan_comments or []
         print()
         date_format = "%Y-%m-%dT%H:%M:%S-%Z"
         for post in information:
@@ -307,7 +316,10 @@ class InfoDisplayer:
     @staticmethod
     def display_categories(information, details=False):
         """Displays categories of the WordPress instance
-        param information: information as a JSON object
+
+        Args:
+            information: information as a JSON object
+            details: show additional details
         """
         print()
         for category in information:
@@ -343,7 +355,10 @@ class InfoDisplayer:
     @staticmethod
     def display_tags(information, details=False):
         """Displays tags of the WordPress instance
-        param information: information as a JSON object
+
+        Args:
+            information: information as a JSON object
+            details: show additional details
         """
         print()
         for tag in information:
@@ -535,7 +550,9 @@ class InfoDisplayer:
     @staticmethod
     def display_crawled_ns(information):
         """Displays endpoints details published on the WordPress instance
-        param information: information as a JSON object
+
+        Args:
+            information: information as a JSON object
         """
         print()
         for url, data in information.items():
