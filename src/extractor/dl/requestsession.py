@@ -25,6 +25,8 @@ import requests
 
 from extractor.dl.console import Console
 
+DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+
 
 class ConnectionCouldNotResolve(Exception):
     pass
@@ -104,9 +106,7 @@ class RequestSession:
 
     def do_request(self, method, url, data=None):
         """Helper class to regroup requests and handle exceptions at the same location."""
-        headers = {
-            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
-        }
+        headers = {"User-Agent": DEFAULT_UA}
         response = None
         try:
             if method == "post":

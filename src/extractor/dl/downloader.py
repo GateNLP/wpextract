@@ -20,11 +20,19 @@ def get_session(target: str, proxy=None, cookies=None, authorization=None):
 
 
 class WPDownloader:
-    def __init__(self, target: str, out_path: Path, data_types: List[str]):
+    def __init__(
+        self,
+        target: str,
+        out_path: Path,
+        data_types: List[str],
+        proxy=None,
+        cookies=None,
+        authorization=None,
+    ):
         self.target = target
         self.out_path = out_path
         self.data_types = data_types
-        self.session = get_session(target)
+        self.session = get_session(target, proxy, cookies, authorization)
         self.scanner = WPApi(self.target, session=self.session)
 
     def download(self):
