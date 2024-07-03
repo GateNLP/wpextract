@@ -212,4 +212,4 @@ The columns of each type are subset and exported as a JSON file each.
 
 This software is made available under the terms of the [Apache License version 2.0](LICENSE).
 
-A portion of this software (contained within the `extractor.dl` module) is adapted from [WPJsonScraper](https://github.com/MickaelWalter/wp-json-scraper) by Mickael Walter, made available under the terms of the [MIT license](src/extractor/dl/LICENSE.txt).
+Portions of this software are derived from other works, see [the `NOTICE` file](NOTICE) for further information.

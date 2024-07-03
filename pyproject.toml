@@ -6,6 +6,8 @@ authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
 packages=[
     { include = "extractor", from = "src"}
 ]
+repository="https://github.com/GateNLP/wordpress-site-extractor"
+license="Apache-2.0"
 
 [tool.poetry.scripts]
 wpextract = "extractor.cli.cli:main"
