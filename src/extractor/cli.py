@@ -4,18 +4,17 @@ import logging
 from tqdm.auto import tqdm
 from tqdm.contrib.logging import logging_redirect_tqdm
 
-from extractor.extract import WPExtractor
-from extractor.util.args import directory, empty_directory
+from extractor.cli.dl import do_dl, register_dl_parser
+from extractor.cli.extract import do_extract, register_extract_parser
 
 
-def _do_extract(args):
-    extractor = WPExtractor(
-        json_root=args.json_root,
-        scrape_root=args.scrape_root,
-        json_prefix=args.json_prefix,
-    )
-    extractor.extract()
-    extractor.export(args.out_dir)
+def _exec_command(args):
+    if args.command == "parse":
+        do_extract(args)
+    elif args.command == "dl":
+        do_dl(args)
+    else:
+        raise ValueError("Unknown command")
 
 
 def main() -> None:
@@ -25,24 +24,6 @@ def main() -> None:
         description="Extracts posts from wordpress dump",
     )
 
-    parser.add_argument("json_root", help="JSON dump of the site", type=directory)
-    parser.add_argument("out_dir", help="Output directory", type=empty_directory)
-    parser.add_argument(
-        "--scrape-root",
-        "-S",
-        help="Root directory of an HTML scrape",
-        type=directory,
-        required=False,
-        default=None,
-    )
-    parser.add_argument(
-        "--json-prefix",
-        "-P",
-        help="Prefix to the JSON files",
-        type=str,
-        required=False,
-        default=None,
-    )
     parser.add_argument(
         "--log",
         "-l",
@@ -57,7 +38,11 @@ def main() -> None:
         help="Increase log level to include debug logs",
         action="store_true",
     )
-    parser.set_defaults(feature=True)
+
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    register_extract_parser(subparsers)
+    register_dl_parser(subparsers)
 
     args = parser.parse_args()
 
@@ -71,6 +56,6 @@ def main() -> None:
 
     if args.log is None:
         with logging_redirect_tqdm():
-            _do_extract(args)
+            _exec_command(args)
     else:
-        _do_extract(args)
+        _exec_command(args)
