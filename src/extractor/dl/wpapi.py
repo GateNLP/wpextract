@@ -23,6 +23,7 @@ import copy
 import math
 from json.decoder import JSONDecodeError
 from urllib.parse import urlencode
+
 from tqdm.auto import tqdm
 
 from extractor.dl.exceptions import (
@@ -34,7 +35,6 @@ from extractor.dl.requestsession import HTTPError400, HTTPError404, RequestSessi
 from extractor.dl.utils import (
     get_by_id,
     get_content_as_json,
-    print_progress_bar,
     url_path_join,
 )
 
