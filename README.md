@@ -207,3 +207,9 @@ For each resolved link, translation, or media, a destination is set containing i
 ### 5. Export
 
 The columns of each type are subset and exported as a JSON file each.
+
+## Acknowledgements and License
+
+This software is made available under the terms of the [Apache License version 2.0](LICENSE).
+
+A portion of this software (contained within the `extractor.dl` module) is adapted from [WPJsonScraper](https://github.com/MickaelWalter/wp-json-scraper) by Mickael Walter, made available under the terms of the [MIT license](src/extractor/dl/LICENSE.txt).

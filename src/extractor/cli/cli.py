@@ -3,7 +3,7 @@ import logging
 
 from tqdm.auto import tqdm
 from tqdm.contrib.logging import logging_redirect_tqdm
-
+from importlib.metadata import version
 from extractor.cli._dl import do_dl, register_dl_parser
 from extractor.cli._extract import do_extract, register_extract_parser
 
@@ -16,13 +16,17 @@ def _exec_command(args):
     else:
         raise ValueError("Unknown command")
 
+def _get_version():
+    return version("wp-site-extractor")
 
 def main() -> None:
     """Entrypoint for CLI."""
     parser = argparse.ArgumentParser(
         prog="wordpress-site-extractor",
-        description="Extracts posts from wordpress dump",
+        description="Create datasets from WordPress sites using the REST API",
     )
+
+    parser.add_argument('--version', action='version', version="%(prog)s " + _get_version())
 
     parser.add_argument(
         "--log",
@@ -40,7 +44,7 @@ def main() -> None:
     )
 
     subparsers = parser.add_subparsers(
-        dest="command", required=True, title="subcommands"
+        dest="command", required=True, title="commands",
     )
 
     register_extract_parser(subparsers)

@@ -7,7 +7,7 @@ dl_types = ["categories", "media", "pages", "posts", "tags", "users"]
 
 def register_dl_parser(subparsers):
     """Register the `dl` subcommand."""
-    parser_dl = subparsers.add_parser("dl")
+    parser_dl = subparsers.add_parser("dl", help="Download a site's content using the WordPress REST API.")
     parser_dl.add_argument(
         "target",
         type=str,

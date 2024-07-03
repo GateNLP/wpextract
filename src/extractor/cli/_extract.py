@@ -4,7 +4,7 @@ from extractor.util.args import directory, empty_directory
 
 def register_extract_parser(subparsers):
     """Register the `extract` subcommand."""
-    parser_extract = subparsers.add_parser("extract")
+    parser_extract = subparsers.add_parser("extract", help="Convert the downloaded data files into a dataset.")
 
     parser_extract.add_argument(
         "json_root", help="JSON dump of the site", type=directory

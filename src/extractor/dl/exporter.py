@@ -53,6 +53,7 @@ class Exporter:
         """
         files_number = 0
         for m in tqdm(media, unit="media"):
+            # TODO: make this use the same session as the initial download
             r = requests.get(m, stream=True)
             if r.status_code == 200:
                 http_path = urlparse.urlparse(m).path.split("/")
