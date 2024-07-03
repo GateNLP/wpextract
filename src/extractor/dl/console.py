@@ -1,5 +1,4 @@
-"""
-Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
+"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +21,9 @@ SOFTWARE.
 
 
 class Console:
+    """A little helper class to allow console management (like color)
     """
-    A little helper class to allow console management (like color)
-    """
+
     normal = "\033[0m"
     blue = "\033[94m"
     green = "\033[92m"
@@ -32,8 +31,7 @@ class Console:
 
     @staticmethod
     def wipe_color():
-        """
-        Deactivates color in terminal
+        """Deactivates color in terminal
         """
         Console.normal = ""
         Console.blue = ""
@@ -42,8 +40,7 @@ class Console:
 
     @staticmethod
     def log_info(text):
-        """
-        Prints information log to the console
+        """Prints information log to the console
         param text: the text to display
         """
         print()
@@ -51,8 +48,7 @@ class Console:
 
     @staticmethod
     def log_error(text):
-        """
-        Prints error log to the console
+        """Prints error log to the console
         param text: the text to display
         """
         print()
@@ -60,8 +56,7 @@ class Console:
 
     @staticmethod
     def log_success(text):
-        """
-        Prints error log to the console
+        """Prints error log to the console
         param text: the text to display
         """
         print(Console.green + "[+] " + text + Console.normal)

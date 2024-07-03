@@ -1,5 +1,4 @@
-"""
-Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
+"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,23 +19,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import os
 import copy
+import csv
 import html
 import json
-import csv
+import mimetypes
+import os
 from datetime import datetime
 from urllib import parse as urlparse
-import mimetypes
+
 import requests
 
 from extractor.dl.console import Console
 from extractor.dl.utils import get_by_id, print_progress_bar
 
+
 class Exporter:
+    """Utility functions to export data
     """
-        Utility functions to export data
-    """
+
     JSON = 1
     """
         Represents the JSON format for format choice
@@ -52,13 +53,12 @@ class Exporter:
 
     @staticmethod
     def download_media(media, output_folder, slugs=None):
-        """
-            Downloads the media files based on the given URLs
-            
-            :param media: the URLs as a list
-            :param output_folder: the path to the folder where the files are being saved, it is assumed as existing
-            :param slugs: list of slugs to associate with media. The list must be ordered the same as media and should be the same size
-            :return: the number of files wrote
+        """Downloads the media files based on the given URLs
+
+        :param media: the URLs as a list
+        :param output_folder: the path to the folder where the files are being saved, it is assumed as existing
+        :param slugs: list of slugs to associate with media. The list must be ordered the same as media and should be the same size
+        :return: the number of files wrote
         """
         files_number = 0
         media_length = len(media)
@@ -76,20 +76,27 @@ class Exporter:
                 if slugs is None:
                     local_path = os.path.join(local_path, http_path[-1])
                 else:
-                    ext = mimetypes.guess_extension(r.headers['Content-Type'])
+                    ext = mimetypes.guess_extension(r.headers["Content-Type"])
                     local_path = os.path.join(local_path, slugs[progress])
                     if ext is not None:
                         local_path += ext
                 with open(local_path, "wb") as f:
                     i = 0
-                    content_size = int(r.headers['Content-Length'])
+                    content_size = int(r.headers["Content-Length"])
                     for chunk in r.iter_content(Exporter.CHUNK_SIZE):
-                        if content_size > 10485706: # 10Mo
-                            print_progress_bar(i*Exporter.CHUNK_SIZE, content_size, prefix=http_path[-1], length=70)
+                        if content_size > 10485706:  # 10Mo
+                            print_progress_bar(
+                                i * Exporter.CHUNK_SIZE,
+                                content_size,
+                                prefix=http_path[-1],
+                                length=70,
+                            )
                         f.write(chunk)
                         i += 1
-                    if content_size > 10485706: # 10Mo
-                            print_progress_bar(content_size, content_size, prefix=http_path[-1], length=70)
+                    if content_size > 10485706:  # 10Mo
+                        print_progress_bar(
+                            content_size, content_size, prefix=http_path[-1], length=70
+                        )
                 files_number += 1
             progress += 1
             if progress % 10 == 1:
@@ -98,47 +105,41 @@ class Exporter:
 
     @staticmethod
     def map_params(el, parameters_to_map):
-        """
-            Maps params to ids recursively.
+        """Maps params to ids recursively.
 
-            This method automatically maps IDs with the correponding objects given in parameters_to_map. 
-            The mapping is made in place as el is passed as a reference.
+        This method automatically maps IDs with the correponding objects given in parameters_to_map.
+        The mapping is made in place as el is passed as a reference.
 
-            :param el: the element that have ID references
-            :param parameters_to_map: a dict containing lists of elements to map by ids with el
+        :param el: the element that have ID references
+        :param parameters_to_map: a dict containing lists of elements to map by ids with el
         """
         for key, value in el.items():
             if key in parameters_to_map.keys() and parameters_to_map[key] is not None:
-                if type(value) is int: # Only one ID to map
+                if type(value) is int:  # Only one ID to map
                     obj = get_by_id(parameters_to_map[key], value)
                     if obj is not None:
-                        el[key] = {
-                            'id': value,
-                            'details': obj
-                        }
-                elif type(value) is list: # The object is a list of IDs, we map each one
+                        el[key] = {"id": value, "details": obj}
+                elif (
+                    type(value) is list
+                ):  # The object is a list of IDs, we map each one
                     vlist = []
                     for v in value:
                         obj = get_by_id(parameters_to_map[key], v)
                         vlist.append(obj)
-                    el[key] = {
-                        'ids': value,
-                        'details': vlist
-                    }
+                    el[key] = {"ids": value, "details": vlist}
             elif value is dict:
                 Exporter.map_params(value, parameters_to_map)
 
     @staticmethod
     def setup_export(vlist, parameters_to_unescape, parameters_to_map):
-        """
-            Sets up the right values for a list export.
+        """Sets up the right values for a list export.
 
-            This function flattens alist of objects before its serialization in the expected format. 
-            It also makes a deepcopy to ensure that the original vlist is not altered.
+        This function flattens alist of objects before its serialization in the expected format.
+        It also makes a deepcopy to ensure that the original vlist is not altered.
 
-            :param vlist: the list to prepare for exporting
-            :param parameters_to_unescape: parameters to unescape (ex. ["param1", ["param2"]["rendered"]])
-            :param parameters_to_map: parameters to map to another (ex. {"param_to_map": param_values_list})
+        :param vlist: the list to prepare for exporting
+        :param parameters_to_unescape: parameters to unescape (ex. ["param1", ["param2"]["rendered"]])
+        :param parameters_to_map: parameters to map to another (ex. {"param_to_map": param_values_list})
         """
         exported_list = []
 
@@ -148,9 +149,9 @@ class Exporter:
                 exported_el = copy.deepcopy(el)
                 # Look for parameters to HTML unescape
                 for key in parameters_to_unescape:
-                    if type(key) is str: # If the parameter is at the root
+                    if type(key) is str:  # If the parameter is at the root
                         exported_el[key] = html.unescape(exported_el[key])
-                    elif type(key) is list: # If the parameter is nested
+                    elif type(key) is list:  # If the parameter is nested
                         selected = exported_el
                         siblings = []
                         fullpath = {}
@@ -190,12 +191,11 @@ class Exporter:
 
     @staticmethod
     def prepare_filename(filename, fmt):
-        """
-            Returns a filename with the proper extension according to the given format
+        """Returns a filename with the proper extension according to the given format
 
-            :param filename: the filename to clean
-            :param fmt: the file format
-            :return: the cleaned filename
+        :param filename: the filename to clean
+        :param fmt: the file format
+        :return: the cleaned filename
         """
         if filename[-5:] != ".json" and fmt == Exporter.JSON:
             filename += ".json"
@@ -205,16 +205,15 @@ class Exporter:
 
     @staticmethod
     def write_file(filename, fmt, csv_keys, data, details=None):
-        """
-            Writes content to the given file using the given format.
+        """Writes content to the given file using the given format.
 
-            The key mapping must be a dict of keys or lists of keys to ensure proper mapping.
+        The key mapping must be a dict of keys or lists of keys to ensure proper mapping.
 
-            :param filename: the path of the file
-            :param fmt: the format of the file
-            :param csv_keys: the key mapping
-            :param data: the actual data to export
-            :param details: the details keys to look for
+        :param filename: the path of the file
+        :param fmt: the format of the file
+        :param csv_keys: the key mapping
+        :param data: the actual data to export
+        :param details: the details keys to look for
         """
         with open(filename, "w", encoding="utf-8") as f:
             if fmt == Exporter.JSON:
@@ -234,7 +233,7 @@ class Exporter:
                         last_key = None
                         if type(k) is str:
                             last_key = k
-                            k = [k] 
+                            k = [k]
                         if k[0] in el.keys():
                             selected = el[k[0]]
                         else:
@@ -246,8 +245,16 @@ class Exporter:
                                     selected = selected[subkey]
                                     last_key = subkey
                         # Once the leaf is selected, we verify if there is any kind of ID mapping and act accordingly
-                        if type(selected) is dict and 'id' in selected.keys() and 'details' in selected.keys() and last_key in details.keys():
-                            el_csv[key] = "%s (%d)" % (selected["details"][details[last_key]], selected["id"])
+                        if (
+                            type(selected) is dict
+                            and "id" in selected.keys()
+                            and "details" in selected.keys()
+                            and last_key in details.keys()
+                        ):
+                            el_csv[key] = "%s (%d)" % (
+                                selected["details"][details[last_key]],
+                                selected["id"],
+                            )
                         elif type(selected) is not dict and type(selected) is not list:
                             el_csv[key] = selected
                         else:
@@ -256,253 +263,256 @@ class Exporter:
                     w.writerow(el_csv)
 
     @staticmethod
-    def export_posts(posts, fmt, filename, tags_list=None, categories_list=None, users_list=None):
-        """
-            Exports posts in specified format to specified file
+    def export_posts(
+        posts, fmt, filename, tags_list=None, categories_list=None, users_list=None
+    ):
+        """Exports posts in specified format to specified file
 
-            :param posts: the posts to export
-            :param fmt: the export format (JSON or CSV)
-            :param tags_list: a list of tags to associate them with tag ids
-            :param categories_list: a list of categories to associate them with
-            category ids
-            :param user_list: a list of users to associate them with author id
-            :return: the length of the list written to the file
+        :param posts: the posts to export
+        :param fmt: the export format (JSON or CSV)
+        :param tags_list: a list of tags to associate them with tag ids
+        :param categories_list: a list of categories to associate them with
+        category ids
+        :param user_list: a list of users to associate them with author id
+        :return: the length of the list written to the file
         """
-        exported_posts = Exporter.setup_export(posts, 
-            [['title', 'rendered'], ['content', 'rendered'], ['excerpt', 'rendered']],
+        exported_posts = Exporter.setup_export(
+            posts,
+            [["title", "rendered"], ["content", "rendered"], ["excerpt", "rendered"]],
             {
-                'author': users_list,
-                'categories': categories_list,
-                'tags': tags_list,
-            })
-        
+                "author": users_list,
+                "categories": categories_list,
+                "tags": tags_list,
+            },
+        )
+
         filename = Exporter.prepare_filename(filename, fmt)
         csv_keys = {
-            'id': 'id',
-            'date': 'date',
-            'modified': 'modified',
-            'status': 'status',
-            'link': 'link',
-            'title': ['title', 'rendered'],
-            'author': 'author'
+            "id": "id",
+            "date": "date",
+            "modified": "modified",
+            "status": "status",
+            "link": "link",
+            "title": ["title", "rendered"],
+            "author": "author",
         }
         details = {
-            'author': 'name',
+            "author": "name",
         }
         Exporter.write_file(filename, fmt, csv_keys, exported_posts, details)
         return len(exported_posts)
 
     @staticmethod
     def export_categories(categories, fmt, filename, category_list=None):
-        """
-            Exports categories in specified format to specified file.
+        """Exports categories in specified format to specified file.
 
-            :param categories: the categories to export
-            :param fmt: the export format (JSON or CSV)
-            :param filename: the path to the file to write
-            :param category_list: the list of categories to be used as parents
-            :return: the length of the list written to the file
+        :param categories: the categories to export
+        :param fmt: the export format (JSON or CSV)
+        :param filename: the path to the file to write
+        :param category_list: the list of categories to be used as parents
+        :return: the length of the list written to the file
         """
-        exported_categories = Exporter.setup_export(categories, # TODO
+        exported_categories = Exporter.setup_export(
+            categories,  # TODO
             [],
             {
-                'parent': category_list,
-            })
-        
+                "parent": category_list,
+            },
+        )
+
         filename = Exporter.prepare_filename(filename, fmt)
 
         csv_keys = {
-            'id': 'id',
-            'name': 'name',
-            'post_count': 'count',
-            'description': 'description',
-            'parent': 'parent'
+            "id": "id",
+            "name": "name",
+            "post_count": "count",
+            "description": "description",
+            "parent": "parent",
         }
-        details = {
-            'parent': 'name'
-        }
+        details = {"parent": "name"}
         Exporter.write_file(filename, fmt, csv_keys, exported_categories, details)
         return len(exported_categories)
-    
+
     @staticmethod
     def export_tags(tags, fmt, filename):
-        """
-            Exports tags in specified format to specified file
+        """Exports tags in specified format to specified file
 
-            :param tags: the tags to export
-            :param fmt: the export format (JSON or CSV)
-            :param filename: the path to the file to write
-            :return: the length of the list written to the file
+        :param tags: the tags to export
+        :param fmt: the export format (JSON or CSV)
+        :param filename: the path to the file to write
+        :return: the length of the list written to the file
         """
         filename = Exporter.prepare_filename(filename, fmt)
-        
-        exported_tags = tags # It seems that no modification will be done for this one, so no deepcopy
+
+        exported_tags = tags  # It seems that no modification will be done for this one, so no deepcopy
         csv_keys = {
-            'id': 'id',
-            'name': 'name',
-            'post_count': 'post_count',
-            'description': 'description'
+            "id": "id",
+            "name": "name",
+            "post_count": "post_count",
+            "description": "description",
         }
         Exporter.write_file(filename, fmt, csv_keys, exported_tags)
         return len(exported_tags)
 
     @staticmethod
     def export_users(users, fmt, filename):
-        """
-            Exports users in specified format to specified file.
+        """Exports users in specified format to specified file.
 
-            :param users: the users to export
-            :param fmt: the export format (JSON or CSV)
-            :param filename: the path to the file to write
-            :return: the length of the list written to the file
+        :param users: the users to export
+        :param fmt: the export format (JSON or CSV)
+        :param filename: the path to the file to write
+        :return: the length of the list written to the file
         """
         filename = Exporter.prepare_filename(filename, fmt)
-        
-        exported_users = users # It seems that no modification will be done for this one, so no deepcopy
+
+        exported_users = users  # It seems that no modification will be done for this one, so no deepcopy
         csv_keys = {
-            'id': 'id',
-            'name': 'name', 
-            'link': 'link', 
-            'description': 'description'
+            "id": "id",
+            "name": "name",
+            "link": "link",
+            "description": "description",
         }
         Exporter.write_file(filename, fmt, csv_keys, exported_users)
         return len(exported_users)
 
     @staticmethod
     def export_pages(pages, fmt, filename, parent_pages=None, users=None):
+        """Exports pages in specified format to specified file.
+
+        :param pages: the pages to export
+        :param fmt: the export format (JSON or CSV)
+        :param filename: the path to the file to write
+        :param parent_pages: the list of all cached pages, to get parents
+        :param users: the list of all cached users, to get users
+        :return: the length of the list written to the file
         """
-            Exports pages in specified format to specified file.
-        
-            :param pages: the pages to export
-            :param fmt: the export format (JSON or CSV)
-            :param filename: the path to the file to write
-            :param parent_pages: the list of all cached pages, to get parents
-            :param users: the list of all cached users, to get users
-            :return: the length of the list written to the file
-        """
-        exported_pages = Exporter.setup_export(pages,
-            [["guid", "rendered"], ["title", "rendered"], ["content", "rendered"], ["excerpt", "rendered"]],
+        exported_pages = Exporter.setup_export(
+            pages,
+            [
+                ["guid", "rendered"],
+                ["title", "rendered"],
+                ["content", "rendered"],
+                ["excerpt", "rendered"],
+            ],
             {
-                'parent': parent_pages,
-                'author': users,
-            })
-        
+                "parent": parent_pages,
+                "author": users,
+            },
+        )
+
         filename = Exporter.prepare_filename(filename, fmt)
         csv_keys = {
-            'id': 'id',
-            'title': ['title', 'rendered'],
-            'date': 'date',
-            'modified': 'modified',
-            'status': 'status',
-            'link': 'link',
-            'author': 'author',
-            'protected': ['content', 'protected']
+            "id": "id",
+            "title": ["title", "rendered"],
+            "date": "date",
+            "modified": "modified",
+            "status": "status",
+            "link": "link",
+            "author": "author",
+            "protected": ["content", "protected"],
         }
-        details = {
-            'author': 'name'
-        }
+        details = {"author": "name"}
         Exporter.write_file(filename, fmt, csv_keys, exported_pages, details)
         return len(exported_pages)
 
     @staticmethod
     def export_media(media, fmt, filename, users=None):
-        """
-            Exports media in specified format to specified file.
+        """Exports media in specified format to specified file.
 
-            :param media: the media to export
-            :param fmt: the export format (JSON or CSV)
-            :param users: a list of users to associate them with author ids
-            :return: the length of the list written to the file
+        :param media: the media to export
+        :param fmt: the export format (JSON or CSV)
+        :param users: a list of users to associate them with author ids
+        :return: the length of the list written to the file
         """
-        exported_media = Exporter.setup_export(media, 
+        exported_media = Exporter.setup_export(
+            media,
             [
-                ['guid', 'rendered'],
-                ['title', 'rendered'],
-                ['description', 'rendered'],
-                ['caption', 'rendered'],
+                ["guid", "rendered"],
+                ["title", "rendered"],
+                ["description", "rendered"],
+                ["caption", "rendered"],
             ],
             {
-                'author': users,
-            })
-        
+                "author": users,
+            },
+        )
+
         filename = Exporter.prepare_filename(filename, fmt)
         csv_keys = {
-            'id': 'id',
-            'title': ['title', 'rendered'],
-            'date': 'date',
-            'modified': 'modified',
-            'status': 'status',
-            'link': 'link',
-            'author': 'author',
-            'media_type': 'media_type'
+            "id": "id",
+            "title": ["title", "rendered"],
+            "date": "date",
+            "modified": "modified",
+            "status": "status",
+            "link": "link",
+            "author": "author",
+            "media_type": "media_type",
         }
-        details = {
-            'author': 'name'
-        }
+        details = {"author": "name"}
         Exporter.write_file(filename, fmt, csv_keys, exported_media, details)
         return len(exported_media)
 
     @staticmethod
     def export_namespaces(namespaces, fmt, filename):
-        """
-            **NOT IMPLEMENTED** Exports namespaces in specified format to specified file.
+        """**NOT IMPLEMENTED** Exports namespaces in specified format to specified file.
 
-            :param namespaces: the namespaces to export
-            :param fmt: the export format (JSON or CSV)
-            :return: the length of the list written to the file
+        :param namespaces: the namespaces to export
+        :param fmt: the export format (JSON or CSV)
+        :return: the length of the list written to the file
         """
         Console.log_info("Namespaces export not available yet")
         return 0
 
     # FIXME to be refactored
     @staticmethod
-    def export_comments_interactive(comments, fmt, filename, parent_posts=None, users=None):
-        """
-            Exports comments in specified format to specified file.
+    def export_comments_interactive(
+        comments, fmt, filename, parent_posts=None, users=None
+    ):
+        """Exports comments in specified format to specified file.
 
-            :param comments: the comments to export
-            :param fmt: the export format (JSON or CSV)
-            :param filename: the path to the file to write
-            :param parent_posts: the list of all cached posts, to get parent posts (not used yet because this could be too verbose)
-            :param users: the list of all cached users, to get users
-            :return: the length of the list written to the file
+        :param comments: the comments to export
+        :param fmt: the export format (JSON or CSV)
+        :param filename: the path to the file to write
+        :param parent_posts: the list of all cached posts, to get parent posts (not used yet because this could be too verbose)
+        :param users: the list of all cached users, to get users
+        :return: the length of the list written to the file
         """
-        exported_comments = Exporter.setup_export(comments,
+        exported_comments = Exporter.setup_export(
+            comments,
             [["content", "rendered"]],
             {
-                'post': parent_posts,
-                'author': users,
-            })
-        
+                "post": parent_posts,
+                "author": users,
+            },
+        )
+
         # FIXME replacing the post ID by the post title in CSV mode doesn't work yet (nested keys)
         filename = Exporter.prepare_filename(filename, fmt)
         csv_keys = {
-            'id': 'id',
-            'post': 'post',
-            'date': 'date',
-            'status': 'status',
-            'link': 'link',
-            'author': 'author_name',
+            "id": "id",
+            "post": "post",
+            "date": "date",
+            "status": "status",
+            "link": "link",
+            "author": "author_name",
         }
-        details = {
-            'post': ['title', 'rendered'] 
-        }
+        details = {"post": ["title", "rendered"]}
         Exporter.write_file(filename, fmt, csv_keys, exported_comments, details)
         return len(exported_comments)
 
     # TODO deprecated, to be moved to export_posts when HTML will be supported
     @staticmethod
-    def export_posts_html(posts, folder, tags_list=None, categories_list=None,
-    users_list=None):
-        """
-            Exports posts as HTML to specified export folder.
-        
-            :param posts: the posts to export
-            :param folder: the export folder
-            :param tags_list: a list of tags to associate them with tag ids
-            :param categories_list: a list of categories to associate them with category ids
-            :param user_list: a list of users to associate them with author id
-            :return: the length of the list written to the file
+    def export_posts_html(
+        posts, folder, tags_list=None, categories_list=None, users_list=None
+    ):
+        """Exports posts as HTML to specified export folder.
+
+        :param posts: the posts to export
+        :param folder: the export folder
+        :param tags_list: a list of tags to associate them with tag ids
+        :param categories_list: a list of categories to associate them with category ids
+        :param user_list: a list of users to associate them with author id
+        :return: the length of the list written to the file
         """
         exported_posts = 0
 
@@ -512,106 +522,111 @@ class Exporter:
             os.makedirs(folder)
         for post in posts:
             post_file = None
-            if 'slug' in post.keys():
-                post_file = open(os.path.join(folder, post['slug'])+".html",
-                "wt", encoding="utf-8")
+            if "slug" in post.keys():
+                post_file = open(
+                    os.path.join(folder, post["slug"]) + ".html", "wt", encoding="utf-8"
+                )
             else:
-                post_file = open(os.path.join(folder, str(post['id']))+".html",
-                "wt", encoding="utf-8")
+                post_file = open(
+                    os.path.join(folder, str(post["id"])) + ".html",
+                    "wt",
+                    encoding="utf-8",
+                )
 
             title = "Unknown"
-            if 'title' in post.keys() and 'rendered' in post['title'].keys():
-                title = post['title']['rendered']
+            if "title" in post.keys() and "rendered" in post["title"].keys():
+                title = post["title"]["rendered"]
 
             date_gmt = "Unknown"
-            if 'date_gmt' in post.keys():
-                date_gmt = datetime.strptime(post['date_gmt'] +
-                                             "-GMT", date_format)
+            if "date_gmt" in post.keys():
+                date_gmt = datetime.strptime(post["date_gmt"] + "-GMT", date_format)
             modified_gmt = "Unknown"
-            if 'modified_gmt' in post.keys():
-                modified_gmt = datetime.strptime(post['modified_gmt'] +
-                                                 "-GMT", date_format)
+            if "modified_gmt" in post.keys():
+                modified_gmt = datetime.strptime(
+                    post["modified_gmt"] + "-GMT", date_format
+                )
             status = "Unknown"
-            if 'status' in post.keys():
-                status = post['status']
+            if "status" in post.keys():
+                status = post["status"]
 
             post_type = "Unknown"
-            if 'type' in post.keys():
-                post_type = post['type']
+            if "type" in post.keys():
+                post_type = post["type"]
 
             link = "Unknown"
-            if 'link' in post.keys():
-                link = html.escape(post['link'])
+            if "link" in post.keys():
+                link = html.escape(post["link"])
 
             comments = "Unknown"
-            if 'comment_status' in post.keys():
-                comments = html.escape(post['comment_status'])
+            if "comment_status" in post.keys():
+                comments = html.escape(post["comment_status"])
 
             content = "Unknown"
-            if 'content' in post.keys() and 'rendered' in \
-                    post['content'].keys():
-                content = post['content']['rendered']
+            if "content" in post.keys() and "rendered" in post["content"].keys():
+                content = post["content"]["rendered"]
 
             excerpt = "Unknown"
-            if 'excerpt' in post.keys() and 'rendered' in \
-                    post['excerpt'].keys():
-                excerpt = post['excerpt']['rendered']
+            if "excerpt" in post.keys() and "rendered" in post["excerpt"].keys():
+                excerpt = post["excerpt"]["rendered"]
 
             author = "Unknown"
-            if 'author' in post.keys() and users_list is not None:
-                author_obj = get_by_id(users_list, post['author'])
-                author = "%d: " % post['author']
+            if "author" in post.keys() and users_list is not None:
+                author_obj = get_by_id(users_list, post["author"])
+                author = "%d: " % post["author"]
                 if author_obj is not None:
-                    if 'name' in author_obj.keys():
-                        author += author_obj['name']
-                    if 'slug' in author_obj.keys():
-                        author += "(%s)" % author_obj['slug']
-                    if 'link' in author_obj.keys():
-                        author += " - <a href=\"%s\">%s</a>" % \
-                                  (author_obj['link'], author_obj['link'])
-            elif 'author' in post.keys():
-                author = str(post['author'])
+                    if "name" in author_obj.keys():
+                        author += author_obj["name"]
+                    if "slug" in author_obj.keys():
+                        author += "(%s)" % author_obj["slug"]
+                    if "link" in author_obj.keys():
+                        author += ' - <a href="%s">%s</a>' % (
+                            author_obj["link"],
+                            author_obj["link"],
+                        )
+            elif "author" in post.keys():
+                author = str(post["author"])
 
             categories = "<li>Unknown</li>"
-            if 'categories' in post.keys() and categories_list is not None:
+            if "categories" in post.keys() and categories_list is not None:
                 categories = ""
-                for cat in post['categories']:
+                for cat in post["categories"]:
                     cat_obj = get_by_id(categories_list, cat)
                     categories += "<li>%d: " % cat
                     if cat_obj is not None:
-                        if 'name' in cat_obj.keys():
-                            categories += cat_obj['name']
-                        if 'link' in cat_obj.keys():
-                            categories += " - <a href=\"%s\">%s</a>" % \
-                                          (html.escape(cat_obj['link']),
-                                           html.escape(cat_obj['link']))
+                        if "name" in cat_obj.keys():
+                            categories += cat_obj["name"]
+                        if "link" in cat_obj.keys():
+                            categories += ' - <a href="%s">%s</a>' % (
+                                html.escape(cat_obj["link"]),
+                                html.escape(cat_obj["link"]),
+                            )
                     categories += "</li>"
-            elif 'categories' in post.keys():
+            elif "categories" in post.keys():
                 categories = ""
-                for cat in post['categories']:
-                    categories += "<li>" + str(post['categories']) + "</li>"
+                for cat in post["categories"]:
+                    categories += "<li>" + str(post["categories"]) + "</li>"
 
             tags = "<li>Unknown</li>"
-            if 'tags' in post.keys() and tags_list is not None:
+            if "tags" in post.keys() and tags_list is not None:
                 tags = ""
-                for tag in post['tags']:
+                for tag in post["tags"]:
                     tag_obj = get_by_id(tags_list, tag)
                     tags += "<li>%d: " % tag
                     if tag_obj is not None:
-                        if 'name' in tag_obj.keys():
-                            tags += tag_obj['name']
-                        if 'link' in tag_obj.keys():
-                            tags += " - <a href=\"%s\">%s</a>" % \
-                                    (html.escape(tag_obj['link']),
-                                     html.escape(tag_obj['link']))
+                        if "name" in tag_obj.keys():
+                            tags += tag_obj["name"]
+                        if "link" in tag_obj.keys():
+                            tags += ' - <a href="%s">%s</a>' % (
+                                html.escape(tag_obj["link"]),
+                                html.escape(tag_obj["link"]),
+                            )
                     tags += "</li>"
-            elif 'tags' in post.keys():
+            elif "tags" in post.keys():
                 tags = ""
-                for cat in post['tags']:
-                    tags += "<li>" + str(post['categories']) + "</li>"
+                for cat in post["tags"]:
+                    tags += "<li>" + str(post["categories"]) + "</li>"
 
-            buffer = \
-"""<!DOCTYPE html>
+            buffer = """<!DOCTYPE html>
 <html>
     <head>
         <title>{title}</title>
@@ -653,18 +668,18 @@ class Exporter:
 </html>
 """
             buffer = buffer.format(
-            title=title,
-            date_gmt=date_gmt.strftime("%d/%m/%Y %H:%M:%S"),
-            modified_gmt=modified_gmt.strftime("%d/%m/%Y %H:%M:%S"),
-            status=status,
-            post_type=post_type,
-            link=link,
-            author=author,
-            comments=comments,
-            categories=categories,
-            tags=tags,
-            excerpt=excerpt,
-            content=content
+                title=title,
+                date_gmt=date_gmt.strftime("%d/%m/%Y %H:%M:%S"),
+                modified_gmt=modified_gmt.strftime("%d/%m/%Y %H:%M:%S"),
+                status=status,
+                post_type=post_type,
+                link=link,
+                author=author,
+                comments=comments,
+                categories=categories,
+                tags=tags,
+                excerpt=excerpt,
+                content=content,
             )
 
             post_file.write(buffer)
@@ -675,38 +690,49 @@ class Exporter:
 
     @staticmethod
     def export_comments(posts, orphan_comments, export_folder):
-        """
-        Exports comments from posts and from orphans list
+        """Exports comments from posts and from orphans list
         """
         exported_comments = 0
         for post in posts:
-            if 'comments' in post.keys() and len(post['comments']) > 0:
-                for comment in post['comments']:
-                    if 'slug' in post.keys() and len(post['slug']) > 0:
-                        Exporter.export_comments_helper(comment, post['slug'], export_folder)
+            if "comments" in post.keys() and len(post["comments"]) > 0:
+                for comment in post["comments"]:
+                    if "slug" in post.keys() and len(post["slug"]) > 0:
+                        Exporter.export_comments_helper(
+                            comment, post["slug"], export_folder
+                        )
                     else:
-                        Exporter.export_comments_helper(comment, post['id'], export_folder)
+                        Exporter.export_comments_helper(
+                            comment, post["id"], export_folder
+                        )
                     exported_comments += 1
         for comment in orphan_comments:
-            Exporter.export_comments_helper(comment, '__orphan_comments', export_folder)
+            Exporter.export_comments_helper(comment, "__orphan_comments", export_folder)
             exported_comments += 1
         return exported_comments
 
-    @staticmethod 
+    @staticmethod
     def export_comments_helper(comment, post, export_folder):
         date_format = "%Y-%m-%dT%H:%M:%S-%Z"
         if not os.path.isdir(export_folder):
             os.mkdir(export_folder)
         if not os.path.isdir(os.path.join(export_folder, post)):
             os.mkdir(os.path.join(export_folder, post))
-        out_file = open(os.path.join(export_folder, post, "%04d.html" % comment['id']), "wt", encoding="utf-8")
+        out_file = open(
+            os.path.join(export_folder, post, "%04d.html" % comment["id"]),
+            "wt",
+            encoding="utf-8",
+        )
         date_gmt = "Unknown"
-        if 'date_gmt' in comment.keys():
-            date_gmt = datetime.strptime(comment['date_gmt'] +
-                                            "-GMT", date_format)
+        if "date_gmt" in comment.keys():
+            date_gmt = datetime.strptime(comment["date_gmt"] + "-GMT", date_format)
         post_link = "None"
-        if '_links' in comment.keys() and 'up' in comment['_links'].keys() and len(comment['_links'].keys()) > 0 and 'href' in comment['_links']['up'][0].keys():
-            post_link = html.escape(comment['_links']['up'][0]['href'])
+        if (
+            "_links" in comment.keys()
+            and "up" in comment["_links"].keys()
+            and len(comment["_links"].keys()) > 0
+            and "href" in comment["_links"]["up"][0].keys()
+        ):
+            post_link = html.escape(comment["_links"]["up"][0]["href"])
         buffer = """
 <!DOCTYPE html>
 <html>
@@ -735,14 +761,14 @@ class Exporter:
         """
         buffer = buffer.format(
             author=html.escape(comment["author_name"]),
-            author_url=html.escape(comment['author_url']),
+            author_url=html.escape(comment["author_url"]),
             date_gmt=date_gmt.strftime("%d/%m/%Y %H:%M:%S"),
-            status=html.escape(comment['status']),
-            link=html.escape(comment['link']),
-            content=html.escape(comment['content']['rendered']),
+            status=html.escape(comment["status"]),
+            link=html.escape(comment["link"]),
+            content=html.escape(comment["content"]["rendered"]),
             post_title=html.escape(post),
-            post_id=int(comment['post']),
-            post_link=post_link
+            post_id=int(comment["post"]),
+            post_link=post_link,
         )
         out_file.write(buffer)
         out_file.close()

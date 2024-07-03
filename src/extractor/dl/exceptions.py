@@ -1,5 +1,4 @@
-"""
-Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
+"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +19,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-class NoWordpressApi (Exception):
+
+class NoWordpressApi(Exception):
+    """No API is available at the given URL
     """
-    No API is available at the given URL
-    """
+
     pass
 
-class WordPressApiNotV2 (Exception):
+
+class WordPressApiNotV2(Exception):
+    """The WordPress V2 API is not available
     """
-    The WordPress V2 API is not available
-    """
+
     pass
 
-class NSNotFoundException (Exception):
+
+class NSNotFoundException(Exception):
+    """The specified namespace does not exist
     """
-    The specified namespace does not exist
-    """
+
     pass

@@ -1,5 +1,4 @@
-"""
-Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
+"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,51 +20,61 @@ SOFTWARE.
 """
 
 from http.cookies import SimpleCookie
-import requests
 
+import requests
 from lib.console import Console
+
 
 class ConnectionCouldNotResolve(Exception):
     pass
 
+
 class ConnectionReset(Exception):
     pass
+
 
 class ConnectionRefused(Exception):
     pass
 
+
 class ConnectionTimeout(Exception):
     pass
+
 
 class HTTPError400(Exception):
     pass
 
+
 class HTTPError401(Exception):
     pass
+
 
 class HTTPError403(Exception):
     pass
 
+
 class HTTPError404(Exception):
     pass
+
 
 class HTTPError500(Exception):
     pass
 
+
 class HTTPError502(Exception):
     pass
+
 
 class HTTPError(Exception):
     pass
 
+
 class RequestSession:
-    """
-    Wrapper to handle the requests library with session support
+    """Wrapper to handle the requests library with session support
     """
 
     def __init__(self, proxy=None, cookies=None, authorization=None):
-        """
-        Creates a new RequestSession instance
+        """Creates a new RequestSession instance
         param proxy: a dict containing a proxy server string for HTTP and/or
         HTTPS connection
         param cookies: a string in the format of the Cookie header
@@ -79,33 +88,31 @@ class RequestSession:
         if cookies is not None:
             self.set_cookies(cookies)
         if authorization is not None and (
-            type(authorization) is tuple and len(authorization) == 2 or
-            type(authorization) is requests.auth.HTTPBasicAuth or
-            type(authorization) is requests.auth.HTTPDigestAuth):
+            type(authorization) is tuple
+            and len(authorization) == 2
+            or type(authorization) is requests.auth.HTTPBasicAuth
+            or type(authorization) is requests.auth.HTTPDigestAuth
+        ):
             self.s.auth = authorization
 
     def get(self, url):
-        """
-        Calls the get function from requests but handles errors to raise proper
+        """Calls the get function from requests but handles errors to raise proper
         exception following the context
         """
         return self.do_request("get", url)
 
-
     def post(self, url, data=None):
-        """
-        Calls the post function from requests but handles errors to raise proper
+        """Calls the post function from requests but handles errors to raise proper
         exception following the context
         """
         return self.do_request("post", url, data)
 
     def do_request(self, method, url, data=None):
-        """
-        Helper class to regroup requests and handle exceptions at the same
+        """Helper class to regroup requests and handle exceptions at the same
         location
         """
         headers = {
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
         }
         response = None
         try:
@@ -114,8 +121,7 @@ class RequestSession:
             else:
                 response = self.s.get(url, headers=headers)
         except requests.ConnectionError as e:
-            if "Errno -5" in str(e) or "Errno -2" in str(e)\
-              or "Errno -3" in str(e):
+            if "Errno -5" in str(e) or "Errno -2" in str(e) or "Errno -3" in str(e):
                 Console.log_error("Could not resolve host %s" % url)
                 raise ConnectionCouldNotResolve
             elif "Errno 111" in str(e):
@@ -133,51 +139,55 @@ class RequestSession:
         if response.status_code == 400:
             raise HTTPError400
         elif response.status_code == 401:
-            Console.log_error("Error 401 (Unauthorized) while trying to fetch"
-            " the API")
+            Console.log_error(
+                "Error 401 (Unauthorized) while trying to fetch" " the API"
+            )
             raise HTTPError401
         elif response.status_code == 403:
-            Console.log_error("Error 403 (Authorization Required) while trying"
-            " to fetch the API")
+            Console.log_error(
+                "Error 403 (Authorization Required) while trying" " to fetch the API"
+            )
             raise HTTPError403
         elif response.status_code == 404:
             raise HTTPError404
         elif response.status_code == 500:
-            Console.log_error("Error 500 (Internal Server Error) while trying"
-            " to fetch the API")
+            Console.log_error(
+                "Error 500 (Internal Server Error) while trying" " to fetch the API"
+            )
             raise HTTPError500
         elif response.status_code == 502:
-            Console.log_error("Error 502 (Bad Gateway) while trying"
-            " to fetch the API")
+            Console.log_error(
+                "Error 502 (Bad Gateway) while trying" " to fetch the API"
+            )
             raise HTTPError404
         elif response.status_code > 400:
-            Console.log_error("Error %d while trying to fetch the API" %
-            response.status_code)
+            Console.log_error(
+                "Error %d while trying to fetch the API" % response.status_code
+            )
             raise HTTPError
 
         return response
-    
+
     def set_cookies(self, cookies):
-        """
-        Sets new cookies from a string
+        """Sets new cookies from a string
         """
         c = SimpleCookie()
         c.load(cookies)
         for key, m in c.items():
             self.s.cookies.set(key, m.value)
-    
+
     def get_cookies(self):
         return self.s.cookies.get_dict()
-    
+
     def set_proxy(self, proxy):
-        prot = 'http'
-        if proxy[:5].lower() == 'https':
-            prot = 'https'
+        prot = "http"
+        if proxy[:5].lower() == "https":
+            prot = "https"
         self.s.proxies = {prot: proxy}
-    
+
     def get_proxies(self):
         return self.s.proxies
-    
+
     def set_creds(self, credentials):
         self.s.auth = credentials
 

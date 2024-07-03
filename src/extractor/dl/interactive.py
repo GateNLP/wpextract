@@ -1,5 +1,4 @@
-"""
-Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
+"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,27 +19,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import cmd
 import argparse
+import cmd
+import os
+import re
 import shlex
 import sys
-import re
-import copy
-import os
 
-from extractor.dl.wpapi import WPApi, WordPressApiNotV2
-from extractor.dl.requestsession import RequestSession
 from extractor.dl.console import Console
-from extractor.dl.infodisplayer import InfoDisplayer
 from extractor.dl.exporter import Exporter
-from extractor.dl.utils import get_by_id
+from extractor.dl.infodisplayer import InfoDisplayer
+from extractor.dl.wpapi import WordPressApiNotV2, WPApi
+
 
 class ArgumentParser(argparse.ArgumentParser):
+    """Wrapper for argparse.ArgumentParser (especially the help function that quits the application after display)
     """
-    Wrapper for argparse.ArgumentParser (especially the help function that quits the application after display)
-    """
+
     def __init__(self, prog="", description=""):
-        argparse.ArgumentParser.__init__(self, prog=prog, add_help=False, description=description)
+        argparse.ArgumentParser.__init__(
+            self, prog=prog, add_help=False, description=description
+        )
         self.add_argument("--help", "-h", help="print this help", action="store_true")
         self.should_help = True
 
@@ -63,10 +62,11 @@ class ArgumentParser(argparse.ArgumentParser):
             print()
             self.should_help = False
 
+
 class InteractiveShell(cmd.Cmd):
+    """The interactive shell for the application
     """
-    The interactive shell for the application
-    """
+
     intro = """
     Entering interactive session
     Use the 'help' command to get a list of available commands and parameters, 'exit' to quit
@@ -83,7 +83,7 @@ class InteractiveShell(cmd.Cmd):
         self.scanner = WPApi(self.target, session=session)
 
     @staticmethod
-    def export_decorator(export_func, is_all, export_str, json, csv, values, kwargs = {}):
+    def export_decorator(export_func, is_all, export_str, json, csv, values, kwargs={}):
         if json is not None:
             json_file = json
             if is_all:
@@ -100,14 +100,13 @@ class InteractiveShell(cmd.Cmd):
             args.append(Exporter.CSV)
             args.append(csv_file)
             export_func(*args, **kwargs)
-    
-    def get_fetch_or_list_type(self, obj_type, plural=False):
-        """
-            Returns a dict containing all necessary metadata
-             about the obj_type to list and fetch data
 
-            :param obj_type: the type of the object
-            :param plural: whether the name must be plural or not
+    def get_fetch_or_list_type(self, obj_type, plural=False):
+        """Returns a dict containing all necessary metadata
+         about the obj_type to list and fetch data
+
+        :param obj_type: the type of the object
+        :param plural: whether the name must be plural or not
         """
         display_func = None
         export_func = None
@@ -126,25 +125,23 @@ class InteractiveShell(cmd.Cmd):
         elif obj_type == WPApi.CATEGORY:
             display_func = InfoDisplayer.display_categories
             export_func = Exporter.export_categories
-            additional_info = {
-                'category_list': self.scanner.categories
-            }
+            additional_info = {"category_list": self.scanner.categories}
             obj_name = "Categories" if plural else "Category"
         elif obj_type == WPApi.POST:
             display_func = InfoDisplayer.display_posts
             export_func = Exporter.export_posts
             additional_info = {
-                'tags_list': self.scanner.tags,
-                'categories_list': self.scanner.categories,
-                'users_list': self.scanner.users
+                "tags_list": self.scanner.tags,
+                "categories_list": self.scanner.categories,
+                "users_list": self.scanner.users,
             }
             obj_name = "Posts" if plural else "Post"
         elif obj_type == WPApi.PAGE:
             display_func = InfoDisplayer.display_pages
             export_func = Exporter.export_pages
             additional_info = {
-                'parent_pages': self.scanner.pages,
-                'users': self.scanner.users
+                "parent_pages": self.scanner.pages,
+                "users": self.scanner.users,
             }
             obj_name = "Pages" if plural else "Page"
         elif obj_type == WPApi.COMMENT:
@@ -152,13 +149,13 @@ class InteractiveShell(cmd.Cmd):
             export_func = Exporter.export_comments_interactive
             additional_info = {
                 #'parent_posts': self.scanner.posts, # May be too verbose
-                'users': self.scanner.users
+                "users": self.scanner.users
             }
             obj_name = "Comments" if plural else "Comment"
         elif obj_type == WPApi.MEDIA:
             display_func = InfoDisplayer.display_media
             export_func = Exporter.export_media
-            additional_info = {'users': self.scanner.users}
+            additional_info = {"users": self.scanner.users}
             obj_name = "Media"
         elif obj_type == WPApi.NAMESPACE:
             display_func = InfoDisplayer.display_namespaces
@@ -170,18 +167,17 @@ class InteractiveShell(cmd.Cmd):
             "display_func": display_func,
             "export_func": export_func,
             "additional_info": additional_info,
-            "obj_name": obj_name
+            "obj_name": obj_name,
         }
 
     def fetch_obj(self, obj_type, obj_id, cache=True, json=None, csv=None):
-        """
-            Displays and exports (if relevant) the object fetched by ID
+        """Displays and exports (if relevant) the object fetched by ID
 
-            :param obj_type: the type of the object
-            :param obj_id: the ID of the obj
-            :param cache: whether to use the cache of not
-            :param json: json export filename
-            :param csv: csv export filename
+        :param obj_type: the type of the object
+        :param obj_id: the ID of the obj
+        :param cache: whether to use the cache of not
+        :param json: json export filename
+        :param csv: csv export filename
         """
         prop = self.get_fetch_or_list_type(obj_type)
         print(prop["obj_name"] + " details")
@@ -192,26 +188,37 @@ class InteractiveShell(cmd.Cmd):
             else:
                 prop["display_func"](obj, details=True)
                 if len(prop["additional_info"].keys()) > 0:
-                    InteractiveShell.export_decorator(prop["export_func"], False, "", json, csv, obj, prop["additional_info"])
+                    InteractiveShell.export_decorator(
+                        prop["export_func"],
+                        False,
+                        "",
+                        json,
+                        csv,
+                        obj,
+                        prop["additional_info"],
+                    )
                 else:
-                    InteractiveShell.export_decorator(prop["export_func"], False, "", json, csv, obj)
+                    InteractiveShell.export_decorator(
+                        prop["export_func"], False, "", json, csv, obj
+                    )
         except WordPressApiNotV2:
             Console.log_error("The API does not support WP V2")
         except IOError as e:
             Console.log_error("Could not open %s for writing" % e.filename)
         print()
-    
-    def list_obj(self, obj_type, start, limit, is_all=False, cache=True, json=None, csv=None):
-        """
-            Displays and exports (if relevant) the object list
 
-            :param obj_type: the type of the object
-            :param start: the offset of the first object
-            :param limit: the maximum number of objects to list
-            :param is_all: are all object types requested?
-            :param cache: whether to use the cache of not
-            :param json: json export filename
-            :param csv: csv export filename
+    def list_obj(
+        self, obj_type, start, limit, is_all=False, cache=True, json=None, csv=None
+    ):
+        """Displays and exports (if relevant) the object list
+
+        :param obj_type: the type of the object
+        :param start: the offset of the first object
+        :param limit: the maximum number of objects to list
+        :param is_all: are all object types requested?
+        :param cache: whether to use the cache of not
+        :param json: json export filename
+        :param csv: csv export filename
         """
         prop = self.get_fetch_or_list_type(obj_type, plural=True)
         print(prop["obj_name"] + " details")
@@ -219,9 +226,18 @@ class InteractiveShell(cmd.Cmd):
             kwargs = {}
             if obj_type == WPApi.POST:
                 kwargs = {"comments": False}
-            obj_list = self.scanner.get_obj_list(obj_type, start, limit, cache, kwargs=kwargs)
+            obj_list = self.scanner.get_obj_list(
+                obj_type, start, limit, cache, kwargs=kwargs
+            )
             prop["display_func"](obj_list)
-            InteractiveShell.export_decorator(prop["export_func"], is_all, prop["obj_name"].lower(), json, csv, obj_list)
+            InteractiveShell.export_decorator(
+                prop["export_func"],
+                is_all,
+                prop["obj_name"].lower(),
+                json,
+                csv,
+                obj_list,
+            )
         except WordPressApiNotV2:
             Console.log_error("The API does not support WP V2")
         except IOError as e:
@@ -229,28 +245,34 @@ class InteractiveShell(cmd.Cmd):
         print()
 
     def do_exit(self, arg):
-        'Exit wp-json-scraper'
+        """Exit wp-json-scraper"""
         return True
-    
+
     def do_show(self, arg):
-        'Shows information about parameters in memory'
-        parser = ArgumentParser(prog='show', description='show information about global parameters')
-        parser.add_argument("what", choices=['all', 'target', 'proxy', 'cookies', 'credentials', 'version'],
-        help='choose the information to be displayed', default='all')
+        """Shows information about parameters in memory"""
+        parser = ArgumentParser(
+            prog="show", description="show information about global parameters"
+        )
+        parser.add_argument(
+            "what",
+            choices=["all", "target", "proxy", "cookies", "credentials", "version"],
+            help="choose the information to be displayed",
+            default="all",
+        )
         args = parser.custom_parse_args(arg)
         if args is None:
             return
-        if args.what == 'all' or args.what == 'target':
+        if args.what == "all" or args.what == "target":
             print("Target: %s" % self.target)
-        if args.what == 'all' or args.what == 'proxy':
+        if args.what == "all" or args.what == "proxy":
             proxies = self.session.get_proxies()
             if proxies is not None and len(proxies) > 0:
-                print ("Proxies:")
+                print("Proxies:")
                 for key, value in proxies.items():
                     print("\t%s: %s" % (key, value))
             else:
-                print ("Proxy: none")
-        if args.what == 'all' or args.what == 'cookies':
+                print("Proxy: none")
+        if args.what == "all" or args.what == "cookies":
             cookies = self.session.get_cookies()
             if len(cookies) > 0:
                 print("Cookies:")
@@ -258,7 +280,7 @@ class InteractiveShell(cmd.Cmd):
                     print("\t%s: %s" % (key, value))
             else:
                 print("Cookies: none")
-        if args.what == 'all' or args.what == 'credentials':
+        if args.what == "all" or args.what == "credentials":
             credentials = self.session.get_creds()
             if credentials is not None:
                 creds_str = "Credentials: "
@@ -267,81 +289,110 @@ class InteractiveShell(cmd.Cmd):
                 print(creds_str[:-1])
             else:
                 print("Credentials: none")
-        if args.what == 'all' or args.what == 'version':
+        if args.what == "all" or args.what == "version":
             print("WPJsonScraper version: %s" % self.version)
         print()
-    
+
     def do_set(self, arg):
-        'Sets a global parameter of WPJsonScanner'
-        parser = ArgumentParser(prog='set', description='sets global parameters for WPJsonScanner')
-        parser.add_argument("what", choices=['target', 'proxy', 'cookies', 'credentials'],
-        help='the parameter to set')
-        parser.add_argument("value", type=str, help='the new value of the parameter (for cookies, set as cookie string: "n1=v1; n2=v2")')
+        """Sets a global parameter of WPJsonScanner"""
+        parser = ArgumentParser(
+            prog="set", description="sets global parameters for WPJsonScanner"
+        )
+        parser.add_argument(
+            "what",
+            choices=["target", "proxy", "cookies", "credentials"],
+            help="the parameter to set",
+        )
+        parser.add_argument(
+            "value",
+            type=str,
+            help='the new value of the parameter (for cookies, set as cookie string: "n1=v1; n2=v2")',
+        )
         args = parser.custom_parse_args(arg)
         if args is None:
             return
-        if args.what == 'target':
+        if args.what == "target":
             self.target = args.value
-            if re.match(r'^https?://.*$', self.target) is None:
+            if re.match(r"^https?://.*$", self.target) is None:
                 self.target = "http://" + self.target
-            if re.match(r'^.+/$', self.target) is None:
+            if re.match(r"^.+/$", self.target) is None:
                 self.target += "/"
             InteractiveShell.prompt = Console.red + self.target + Console.normal + " > "
             print("target = %s" % args.value)
             self.scanner = WPApi(self.target, session=self.session)
-            Console.log_info("Cache is erased but session stays the same (with cookies and authorization)")
-        elif args.what == 'proxy':
+            Console.log_info(
+                "Cache is erased but session stays the same (with cookies and authorization)"
+            )
+        elif args.what == "proxy":
             self.session.set_proxy(args.value)
             print("proxy = %s" % args.value)
-        elif args.what == 'cookies':
+        elif args.what == "cookies":
             self.session.set_cookies(args.value)
             print("Cookies set!")
         elif args.what == "credentials":
-            authorization_list = args.value.split(':')
+            authorization_list = args.value.split(":")
             if len(authorization_list) == 1:
-                authorization = (authorization_list[0], '')
+                authorization = (authorization_list[0], "")
             elif len(authorization_list) >= 2:
-                authorization = (authorization_list[0],
-                ':'.join(authorization_list[1:]))
+                authorization = (
+                    authorization_list[0],
+                    ":".join(authorization_list[1:]),
+                )
             self.session.set_creds(authorization)
             print("Credentials set!")
         print()
 
     def do_list(self, arg):
-        'Gets the list of something from the server'
-        parser = ArgumentParser(prog='list', description='gets a list of something from the server')
-        parser.add_argument("what", choices=[
-            'posts', 
-            #'post-revisions', 
-            #'wp-blocks', 
-            'categories',
-            'tags',
-            'pages',
-            'comments',
-            'media',
-            'users',
-            #'themes',
-            #'search-results',
-            'namespaces',
-            'all',
+        """Gets the list of something from the server"""
+        parser = ArgumentParser(
+            prog="list", description="gets a list of something from the server"
+        )
+        parser.add_argument(
+            "what",
+            choices=[
+                "posts",
+                #'post-revisions',
+                #'wp-blocks',
+                "categories",
+                "tags",
+                "pages",
+                "comments",
+                "media",
+                "users",
+                #'themes',
+                #'search-results',
+                "namespaces",
+                "all",
             ],
-            help='what to list')
-        parser.add_argument("--json", "-j", help="list and store as json to the specified file")
-        parser.add_argument("--csv", "-c", help="list and store as csv to the specified file")
-        parser.add_argument("--limit", "-l", type=int, help="limit the number of results")
+            help="what to list",
+        )
+        parser.add_argument(
+            "--json", "-j", help="list and store as json to the specified file"
+        )
+        parser.add_argument(
+            "--csv", "-c", help="list and store as csv to the specified file"
+        )
+        parser.add_argument(
+            "--limit", "-l", type=int, help="limit the number of results"
+        )
         parser.add_argument("--start", "-s", type=int, help="start at the given index")
-        parser.add_argument("--no-cache", dest="cache", action="store_false", help="don't lookup in cache and ask the server")
+        parser.add_argument(
+            "--no-cache",
+            dest="cache",
+            action="store_false",
+            help="don't lookup in cache and ask the server",
+        )
         args = parser.custom_parse_args(arg)
         if args is None:
             return
         # The checks must be ordered by dependencies
         kwargs = {
-            "start": args.start, 
-            "limit": args.limit, 
-            "is_all": args.what == "all", 
-            "cache": args.cache, 
-            "json": args.json, 
-            "csv": args.csv
+            "start": args.start,
+            "limit": args.limit,
+            "is_all": args.what == "all",
+            "cache": args.cache,
+            "json": args.json,
+            "csv": args.csv,
         }
         if args.what == "all" or args.what == "users":
             self.list_obj(WPApi.USER, **kwargs)
@@ -361,62 +412,91 @@ class InteractiveShell(cmd.Cmd):
             self.list_obj(WPApi.NAMESPACE, **kwargs)
 
     def do_fetch(self, arg):
-        'Fetches a specific content specified by ID'
-        parser = ArgumentParser(prog='fetch', description='fetches something from the server or the cache by ID')
-        parser.add_argument("what", choices=[
-            'post', 
-            #'post-revision', 
-            #'wp-block', 
-            'category',
-            'tag',
-            'page',
-            'comment',
-            'media',
-            'user',
-            #'theme',
-            #'search-result',
+        """Fetches a specific content specified by ID"""
+        parser = ArgumentParser(
+            prog="fetch",
+            description="fetches something from the server or the cache by ID",
+        )
+        parser.add_argument(
+            "what",
+            choices=[
+                "post",
+                #'post-revision',
+                #'wp-block',
+                "category",
+                "tag",
+                "page",
+                "comment",
+                "media",
+                "user",
+                #'theme',
+                #'search-result',
             ],
-            help='what to fetch')
-        parser.add_argument("id", type=int, help='the ID of the content to fetch')
-        parser.add_argument("--json", "-j", help="list and store as json to the specified file")
-        parser.add_argument("--csv", "-c", help="list and store as csv to the specified file")
-        parser.add_argument("--no-cache", dest="cache", action="store_false", help="don't lookup in cache and ask the server")
+            help="what to fetch",
+        )
+        parser.add_argument("id", type=int, help="the ID of the content to fetch")
+        parser.add_argument(
+            "--json", "-j", help="list and store as json to the specified file"
+        )
+        parser.add_argument(
+            "--csv", "-c", help="list and store as csv to the specified file"
+        )
+        parser.add_argument(
+            "--no-cache",
+            dest="cache",
+            action="store_false",
+            help="don't lookup in cache and ask the server",
+        )
         args = parser.custom_parse_args(arg)
         what_type = None
         if args is None:
             return
         what_type = WPApi.str_type_to_native(args.what)
-        
+
         if what_type is not None:
-            self.fetch_obj(what_type, args.id, cache=args.cache, json=args.json, csv=args.csv)
+            self.fetch_obj(
+                what_type, args.id, cache=args.cache, json=args.json, csv=args.csv
+            )
         else:
             print("Not implemented")
             print()
-    
+
     def do_search(self, arg):
-        'Looks for specific keywords in the WordPress API'
-        parser = ArgumentParser(prog='search', description='searches something from the server')
-        parser.add_argument("--type", "-t", action="append", choices=[
-            'all',
-            'post', 
-            #'post-revision', 
-            #'wp-block', 
-            'category',
-            'tag',
-            'page',
-            'comment',
-            'media',
-            'user',
-            #'theme',
-            #'search-result',
+        """Looks for specific keywords in the WordPress API"""
+        parser = ArgumentParser(
+            prog="search", description="searches something from the server"
+        )
+        parser.add_argument(
+            "--type",
+            "-t",
+            action="append",
+            choices=[
+                "all",
+                "post",
+                #'post-revision',
+                #'wp-block',
+                "category",
+                "tag",
+                "page",
+                "comment",
+                "media",
+                "user",
+                #'theme',
+                #'search-result',
             ],
-            help='the types to look for (default all)',
-            dest='what'
-            )
-        parser.add_argument("keywords", help='the keywords to look for')
-        parser.add_argument("--json", "-j", help="list and store as json to the specified file(s)")
-        parser.add_argument("--csv", "-c", help="list and store as csv to the specified file(s)")
-        parser.add_argument("--limit", "-l", type=int, help="limit the number of results")
+            help="the types to look for (default all)",
+            dest="what",
+        )
+        parser.add_argument("keywords", help="the keywords to look for")
+        parser.add_argument(
+            "--json", "-j", help="list and store as json to the specified file(s)"
+        )
+        parser.add_argument(
+            "--csv", "-c", help="list and store as csv to the specified file(s)"
+        )
+        parser.add_argument(
+            "--limit", "-l", type=int, help="limit the number of results"
+        )
         parser.add_argument("--start", "-s", type=int, help="start at the given index")
         args = parser.custom_parse_args(arg)
         if args is None:
@@ -438,7 +518,7 @@ class InteractiveShell(cmd.Cmd):
                         prop["obj_name"].lower(),
                         args.json,
                         args.csv,
-                        v
+                        v,
                     )
                 except WordPressApiNotV2:
                     Console.log_error("The API does not support WP V2")
@@ -447,17 +527,30 @@ class InteractiveShell(cmd.Cmd):
             print()
 
     def do_dl(self, arg):
-        'Downloads a media file (e.g. from /wp-content/uploads/) based on its ID'
-
-        parser = ArgumentParser(prog='dl', description='downloads a media from the server')
-        parser.add_argument("ids", help='ids to look for (comma separated), "all" or "cache"')
-        parser.add_argument("dest", help='destination folder')
-        parser.add_argument("--no-cache", dest="cache", action="store_false", help="don't lookup in cache and ask the server")
-        parser.add_argument("--use-slug", dest="slug", action="store_true", help="use the slug as filename and not the source URL name")
+        """Downloads a media file (e.g. from /wp-content/uploads/) based on its ID"""
+        parser = ArgumentParser(
+            prog="dl", description="downloads a media from the server"
+        )
+        parser.add_argument(
+            "ids", help='ids to look for (comma separated), "all" or "cache"'
+        )
+        parser.add_argument("dest", help="destination folder")
+        parser.add_argument(
+            "--no-cache",
+            dest="cache",
+            action="store_false",
+            help="don't lookup in cache and ask the server",
+        )
+        parser.add_argument(
+            "--use-slug",
+            dest="slug",
+            action="store_true",
+            help="use the slug as filename and not the source URL name",
+        )
         args = parser.custom_parse_args(arg)
         if args is None:
             return
-        
+
         if not os.path.isdir(args.dest):
             Console.log_error("The destination is not a folder or does not exist")
             return
@@ -478,10 +571,10 @@ class InteractiveShell(cmd.Cmd):
             number_downloaded = Exporter.download_media(media, args.dest, slugs)
         else:
             number_downloaded = Exporter.download_media(media, args.dest)
-        print('Downloaded %d media to %s' % (number_downloaded, args.dest))
+        print("Downloaded %d media to %s" % (number_downloaded, args.dest))
+
 
 def start_interactive(target, session, version):
-    """
-    Starts a new interactive session
+    """Starts a new interactive session
     """
     InteractiveShell(target, session, version).cmdloop()
