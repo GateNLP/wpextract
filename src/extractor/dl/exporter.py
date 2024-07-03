@@ -20,18 +20,15 @@ SOFTWARE.
 """
 
 import copy
-import csv
 import html
 import json
 import os
-from datetime import datetime
 from urllib import parse as urlparse
 
 import requests
 from tqdm.auto import tqdm
 
 from extractor.dl.console import Console
-from extractor.dl.utils import get_by_id
 
 
 class Exporter:
@@ -88,7 +85,6 @@ class Exporter:
                         chunks_pbar.close()
                 files_number += 1
         return files_number
-
 
     @staticmethod
     def setup_export(vlist, parameters_to_unescape):
@@ -183,7 +179,9 @@ class Exporter:
 
     @staticmethod
     def export_posts(
-        posts, fmt, filename,
+        posts,
+        fmt,
+        filename,
     ):
         """Exports posts in specified format to specified file
 
@@ -197,7 +195,7 @@ class Exporter:
         """
         exported_posts = Exporter.setup_export(
             posts,
-            [["title", "rendered"], ["content", "rendered"], ["excerpt", "rendered"]]
+            [["title", "rendered"], ["content", "rendered"], ["excerpt", "rendered"]],
         )
 
         filename = Exporter.prepare_filename(filename, fmt)
@@ -282,7 +280,7 @@ class Exporter:
                 ["title", "rendered"],
                 ["content", "rendered"],
                 ["excerpt", "rendered"],
-            ]
+            ],
         )
 
         filename = Exporter.prepare_filename(filename, fmt)
@@ -309,7 +307,7 @@ class Exporter:
                 ["title", "rendered"],
                 ["description", "rendered"],
                 ["caption", "rendered"],
-            ]
+            ],
         )
 
         filename = Exporter.prepare_filename(filename, fmt)
