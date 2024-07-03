@@ -18,6 +18,13 @@ def register_dl_parser(subparsers):
         type=str,
         help="the path of the output JSON file",
     )
+    parser_dl.add_argument(
+        "--media-dest",
+        "-m",
+        type=str,
+        default=None,
+        help="Path to download media files, skipped if not supplied."
+    )
     type_group = parser_dl.add_argument_group("data types")
     for dl_type in dl_types:
         type_group.add_argument(
@@ -41,3 +48,6 @@ def do_dl(args: Namespace):
     )
 
     downloader.download()
+
+    if args.media_dest:
+        downloader.download_media_files(args.media_dest)

@@ -45,6 +45,22 @@ class WPDownloader:
         if "media" in self.data_types:
             self._list_obj(WPApi.MEDIA)
 
+    def download_media_files(self, dest):
+        print("Pulling media URLs")
+        media, slugs = self.scanner.get_media_urls("all", cache=True)
+
+        if len(media) == 0:
+            Console.log_error("No media found corresponding to the criteria")
+            return
+        print("%d media URLs found" % len(media))
+        answer = input("Do you wish to proceed to download? (y/N)")
+        if answer.lower() != "y":
+            return
+        print("Note: Only files over 10MB are logged here")
+
+        number_dl = Exporter.download_media(media, dest)
+        print(f"Downloaded {number_dl} media files")
+
     def _get_fetch_or_list_type(self, obj_type, plural=False):
         """Returns a dict containing all necessary metadata about the obj_type to list and fetch data
 
@@ -71,10 +87,6 @@ class WPDownloader:
             obj_name = "Pages" if plural else "Page"
         elif obj_type == WPApi.COMMENT:
             export_func = Exporter.export_comments_interactive
-            additional_info = {
-                #'parent_posts': self.scanner.posts, # May be too verbose
-                "users": self.scanner.users
-            }
             obj_name = "Comments" if plural else "Comment"
         elif obj_type == WPApi.MEDIA:
             export_func = Exporter.export_media

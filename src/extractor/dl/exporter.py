@@ -29,9 +29,10 @@ from datetime import datetime
 from urllib import parse as urlparse
 
 import requests
+from tqdm.auto import tqdm
 
 from extractor.dl.console import Console
-from extractor.dl.utils import get_by_id, print_progress_bar
+from extractor.dl.utils import get_by_id
 
 
 class Exporter:
@@ -45,23 +46,19 @@ class Exporter:
     """The size of chunks to download large files"""
 
     @staticmethod
-    def download_media(media, output_folder, slugs=None):
+    def download_media(media, output_folder):
         """Downloads the media files based on the given URLs
 
         Args:
             media: the URLs as a list
             output_folder: the path to the folder where the files are
                 being saved, it is assumed as existing
-            slugs: list of slugs to associate with media. The list must
-                be ordered the same as media and should be the same size
 
         Returns:
             the number of files wrote
         """
         files_number = 0
-        media_length = len(media)
-        progress = 0
-        for m in media:
+        for m in tqdm(media, unit='media'):
             r = requests.get(m, stream=True)
             if r.status_code == 200:
                 http_path = urlparse.urlparse(m).path.split("/")
@@ -71,34 +68,22 @@ class Exporter:
                         local_path = os.path.join(local_path, el)
                         if not os.path.isdir(local_path):
                             os.mkdir(local_path)
-                if slugs is None:
-                    local_path = os.path.join(local_path, http_path[-1])
-                else:
-                    ext = mimetypes.guess_extension(r.headers["Content-Type"])
-                    local_path = os.path.join(local_path, slugs[progress])
-                    if ext is not None:
-                        local_path += ext
+                local_path = os.path.join(local_path, http_path[-1])
                 with open(local_path, "wb") as f:
                     i = 0
-                    content_size = int(r.headers["Content-Length"])
+                    content_size = int(r.headers.get("Content-Length", -1))
+                    chunks_pbar = None
+                    if content_size > 0:
+                        chunks_pbar = tqdm(total=content_size, unit='B', unit_scale=True, desc=http_path[-1],keep=False)
                     for chunk in r.iter_content(Exporter.CHUNK_SIZE):
-                        if content_size > 10485706:  # 10Mo
-                            print_progress_bar(
-                                i * Exporter.CHUNK_SIZE,
-                                content_size,
-                                prefix=http_path[-1],
-                                length=70,
-                            )
+                        if chunks_pbar is not None:
+                            chunks_pbar.update(Exporter.CHUNK_SIZE)
                         f.write(chunk)
                         i += 1
-                    if content_size > 10485706:  # 10Mo
-                        print_progress_bar(
-                            content_size, content_size, prefix=http_path[-1], length=70
-                        )
+                    if chunks_pbar is not None:
+                        chunks_pbar.update(content_size - chunks_pbar.n)
+                        chunks_pbar.close()
                 files_number += 1
-            progress += 1
-            if progress % 10 == 1:
-                print("Downloaded file %d of %d" % (progress, media_length))
         return files_number
 
     @staticmethod
