@@ -108,7 +108,9 @@ def load_posts(
             lambda link: load_scrape(scrape_urls_files, link)
         )
         posts_df[["language", "translations"]] = posts_df.apply(
-            lambda r: extract_translations(r["scrape_bs"], r["link"], translation_pickers),
+            lambda r: extract_translations(
+                r["scrape_bs"], r["link"], translation_pickers
+            ),
             axis=1,
         )
     else:

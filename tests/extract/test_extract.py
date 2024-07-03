@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import pandas as pd
-
 from extractor.extract import WPExtractor
 
 
@@ -24,9 +23,7 @@ def _assert_output_valid(out_dir: Path):
 
 
 def test_extract_no_scrape(datadir):
-    extractor = WPExtractor(
-        json_root=datadir / "json",
-    )
+    extractor = WPExtractor(json_root=datadir / "json")
 
     extractor.extract()
     _assert_extractor_valid(extractor)
@@ -38,15 +35,12 @@ def test_extract_no_scrape(datadir):
 
 
 def test_extract_scrape(datadir):
-    extractor = WPExtractor(
-        json_root=datadir / "json",
-        scrape_root=datadir / "scrape"
-    )
+    extractor = WPExtractor(json_root=datadir / "json", scrape_root=datadir / "scrape")
 
     extractor.extract()
     _assert_extractor_valid(extractor)
 
-    assert 'translations' in extractor.posts.columns
+    assert "translations" in extractor.posts.columns
 
     out_dir = datadir / "out_json"
     out_dir.mkdir()

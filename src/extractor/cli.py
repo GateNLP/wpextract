@@ -29,11 +29,11 @@ def main() -> None:
     parser.add_argument("out_dir", help="Output directory", type=empty_directory)
     parser.add_argument(
         "--scrape-root",
-        '-S',
+        "-S",
         help="Root directory of an HTML scrape",
         type=directory,
         required=False,
-        default=None
+        default=None,
     )
     parser.add_argument(
         "--json-prefix",
