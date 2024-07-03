@@ -4,8 +4,6 @@ from typing import List
 from extractor.dl.console import Console
 from extractor.dl.exceptions import WordPressApiNotV2
 from extractor.dl.exporter import Exporter
-from extractor.dl.infodisplayer import InfoDisplayer
-from extractor.dl.interactive import InteractiveShell
 from extractor.dl.requestsession import RequestSession
 from extractor.dl.wpapi import WPApi
 
@@ -30,6 +28,7 @@ class WPDownloader:
         self.scanner = WPApi(self.target, session=self.session)
 
     def download(self):
+        """Download and export the requested data lists."""
         if "users" in self.data_types:
             self._list_obj(WPApi.USER)
         if "tags" in self.data_types:
@@ -46,6 +45,11 @@ class WPDownloader:
             self._list_obj(WPApi.MEDIA)
 
     def download_media_files(self, dest):
+        """Download site media files.
+
+        Args:
+            dest: destination directory for media
+        """
         print("Pulling media URLs")
         media, slugs = self.scanner.get_media_urls("all", cache=True)
 

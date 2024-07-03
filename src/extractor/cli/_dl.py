@@ -23,7 +23,7 @@ def register_dl_parser(subparsers):
         "-m",
         type=str,
         default=None,
-        help="Path to download media files, skipped if not supplied."
+        help="Path to download media files, skipped if not supplied.",
     )
     type_group = parser_dl.add_argument_group("data types")
     for dl_type in dl_types:

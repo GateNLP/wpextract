@@ -23,7 +23,6 @@ import copy
 import csv
 import html
 import json
-import mimetypes
 import os
 from datetime import datetime
 from urllib import parse as urlparse
@@ -58,7 +57,7 @@ class Exporter:
             the number of files wrote
         """
         files_number = 0
-        for m in tqdm(media, unit='media'):
+        for m in tqdm(media, unit="media"):
             r = requests.get(m, stream=True)
             if r.status_code == 200:
                 http_path = urlparse.urlparse(m).path.split("/")
@@ -74,7 +73,13 @@ class Exporter:
                     content_size = int(r.headers.get("Content-Length", -1))
                     chunks_pbar = None
                     if content_size > 0:
-                        chunks_pbar = tqdm(total=content_size, unit='B', unit_scale=True, desc=http_path[-1],keep=False)
+                        chunks_pbar = tqdm(
+                            total=content_size,
+                            unit="B",
+                            unit_scale=True,
+                            desc=http_path[-1],
+                            keep=False,
+                        )
                     for chunk in r.iter_content(Exporter.CHUNK_SIZE):
                         if chunks_pbar is not None:
                             chunks_pbar.update(Exporter.CHUNK_SIZE)
