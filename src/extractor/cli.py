@@ -26,8 +26,15 @@ def main() -> None:
     )
 
     parser.add_argument("json_root", help="JSON dump of the site", type=directory)
-    parser.add_argument("scrape_root", help="HTML scrape of the site", type=directory)
     parser.add_argument("out_dir", help="Output directory", type=empty_directory)
+    parser.add_argument(
+        "--scrape-root",
+        "-S",
+        help="Root directory of an HTML scrape",
+        type=directory,
+        required=False,
+        default=None,
+    )
     parser.add_argument(
         "--json-prefix",
         "-P",
