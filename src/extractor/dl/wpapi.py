@@ -23,6 +23,7 @@ import copy
 import math
 from json.decoder import JSONDecodeError
 from urllib.parse import urlencode
+from tqdm.auto import tqdm
 
 from extractor.dl.exceptions import (
     NoWordpressApi,
@@ -208,6 +209,10 @@ class WPApi:
             page = math.floor(start / per_page) + 1
         if num is not None:
             entries_left = num
+
+        # Initialise placeholder for progress bar
+        pbar = None
+
         while more_entries and entries_left > 0:
             rest_url = url_path_join(self.url, self.api_path, (base_url % page))
             if start is not None:
@@ -228,6 +233,7 @@ class WPApi:
                 break
             except Exception as e:
                 raise WordPressApiNotV2 from e
+
             try:
                 json_content = get_content_as_json(req)
                 if type(json_content) is list and len(json_content) > 0:
@@ -263,21 +269,27 @@ class WPApi:
 
                     if display_progress:
                         if num is None and start is None and total_entries >= 0:
-                            print_progress_bar(page, total_pages, length=70)
+                            if pbar is None:
+                                pbar = tqdm(total=total_pages)
+                            pbar.update(page - pbar.n)
+
                         elif num is None and start is not None and total_entries >= 0:
-                            print_progress_bar(
-                                total_entries - start - entries_left,
-                                total_entries - start,
-                                length=70,
-                            )
+                            if pbar is None:
+                                pbar = tqdm(total=total_entries - start)
+                            pbar.update(total_entries - start - entries_left - pbar.n)
                         elif num is not None and total_entries > 0:
-                            print_progress_bar(num - entries_left, num, length=70)
+                            if pbar is None:
+                                pbar = tqdm(total=total_entries)
+                            pbar.update(num - entries_left - pbar.n)
                 else:
                     more_entries = False
             except JSONDecodeError:
                 more_entries = False
 
             page += 1
+
+        if pbar is not None:
+            pbar.close()
 
         return (entries, total_entries)
 

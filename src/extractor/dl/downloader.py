@@ -125,7 +125,7 @@ class WPDownloader:
             obj_list = self.scanner.get_obj_list(
                 obj_type, start, limit, cache, kwargs=kwargs
             )
-            prop["display_func"](obj_list)
+            # prop["display_func"](obj_list)
             InteractiveShell.export_decorator(
                 prop["export_func"],
                 is_all,
