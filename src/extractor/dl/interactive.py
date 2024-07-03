@@ -81,9 +81,9 @@ class InteractiveShell(cmd.Cmd):
         self.scanner = WPApi(self.target, session=session)
 
     @staticmethod
-    def export_decorator(
+    def export_decorator(  # noqa: D102
         export_func, is_all, export_str, json, csv, values, kwargs=None
-    ):  # noqa: D102
+    ):
         kwargs = kwargs or {}
         if json is not None:
             json_file = json
