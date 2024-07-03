@@ -143,7 +143,7 @@ The extractor can also be used as a library instead of on the command line.
 
 Typically, you would instantiate a new [`WPExtractor`](src/extractor/extract.py) instance and call its `extract` method. The dataframes can then be accessed as class attributes or exported with the `export` method.
 
-An example usage is available in the CLI script ([`extractor.cli`](src/extractor/cli.py)).
+An example usage is available in the CLI script ([`extractor.cli`](src/extractor/cli/cli.py)).
 
 When using this approach, it's possible to use customised translation pickers (see the `translation_pickers` argument of `WPExtractor`). These should be child classes of [`extractor.parse.translations.LangPicker`](src/extractor/parse/translations/_pickers.py).
 

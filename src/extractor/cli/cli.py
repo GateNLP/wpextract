@@ -4,8 +4,8 @@ import logging
 from tqdm.auto import tqdm
 from tqdm.contrib.logging import logging_redirect_tqdm
 
-from extractor.cli.dl import do_dl, register_dl_parser
-from extractor.cli.extract import do_extract, register_extract_parser
+from extractor.cli._dl import do_dl, register_dl_parser
+from extractor.cli._extract import do_extract, register_extract_parser
 
 
 def _exec_command(args):
@@ -39,7 +39,9 @@ def main() -> None:
         action="store_true",
     )
 
-    subparsers = parser.add_subparsers(dest="command", required=True)
+    subparsers = parser.add_subparsers(
+        dest="command", required=True, title="subcommands"
+    )
 
     register_extract_parser(subparsers)
     register_dl_parser(subparsers)

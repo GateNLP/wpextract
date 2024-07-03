@@ -22,7 +22,8 @@ SOFTWARE.
 from http.cookies import SimpleCookie
 
 import requests
-from lib.console import Console
+
+from extractor.dl.console import Console
 
 
 class ConnectionCouldNotResolve(Exception):
