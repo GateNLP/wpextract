@@ -1,0 +1,178 @@
+[
+  {
+    "id": 1,
+    "count": 3,
+    "description": "About Test Tag One",
+    "link": "https://example.org/tag/test-tag-one/",
+    "name": "Test Tag One",
+    "slug": "test-tag-one",
+    "taxonomy": "post_tag",
+    "meta": [],
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "Test Tag One - example.org",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/tag/test-tag-one/",
+      "og_locale": "en_US",
+      "og_type": "article",
+      "og_title": "Test Tag One - example.org",
+      "og_url": "https://example.org/tag/test-tag-one/",
+      "og_site_name": "example.org",
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/tags/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/tags"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/taxonomies/post_tag"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/posts?tags=1"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "count": 3,
+    "description": "About Test Tag Two",
+    "link": "https://example.org/fr/test-tag-two/",
+    "name": "Test Tag Two",
+    "slug": "test-tag-two",
+    "taxonomy": "post_tag",
+    "parent": 0,
+    "meta": [],
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "Test Tag One - example.org",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/fr/tag/test-tag-two/",
+      "og_locale": "en_FR",
+      "og_type": "article",
+      "og_title": "Test Tag Three - example.org",
+      "og_url": "https://example.org/fr/tag/test-tag-two/",
+      "og_site_name": "example.org",
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/tags/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/tags"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/taxonomies/post_tag"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/posts?tags=2"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "count": 3,
+    "description": "About Test Tag Three",
+    "link": "https://example.org/fr/tag/test-tag-three/",
+    "name": "Test Tag Three",
+    "slug": "test-tag-three",
+    "taxonomy": "post_tag",
+    "parent": 2,
+    "meta": [],
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "Test Tag Three - example.org",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/fr/tag/test-tag-three/",
+      "og_locale": "en_US",
+      "og_type": "article",
+      "og_title": "Test Tag One - example.org",
+      "og_url": "https://example.org/fr/tag/test-tag-three/",
+      "og_site_name": "example.org",
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/tags/3"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/tags"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/taxonomies/post_tag"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/posts?tags=3"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]

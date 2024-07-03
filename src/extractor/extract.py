@@ -25,7 +25,11 @@ from extractor.util.file import prefix_filename
 class WPExtractor:
     """Main class to extract data."""
 
+    json_root: Path
+    scrape_root: Optional[Path]
+    json_prefix: Optional[str]
     link_registry: LinkRegistry
+
     posts: Optional[DataFrame]
     media: Optional[DataFrame]
     tags: Optional[DataFrame]
@@ -38,7 +42,7 @@ class WPExtractor:
     def __init__(
         self,
         json_root: Path,
-        scrape_root: Path,
+        scrape_root: Optional[Path] = None,
         json_prefix: Optional[str] = None,
         translation_pickers: Optional[PickerListType] = None,
     ):
@@ -81,6 +85,11 @@ class WPExtractor:
         return prefix_filename(file_name, self.json_prefix)
 
     def _crawl_scrape(self):
+        if self.scrape_root is None:
+            logging.info("No scrape root specified, skipping")
+            self.scrape_url_mapping = {}
+            return
+
         crawl = ScrapeCrawl(self.scrape_root)
         crawl.crawl()
         self.scrape_url_mapping = crawl.get_link_abs_path()
@@ -116,9 +125,10 @@ class WPExtractor:
 
     def _resolve_post_links(self):
         self.posts = resolve_post_links(self.link_registry, self.posts)
-        self.posts = resolve_post_translations(self.link_registry, self.posts)
-        self.posts = ensure_translations_undirected(self.posts)
-        self.posts = resolve_post_translations(self.link_registry, self.posts)
+        if "translations" in self.posts.columns:
+            self.posts = resolve_post_translations(self.link_registry, self.posts)
+            self.posts = ensure_translations_undirected(self.posts)
+            self.posts = resolve_post_translations(self.link_registry, self.posts)
 
     def export(self, out_dir: Path) -> None:
         """Save scrape results to ``out_dir``."""

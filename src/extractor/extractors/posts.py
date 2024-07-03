@@ -58,7 +58,7 @@ def load_posts(
     path: Path,
     link_registry: LinkRegistry,
     scrape_urls_files: Dict[str, Path],
-    translation_pickers: Optional[PickerListType],
+    translation_pickers: Optional[PickerListType] = None,
 ) -> Optional[pd.DataFrame]:
     """Load the posts from a JSON file.
 
@@ -102,20 +102,23 @@ def load_posts(
     tqdm.pandas(desc="Parsing Content")
     posts_df["content.bs"] = posts_df["content.rendered"].progress_apply(parse_html)
 
-    tqdm.pandas(desc="Parsing Scrape")
-    posts_df["scrape_bs"] = posts_df["link"].progress_apply(
-        lambda link: load_scrape(scrape_urls_files, link)
-    )
-    posts_df[["language", "translations"]] = posts_df.apply(
-        lambda r: extract_translations(r["scrape_bs"], r["link"], translation_pickers),
-        axis=1,
-    )
+    if scrape_urls_files != {}:
+        tqdm.pandas(desc="Parsing Scrape")
+        posts_df["scrape_bs"] = posts_df["link"].progress_apply(
+            lambda link: load_scrape(scrape_urls_files, link)
+        )
+        posts_df[["language", "translations"]] = posts_df.apply(
+            lambda r: extract_translations(r["scrape_bs"], r["link"], translation_pickers),
+            axis=1,
+        )
+    else:
+        logging.info("SKipping translation extraction")
 
     link_registry.add_linkables(
         "post", posts_df["link"].to_list(), posts_df.index.to_list()
     )
 
-    tqdm.pandas(desc="Extracting scrape")
+    tqdm.pandas(desc="Extracting from text")
     posts_df[
         ["content.text", "links.internal", "links.external", "embeds", "images"]
     ] = posts_df.progress_apply(
