@@ -39,59 +39,34 @@ from extractor.dl.utils import (
 
 
 class WPApi:
-    """Queries the WordPress API to retrieve information
-    """
+    """Queries the WordPress API to retrieve information"""
 
     # Object types
     POST = 0
-    """
-        The post type
-    """
+    """The post type"""
     POST_REVISION = 1
-    """
-        The post revision type
-    """
+    """The post revision type"""
     WP_BLOCK = 2
-    """
-        The Gutenberg block type
-    """
+    """The Gutenberg block type"""
     CATEGORY = 3
-    """
-        The category type
-    """
+    """The category type"""
     TAG = 4
-    """
-        The tag type
-    """
+    """The tag type"""
     PAGE = 5
-    """
-        The page type
-    """
+    """The page type"""
     COMMENT = 6
-    """
-        The comment type
-    """
+    """The comment type"""
     MEDIA = 7
-    """
-        The media type
-    """
+    """The media type"""
     USER = 8
-    """
-        The user type
-    """
+    """The user type"""
     THEME = 9
-    """
-        The theme type
-    """
+    """The theme type"""
     NAMESPACE = 10
-    """
-        The namespace type
-    """
+    """The namespace type"""
     # SEARCH_RESULT = 10
     ALL_TYPES = 20
-    """
-        Constant representing all types
-    """
+    """Constant representing all types"""
 
     def __init__(self, target, api_path="wp-json/", session=None, search_terms=None):
         """Creates a new instance of WPApi
@@ -129,8 +104,11 @@ class WPApi:
         If the object type is unknown, this returns None as a fallback.
         This may have to be modified in cases of bugs.
 
-        :param str_type: the object type as string
-        :return: the object type as native constant
+        Args:
+            str_type: the object type as string
+
+        Returns:
+            the object type as native constant
 
         ```
         str_type_to_native("post") # returns WPApi.POST
@@ -175,13 +153,11 @@ class WPApi:
         return out
 
     def get_orphans_comments(self):
-        """Returns the list of comments for which a post hasn't been found
-        """
+        """Returns the list of comments for which a post hasn't been found"""
         return self.orphan_comments
 
     def get_basic_info(self):
-        """Collects and stores basic information about the target
-        """
+        """Collects and stores basic information about the target"""
         rest_url = url_path_join(self.url, self.api_path)
         if self.basic_info is not None:
             return self.basic_info
@@ -307,8 +283,7 @@ class WPApi:
         return (entries, total_entries)
 
     def crawl_single_page(self, url):
-        """Crawls a single URL
-        """
+        """Crawls a single URL"""
         content = None
         rest_url = url_path_join(self.url, self.api_path, url)
         try:
@@ -327,8 +302,7 @@ class WPApi:
         return content
 
     def get_from_cache(self, cache, start=None, num=None, force=False):
-        """Tries to fetch data from the given cache, also verifies first if WP-JSON is supported
-        """
+        """Tries to fetch data from the given cache, also verifies first if WP-JSON is supported"""
         if self.has_v2 is None:
             self.get_basic_info()
         if not self.has_v2:
@@ -395,8 +369,7 @@ class WPApi:
         return cache
 
     def get_comments(self, start=None, num=None, force=False):
-        """Retrieves all comments
-        """
+        """Retrieves all comments"""
         comments = self.get_from_cache(self.comments, start, num, force)
         if comments is not None:
             return comments
@@ -408,8 +381,7 @@ class WPApi:
         return comments
 
     def get_posts(self, comments=False, start=None, num=None, force=False):
-        """Retrieves all posts or the specified ones
-        """
+        """Retrieves all posts or the specified ones"""
         if self.has_v2 is None:
             self.get_basic_info()
         if not self.has_v2:
@@ -454,8 +426,7 @@ class WPApi:
         return return_posts
 
     def get_tags(self, start=None, num=None, force=False):
-        """Retrieves all tags
-        """
+        """Retrieves all tags"""
         tags = self.get_from_cache(self.tags, start, num, force)
         if tags is not None:
             return tags
@@ -465,8 +436,7 @@ class WPApi:
         return tags
 
     def get_categories(self, start=None, num=None, force=False):
-        """Retrieves all categories or the specified ones
-        """
+        """Retrieves all categories or the specified ones"""
         categories = self.get_from_cache(self.categories, start, num, force)
         if categories is not None:
             return categories
@@ -480,8 +450,7 @@ class WPApi:
         return categories
 
     def get_users(self, start=None, num=None, force=False):
-        """Retrieves all users or the specified ones
-        """
+        """Retrieves all users or the specified ones"""
         users = self.get_from_cache(self.users, start, num, force)
         if users is not None:
             return users
@@ -493,8 +462,7 @@ class WPApi:
         return users
 
     def get_media(self, start=None, num=None, force=False):
-        """Retrieves all media objects
-        """
+        """Retrieves all media objects"""
         media = self.get_from_cache(self.media, start, num, force)
         if media is not None:
             return media
@@ -506,8 +474,7 @@ class WPApi:
         return media
 
     def get_media_urls(self, ids, cache=True):
-        """Retrieves the media download URLs for specified IDs or all or from cache
-        """
+        """Retrieves the media download URLs for specified IDs or all or from cache"""
         media = []
         if ids == "all":
             media = self.get_media(force=(not cache))
@@ -540,8 +507,7 @@ class WPApi:
         return urls, slugs
 
     def get_pages(self, start=None, num=None, force=False):
-        """Retrieves all pages
-        """
+        """Retrieves all pages"""
         pages = self.get_from_cache(self.pages, start, num, force)
         if pages is not None:
             return pages
@@ -553,8 +519,7 @@ class WPApi:
         return pages
 
     def get_namespaces(self, start=None, num=None, force=False):
-        """Retrieves an array of namespaces
-        """
+        """Retrieves an array of namespaces"""
         if self.has_v2 is None or force:
             self.get_basic_info()
         if "namespaces" in self.basic_info.keys():
@@ -569,8 +534,7 @@ class WPApi:
         return []
 
     def get_routes(self):
-        """Retrieves an array of routes
-        """
+        """Retrieves an array of routes"""
         if self.has_v2 is None:
             self.get_basic_info()
         if "routes" in self.basic_info.keys():
@@ -578,8 +542,7 @@ class WPApi:
         return []
 
     def crawl_namespaces(self, ns):
-        """Crawls all accessible get routes defined for the specified namespace.
-        """
+        """Crawls all accessible get routes defined for the specified namespace."""
         namespaces = self.get_namespaces()
         routes = self.get_routes()
         ns_data = {}
@@ -629,9 +592,11 @@ class WPApi:
 
         Also returns an empty list if the ID does not exist.
 
-        :param obj_type: the type of the object (ex. POST)
-        :param obj_id: the ID of the object to fetch
-        :param use_cache: if the cache should be used to avoid useless requests
+        Args:
+            obj_type: the type of the object (ex. POST)
+            obj_id: the ID of the object to fetch
+            use_cache: if the cache should be used to avoid useless
+                requests
         """
         if obj_type == WPApi.USER:
             return self.get_obj_by_id_helper(
@@ -666,11 +631,13 @@ class WPApi:
     def get_obj_list(self, obj_type, start, limit, cache, kwargs={}):
         """Returns a list of maximum limit objects specified by the starting object offset.
 
-        :param obj_type: the type of the object (ex. POST)
-        :param start: the offset of the first object to return
-        :param limit: the maximum number of objects to return
-        :param cache: if the cache should be used to avoid useless requests
-        :param kwargs: additional parameters to pass to the function (for POST only)
+        Args:
+            obj_type: the type of the object (ex. POST)
+            start: the offset of the first object to return
+            limit: the maximum number of objects to return
+            cache: if the cache should be used to avoid useless requests
+            kwargs: additional parameters to pass to the function (for
+                POST only)
         """
         get_func = None
         if obj_type == WPApi.USER:
@@ -697,11 +664,14 @@ class WPApi:
     def search(self, obj_types, keywords, start, limit):
         """Looks for data with the specified keywords of the given types.
 
-        :param obj_types: a list of the desired object types to look for
-        :param keywords: the keywords to look for
-        :param start: a start index
-        :param limit: the max number to return
-        :return: a dict of lists of objects sorted by types
+        Args:
+            obj_types: a list of the desired object types to look for
+            keywords: the keywords to look for
+            start: a start index
+            limit: the max number to return
+
+        Returns:
+            a dict of lists of objects sorted by types
         """
         out = {}
         if WPApi.ALL_TYPES in obj_types or len(obj_types) == 0:

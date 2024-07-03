@@ -27,8 +27,7 @@ from extractor.dl.console import Console
 
 
 class InfoDisplayer:
-    """Static class to display information for different categories
-    """
+    """Static class to display information for different categories"""
 
     @staticmethod
     def display_basic_info(information):
@@ -92,8 +91,9 @@ class InfoDisplayer:
     def display_namespaces(information, details=False):
         """Displays namespace list of the WordPress API
 
-        :param information: information as a JSON object
-        :param details: unused, available for compatibility purposes
+        Args:
+            information: information as a JSON object
+            details: unused, available for compatibility purposes
         """
         print()
         if information is not None:
@@ -227,8 +227,9 @@ class InfoDisplayer:
     def display_comments(information, details=False):
         """Displays comments published on the WordPress instance.
 
-        :param information: information as a JSON object
-        :param details: if the details should be displayed
+        Args:
+            information: information as a JSON object
+            details: if the details should be displayed
         """
         print()
         date_format = "%Y-%m-%dT%H:%M:%S-%Z"
@@ -271,8 +272,9 @@ class InfoDisplayer:
     def display_users(information, details=False):
         """Displays users on the WordPress instance
 
-        :param information: information as a JSON object
-        :param details: display more details about the user
+        Args:
+            information: information as a JSON object
+            details: display more details about the user
         """
         print()
         for user in information:
@@ -369,8 +371,9 @@ class InfoDisplayer:
     def display_media(information, details=False):
         """Displays media objects of the WordPress instance
 
-        :param information: information as a JSON object
-        :param details: if the details should be displayed
+        Args:
+            information: information as a JSON object
+            details: if the details should be displayed
         """
         print()
         date_format = "%Y-%m-%dT%H:%M:%S-%Z"
@@ -435,8 +438,9 @@ class InfoDisplayer:
     def display_pages(information, details=False):
         """Displays pages published on the WordPress instance
 
-        :param information: information as a JSON object
-        :param details: if the details should be displayed
+        Args:
+            information: information as a JSON object
+            details: if the details should be displayed
         """
         print()
         for page in information:
@@ -487,8 +491,7 @@ class InfoDisplayer:
 
     @staticmethod
     def recurse_list_or_dict(data, tab):
-        """Helper function to generate recursive display of API data
-        """
+        """Helper function to generate recursive display of API data"""
         if type(data) is not dict and type(data) is not list:
             return tab + str(data)
 

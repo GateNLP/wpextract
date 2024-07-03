@@ -89,7 +89,9 @@ def get_content_as_json(response_obj):
     even if a BOM is present in UTF-8 text
     @params:
         response_obj: a requests Response instance
-    @returns: a decoded json object (list or dict)
+
+    Returns:
+        a decoded json object (list or dict)
     """
     if response_obj.content[:3] == b"\xef\xbb\xbf":  # UTF-8 BOM
         content = response_obj.content.decode("utf-8-sig")

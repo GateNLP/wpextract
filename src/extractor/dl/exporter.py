@@ -35,30 +35,28 @@ from extractor.dl.utils import get_by_id, print_progress_bar
 
 
 class Exporter:
-    """Utility functions to export data
-    """
+    """Utility functions to export data"""
 
     JSON = 1
-    """
-        Represents the JSON format for format choice
-    """
+    """Represents the JSON format for format choice"""
     CSV = 2
-    """
-        Represents the CSV format for format choice
-    """
+    """Represents the CSV format for format choice"""
     CHUNK_SIZE = 2048
-    """
-        The size of chunks to download large files
-    """
+    """The size of chunks to download large files"""
 
     @staticmethod
     def download_media(media, output_folder, slugs=None):
         """Downloads the media files based on the given URLs
 
-        :param media: the URLs as a list
-        :param output_folder: the path to the folder where the files are being saved, it is assumed as existing
-        :param slugs: list of slugs to associate with media. The list must be ordered the same as media and should be the same size
-        :return: the number of files wrote
+        Args:
+            media: the URLs as a list
+            output_folder: the path to the folder where the files are
+                being saved, it is assumed as existing
+            slugs: list of slugs to associate with media. The list must
+                be ordered the same as media and should be the same size
+
+        Returns:
+            the number of files wrote
         """
         files_number = 0
         media_length = len(media)
@@ -110,8 +108,10 @@ class Exporter:
         This method automatically maps IDs with the correponding objects given in parameters_to_map.
         The mapping is made in place as el is passed as a reference.
 
-        :param el: the element that have ID references
-        :param parameters_to_map: a dict containing lists of elements to map by ids with el
+        Args:
+            el: the element that have ID references
+            parameters_to_map: a dict containing lists of elements to
+                map by ids with el
         """
         for key, value in el.items():
             if key in parameters_to_map.keys() and parameters_to_map[key] is not None:
@@ -137,9 +137,12 @@ class Exporter:
         This function flattens alist of objects before its serialization in the expected format.
         It also makes a deepcopy to ensure that the original vlist is not altered.
 
-        :param vlist: the list to prepare for exporting
-        :param parameters_to_unescape: parameters to unescape (ex. ["param1", ["param2"]["rendered"]])
-        :param parameters_to_map: parameters to map to another (ex. {"param_to_map": param_values_list})
+        Args:
+            vlist: the list to prepare for exporting
+            parameters_to_unescape: parameters to unescape (ex.
+                ["param1", ["param2"]["rendered"]])
+            parameters_to_map: parameters to map to another (ex.
+                {"param_to_map": param_values_list})
         """
         exported_list = []
 
@@ -193,9 +196,12 @@ class Exporter:
     def prepare_filename(filename, fmt):
         """Returns a filename with the proper extension according to the given format
 
-        :param filename: the filename to clean
-        :param fmt: the file format
-        :return: the cleaned filename
+        Args:
+            filename: the filename to clean
+            fmt: the file format
+
+        Returns:
+            the cleaned filename
         """
         if filename[-5:] != ".json" and fmt == Exporter.JSON:
             filename += ".json"
@@ -209,11 +215,12 @@ class Exporter:
 
         The key mapping must be a dict of keys or lists of keys to ensure proper mapping.
 
-        :param filename: the path of the file
-        :param fmt: the format of the file
-        :param csv_keys: the key mapping
-        :param data: the actual data to export
-        :param details: the details keys to look for
+        Args:
+            filename: the path of the file
+            fmt: the format of the file
+            csv_keys: the key mapping
+            data: the actual data to export
+            details: the details keys to look for
         """
         with open(filename, "w", encoding="utf-8") as f:
             if fmt == Exporter.JSON:
@@ -268,13 +275,16 @@ class Exporter:
     ):
         """Exports posts in specified format to specified file
 
-        :param posts: the posts to export
-        :param fmt: the export format (JSON or CSV)
-        :param tags_list: a list of tags to associate them with tag ids
-        :param categories_list: a list of categories to associate them with
+        Args:
+            posts: the posts to export
+            fmt: the export format (JSON or CSV)
+            tags_list: a list of tags to associate them with tag ids
+            categories_list: a list of categories to associate them with
+            user_list: a list of users to associate them with author id
         category ids
-        :param user_list: a list of users to associate them with author id
-        :return: the length of the list written to the file
+
+        Returns:
+            the length of the list written to the file
         """
         exported_posts = Exporter.setup_export(
             posts,
@@ -306,11 +316,14 @@ class Exporter:
     def export_categories(categories, fmt, filename, category_list=None):
         """Exports categories in specified format to specified file.
 
-        :param categories: the categories to export
-        :param fmt: the export format (JSON or CSV)
-        :param filename: the path to the file to write
-        :param category_list: the list of categories to be used as parents
-        :return: the length of the list written to the file
+        Args:
+            categories: the categories to export
+            fmt: the export format (JSON or CSV)
+            filename: the path to the file to write
+            category_list: the list of categories to be used as parents
+
+        Returns:
+            the length of the list written to the file
         """
         exported_categories = Exporter.setup_export(
             categories,  # TODO
@@ -337,10 +350,13 @@ class Exporter:
     def export_tags(tags, fmt, filename):
         """Exports tags in specified format to specified file
 
-        :param tags: the tags to export
-        :param fmt: the export format (JSON or CSV)
-        :param filename: the path to the file to write
-        :return: the length of the list written to the file
+        Args:
+            tags: the tags to export
+            fmt: the export format (JSON or CSV)
+            filename: the path to the file to write
+
+        Returns:
+            the length of the list written to the file
         """
         filename = Exporter.prepare_filename(filename, fmt)
 
@@ -358,10 +374,13 @@ class Exporter:
     def export_users(users, fmt, filename):
         """Exports users in specified format to specified file.
 
-        :param users: the users to export
-        :param fmt: the export format (JSON or CSV)
-        :param filename: the path to the file to write
-        :return: the length of the list written to the file
+        Args:
+            users: the users to export
+            fmt: the export format (JSON or CSV)
+            filename: the path to the file to write
+
+        Returns:
+            the length of the list written to the file
         """
         filename = Exporter.prepare_filename(filename, fmt)
 
@@ -379,12 +398,15 @@ class Exporter:
     def export_pages(pages, fmt, filename, parent_pages=None, users=None):
         """Exports pages in specified format to specified file.
 
-        :param pages: the pages to export
-        :param fmt: the export format (JSON or CSV)
-        :param filename: the path to the file to write
-        :param parent_pages: the list of all cached pages, to get parents
-        :param users: the list of all cached users, to get users
-        :return: the length of the list written to the file
+        Args:
+            pages: the pages to export
+            fmt: the export format (JSON or CSV)
+            filename: the path to the file to write
+            parent_pages: the list of all cached pages, to get parents
+            users: the list of all cached users, to get users
+
+        Returns:
+            the length of the list written to the file
         """
         exported_pages = Exporter.setup_export(
             pages,
@@ -419,10 +441,13 @@ class Exporter:
     def export_media(media, fmt, filename, users=None):
         """Exports media in specified format to specified file.
 
-        :param media: the media to export
-        :param fmt: the export format (JSON or CSV)
-        :param users: a list of users to associate them with author ids
-        :return: the length of the list written to the file
+        Args:
+            media: the media to export
+            fmt: the export format (JSON or CSV)
+            users: a list of users to associate them with author ids
+
+        Returns:
+            the length of the list written to the file
         """
         exported_media = Exporter.setup_export(
             media,
@@ -456,9 +481,12 @@ class Exporter:
     def export_namespaces(namespaces, fmt, filename):
         """**NOT IMPLEMENTED** Exports namespaces in specified format to specified file.
 
-        :param namespaces: the namespaces to export
-        :param fmt: the export format (JSON or CSV)
-        :return: the length of the list written to the file
+        Args:
+            namespaces: the namespaces to export
+            fmt: the export format (JSON or CSV)
+
+        Returns:
+            the length of the list written to the file
         """
         Console.log_info("Namespaces export not available yet")
         return 0
@@ -470,12 +498,16 @@ class Exporter:
     ):
         """Exports comments in specified format to specified file.
 
-        :param comments: the comments to export
-        :param fmt: the export format (JSON or CSV)
-        :param filename: the path to the file to write
-        :param parent_posts: the list of all cached posts, to get parent posts (not used yet because this could be too verbose)
-        :param users: the list of all cached users, to get users
-        :return: the length of the list written to the file
+        Args:
+            comments: the comments to export
+            fmt: the export format (JSON or CSV)
+            filename: the path to the file to write
+            parent_posts: the list of all cached posts, to get parent
+                posts (not used yet because this could be too verbose)
+            users: the list of all cached users, to get users
+
+        Returns:
+            the length of the list written to the file
         """
         exported_comments = Exporter.setup_export(
             comments,
@@ -507,12 +539,16 @@ class Exporter:
     ):
         """Exports posts as HTML to specified export folder.
 
-        :param posts: the posts to export
-        :param folder: the export folder
-        :param tags_list: a list of tags to associate them with tag ids
-        :param categories_list: a list of categories to associate them with category ids
-        :param user_list: a list of users to associate them with author id
-        :return: the length of the list written to the file
+        Args:
+            posts: the posts to export
+            folder: the export folder
+            tags_list: a list of tags to associate them with tag ids
+            categories_list: a list of categories to associate them with
+                category ids
+            user_list: a list of users to associate them with author id
+
+        Returns:
+            the length of the list written to the file
         """
         exported_posts = 0
 
@@ -690,8 +726,7 @@ class Exporter:
 
     @staticmethod
     def export_comments(posts, orphan_comments, export_folder):
-        """Exports comments from posts and from orphans list
-        """
+        """Exports comments from posts and from orphans list"""
         exported_comments = 0
         for post in posts:
             if "comments" in post.keys() and len(post["comments"]) > 0:

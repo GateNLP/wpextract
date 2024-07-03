@@ -33,8 +33,7 @@ from extractor.dl.wpapi import WordPressApiNotV2, WPApi
 
 
 class ArgumentParser(argparse.ArgumentParser):
-    """Wrapper for argparse.ArgumentParser (especially the help function that quits the application after display)
-    """
+    """Wrapper for argparse.ArgumentParser (especially the help function that quits the application after display)"""
 
     def __init__(self, prog="", description=""):
         argparse.ArgumentParser.__init__(
@@ -64,8 +63,7 @@ class ArgumentParser(argparse.ArgumentParser):
 
 
 class InteractiveShell(cmd.Cmd):
-    """The interactive shell for the application
-    """
+    """The interactive shell for the application"""
 
     intro = """
     Entering interactive session
@@ -105,8 +103,9 @@ class InteractiveShell(cmd.Cmd):
         """Returns a dict containing all necessary metadata
          about the obj_type to list and fetch data
 
-        :param obj_type: the type of the object
-        :param plural: whether the name must be plural or not
+        Args:
+            obj_type: the type of the object
+            plural: whether the name must be plural or not
         """
         display_func = None
         export_func = None
@@ -173,11 +172,12 @@ class InteractiveShell(cmd.Cmd):
     def fetch_obj(self, obj_type, obj_id, cache=True, json=None, csv=None):
         """Displays and exports (if relevant) the object fetched by ID
 
-        :param obj_type: the type of the object
-        :param obj_id: the ID of the obj
-        :param cache: whether to use the cache of not
-        :param json: json export filename
-        :param csv: csv export filename
+        Args:
+            obj_type: the type of the object
+            obj_id: the ID of the obj
+            cache: whether to use the cache of not
+            json: json export filename
+            csv: csv export filename
         """
         prop = self.get_fetch_or_list_type(obj_type)
         print(prop["obj_name"] + " details")
@@ -212,13 +212,14 @@ class InteractiveShell(cmd.Cmd):
     ):
         """Displays and exports (if relevant) the object list
 
-        :param obj_type: the type of the object
-        :param start: the offset of the first object
-        :param limit: the maximum number of objects to list
-        :param is_all: are all object types requested?
-        :param cache: whether to use the cache of not
-        :param json: json export filename
-        :param csv: csv export filename
+        Args:
+            obj_type: the type of the object
+            start: the offset of the first object
+            limit: the maximum number of objects to list
+            is_all: are all object types requested?
+            cache: whether to use the cache of not
+            json: json export filename
+            csv: csv export filename
         """
         prop = self.get_fetch_or_list_type(obj_type, plural=True)
         print(prop["obj_name"] + " details")
@@ -575,6 +576,5 @@ class InteractiveShell(cmd.Cmd):
 
 
 def start_interactive(target, session, version):
-    """Starts a new interactive session
-    """
+    """Starts a new interactive session"""
     InteractiveShell(target, session, version).cmdloop()

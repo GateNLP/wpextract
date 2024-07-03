@@ -70,8 +70,7 @@ class HTTPError(Exception):
 
 
 class RequestSession:
-    """Wrapper to handle the requests library with session support
-    """
+    """Wrapper to handle the requests library with session support"""
 
     def __init__(self, proxy=None, cookies=None, authorization=None):
         """Creates a new RequestSession instance
@@ -169,8 +168,7 @@ class RequestSession:
         return response
 
     def set_cookies(self, cookies):
-        """Sets new cookies from a string
-        """
+        """Sets new cookies from a string"""
         c = SimpleCookie()
         c.load(cookies)
         for key, m in c.items():

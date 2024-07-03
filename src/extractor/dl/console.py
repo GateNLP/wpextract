@@ -21,8 +21,7 @@ SOFTWARE.
 
 
 class Console:
-    """A little helper class to allow console management (like color)
-    """
+    """A little helper class to allow console management (like color)"""
 
     normal = "\033[0m"
     blue = "\033[94m"
@@ -31,8 +30,7 @@ class Console:
 
     @staticmethod
     def wipe_color():
-        """Deactivates color in terminal
-        """
+        """Deactivates color in terminal"""
         Console.normal = ""
         Console.blue = ""
         Console.green = ""
