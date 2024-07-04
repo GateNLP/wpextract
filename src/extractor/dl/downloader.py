@@ -49,10 +49,11 @@ class WPDownloader:
         if "media" in self.data_types:
             self._list_obj(WPApi.MEDIA)
 
-    def download_media_files(self, dest):
+    def download_media_files(self, session: RequestSession, dest):
         """Download site media files.
 
         Args:
+            session: the request session to use
             dest: destination directory for media
         """
         print("Pulling media URLs")
@@ -63,7 +64,7 @@ class WPDownloader:
             return
         print(f"{len(media)} media URLs found")
 
-        number_dl = Exporter.download_media(media, dest)
+        number_dl = Exporter.download_media(session, media, dest)
         print(f"Downloaded {number_dl} media files")
 
     def _get_fetch_or_list_type(self, obj_type, plural=False):

@@ -49,6 +49,12 @@ def register_dl_parser(subparsers):
 
     req_group = parser_dl.add_argument_group("request behaviour")
     req_group.add_argument(
+        "--timeout",
+        type=int,
+        default=30,
+        help="Stop waiting for a response after a given number of seconds (default: %(default)s)",
+    )
+    req_group.add_argument(
         "--wait",
         "-w",
         type=float,
@@ -107,6 +113,7 @@ def do_dl(parser, args: Namespace):
         proxy=args.proxy,
         cookies=args.cookies,
         authorization=auth,
+        timeout=args.timeout,
         wait=args.wait,
         random_wait=args.random_wait,
         max_retries=args.max_retries,
@@ -123,4 +130,4 @@ def do_dl(parser, args: Namespace):
     downloader.download()
 
     if args.media_dest:
-        downloader.download_media_files(args.media_dest)
+        downloader.download_media_files(session, args.media_dest)

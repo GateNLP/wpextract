@@ -87,7 +87,6 @@ class HTTPTooManyRedirects(Exception):
 
 RETRY_AFTER_STATUS = frozenset(
     [
-        400,
         # Standard HTTP
         413,  # Payload Too Large
         429,  # Too Many Requests
@@ -183,6 +182,7 @@ class RequestSession:
         proxy: str = None,
         cookies: str = None,
         authorization: AuthorizationType = None,
+        timeout: float = 30,
         wait: float = None,
         random_wait: bool = False,
         max_retries: int = 10,
@@ -195,6 +195,7 @@ class RequestSession:
             proxy: a dict containing a proxy server string for HTTP and/or HTTPS connection
             cookies: a string in the format of the Cookie header
             authorization: a tuple containing login and password or requests.auth.HTTPBasicAuth for basic authentication or requests.auth.HTTPDigestAuth for NTLM-like authentication
+            timeout: maximum time in seconds to wait for a response before giving up
             wait: wait time in seconds between requests, None to not wait
             random_wait: If true, the wait time between requests is multiplied by a random factor between 0.5 and 1.5
             max_retries: the maximum number of retries before failing
@@ -214,7 +215,7 @@ class RequestSession:
         ):
             self.s.auth = authorization
         self.wait = wait
-
+        self.timeout = timeout
         self._mount_retry(backoff_factor, max_redirects, max_retries)
         self.waiter = RequestWait(wait, random_wait)
 
@@ -239,15 +240,17 @@ class RequestSession:
         """Calls the post function from requests but handles errors to raise proper exception following the context."""
         return self.do_request("post", url, data)
 
-    def do_request(self, method, url, data=None):
+    def do_request(self, method, url, data=None, stream=False):
         """Helper class to regroup requests and handle exceptions at the same location."""
         headers = {"User-Agent": DEFAULT_UA}
         response = None
         try:
             if method == "post":
-                response = self.s.post(url, data, headers=headers)
+                response = self.s.post(url, data, headers=headers, timeout=self.timeout)
             else:
-                response = self.s.get(url, headers=headers)
+                response = self.s.get(
+                    url, headers=headers, timeout=self.timeout, stream=stream
+                )
         except requests.ConnectionError as e:
             if "Errno -5" in str(e) or "Errno -2" in str(e) or "Errno -3" in str(e):
                 logging.error("Could not resolve host %s" % url)
@@ -261,6 +264,9 @@ class RequestSession:
             else:
                 print(e)
                 raise e
+        except requests.Timeout as e:
+            logging.error(f"Request timed out fetching {url}")
+            raise ConnectionTimeout from e
 
         # If this is an HTTP 400 due to an invalid page, raise this special error early
         if response.status_code == 400 and "application/json" in response.headers.get(

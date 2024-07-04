@@ -26,8 +26,9 @@ import logging
 import os
 from urllib import parse as urlparse
 
-import requests
 from tqdm.auto import tqdm
+
+from extractor.dl.requestsession import RequestSession
 
 
 class Exporter:
@@ -39,10 +40,11 @@ class Exporter:
     """The size of chunks to download large files"""
 
     @staticmethod
-    def download_media(media, output_folder):
+    def download_media(session: RequestSession, media, output_folder):
         """Downloads the media files based on the given URLs
 
         Args:
+            session: the request session to use
             media: the URLs as a list
             output_folder: the path to the folder where the files are
                 being saved, it is assumed as existing
@@ -53,7 +55,7 @@ class Exporter:
         files_number = 0
         for m in tqdm(media, unit="media"):
             # TODO: make this use the same session as the initial download
-            r = requests.get(m, stream=True)
+            r = session.do_request("get", m, stream=True)
             if r.status_code == 200:
                 http_path = urlparse.urlparse(m).path.split("/")
                 local_path = output_folder
@@ -73,7 +75,7 @@ class Exporter:
                             unit="B",
                             unit_scale=True,
                             desc=http_path[-1],
-                            keep=False,
+                            leave=False,
                         )
                     for chunk in r.iter_content(Exporter.CHUNK_SIZE):
                         if chunks_pbar is not None:
