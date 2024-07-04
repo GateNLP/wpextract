@@ -33,7 +33,7 @@ def register_extract_parser(subparsers):
     parser_extract.set_defaults(feature=True)
 
 
-def do_extract(args):
+def do_extract(parser, args):
     """Perform the extract command."""
     extractor = WPExtractor(
         json_root=args.json_root,

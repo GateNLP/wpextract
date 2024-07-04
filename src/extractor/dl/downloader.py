@@ -1,22 +1,11 @@
 import logging
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from extractor.dl.exceptions import WordPressApiNotV2
 from extractor.dl.exporter import Exporter
 from extractor.dl.requestsession import RequestSession
 from extractor.dl.wpapi import WPApi
-
-
-def get_session(target: str, proxy=None, cookies=None, authorization=None):
-    session = RequestSession(proxy=proxy, cookies=cookies, authorization=authorization)
-    try:
-        session.get(target)
-        logging.info("Connected successfully")
-    except Exception:
-        logging.error("Failed to connect to the server")
-        exit(0)
-    return session
 
 
 class WPDownloader:
@@ -25,15 +14,23 @@ class WPDownloader:
         target: str,
         out_path: Path,
         data_types: List[str],
-        proxy=None,
-        cookies=None,
-        authorization=None,
+        session: Optional[RequestSession] = None,
     ):
         self.target = target
         self.out_path = out_path
         self.data_types = data_types
-        self.session = get_session(target, proxy, cookies, authorization)
+        self.session = session if session else RequestSession()
+        self._test_session()
         self.scanner = WPApi(self.target, session=self.session)
+
+    def _test_session(self):
+        try:
+            self.session.get(self.target)
+            logging.info("Connected successfully")
+        except Exception as e:
+            logging.error("Failed to connect to the server")
+            raise e
+            exit(0)
 
     def download(self):
         """Download and export the requested data lists."""

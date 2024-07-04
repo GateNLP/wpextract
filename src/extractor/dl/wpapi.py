@@ -31,7 +31,11 @@ from extractor.dl.exceptions import (
     NSNotFoundException,
     WordPressApiNotV2,
 )
-from extractor.dl.requestsession import HTTPError400, HTTPError404, RequestSession
+from extractor.dl.requestsession import (
+    HTTPError404,
+    HTTPErrorInvalidPage,
+    RequestSession,
+)
 from extractor.dl.utils import (
     get_by_id,
     get_content_as_json,
@@ -229,7 +233,7 @@ class WPApi:
                     print("Total number of entries: %d" % total_entries)
                     if start is not None and total_entries < start:
                         start = total_entries - 1
-            except HTTPError400:
+            except HTTPErrorInvalidPage:
                 break
             except Exception as e:
                 raise WordPressApiNotV2 from e
@@ -299,7 +303,7 @@ class WPApi:
         rest_url = url_path_join(self.url, self.api_path, url)
         try:
             req = self.s.get(rest_url)
-        except HTTPError400:
+        except HTTPErrorInvalidPage:
             return None
         except HTTPError404:
             return None

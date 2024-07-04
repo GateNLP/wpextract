@@ -9,11 +9,11 @@ from extractor.cli._dl import do_dl, register_dl_parser
 from extractor.cli._extract import do_extract, register_extract_parser
 
 
-def _exec_command(args):
+def _exec_command(parser, args):
     if args.command == "parse":
-        do_extract(args)
+        do_extract(parser, args)
     elif args.command == "dl":
-        do_dl(args)
+        do_dl(parser, args)
     else:
         raise ValueError("Unknown command")
 
@@ -25,7 +25,7 @@ def _get_version():
 def main() -> None:
     """Entrypoint for CLI."""
     parser = argparse.ArgumentParser(
-        prog="wordpress-site-extractor",
+        prog="wpextract",
         description="Create datasets from WordPress sites using the REST API",
     )
 
@@ -69,6 +69,6 @@ def main() -> None:
 
     if args.log is None:
         with logging_redirect_tqdm():
-            _exec_command(args)
+            _exec_command(parser, args)
     else:
-        _exec_command(args)
+        _exec_command(parser, args)
