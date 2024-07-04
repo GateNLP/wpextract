@@ -60,10 +60,6 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
-# Code from https://stackoverflow.com/questions/3173320/text-progress-bar-in-th
-# e-console
-
-
 def get_content_as_json(response_obj):
     """Returns a json value even if a BOM is present in UTF-8 text.
 
