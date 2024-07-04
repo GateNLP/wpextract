@@ -6,9 +6,11 @@ authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
 packages=[
     { include = "extractor", from = "src"}
 ]
+repository="https://github.com/GateNLP/wordpress-site-extractor"
+license="Apache-2.0"
 
 [tool.poetry.scripts]
-wpextract = "extractor.cli:main"
+wpextract = "extractor.cli.cli:main"
 
 # Workaround for https://github.com/python-poetry/poetry/issues/9293
 [[tool.poetry.source]]
@@ -23,6 +25,8 @@ lxml = ">=5.2.2"
 numpy = ">=1.26.4"
 pandas = ">=2.2.2"
 tqdm = ">=4.66.4"
+requests = "^2.32.3"
+docconvert = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 build = "==0.9.*,>=0.9.0"
@@ -57,6 +61,12 @@ ignore = [
 "**/tests/*" = [
     "D103", # Ignore method docstring errors in tests
     "PD901", # Allow `df` variable name in tests
+]
+"src/extractor/dl/*" = [
+    "D415",
+    "D103",
+    "D101",
+    "D107"
 ]
 
 [tool.ruff.lint.pydocstyle]
