@@ -22,13 +22,12 @@ SOFTWARE.
 import copy
 import html
 import json
+import logging
 import os
 from urllib import parse as urlparse
 
 import requests
 from tqdm.auto import tqdm
-
-from extractor.dl.console import Console
 
 
 class Exporter:
@@ -327,7 +326,7 @@ class Exporter:
         Returns:
             the length of the list written to the file
         """
-        Console.log_info("Namespaces export not available yet")
+        logging.info("Namespaces export not available yet")
         return 0
 
     # FIXME to be refactored

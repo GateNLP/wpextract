@@ -1,7 +1,7 @@
+import logging
 from pathlib import Path
 from typing import List
 
-from extractor.dl.console import Console
 from extractor.dl.exceptions import WordPressApiNotV2
 from extractor.dl.exporter import Exporter
 from extractor.dl.requestsession import RequestSession
@@ -12,9 +12,9 @@ def get_session(target: str, proxy=None, cookies=None, authorization=None):
     session = RequestSession(proxy=proxy, cookies=cookies, authorization=authorization)
     try:
         session.get(target)
-        Console.log_success("Connection OK")
+        logging.info("Connected successfully")
     except Exception:
-        Console.log_error("Failed to connect to the server")
+        logging.error("Failed to connect to the server")
         exit(0)
     return session
 
@@ -62,13 +62,9 @@ class WPDownloader:
         media, slugs = self.scanner.get_media_urls("all", cache=True)
 
         if len(media) == 0:
-            Console.log_error("No media found corresponding to the criteria")
+            logging.warning("No media found corresponding to the criteria")
             return
-        print("%d media URLs found" % len(media))
-        answer = input("Do you wish to proceed to download? (y/N)")
-        if answer.lower() != "y":
-            return
-        print("Note: Only files over 10MB are logged here")
+        print(f"{len(media)} media URLs found")
 
         number_dl = Exporter.download_media(media, dest)
         print(f"Downloaded {number_dl} media files")
@@ -131,9 +127,9 @@ class WPDownloader:
                 values=obj_list,
             )
         except WordPressApiNotV2:
-            Console.log_error("The API does not support WP V2")
+            logging.error("The API does not support WP V2")
         except IOError as e:
-            Console.log_error("Could not open %s for writing" % e.filename)
+            logging.error(f"Could not open {e.filename} for writing")
         print()
 
     @staticmethod

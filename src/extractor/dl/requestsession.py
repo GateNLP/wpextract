@@ -19,11 +19,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+import logging
 from http.cookies import SimpleCookie
 
 import requests
-
-from extractor.dl.console import Console
 
 DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
 
@@ -115,13 +114,13 @@ class RequestSession:
                 response = self.s.get(url, headers=headers)
         except requests.ConnectionError as e:
             if "Errno -5" in str(e) or "Errno -2" in str(e) or "Errno -3" in str(e):
-                Console.log_error("Could not resolve host %s" % url)
+                logging.error("Could not resolve host %s" % url)
                 raise ConnectionCouldNotResolve from e
             elif "Errno 111" in str(e):
-                Console.log_error("Connection refused by %s" % url)
+                logging.error("Connection refused by %s" % url)
                 raise ConnectionRefused from e
             elif "RemoteDisconnected" in str(e):
-                Console.log_error("Connection reset by %s" % url)
+                logging.error("Connection reset by %s" % url)
                 raise ConnectionReset from e
             else:
                 print(e)
@@ -132,29 +131,25 @@ class RequestSession:
         if response.status_code == 400:
             raise HTTPError400
         elif response.status_code == 401:
-            Console.log_error(
-                "Error 401 (Unauthorized) while trying to fetch" " the API"
-            )
+            logging.error("Error 401 (Unauthorized) while trying to fetch" " the API")
             raise HTTPError401
         elif response.status_code == 403:
-            Console.log_error(
+            logging.error(
                 "Error 403 (Authorization Required) while trying" " to fetch the API"
             )
             raise HTTPError403
         elif response.status_code == 404:
             raise HTTPError404
         elif response.status_code == 500:
-            Console.log_error(
+            logging.error(
                 "Error 500 (Internal Server Error) while trying" " to fetch the API"
             )
             raise HTTPError500
         elif response.status_code == 502:
-            Console.log_error(
-                "Error 502 (Bad Gateway) while trying" " to fetch the API"
-            )
+            logging.error("Error 502 (Bad Gateway) while trying" " to fetch the API")
             raise HTTPError404
         elif response.status_code > 400:
-            Console.log_error(
+            logging.error(
                 "Error %d while trying to fetch the API" % response.status_code
             )
             raise HTTPError
