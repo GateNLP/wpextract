@@ -23,7 +23,7 @@ import logging
 import random
 import time
 from http.cookies import SimpleCookie
-from typing import Tuple
+from typing import Tuple, Union
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -171,7 +171,7 @@ class RequestWait:
         time.sleep(self.wait_s * wait_factor)
 
 
-AuthorizationType = Tuple[str, str] | HTTPBasicAuth | HTTPDigestAuth
+AuthorizationType = Union[Tuple[str, str], HTTPBasicAuth, HTTPDigestAuth]
 
 
 class RequestSession:
