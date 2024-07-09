@@ -28,6 +28,14 @@ def register_dl_parser(subparsers):
         default=None,
         help="Path to download media files, skipped if not supplied.",
     )
+    parser_dl.add_argument(
+        "--json-prefix",
+        "-P",
+        help="Prefix to the JSON files",
+        type=str,
+        required=False,
+        default=None,
+    )
 
     _register_shared(parser_dl)
 

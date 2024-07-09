@@ -17,6 +17,7 @@ class WPDownloader:
         out_path: Path,
         data_types: List[str],
         session: Optional[RequestSession] = None,
+        json_prefix: str = None
     ):
         """Initializes the WPDownloader object.
 
@@ -32,6 +33,7 @@ class WPDownloader:
         self.session = session if session else RequestSession()
         self._test_session()
         self.scanner = WPApi(self.target, session=self.session)
+        self.json_prefix = json_prefix
 
     def _test_session(self):
         try:
@@ -40,7 +42,6 @@ class WPDownloader:
         except Exception as e:
             logging.error("Failed to connect to the server")
             raise e
-            exit(0)
 
     def download(self):
         """Download and export the requested data lists."""
@@ -131,7 +132,8 @@ class WPDownloader:
             WPDownloader.export_decorator(
                 export_func=prop["export_func"],
                 export_str=prop["obj_name"].lower(),
-                json=self.out_path,
+                json_path=self.out_path,
+                json_prefix=self.json_prefix,
                 values=obj_list,
             )
         except WordPressApiNotV2:
@@ -142,9 +144,13 @@ class WPDownloader:
 
     @staticmethod
     def export_decorator(  # noqa: D102
-        export_func, export_str, json, values, kwargs=None
+        export_func, export_str, json_path: Path, json_prefix: str, values, kwargs=None
     ):
         kwargs = kwargs or {}
-        if json is not None:
-            json_file = json + "-" + export_str
-            export_func(values, Exporter.JSON, json_file, **kwargs)
+
+        filename = export_str + ".json"
+        if json_prefix is not None:
+            filename = json_prefix + "-" + filename
+
+        json_file = json_path / filename
+        export_func(values, Exporter.JSON, json_file, **kwargs)

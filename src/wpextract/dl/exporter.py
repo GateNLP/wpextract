@@ -147,21 +147,6 @@ class Exporter:
         return exported_list
 
     @staticmethod
-    def prepare_filename(filename, fmt):
-        """Returns a filename with the proper extension according to the given format
-
-        Args:
-            filename: the filename to clean
-            fmt: the file format
-
-        Returns:
-            the cleaned filename
-        """
-        if filename[-5:] != ".json" and fmt == Exporter.JSON:
-            filename += ".json"
-        return filename
-
-    @staticmethod
     def write_file(filename, fmt, data):
         """Writes content to the given file using the given format.
 
@@ -200,7 +185,6 @@ class Exporter:
             [["title", "rendered"], ["content", "rendered"], ["excerpt", "rendered"]],
         )
 
-        filename = Exporter.prepare_filename(filename, fmt)
         Exporter.write_file(filename, fmt, exported_posts)
         return len(exported_posts)
 
@@ -221,7 +205,6 @@ class Exporter:
             [],
         )
 
-        filename = Exporter.prepare_filename(filename, fmt)
         Exporter.write_file(filename, fmt, exported_categories)
         return len(exported_categories)
 
@@ -237,7 +220,6 @@ class Exporter:
         Returns:
             the length of the list written to the file
         """
-        filename = Exporter.prepare_filename(filename, fmt)
 
         exported_tags = tags  # It seems that no modification will be done for this one, so no deepcopy
         Exporter.write_file(filename, fmt, exported_tags)
@@ -255,7 +237,6 @@ class Exporter:
         Returns:
             the length of the list written to the file
         """
-        filename = Exporter.prepare_filename(filename, fmt)
 
         exported_users = users  # It seems that no modification will be done for this one, so no deepcopy
         Exporter.write_file(filename, fmt, exported_users)
@@ -285,7 +266,6 @@ class Exporter:
             ],
         )
 
-        filename = Exporter.prepare_filename(filename, fmt)
         Exporter.write_file(filename, fmt, exported_pages)
         return len(exported_pages)
 
@@ -312,7 +292,6 @@ class Exporter:
             ],
         )
 
-        filename = Exporter.prepare_filename(filename, fmt)
         Exporter.write_file(filename, fmt, exported_media)
         return len(exported_media)
 
@@ -354,6 +333,5 @@ class Exporter:
             [["content", "rendered"]],
         )
 
-        filename = Exporter.prepare_filename(filename, fmt)
         Exporter.write_file(filename, fmt, exported_comments)
         return len(exported_comments)
