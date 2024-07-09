@@ -220,7 +220,6 @@ class Exporter:
         Returns:
             the length of the list written to the file
         """
-
         exported_tags = tags  # It seems that no modification will be done for this one, so no deepcopy
         Exporter.write_file(filename, fmt, exported_tags)
         return len(exported_tags)
@@ -237,7 +236,6 @@ class Exporter:
         Returns:
             the length of the list written to the file
         """
-
         exported_users = users  # It seems that no modification will be done for this one, so no deepcopy
         Exporter.write_file(filename, fmt, exported_users)
         return len(exported_users)

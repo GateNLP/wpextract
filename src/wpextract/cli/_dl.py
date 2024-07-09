@@ -3,6 +3,7 @@ from argparse import Namespace
 from wpextract.cli._shared import _register_shared
 from wpextract.dl.downloader import WPDownloader
 from wpextract.dl.requestsession import RequestSession
+from wpextract.util.args import directory
 
 dl_types = ["categories", "media", "pages", "posts", "tags", "users"]
 
@@ -19,7 +20,7 @@ def register_dl_parser(subparsers):
     )
     parser_dl.add_argument(
         "out_json",
-        type=str,
+        type=directory,
         help="the path of the output JSON file",
     )
     parser_dl.add_argument(
@@ -50,7 +51,7 @@ def register_dl_parser(subparsers):
     parser_dl.set_defaults(**{dl_type: True for dl_type in dl_types})
 
     auth_group = parser_dl.add_argument_group("authentication")
-    auth_group.add_argument("--proxy", "-P", help="Define a proxy server to use")
+    auth_group.add_argument("--proxy", help="Define a proxy server to use")
     auth_group.add_argument(
         "--auth", help="Define HTTP Basic credentials in format username:password"
     )
@@ -137,6 +138,7 @@ def do_dl(parser, args: Namespace):
         out_path=args.out_json,
         data_types=types_to_dl,
         session=session,
+        json_prefix=args.json_prefix,
     )
 
     downloader.download()
