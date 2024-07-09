@@ -1,10 +1,13 @@
 from datetime import datetime
 from pathlib import Path
 
-import wpextract
 import pandas as pd
 import pytest
+import wpextract
 from bs4 import BeautifulSoup
+from helpers.df import ordered_col
+from helpers.file import json_without_cols
+from pytest_mock import MockerFixture
 from wpextract.extractors.data.links import Linkable, LinkRegistry
 from wpextract.extractors.posts import (
     ensure_translations_undirected,
@@ -13,9 +16,6 @@ from wpextract.extractors.posts import (
     resolve_post_translations,
 )
 from wpextract.parse.translations._resolver import TranslationLink
-from helpers.df import ordered_col
-from helpers.file import json_without_cols
-from pytest_mock import MockerFixture
 
 
 def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pickers):

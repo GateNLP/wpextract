@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 import pytest
+from helpers.df import ordered_col
 from wpextract.extractors.categories import load_categories
 from wpextract.extractors.data.links import LinkRegistry
-from helpers.df import ordered_col
 
 
 @pytest.fixture()

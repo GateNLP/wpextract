@@ -2,9 +2,9 @@ from datetime import datetime
 
 import pandas as pd
 import pytest
+from helpers.df import ordered_col
 from wpextract.extractors.data.links import LinkRegistry
 from wpextract.extractors.pages import load_pages
-from helpers.df import ordered_col
 
 
 @pytest.fixture()

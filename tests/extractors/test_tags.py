@@ -1,8 +1,8 @@
 import pandas as pd
 import pytest
+from helpers.df import ordered_col
 from wpextract.extractors.data.links import LinkRegistry
 from wpextract.extractors.tags import load_tags
-from helpers.df import ordered_col
 
 
 @pytest.fixture()
