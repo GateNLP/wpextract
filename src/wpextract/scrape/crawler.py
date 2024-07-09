@@ -6,7 +6,7 @@ from typing import Dict, List
 from bs4 import BeautifulSoup
 from tqdm.auto import tqdm
 
-from extractor.scrape.processor import extract_self_url, self_url_strainer
+from wpextract.scrape.processor import extract_self_url, self_url_strainer
 
 # Increment to invalidate old caches
 SCRAPE_CRAWL_VERSION = 1

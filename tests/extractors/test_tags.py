@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
-from extractor.extractors.data.links import LinkRegistry
-from extractor.extractors.tags import load_tags
+from wpextract.extractors.data.links import LinkRegistry
+from wpextract.extractors.tags import load_tags
 from helpers.df import ordered_col
 
 

@@ -3,7 +3,7 @@ from typing import Optional
 
 import pandas as pd
 
-from extractor.extractors.io import load_df
+from wpextract.extractors.io import load_df
 
 EXPORT_COLUMNS = ["avatar", "description", "link", "name", "slug", "url"]
 

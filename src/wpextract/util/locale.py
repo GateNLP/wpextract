@@ -3,7 +3,7 @@ from typing import Optional
 
 from langcodes import Language, tag_is_valid
 
-from extractor.util.str import remove_ends
+from wpextract.util.str import remove_ends
 
 EXCLUDED_TAGS = {"tag"}  # Tagoi
 

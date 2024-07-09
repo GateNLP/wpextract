@@ -2,7 +2,7 @@ import re
 
 from bs4 import BeautifulSoup
 
-from extractor.util.str import squash_whitespace
+from wpextract.util.str import squash_whitespace
 
 PROBABLY_HTML = re.compile(r"<|&\S+;")
 

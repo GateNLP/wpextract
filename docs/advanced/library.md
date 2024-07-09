@@ -4,24 +4,24 @@ The extractor can also be used as a library instead of on the command line.
 
 Typically, you would:
 
-- instantiate a [`WPDownloader`][extractor.WPDownloader] instance and call its [`download`][extractor.WPDownloader.download] method.
-- instantiate a [`WPExtractor`][extractor.WPExtractor] instance and call its `extract` method. The dataframes can then be accessed as class attributes or exported with the `export` method.
+- instantiate a [`WPDownloader`][wpextract.WPDownloader] instance and call its [`download`][wpextract.WPDownloader.download] method.
+- instantiate a [`WPExtractor`][wpextract.WPExtractor] instance and call its `extract` method. The dataframes can then be accessed as class attributes or exported with the `export` method.
 
-Examples of usage are available in the CLI scripts in the `extractor.cli` module.
+Examples of usage are available in the CLI scripts in the `wpextract.cli` module.
 
 
 
 ## Downloader
 
-Use the [`extractor.WPDownloader`][extractor.WPDownloader] class.
+Use the [`wpextract.WPDownloader`][wpextract.WPDownloader] class.
 
 Possible customisations include:
 
-- Implement highly custom request behaviour by subclassing [`RequestSession`][extractor.dl.RequestSession] and passing to the `session` parameter.
+- Implement highly custom request behaviour by subclassing [`RequestSession`][wpextract.dl.RequestSession] and passing to the `session` parameter.
 
 
 ## Extractor
 
-Use the [`extractor.WPExtractor`][extractor.WPExtractor] class.
+Use the [`wpextract.WPExtractor`][wpextract.WPExtractor] class.
 
-When using this approach, it's possible to use [customised translation pickers](../advanced/multilingual.md#adding-support) by passing subclasses of [`LanguagePicker`][extractor.parse.translations.LangPicker] to the 
+When using this approach, it's possible to use [customised translation pickers](../advanced/multilingual.md#adding-support) by passing subclasses of [`LanguagePicker`][wpextract.parse.translations.LangPicker] to the

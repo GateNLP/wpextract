@@ -1,9 +1,9 @@
 from pathlib import Path
 
 from bs4 import BeautifulSoup
-from extractor.extractors.data.images import MediaUse, ResolvableMediaUse
-from extractor.extractors.data.links import Link, ResolvableLink
-from extractor.parse.content import (
+from wpextract.extractors.data.images import MediaUse, ResolvableMediaUse
+from wpextract.extractors.data.links import Link, ResolvableLink
+from wpextract.parse.content import (
     extract_content_data,
     extract_embeds,
     extract_images,

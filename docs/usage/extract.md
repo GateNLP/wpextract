@@ -59,7 +59,7 @@ The extraction process is applied to all posts simultaneously in the following o
 2. Parse the HTML content from the API response input.
 3. Parse the HTML content from the scrape file, if it was found for the link during the crawl
 4. Extract the post's language and translations from the scrape file
-   * Translations are detected using the translation pickers (implementing [`LangPicker`][extractor.parse.translations.LangPicker])
+   * Translations are detected using the translation pickers (implementing [`LangPicker`][wpextract.parse.translations.LangPicker])
    * Custom pickers can be added if using this tool as a library
    * Any extracted translations are stored as unresolved links
 5. Add the post's link to the link registry

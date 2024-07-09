@@ -4,22 +4,22 @@ from typing import Dict, Optional
 
 from pandas import DataFrame
 
-from extractor.extractors.categories import load_categories
-from extractor.extractors.data.links import LinkRegistry
-from extractor.extractors.io import export_df
-from extractor.extractors.media import load_media
-from extractor.extractors.pages import load_pages
-from extractor.extractors.posts import (
+from wpextract.extractors.categories import load_categories
+from wpextract.extractors.data.links import LinkRegistry
+from wpextract.extractors.io import export_df
+from wpextract.extractors.media import load_media
+from wpextract.extractors.pages import load_pages
+from wpextract.extractors.posts import (
     ensure_translations_undirected,
     load_posts,
     resolve_post_links,
     resolve_post_translations,
 )
-from extractor.extractors.tags import load_tags
-from extractor.extractors.users import load_users
-from extractor.parse.translations import PickerListType
-from extractor.scrape.crawler import ScrapeCrawl
-from extractor.util.file import prefix_filename
+from wpextract.extractors.tags import load_tags
+from wpextract.extractors.users import load_users
+from wpextract.parse.translations import PickerListType
+from wpextract.scrape.crawler import ScrapeCrawl
+from wpextract.util.file import prefix_filename
 
 
 class WPExtractor:

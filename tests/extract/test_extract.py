@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pandas as pd
-from extractor.extract import WPExtractor
+from wpextract.extract import WPExtractor
 
 
 def _assert_extractor_valid(extractor: WPExtractor):

@@ -3,7 +3,7 @@ import re
 from dataclasses import dataclass
 from typing import List, Optional
 
-from extractor.extractors.data.links import Linkable, LinkRegistry
+from wpextract.extractors.data.links import Linkable, LinkRegistry
 
 
 @dataclass

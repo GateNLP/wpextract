@@ -1,5 +1,5 @@
 import pandas as pd
-from extractor.extractors.io import (
+from wpextract.extractors.io import (
     df_denormalize_to_dict,
     export_df,
     load_df,

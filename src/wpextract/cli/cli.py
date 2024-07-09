@@ -5,8 +5,8 @@ from importlib.metadata import version
 from tqdm.auto import tqdm
 from tqdm.contrib.logging import logging_redirect_tqdm
 
-from extractor.cli._dl import do_dl, register_dl_parser
-from extractor.cli._extract import do_extract, register_extract_parser
+from wpextract.cli._dl import do_dl, register_dl_parser
+from wpextract.cli._extract import do_extract, register_extract_parser
 
 
 def _exec_command(parser, args):

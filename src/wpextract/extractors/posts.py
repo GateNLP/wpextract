@@ -6,16 +6,16 @@ import pandas as pd
 from pandas import DataFrame
 from tqdm.auto import tqdm
 
-from extractor.extractors.data.images import resolve_images
-from extractor.extractors.data.link_resolver import resolve_links
-from extractor.extractors.data.links import LinkRegistry
-from extractor.extractors.io import load_df
-from extractor.parse.content import extract_content_data
-from extractor.parse.html import extract_html_text, parse_html
-from extractor.parse.translations import PickerListType, extract_translations
-from extractor.parse.translations._resolver import TranslationLink
-from extractor.scrape.scrape import load_scrape
-from extractor.util.locale import extract_locale
+from wpextract.extractors.data.images import resolve_images
+from wpextract.extractors.data.link_resolver import resolve_links
+from wpextract.extractors.data.links import LinkRegistry
+from wpextract.extractors.io import load_df
+from wpextract.parse.content import extract_content_data
+from wpextract.parse.html import extract_html_text, parse_html
+from wpextract.parse.translations import PickerListType, extract_translations
+from wpextract.parse.translations._resolver import TranslationLink
+from wpextract.scrape.scrape import load_scrape
+from wpextract.util.locale import extract_locale
 
 EXPORT_COLUMNS = [
     "author",

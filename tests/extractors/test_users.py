@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from extractor.extractors.users import load_users
+from wpextract.extractors.users import load_users
 from helpers.file import json_without_cols
 
 

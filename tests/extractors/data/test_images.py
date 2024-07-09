@@ -1,5 +1,5 @@
-from extractor.extractors.data.images import ResolvableMediaUse, resolve_image
-from extractor.extractors.data.links import LinkRegistry
+from wpextract.extractors.data.images import ResolvableMediaUse, resolve_image
+from wpextract.extractors.data.links import LinkRegistry
 
 
 def test_image_resolver():

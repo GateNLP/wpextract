@@ -6,10 +6,10 @@ from urllib.parse import urljoin, urlparse, urlunparse
 import pandas as pd
 from bs4 import BeautifulSoup, Comment, NavigableString
 
-from extractor.extractors.data.images import MediaUse, ResolvableMediaUse
-from extractor.extractors.data.links import Link, ResolvableLink
-from extractor.extractors.media import get_caption
-from extractor.util.str import squash_whitespace
+from wpextract.extractors.data.images import MediaUse, ResolvableMediaUse
+from wpextract.extractors.data.links import Link, ResolvableLink
+from wpextract.extractors.media import get_caption
+from wpextract.util.str import squash_whitespace
 
 EXCLUDED_CONTENT_TAGS = {"figcaption"}
 NEWLINE_TAGS = {"br", "p"}

@@ -58,14 +58,14 @@ Currently the following plugins are supported:
 !!! info "See also"
     [Using WPextract as a library](library.md) for information on how to run wpextract as a library using additional pickers.
 
-Support can be added by creating a new picker definition inheriting from [`LangPicker`][extractor.parse.translations.LangPicker].
+Support can be added by creating a new picker definition inheriting from [`LangPicker`][wpextract.parse.translations.LangPicker].
 
 This parent class defines two abstract methods which must be implemented:
 
-- [`LangPicker.get_root`][extractor.parse.translations.LangPicker.get_root] - returns the root element of the picker
-- [`LangPicker.extract`][extractor.parse.translations.LangPicker.extract] - find the languages, call [`LangPicker.set_current_lang`][extractor.parse.translations.LangPicker.set_current_lang] and call [`LangPicker.add_translation`][extractor.parse.translations.LangPicker.add_translation] for each
+- [`LangPicker.get_root`][wpextract.parse.translations.LangPicker.get_root] - returns the root element of the picker
+- [`LangPicker.extract`][wpextract.parse.translations.LangPicker.extract] - find the languages, call [`LangPicker.set_current_lang`][wpextract.parse.translations.LangPicker.set_current_lang] and call [`LangPicker.add_translation`][wpextract.parse.translations.LangPicker.add_translation] for each
 
-More complicted pickers may need to override additional methods of the class, but should still ultimately populate the [`LangPicker.translations`][extractor.parse.translations.LangPicker.translations] and [`LangPicker.current_language`][extractor.parse.translations.LangPicker.current_language] attributes as the parent class does.
+More complicted pickers may need to override additional methods of the class, but should still ultimately populate the [`LangPicker.translations`][wpextract.parse.translations.LangPicker.translations] and [`LangPicker.current_language`][wpextract.parse.translations.LangPicker.current_language] attributes as the parent class does.
 
 This section will show implementing a new picker with the following simplified markup:
 
