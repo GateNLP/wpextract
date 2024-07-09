@@ -19,7 +19,7 @@ def _exec_command(parser, args):
 
 
 def _get_version():
-    return version("wp-site-extractor")
+    return version("wpextract")
 
 
 def _build_parser():
