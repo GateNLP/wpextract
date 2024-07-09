@@ -22,7 +22,7 @@ def _get_version():
     return version("wp-site-extractor")
 
 
-def main() -> None:
+def _build_parser():
     """Entrypoint for CLI."""
     parser = argparse.ArgumentParser(
         prog="wpextract",
@@ -31,21 +31,6 @@ def main() -> None:
 
     parser.add_argument(
         "--version", action="version", version="%(prog)s " + _get_version()
-    )
-
-    parser.add_argument(
-        "--log",
-        "-l",
-        help="File to log to. Will suppress stdout.",
-        type=str,
-        required=False,
-        default=None,
-    )
-    parser.add_argument(
-        "--verbose",
-        "-v",
-        help="Increase log level to include debug logs",
-        action="store_true",
     )
 
     subparsers = parser.add_subparsers(
@@ -57,6 +42,10 @@ def main() -> None:
     register_extract_parser(subparsers)
     register_dl_parser(subparsers)
 
+    return parser
+
+def main() -> None:
+    parser = _build_parser()
     args = parser.parse_args()
 
     log_level = logging.DEBUG if args.verbose else logging.INFO

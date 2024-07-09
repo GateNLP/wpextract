@@ -1,3 +1,7 @@
+"""
+The extractor is blah blah blah.
+"""
+
 import logging
 from pathlib import Path
 from typing import Dict, Optional
@@ -23,21 +27,31 @@ from extractor.util.file import prefix_filename
 
 
 class WPExtractor:
-    """Main class to extract data."""
+    """Manages the extraction of data from a WordPress site.
+    """
 
     json_root: Path
     scrape_root: Optional[Path]
     json_prefix: Optional[str]
+    translation_pickers: Optional[PickerListType]
+
     link_registry: LinkRegistry
+    """Registry of known URLs and their corresponding data items."""
 
     posts: Optional[DataFrame]
+    """DataFrame of extracted posts."""
     media: Optional[DataFrame]
+    """DataFrame of extracted media."""
     tags: Optional[DataFrame]
+    """DataFrame of extracted tags."""
     categories: Optional[DataFrame]
+    """DataFrame of extracted categories."""
     users: Optional[DataFrame]
+    """DataFrame of extracted users."""
     pages: Optional[DataFrame]
+    """DataFrame of extracted pages."""
+
     scrape_url_mapping: Dict[str, Path]
-    translation_pickers: Optional[PickerListType]
 
     def __init__(
         self,
@@ -131,7 +145,11 @@ class WPExtractor:
             self.posts = resolve_post_translations(self.link_registry, self.posts)
 
     def export(self, out_dir: Path) -> None:
-        """Save scrape results to ``out_dir``."""
+        """Save scrape results!
+
+        Args:
+            out_dir: Path to output directory
+        """
         logging.info("Beginning export")
         export_df(self.posts, out_dir / self._prefix_filename("posts.json"))
         export_df(self.pages, out_dir / self._prefix_filename("pages.json"))

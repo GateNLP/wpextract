@@ -2,6 +2,7 @@ from argparse import Namespace
 
 from extractor.dl.downloader import WPDownloader
 from extractor.dl.requestsession import RequestSession
+from extractor.cli._shared import _register_shared
 
 dl_types = ["categories", "media", "pages", "posts", "tags", "users"]
 
@@ -27,6 +28,9 @@ def register_dl_parser(subparsers):
         default=None,
         help="Path to download media files, skipped if not supplied.",
     )
+
+    _register_shared(parser_dl)
+
     type_group = parser_dl.add_argument_group("data types")
     for dl_type in dl_types:
         type_group.add_argument(

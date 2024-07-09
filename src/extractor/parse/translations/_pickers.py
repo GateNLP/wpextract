@@ -9,11 +9,20 @@ from extractor.util.str import squash_whitespace
 
 
 class LangPicker(ABC):
-    """Abstract class of a language picker style."""
+    """Abstract class of a language picker style.
+    
+    Support for a new language picker can be added by creating a new class inheriting from this one.
+    """
 
+
+    page_doc: BeautifulSoup
+    """The document to extract the language picker from."""
     root_el: Tag
+    """The root element of the language picker, populated if [`LangPicker.matches`][extractor.parse.translations.LangPicker.matches] is succesful."""
     translations: List[TranslationLink]
+    """A list of translation links, populated by calling [`LangPicker.add_translation`][extractor.parse.translations.LangPicker.add_translation] within [`LangPicker.extract`][extractor.parse.translations.LangPicker.extract]."""
     current_language: Language
+    """The current language of the page, populated by calling [`LangPicker.set_current_lang`][extractor.parse.translations.LangPicker.set_current_lang] within [`LangPicker.extract`][extractor.parse.translations.LangPicker.extract]."""
 
     def __init__(self, page_doc: BeautifulSoup):
         """Inits a language picker searcher.
@@ -50,11 +59,10 @@ class LangPicker(ABC):
     def get_root(self) -> PageElement:
         """Retrieve the root element of the translation picker.
 
-        Should contain the element which indicates the current language
-        and lists translations.
+        Using the [`LangPicker.page_doc`][extractor.parse.translations.LangPicker.page_doc] attribute (a [`bs4.BeautifulSoup`][bs4.BeautifulSoup] object representing the whole page), the root element of the picker shoudl be found and returned.
 
         Returns:
-            The root element.
+            The root element, or None if this picker is not found on the page.
         """
         pass
 
