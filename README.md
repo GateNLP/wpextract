@@ -1,20 +1,9 @@
 # WPextract - WordPress Site Extractor
 
-<p align="center">
-    <strong>
-        WPextract is a tool to create datasets from WordPress sites.
-    </strong>
-</p>
+<a href="https://pypi.org/project/wpextract/"><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/wpextract"></a>
+<a href="https://anaconda.org/conda-forge/wpextract"><img alt="Conda Version" src="https://img.shields.io/conda/vn/conda-forge/wpextract"></a>
 
-
-<p align="center">
-    <a href="https://pypi.org/project/wpextract/">
-        <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/wpextract">
-    </a>
-    <a href="https://anaconda.org/conda-forge/wpextract">
-        <img alt="Conda Version" src="https://img.shields.io/conda/vn/conda-forge/wpextract">
-    </a>
-</p>
+**WPextract is a tool to create datasets from WordPress sites.**
 
 - Archives posts, pages, tags, categories, media (including files), comments, and users
 - Uses the WordPress API to guarantee 100% accurate and complete content
