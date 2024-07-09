@@ -1,1 +1,1 @@
-from .requestsession import RequestSession
+from .requestsession import RequestSession as RequestSession

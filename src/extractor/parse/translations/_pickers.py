@@ -10,10 +10,9 @@ from extractor.util.str import squash_whitespace
 
 class LangPicker(ABC):
     """Abstract class of a language picker style.
-    
+
     Support for a new language picker can be added by creating a new class inheriting from this one.
     """
-
 
     page_doc: BeautifulSoup
     """The document to extract the language picker from."""

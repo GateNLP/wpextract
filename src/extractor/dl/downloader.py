@@ -9,8 +9,8 @@ from extractor.dl.wpapi import WPApi
 
 
 class WPDownloader:
-    """Manages the download of data from a WordPress site.
-    """
+    """Manages the download of data from a WordPress site."""
+
     def __init__(
         self,
         target: str,
@@ -24,7 +24,7 @@ class WPDownloader:
             target: the target WordPress site URL
             out_path: the output path for the downloaded data
             data_types: set of data types to download
-            session : request session. Will be created from default constructor if not provided. 
+            session : request session. Will be created from default constructor if not provided.
         """
         self.target = target
         self.out_path = out_path

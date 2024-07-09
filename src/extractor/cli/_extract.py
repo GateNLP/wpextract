@@ -1,7 +1,7 @@
+from extractor.cli._shared import _register_shared
 from extractor.extract import WPExtractor
 from extractor.util.args import directory, empty_directory
 
-from extractor.cli._shared import _register_shared
 
 def register_extract_parser(subparsers):
     """Register the `extract` subcommand."""

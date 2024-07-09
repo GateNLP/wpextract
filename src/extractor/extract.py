@@ -1,7 +1,3 @@
-"""
-The extractor is blah blah blah.
-"""
-
 import logging
 from pathlib import Path
 from typing import Dict, Optional
@@ -27,8 +23,7 @@ from extractor.util.file import prefix_filename
 
 
 class WPExtractor:
-    """Manages the extraction of data from a WordPress site.
-    """
+    """Manages the extraction of data from a WordPress site."""
 
     json_root: Path
     scrape_root: Optional[Path]

@@ -1,8 +1,8 @@
 from argparse import Namespace
 
+from extractor.cli._shared import _register_shared
 from extractor.dl.downloader import WPDownloader
 from extractor.dl.requestsession import RequestSession
-from extractor.cli._shared import _register_shared
 
 dl_types = ["categories", "media", "pages", "posts", "tags", "users"]
 

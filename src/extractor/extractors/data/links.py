@@ -37,7 +37,7 @@ class LinkRegistry:
         self.links = []
 
     def add_linkable(
-        self, url: str, data_type: str, idx: str, _refresh_cache: bool=True
+        self, url: str, data_type: str, idx: str, _refresh_cache: bool = True
     ) -> None:
         """Add a single linkable item to the registry.
 

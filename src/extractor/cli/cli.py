@@ -44,7 +44,9 @@ def _build_parser():
 
     return parser
 
+
 def main() -> None:
+    """Main entrypoint for CLI."""
     parser = _build_parser()
     args = parser.parse_args()
 

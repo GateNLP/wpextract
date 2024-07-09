@@ -1,2 +1,2 @@
-from .extract import WPExtractor
-from .dl.downloader import WPDownloader
+from .dl.downloader import WPDownloader as WPDownloader
+from .extract import WPExtractor as WPExtractor
