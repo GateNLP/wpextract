@@ -14,6 +14,10 @@ $ wpextract dl target out_json
 `out_json`
 : Directory to output to
 
+**optional arguments**
+`--json-prefix JSON_PREFIX`
+: Output files with a prefix, e.g. supplying _20240101-example_ will output posts to `out_dir/20240101-example-posts.json`
+
 **skip data**
 
 `--no-categories` `--no-media` `--no-pages` `--no-posts` `--no-tags` `--no-users`
