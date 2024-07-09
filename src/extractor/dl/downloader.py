@@ -9,6 +9,8 @@ from extractor.dl.wpapi import WPApi
 
 
 class WPDownloader:
+    """Manages the download of data from a WordPress site."""
+
     def __init__(
         self,
         target: str,
@@ -16,6 +18,14 @@ class WPDownloader:
         data_types: List[str],
         session: Optional[RequestSession] = None,
     ):
+        """Initializes the WPDownloader object.
+
+        Args:
+            target: the target WordPress site URL
+            out_path: the output path for the downloaded data
+            data_types: set of data types to download
+            session : request session. Will be created from default constructor if not provided.
+        """
         self.target = target
         self.out_path = out_path
         self.data_types = data_types
@@ -49,7 +59,7 @@ class WPDownloader:
         if "media" in self.data_types:
             self._list_obj(WPApi.MEDIA)
 
-    def download_media_files(self, session: RequestSession, dest):
+    def download_media_files(self, session: RequestSession, dest: str):
         """Download site media files.
 
         Args:

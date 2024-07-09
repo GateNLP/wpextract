@@ -23,7 +23,7 @@ import logging
 import random
 import time
 from http.cookies import SimpleCookie
-from typing import Tuple
+from typing import Tuple, Union
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -171,7 +171,7 @@ class RequestWait:
         time.sleep(self.wait_s * wait_factor)
 
 
-AuthorizationType = Tuple[str, str] | HTTPBasicAuth | HTTPDigestAuth
+AuthorizationType = Union[Tuple[str, str], HTTPBasicAuth, HTTPDigestAuth]
 
 
 class RequestSession:
@@ -194,7 +194,7 @@ class RequestSession:
         Args:
             proxy: a dict containing a proxy server string for HTTP and/or HTTPS connection
             cookies: a string in the format of the Cookie header
-            authorization: a tuple containing login and password or requests.auth.HTTPBasicAuth for basic authentication or requests.auth.HTTPDigestAuth for NTLM-like authentication
+            authorization: a tuple containing login and password or [`requests.auth.HTTPBasicAuth`][requests.auth.HTTPBasicAuth] for basic authentication or [`requests.auth.HTTPDigestAuth`][requests.auth.HTTPDigestAuth] for NTLM-like authentication
             timeout: maximum time in seconds to wait for a response before giving up
             wait: wait time in seconds between requests, None to not wait
             random_wait: If true, the wait time between requests is multiplied by a random factor between 0.5 and 1.5

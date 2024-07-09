@@ -1,3 +1,4 @@
+from extractor.cli._shared import _register_shared
 from extractor.extract import WPExtractor
 from extractor.util.args import directory, empty_directory
 
@@ -30,7 +31,10 @@ def register_extract_parser(subparsers):
         required=False,
         default=None,
     )
+
     parser_extract.set_defaults(feature=True)
+
+    _register_shared(parser_extract)
 
 
 def do_extract(parser, args):

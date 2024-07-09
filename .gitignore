@@ -62,3 +62,6 @@ MANIFEST
 ## == JAVASCRIPT ==
 
 node_modules/
+
+## == DOCUMENTATION ==
+site/

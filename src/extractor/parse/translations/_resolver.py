@@ -10,7 +10,9 @@ class TranslationLink(ResolvableLink):
     """A link to an alternative version of this article in a different language."""
 
     lang: str
+    """Raw language code."""
 
-    def __post_init__(self) -> None:
-        """Parse string lang into normalised language."""
-        self.language = Language.get(self.lang, normalize=True)
+    @property
+    def language(self) -> Language:
+        """Parsed and normalized language. Populated automatically post-init."""
+        return Language.get(self.lang, normalize=True)
