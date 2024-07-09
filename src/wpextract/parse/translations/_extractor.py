@@ -4,7 +4,7 @@ from typing import List, Optional, Type
 import pandas as pd
 from bs4 import BeautifulSoup
 
-import extractor.parse.translations._pickers as pickers
+import wpextract.parse.translations._pickers as pickers
 
 PICKERS = [pickers.Polylang, pickers.GenericLangSwitcher]
 PickerListType = List[Type[pickers.LangPicker]]

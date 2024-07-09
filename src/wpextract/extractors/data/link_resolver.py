@@ -2,8 +2,8 @@ import logging
 from typing import List, Optional
 from urllib.parse import urlparse, urlunparse
 
-from extractor.extractors.data.links import LinkRegistry, ResolvableLink
-from extractor.util.str import remove_ends
+from wpextract.extractors.data.links import LinkRegistry, ResolvableLink
+from wpextract.util.str import remove_ends
 
 
 def resolve_link(

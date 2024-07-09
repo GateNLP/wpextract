@@ -1,5 +1,5 @@
 import pytest
-from extractor.util.locale import extract_locale
+from wpextract.util.locale import extract_locale
 
 
 @pytest.mark.parametrize(

@@ -4,9 +4,9 @@ from typing import Optional
 import pandas as pd
 from bs4 import Tag
 
-from extractor.extractors.data.links import LinkRegistry
-from extractor.extractors.io import load_df
-from extractor.parse.html import extract_html_text
+from wpextract.extractors.data.links import LinkRegistry
+from wpextract.extractors.io import load_df
+from wpextract.parse.html import extract_html_text
 
 EXPORT_COLUMNS = [
     "alt_text",

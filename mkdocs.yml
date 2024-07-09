@@ -66,7 +66,7 @@ plugins:
               ignore_init_summary: true
             docstring_section_style: spacy
             # filters: ["!^_"]
-            preload_modules: ["extractor"]
+            preload_modules: ["wpextract"]
             heading_level: 3
             inherited_members: true
             merge_init_into_class: true

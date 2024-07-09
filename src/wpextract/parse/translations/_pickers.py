@@ -4,8 +4,8 @@ from typing import List
 from bs4 import BeautifulSoup, PageElement, Tag
 from langcodes import Language
 
-from extractor.parse.translations._resolver import TranslationLink
-from extractor.util.str import squash_whitespace
+from wpextract.parse.translations._resolver import TranslationLink
+from wpextract.util.str import squash_whitespace
 
 
 class LangPicker(ABC):
@@ -17,11 +17,11 @@ class LangPicker(ABC):
     page_doc: BeautifulSoup
     """The document to extract the language picker from."""
     root_el: Tag
-    """The root element of the language picker, populated if [`LangPicker.matches`][extractor.parse.translations.LangPicker.matches] is succesful."""
+    """The root element of the language picker, populated if [`LangPicker.matches`][wpextract.parse.translations.LangPicker.matches] is succesful."""
     translations: List[TranslationLink]
-    """A list of translation links, populated by calling [`LangPicker.add_translation`][extractor.parse.translations.LangPicker.add_translation] within [`LangPicker.extract`][extractor.parse.translations.LangPicker.extract]."""
+    """A list of translation links, populated by calling [`LangPicker.add_translation`][wpextract.parse.translations.LangPicker.add_translation] within [`LangPicker.extract`][wpextract.parse.translations.LangPicker.extract]."""
     current_language: Language
-    """The current language of the page, populated by calling [`LangPicker.set_current_lang`][extractor.parse.translations.LangPicker.set_current_lang] within [`LangPicker.extract`][extractor.parse.translations.LangPicker.extract]."""
+    """The current language of the page, populated by calling [`LangPicker.set_current_lang`][wpextract.parse.translations.LangPicker.set_current_lang] within [`LangPicker.extract`][wpextract.parse.translations.LangPicker.extract]."""
 
     def __init__(self, page_doc: BeautifulSoup):
         """Inits a language picker searcher.
@@ -58,7 +58,7 @@ class LangPicker(ABC):
     def get_root(self) -> PageElement:
         """Retrieve the root element of the translation picker.
 
-        Using the [`LangPicker.page_doc`][extractor.parse.translations.LangPicker.page_doc] attribute (a [`bs4.BeautifulSoup`][bs4.BeautifulSoup] object representing the whole page), the root element of the picker shoudl be found and returned.
+        Using the [`LangPicker.page_doc`][wpextract.parse.translations.LangPicker.page_doc] attribute (a [`bs4.BeautifulSoup`][bs4.BeautifulSoup] object representing the whole page), the root element of the picker shoudl be found and returned.
 
         Returns:
             The root element, or None if this picker is not found on the page.

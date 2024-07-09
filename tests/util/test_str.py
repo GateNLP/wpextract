@@ -1,5 +1,5 @@
 import pytest
-from extractor.util.str import (
+from wpextract.util.str import (
     ensure_suffix,
     remove_ends,
     remove_prefix,

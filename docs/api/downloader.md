@@ -2,12 +2,12 @@
 
 ## Downloading
 
-::: extractor.WPDownloader
+::: wpextract.WPDownloader
 
 ## Configuring Request Behaviour
 
-::: extractor.dl.RequestSession
+::: wpextract.dl.RequestSession
     options:
         members: false
 
-::: extractor.dl.requestsession.AuthorizationType
+::: wpextract.dl.requestsession.AuthorizationType

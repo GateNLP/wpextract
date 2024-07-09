@@ -1,4 +1,4 @@
-from extractor.extractors.data.links import Linkable, LinkRegistry
+from wpextract.extractors.data.links import Linkable, LinkRegistry
 
 
 def test_add_link():

@@ -26,17 +26,17 @@ from urllib.parse import urlencode
 
 from tqdm.auto import tqdm
 
-from extractor.dl.exceptions import (
+from wpextract.dl.exceptions import (
     NoWordpressApi,
     NSNotFoundException,
     WordPressApiNotV2,
 )
-from extractor.dl.requestsession import (
+from wpextract.dl.requestsession import (
     HTTPError404,
     HTTPErrorInvalidPage,
     RequestSession,
 )
-from extractor.dl.utils import (
+from wpextract.dl.utils import (
     get_by_id,
     get_content_as_json,
     url_path_join,

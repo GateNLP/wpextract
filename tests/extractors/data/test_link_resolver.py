@@ -1,6 +1,6 @@
 import pytest
-from extractor.extractors.data.link_resolver import resolve_link
-from extractor.extractors.data.links import LinkRegistry, ResolvableLink
+from wpextract.extractors.data.link_resolver import resolve_link
+from wpextract.extractors.data.links import LinkRegistry, ResolvableLink
 
 
 def test_link_resolver():

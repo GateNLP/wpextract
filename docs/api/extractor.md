@@ -1,23 +1,23 @@
 # Extractor API
 
 ## Extraction
-::: extractor.WPExtractor
+::: wpextract.WPExtractor
 
 ## Extraction Data
 
 
-::: extractor.extractors.data.links
+::: wpextract.extractors.data.links
     options:
         show_root_heading: false
         show_root_toc_entry: false
 
 ## Multilingual Extraction
 
-::: extractor.parse.translations.LangPicker
+::: wpextract.parse.translations.LangPicker
 
-::: extractor.parse.translations.PickerListType
+::: wpextract.parse.translations.PickerListType
 
-::: extractor.parse.translations.TranslationLink
+::: wpextract.parse.translations.TranslationLink
     options:
         inherited_members:
           - destination

@@ -4,7 +4,7 @@ version="1.0.0a0"
 description="Create a dataset from the WordPress API"
 authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
 packages=[
-    { include = "extractor", from = "src"}
+    { include = "wpextract", from = "src"}
 ]
 homepage="https://gatenlp.github.io/wordpress-site-extractor/"
 repository="https://github.com/GateNLP/wordpress-site-extractor"
@@ -12,7 +12,7 @@ license="Apache-2.0"
 readme = "README.md"
 
 [tool.poetry.scripts]
-wpextract = "extractor.cli.cli:main"
+wpextract = "wpextract.cli.cli:main"
 
 # Workaround for https://github.com/python-poetry/poetry/issues/9293
 [[tool.poetry.source]]
@@ -75,7 +75,7 @@ ignore = [
     "D103", # Ignore method docstring errors in tests
     "PD901", # Allow `df` variable name in tests
 ]
-"src/extractor/dl/*" = [
+"src/wpextract/dl/*" = [
     "D415",
     "D103",
     "D101",

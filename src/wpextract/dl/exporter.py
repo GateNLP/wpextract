@@ -28,7 +28,7 @@ from urllib import parse as urlparse
 
 from tqdm.auto import tqdm
 
-from extractor.dl.requestsession import RequestSession
+from wpextract.dl.requestsession import RequestSession
 
 
 class Exporter:

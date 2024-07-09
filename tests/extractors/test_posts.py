@@ -1,21 +1,21 @@
 from datetime import datetime
 from pathlib import Path
 
-import extractor
 import pandas as pd
 import pytest
+import wpextract
 from bs4 import BeautifulSoup
-from extractor.extractors.data.links import Linkable, LinkRegistry
-from extractor.extractors.posts import (
+from helpers.df import ordered_col
+from helpers.file import json_without_cols
+from pytest_mock import MockerFixture
+from wpextract.extractors.data.links import Linkable, LinkRegistry
+from wpextract.extractors.posts import (
     ensure_translations_undirected,
     load_posts,
     resolve_post_media,
     resolve_post_translations,
 )
-from extractor.parse.translations._resolver import TranslationLink
-from helpers.df import ordered_col
-from helpers.file import json_without_cols
-from pytest_mock import MockerFixture
+from wpextract.parse.translations._resolver import TranslationLink
 
 
 def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pickers):
@@ -52,7 +52,7 @@ def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pi
 @pytest.fixture()
 def _do_mock_translation_extractor(mocker: MockerFixture):
     mocker.patch(
-        "extractor.extractors.posts.extract_translations", mock_translation_extractor
+        "wpextract.extractors.posts.extract_translations", mock_translation_extractor
     )
 
 
@@ -131,7 +131,7 @@ def test_language(posts_df):
 
 @pytest.fixture()
 def spy_extractor_data(mocker: MockerFixture):
-    return mocker.spy(extractor.extractors.posts, "extract_content_data")
+    return mocker.spy(wpextract.extractors.posts, "extract_content_data")
 
 
 def test_extract_content_call(spy_extractor_data, posts_df):

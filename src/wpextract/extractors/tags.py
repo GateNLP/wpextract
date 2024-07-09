@@ -3,9 +3,9 @@ from typing import Optional
 
 import pandas as pd
 
-from extractor.extractors.data.links import LinkRegistry
-from extractor.extractors.io import load_df
-from extractor.util.locale import extract_locale
+from wpextract.extractors.data.links import LinkRegistry
+from wpextract.extractors.io import load_df
+from wpextract.util.locale import extract_locale
 
 EXPORT_COLUMNS = [
     "count",

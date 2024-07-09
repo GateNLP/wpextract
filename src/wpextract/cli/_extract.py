@@ -1,6 +1,6 @@
-from extractor.cli._shared import _register_shared
-from extractor.extract import WPExtractor
-from extractor.util.args import directory, empty_directory
+from wpextract.cli._shared import _register_shared
+from wpextract.extract import WPExtractor
+from wpextract.util.args import directory, empty_directory
 
 
 def register_extract_parser(subparsers):

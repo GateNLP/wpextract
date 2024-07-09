@@ -1,7 +1,7 @@
 from argparse import ArgumentTypeError
 
 import pytest
-from extractor.util.args import directory, empty_directory
+from wpextract.util.args import directory, empty_directory
 
 
 def test_directory_when_directory(tmp_path):

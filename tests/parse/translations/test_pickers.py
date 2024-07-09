@@ -1,11 +1,11 @@
 from pathlib import Path
 from typing import Type
 
-import extractor.parse.translations._pickers as pickers
 import pytest
+import wpextract.parse.translations._pickers as pickers
 from bs4 import BeautifulSoup
-from extractor.parse.translations._resolver import TranslationLink
 from langcodes import Language
+from wpextract.parse.translations._resolver import TranslationLink
 
 
 @pytest.mark.parametrize(
