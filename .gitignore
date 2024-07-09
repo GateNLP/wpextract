@@ -64,4 +64,4 @@ MANIFEST
 node_modules/
 
 ## == DOCUMENTATION ==
-_build/
+site/
