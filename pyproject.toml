@@ -1,13 +1,15 @@
 [tool.poetry]
 name="wpextract"
-version="0.0.1"
+version="1.0.0a0"
 description="Create a dataset from the WordPress API"
 authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
 packages=[
     { include = "extractor", from = "src"}
 ]
+homepage="https://gatenlp.github.io/wordpress-site-extractor/"
 repository="https://github.com/GateNLP/wordpress-site-extractor"
 license="Apache-2.0"
+readme = "README.md"
 
 [tool.poetry.scripts]
 wpextract = "extractor.cli.cli:main"
@@ -19,13 +21,13 @@ url = "https://pypi.org/simple/"
 
 [tool.poetry.dependencies]
 python = ">=3.9.0,<3.13"
-beautifulsoup4 = ">=4.12.3"
-langcodes = ">=3.4.0"
-lxml = ">=5.2.2"
-numpy = ">=1.26.4"
-pandas = ">=2.2.2"
-tqdm = ">=4.66.4"
-requests = "^2.32.3"
+beautifulsoup4 = ">=4.12.0"
+langcodes = ">=3.3.0"
+lxml = ">=5.0.0"
+numpy = ">=1.23.0"
+pandas = ">=1.5.2"
+tqdm = ">=4.65.0"
+requests = ">=2.32.3"
 
 [tool.poetry.group.dev.dependencies]
 build = "==0.9.*,>=0.9.0"
@@ -35,6 +37,8 @@ pytest-mock = "~3.14.0"
 ruff = "^0.5.0"
 
 
+[tool.poetry.group.docs]
+optional = true
 [tool.poetry.group.docs.dependencies]
 mkdocs-material = "^9.5.28"
 mkdocstrings = "^0.25.1"

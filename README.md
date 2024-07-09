@@ -1,5 +1,8 @@
 # WPextract - WordPress Site Extractor
 
+<a href="https://pypi.org/project/wpextract/"><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/wpextract"></a>
+<a href="https://anaconda.org/conda-forge/wpextract"><img alt="Conda Version" src="https://img.shields.io/conda/vn/conda-forge/wpextract"></a>
+
 **WPextract is a tool to create datasets from WordPress sites.**
 
 - Archives posts, pages, tags, categories, media (including files), comments, and users
@@ -7,12 +10,10 @@
 - Resolves internal links and media to IDs
 - Automatically parses multilingual sites to create parallel datasets
 
-> [!NOTE]  
-> This software was developed for our EMNLP 2023 paper [_Analysing State-Backed Propaganda Websites: a New Dataset and Linguistic Study_](https://aclanthology.org/2023.emnlp-main.349/). The code has been updated since the paper was written; for archival purposes, the precise version used for the study is [available on Zenodo](https://zenodo.org/records/10008086).
 
 ## Quickstart
 
-See the [complete documentation](#) for more detailed usage.
+See the [complete documentation](https://gatenlp.github.io/wordpress-site-extractor/) for more detailed usage.
 
 1. Install with `pipx`
     ```shell-session
@@ -36,6 +37,9 @@ WPextract was built by [Freddy Heppell](https://freddyheppell.com) of the [GATE 
 Available under the Apache 2.0 license. See [LICENSE](LICENSE) for more information.
 
 ## Citing
+
+> [!NOTE]
+> This software was developed for our EMNLP 2023 paper [_Analysing State-Backed Propaganda Websites: a New Dataset and Linguistic Study_](https://aclanthology.org/2023.emnlp-main.349/). The code has been updated since the paper was written; for archival purposes, the precise version used for the study is [available on Zenodo](https://zenodo.org/records/10008086).
 
 We'd love to hear about your use of our tool, you can [email us](mailto:frheppell1@sheffield.ac.uk) to let us know! Feel free to create issues and/or pull requests for new features or bugs.
 
