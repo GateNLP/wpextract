@@ -80,7 +80,7 @@ class WPDownloader:
         print(f"Downloaded {number_dl} media files")
 
     def _get_fetch_or_list_type(self, obj_type, plural=False):
-        """Returns a dict containing all necessary metadata about the obj_type to list and fetch data
+        """Returns a dict containing all necessary metadata about the obj_type to list and fetch data.
 
         Args:
             obj_type: the type of the object
@@ -109,9 +109,6 @@ class WPDownloader:
         elif obj_type == WPApi.MEDIA:
             export_func = Exporter.export_media
             obj_name = "Media"
-        elif obj_type == WPApi.NAMESPACE:
-            export_func = Exporter.export_namespaces
-            obj_name = "Namespaces" if plural else "Namespace"
 
         return {
             "export_func": export_func,
@@ -154,4 +151,4 @@ class WPDownloader:
             filename = json_prefix + "-" + filename
 
         json_file = json_path / filename
-        export_func(values, Exporter.JSON, json_file, **kwargs)
+        export_func(values, json_file, **kwargs)

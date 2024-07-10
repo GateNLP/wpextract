@@ -1,24 +1,3 @@
-"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import json
 from urllib.parse import urlsplit, urlunsplit
 
@@ -57,6 +36,15 @@ def url_path_join(*parts):
 
 
 def first(sequence, default=""):
+    """Return the first element of an iterable sequence or a default value.
+
+    Args:
+        sequence: an iterable sequence.
+        default: the value to return if the sequence is empty.
+
+    Returns:
+        The first element of an iterable sequence or a default value.
+    """
     return next((x for x in sequence if x), default)
 
 
