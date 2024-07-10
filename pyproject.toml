@@ -66,6 +66,7 @@ select = [
     "PT",
     "B",
     "UP",
+    "RUF"
 ]
 
 ignore = [

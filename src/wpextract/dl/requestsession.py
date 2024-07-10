@@ -2,7 +2,7 @@ import logging
 import random
 import time
 from http.cookies import SimpleCookie
-from typing import Union
+from typing import Optional, Union
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -163,7 +163,9 @@ def _handle_status(url, status_code, n_tries=None):
 class RequestWait:
     """Manages waiting between requests."""
 
-    def __init__(self, wait: float = None, random_wait: bool = False):
+    def __init__(
+        self, wait: Optional[float] = None, random_wait: Optional[bool] = False
+    ):
         """Create a new waiting instance.
 
         Args:
@@ -193,11 +195,11 @@ class RequestSession:
 
     def __init__(
         self,
-        proxy: str = None,
-        cookies: str = None,
-        authorization: AuthorizationType = None,
-        timeout: float = 30,
-        wait: float = None,
+        proxy: Optional[str] = None,
+        cookies: Optional[str] = None,
+        authorization: Optional[AuthorizationType] = None,
+        timeout: Optional[float] = 30,
+        wait: Optional[float] = None,
         random_wait: bool = False,
         max_retries: int = 10,
         backoff_factor: float = 0.1,
