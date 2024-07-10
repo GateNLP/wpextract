@@ -91,8 +91,15 @@ def test_download_data_type(datadir, mocker, mock_request_session, datatype, val
     exporter.assert_called_once()
 
 
-def test_prefix(datadir, mocker, mock_request_session):
-    downloader = _make_downloader(datadir, mocker, ["pages"], "myprefix")
+@pytest.mark.parametrize(
+    ("prefix", "expected_name"),
+    [
+        ("myprefix", "myprefix-pages.json"),
+        (None, "pages.json")
+    ]
+)
+def test_prefix(datadir, mocker, mock_request_session, prefix, expected_name):
+    downloader = _make_downloader(datadir, mocker, ["pages"], prefix)
     exporter = _mocked_exporter(mocker, "pages")
 
     downloader.download()
@@ -100,5 +107,5 @@ def test_prefix(datadir, mocker, mock_request_session):
     exporter.assert_called_once_with(
         _fake_api_return(),
         Exporter.JSON,
-        datadir / "myprefix-pages.json",
+        datadir / expected_name,
     )
