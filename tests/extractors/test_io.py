@@ -15,6 +15,12 @@ def test_load_from_path(datadir):
     assert loaded[0]["entry"] == "one"
 
 
+def test_load_from_path_doesnt_exist(datadir):
+    loaded = load_from_path(datadir / "notreal.json")
+
+    assert loaded is None
+
+
 def test_load_df(datadir):
     df = load_df(datadir / "example.json")
 

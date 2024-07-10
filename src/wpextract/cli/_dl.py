@@ -3,7 +3,7 @@ from argparse import Namespace
 from wpextract.cli._shared import _register_shared
 from wpextract.dl.downloader import WPDownloader
 from wpextract.dl.requestsession import RequestSession
-from wpextract.util.args import directory
+from wpextract.util.args import empty_directory
 
 dl_types = ["categories", "media", "pages", "posts", "tags", "users"]
 
@@ -20,7 +20,7 @@ def register_dl_parser(subparsers):
     )
     parser_dl.add_argument(
         "out_json",
-        type=directory,
+        type=empty_directory,
         help="the path of the output JSON file",
     )
     parser_dl.add_argument(

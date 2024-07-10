@@ -1,5 +1,6 @@
 import dataclasses
 import json
+import logging
 from pathlib import Path
 from typing import Any, List, Optional
 
@@ -10,15 +11,18 @@ from pandas import DataFrame
 from pandas import Timestamp as PdTimestamp
 
 
-def load_from_path(path: Path) -> dict:
+def load_from_path(path: Path) -> Optional[dict]:
     """Loads and parses a JSON file.
 
     Args:
         path: The path to load
 
     Returns:
-        The decoded JSON object.
+        The decoded JSON object. None if the file does not exist.
     """
+    if not path.is_file():
+        return None
+
     with open(path, "r") as f:
         return json.load(f)
 
@@ -34,11 +38,16 @@ def load_df(path: Path, index_col: str = "id") -> Optional[pd.DataFrame]:
         index_col: The key from the JSON to use as the index
 
     Returns:
-        A dataframe with the flattened JSON.
+        A dataframe with the flattened JSON. None if the file does not exist or is an empty array.
     """
     data_raw = load_from_path(path)
 
+    if data_raw is None:
+        logging.info(f"File {path} does not exist, skipping this data type.")
+        return None
+
     if len(data_raw) == 0:
+        logging.info(f"File {path} has no data, skipping this data type.")
         return None
 
     return pd.json_normalize(data_raw).set_index(index_col)

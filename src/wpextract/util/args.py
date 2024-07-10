@@ -41,7 +41,7 @@ def empty_directory(arg: str) -> Path:
     path = Path(arg)
 
     if path.exists() and not path.is_dir():
-        raise ArgumentTypeError("is not a directory, must be an empty directory")
+        raise ArgumentTypeError("exists but is not a directory")
 
     try:
         path.mkdir(exist_ok=True)
