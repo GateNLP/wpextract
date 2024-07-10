@@ -48,6 +48,14 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: GateNLP
+      repo: wordpress-site-extractor
 
 plugins:
   - search
