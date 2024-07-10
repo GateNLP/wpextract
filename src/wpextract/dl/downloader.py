@@ -119,7 +119,6 @@ class WPDownloader:
         }
 
     def _list_obj(self, obj_type, start=None, limit=None, cache=True):
-        print("!!")
         prop = self._get_fetch_or_list_type(obj_type, plural=True)
         print(prop["obj_name"] + " details")
 

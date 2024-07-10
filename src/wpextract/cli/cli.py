@@ -10,7 +10,7 @@ from wpextract.cli._extract import do_extract, register_extract_parser
 
 
 def _exec_command(parser, args):
-    if args.command == "parse":
+    if args.command == "extract":
         do_extract(parser, args)
     elif args.command == "dl":
         do_dl(parser, args)
