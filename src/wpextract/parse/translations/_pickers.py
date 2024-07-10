@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import List
 
 from bs4 import BeautifulSoup, PageElement, Tag
 from langcodes import Language
@@ -18,7 +17,7 @@ class LangPicker(ABC):
     """The document to extract the language picker from."""
     root_el: Tag
     """The root element of the language picker, populated if [`LangPicker.matches`][wpextract.parse.translations.LangPicker.matches] is succesful."""
-    translations: List[TranslationLink]
+    translations: list[TranslationLink]
     """A list of translation links, populated by calling [`LangPicker.add_translation`][wpextract.parse.translations.LangPicker.add_translation] within [`LangPicker.extract`][wpextract.parse.translations.LangPicker.extract]."""
     current_language: Language
     """The current language of the page, populated by calling [`LangPicker.set_current_lang`][wpextract.parse.translations.LangPicker.set_current_lang] within [`LangPicker.extract`][wpextract.parse.translations.LangPicker.extract]."""

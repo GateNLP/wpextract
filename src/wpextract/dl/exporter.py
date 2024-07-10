@@ -1,29 +1,7 @@
-"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import copy
 import html
 import json
-import logging
-import os
+from pathlib import Path
 from urllib import parse as urlparse
 
 from tqdm.auto import tqdm
@@ -32,39 +10,36 @@ from wpextract.dl.requestsession import RequestSession
 
 
 class Exporter:
-    """Utility functions to export data"""
+    """Utility functions to export data."""
 
-    JSON = 1
-    """Represents the JSON format for format choice"""
     CHUNK_SIZE = 2048
     """The size of chunks to download large files"""
 
     @staticmethod
-    def download_media(session: RequestSession, media, output_folder):
-        """Downloads the media files based on the given URLs
+    def download_media(
+        session: RequestSession, media: list[str], out_path: Path
+    ) -> int:
+        """Downloads the media files based on the given URLs.
 
         Args:
             session: the request session to use
             media: the URLs as a list
-            output_folder: the path to the folder where the files are
-                being saved, it is assumed as existing
+            out_path: the path to the folder where the files are being saved, it is assumed as existing
 
         Returns:
-            the number of files wrote
+            the number of files written
         """
         files_number = 0
         for m in tqdm(media, unit="media"):
-            # TODO: make this use the same session as the initial download
             r = session.do_request("get", m, stream=True)
             if r.status_code == 200:
                 http_path = urlparse.urlparse(m).path.split("/")
-                local_path = output_folder
+                local_path = out_path
                 if len(http_path) > 1:
                     for el in http_path[:-1]:
-                        local_path = os.path.join(local_path, el)
-                        if not os.path.isdir(local_path):
-                            os.mkdir(local_path)
-                local_path = os.path.join(local_path, http_path[-1])
+                        local_path = local_path / el
+                        local_path.mkdir(exist_ok=True)
+                local_path = local_path / http_path[-1]
                 with open(local_path, "wb") as f:
                     i = 0
                     content_size = int(r.headers.get("Content-Length", -1))
@@ -147,34 +122,27 @@ class Exporter:
         return exported_list
 
     @staticmethod
-    def write_file(filename, fmt, data):
-        """Writes content to the given file using the given format.
+    def write_file(filename, data):
+        """Writes content to the given file in JSON format.
 
         The key mapping must be a dict of keys or lists of keys to ensure proper mapping.
 
         Args:
             filename: the path of the file
-            fmt: the format of the file
             data: the actual data to export
         """
         with open(filename, "w", encoding="utf-8") as f:
-            if fmt == Exporter.JSON:
-                # The JSON format is straightforward, we dump the flattened objects to JSON
-                json.dump(data, f, ensure_ascii=False, indent=4)
-            else:
-                raise ValueError("Unknown export format")
+            json.dump(data, f, ensure_ascii=False, indent=4)
 
     @staticmethod
     def export_posts(
-        posts,
-        fmt,
-        filename,
+        posts: list[dict],
+        filename: str,
     ):
-        """Exports posts in specified format to specified file
+        """Exports posts to the specified file.
 
         Args:
             posts: the posts to export
-            fmt: the export format (JSON or CSV)
             filename: filename to use
 
         Returns:
@@ -185,16 +153,15 @@ class Exporter:
             [["title", "rendered"], ["content", "rendered"], ["excerpt", "rendered"]],
         )
 
-        Exporter.write_file(filename, fmt, exported_posts)
+        Exporter.write_file(filename, exported_posts)
         return len(exported_posts)
 
     @staticmethod
-    def export_categories(categories, fmt, filename):
-        """Exports categories in specified format to specified file.
+    def export_categories(categories, filename):
+        """Exports categories to the specified file.
 
         Args:
             categories: the categories to export
-            fmt: the export format (JSON or CSV)
             filename: the path to the file to write
 
         Returns:
@@ -205,51 +172,46 @@ class Exporter:
             [],
         )
 
-        Exporter.write_file(filename, fmt, exported_categories)
+        Exporter.write_file(filename, exported_categories)
         return len(exported_categories)
 
     @staticmethod
-    def export_tags(tags, fmt, filename):
-        """Exports tags in specified format to specified file
+    def export_tags(tags, filename):
+        """Exports tags to the specified file.
 
         Args:
             tags: the tags to export
-            fmt: the export format (JSON or CSV)
             filename: the path to the file to write
 
         Returns:
             the length of the list written to the file
         """
         exported_tags = tags  # It seems that no modification will be done for this one, so no deepcopy
-        Exporter.write_file(filename, fmt, exported_tags)
+        Exporter.write_file(filename, exported_tags)
         return len(exported_tags)
 
     @staticmethod
-    def export_users(users, fmt, filename):
-        """Exports users in specified format to specified file.
+    def export_users(users, filename):
+        """Exports users to the specified file.
 
         Args:
             users: the users to export
-            fmt: the export format (JSON or CSV)
             filename: the path to the file to write
 
         Returns:
             the length of the list written to the file
         """
         exported_users = users  # It seems that no modification will be done for this one, so no deepcopy
-        Exporter.write_file(filename, fmt, exported_users)
+        Exporter.write_file(filename, exported_users)
         return len(exported_users)
 
     @staticmethod
-    def export_pages(pages, fmt, filename, parent_pages=None, users=None):
-        """Exports pages in specified format to specified file.
+    def export_pages(pages, filename):
+        """Exports pages to the specified file.
 
         Args:
             pages: the pages to export
-            fmt: the export format (JSON or CSV)
             filename: the path to the file to write
-            parent_pages: the list of all cached pages, to get parents
-            users: the list of all cached users, to get users
 
         Returns:
             the length of the list written to the file
@@ -264,18 +226,16 @@ class Exporter:
             ],
         )
 
-        Exporter.write_file(filename, fmt, exported_pages)
+        Exporter.write_file(filename, exported_pages)
         return len(exported_pages)
 
     @staticmethod
-    def export_media(media, fmt, filename, users=None):
-        """Exports media in specified format to specified file.
+    def export_media(media, filename):
+        """Exports media to the specified file.
 
         Args:
             media: the media to export
-            fmt: the export format (JSON or CSV)
             filename: file to export to
-            users: a list of users to associate them with author ids
 
         Returns:
             the length of the list written to the file
@@ -290,38 +250,17 @@ class Exporter:
             ],
         )
 
-        Exporter.write_file(filename, fmt, exported_media)
+        Exporter.write_file(filename, exported_media)
         return len(exported_media)
-
-    @staticmethod
-    def export_namespaces(namespaces, fmt, filename):
-        """**NOT IMPLEMENTED** Exports namespaces in specified format to specified file.
-
-        Args:
-            namespaces: the namespaces to export
-            fmt: the export format (JSON or CSV)
-            filename: file to export to
-
-        Returns:
-            the length of the list written to the file
-        """
-        logging.info("Namespaces export not available yet")
-        return 0
 
     # FIXME to be refactored
     @staticmethod
-    def export_comments_interactive(
-        comments, fmt, filename, parent_posts=None, users=None
-    ):
-        """Exports comments in specified format to specified file.
+    def export_comments_interactive(comments, filename):
+        """Exports comments to the specified file.
 
         Args:
             comments: the comments to export
-            fmt: the export format (JSON or CSV)
             filename: the path to the file to write
-            parent_posts: the list of all cached posts, to get parent
-                posts (not used yet because this could be too verbose)
-            users: the list of all cached users, to get users
 
         Returns:
             the length of the list written to the file
@@ -331,5 +270,5 @@ class Exporter:
             [["content", "rendered"]],
         )
 
-        Exporter.write_file(filename, fmt, exported_comments)
+        Exporter.write_file(filename, exported_comments)
         return len(exported_comments)

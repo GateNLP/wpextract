@@ -10,4 +10,4 @@
     options:
         members: false
 
-::: wpextract.dl.requestsession.AuthorizationType
+::: wpextract.dl.AuthorizationType

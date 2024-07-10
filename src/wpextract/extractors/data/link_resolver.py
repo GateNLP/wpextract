@@ -1,5 +1,5 @@
 import logging
-from typing import List, Optional
+from typing import Optional
 from urllib.parse import urlparse, urlunparse
 
 from wpextract.extractors.data.links import LinkRegistry, ResolvableLink
@@ -66,8 +66,8 @@ def resolve_link(
 
 
 def resolve_links(
-    registry: LinkRegistry, links: List[ResolvableLink]
-) -> List[ResolvableLink]:
+    registry: LinkRegistry, links: list[ResolvableLink]
+) -> list[ResolvableLink]:
     """Resolve a list of links against the link registry.
 
     Args:

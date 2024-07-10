@@ -1,7 +1,7 @@
 import logging
 import re
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Optional
 
 from wpextract.extractors.data.links import Linkable, LinkRegistry
 
@@ -56,8 +56,8 @@ def resolve_image(
 
 
 def resolve_images(
-    registry: LinkRegistry, images: List[ResolvableMediaUse]
-) -> List[ResolvableMediaUse]:
+    registry: LinkRegistry, images: list[ResolvableMediaUse]
+) -> list[ResolvableMediaUse]:
     """Resolve the internal links of a list of media uses.
 
     Args:

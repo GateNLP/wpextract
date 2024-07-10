@@ -2,7 +2,7 @@ import dataclasses
 import json
 import logging
 from pathlib import Path
-from typing import Any, List, Optional
+from typing import Any, Optional
 
 import numpy as np
 import pandas as pd
@@ -23,7 +23,7 @@ def load_from_path(path: Path) -> Optional[dict]:
     if not path.is_file():
         return None
 
-    with open(path, "r") as f:
+    with open(path) as f:
         return json.load(f)
 
 
@@ -53,7 +53,7 @@ def load_df(path: Path, index_col: str = "id") -> Optional[pd.DataFrame]:
     return pd.json_normalize(data_raw).set_index(index_col)
 
 
-def _set_nested_keys(row_dict: dict, split_key: List[str], val: Any):
+def _set_nested_keys(row_dict: dict, split_key: list[str], val: Any):
     """Set a value in the dictionary with nested keys.
 
     Args:

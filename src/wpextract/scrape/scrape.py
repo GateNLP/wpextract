@@ -1,12 +1,12 @@
 import logging
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Optional
 
 from bs4 import BeautifulSoup
 
 
 def load_scrape(
-    scrape_urls_files: Dict[str, Path], link: str
+    scrape_urls_files: dict[str, Path], link: str
 ) -> Optional[BeautifulSoup]:
     """Find, load and parse the scrape of a link.
 

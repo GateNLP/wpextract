@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, Callable, Optional
 
 from wpextract.dl.exceptions import WordPressApiNotV2
 from wpextract.dl.exporter import Exporter
@@ -15,7 +15,7 @@ class WPDownloader:
         self,
         target: str,
         out_path: Path,
-        data_types: List[str],
+        data_types: list[str],
         session: Optional[RequestSession] = None,
         json_prefix: Optional[str] = None,
     ):
@@ -61,7 +61,7 @@ class WPDownloader:
         if "media" in self.data_types:
             self._list_obj(WPApi.MEDIA)
 
-    def download_media_files(self, session: RequestSession, dest: str):
+    def download_media_files(self, session: RequestSession, dest: Path):
         """Download site media files.
 
         Args:
@@ -80,7 +80,7 @@ class WPDownloader:
         print(f"Downloaded {number_dl} media files")
 
     def _get_fetch_or_list_type(self, obj_type, plural=False):
-        """Returns a dict containing all necessary metadata about the obj_type to list and fetch data
+        """Returns a dict containing all necessary metadata about the obj_type to list and fetch data.
 
         Args:
             obj_type: the type of the object
@@ -109,9 +109,6 @@ class WPDownloader:
         elif obj_type == WPApi.MEDIA:
             export_func = Exporter.export_media
             obj_name = "Media"
-        elif obj_type == WPApi.NAMESPACE:
-            export_func = Exporter.export_namespaces
-            obj_name = "Namespaces" if plural else "Namespace"
 
         return {
             "export_func": export_func,
@@ -132,26 +129,41 @@ class WPDownloader:
 
             WPDownloader.export_decorator(
                 export_func=prop["export_func"],
-                export_str=prop["obj_name"].lower(),
+                file_name=prop["obj_name"].lower(),
                 json_path=self.out_path,
                 json_prefix=self.json_prefix,
                 values=obj_list,
             )
         except WordPressApiNotV2:
             logging.error("The API does not support WP V2")
-        except IOError as e:
+        except OSError as e:
             logging.error(f"Could not open {e.filename} for writing")
         print()
 
     @staticmethod
-    def export_decorator(  # noqa: D102
-        export_func, export_str, json_path: Path, json_prefix: str, values, kwargs=None
-    ):
+    def export_decorator(
+        export_func: Callable,
+        file_name: str,
+        json_path: Path,
+        json_prefix: str,
+        values: Any,
+        kwargs: Optional[dict] = None,
+    ) -> None:
+        """Call the export function with a constructed filename.
+
+        Args:
+            export_func: the function to run
+            file_name: the name of the export file
+            json_path: the path to the output directory
+            json_prefix: a prefix for the export file
+            values: data to be exported
+            kwargs: arguments to pass to the export function
+        """
         kwargs = kwargs or {}
 
-        filename = export_str + ".json"
+        filename = file_name + ".json"
         if json_prefix is not None:
             filename = json_prefix + "-" + filename
 
         json_file = json_path / filename
-        export_func(values, Exporter.JSON, json_file, **kwargs)
+        export_func(values, json_file, **kwargs)

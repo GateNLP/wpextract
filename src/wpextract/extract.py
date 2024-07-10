@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Optional
 
 from pandas import DataFrame
 
@@ -46,7 +46,7 @@ class WPExtractor:
     pages: Optional[DataFrame]
     """DataFrame of extracted pages."""
 
-    scrape_url_mapping: Dict[str, Path]
+    scrape_url_mapping: dict[str, Path]
 
     def __init__(
         self,

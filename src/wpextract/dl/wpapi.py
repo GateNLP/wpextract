@@ -1,24 +1,3 @@
-"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import copy
 import math
 from json.decoder import JSONDecodeError
@@ -44,7 +23,7 @@ from wpextract.dl.utils import (
 
 
 class WPApi:
-    """Queries the WordPress API to retrieve information"""
+    """Queries the WordPress API to retrieve information."""
 
     # Object types
     POST = 0
@@ -74,7 +53,7 @@ class WPApi:
     """Constant representing all types"""
 
     def __init__(self, target, api_path="wp-json/", session=None, search_terms=None):
-        """Creates a new instance of WPApi
+        """Creates a new instance of WPApi.
 
         Args:
             target: the target of the scan
@@ -106,11 +85,11 @@ class WPApi:
             self.s = RequestSession()
 
     def get_orphans_comments(self):
-        """Returns the list of comments for which a post hasn't been found"""
+        """Returns the list of comments for which a post hasn't been found."""
         return self.orphan_comments
 
     def get_basic_info(self):
-        """Collects and stores basic information about the target"""
+        """Collects and stores basic information about the target."""
         rest_url = url_path_join(self.url, self.api_path)
         if self.basic_info is not None:
             return self.basic_info
@@ -245,7 +224,7 @@ class WPApi:
         return (entries, total_entries)
 
     def crawl_single_page(self, url):
-        """Crawls a single URL"""
+        """Crawls a single URL."""
         content = None
         rest_url = url_path_join(self.url, self.api_path, url)
         try:
@@ -264,7 +243,7 @@ class WPApi:
         return content
 
     def get_from_cache(self, cache, start=None, num=None, force=False):
-        """Tries to fetch data from the given cache, also verifies first if WP-JSON is supported"""
+        """Tries to fetch data from the given cache, also verifies first if WP-JSON is supported."""
         if self.has_v2 is None:
             self.get_basic_info()
         if not self.has_v2:
@@ -302,7 +281,8 @@ class WPApi:
 
         return None
 
-    def update_cache(self, cache, values, total_entries, start=None, num=None):  # noqa: D102
+    def update_cache(self, cache, values, total_entries, start=None, num=None):
+        """Push new values to the cache."""
         if cache is None:
             cache = values
         elif len(values) > 0:
@@ -331,7 +311,7 @@ class WPApi:
         return cache
 
     def get_comments(self, start=None, num=None, force=False):
-        """Retrieves all comments"""
+        """Retrieves all comments."""
         comments = self.get_from_cache(self.comments, start, num, force)
         if comments is not None:
             return comments
@@ -343,7 +323,7 @@ class WPApi:
         return comments
 
     def get_posts(self, comments=False, start=None, num=None, force=False):
-        """Retrieves all posts or the specified ones"""
+        """Retrieves all posts or the specified ones."""
         if self.has_v2 is None:
             self.get_basic_info()
         if not self.has_v2:
@@ -388,7 +368,7 @@ class WPApi:
         return return_posts
 
     def get_tags(self, start=None, num=None, force=False):
-        """Retrieves all tags"""
+        """Retrieves all tags."""
         tags = self.get_from_cache(self.tags, start, num, force)
         if tags is not None:
             return tags
@@ -398,7 +378,7 @@ class WPApi:
         return tags
 
     def get_categories(self, start=None, num=None, force=False):
-        """Retrieves all categories or the specified ones"""
+        """Retrieves all categories or the specified ones."""
         categories = self.get_from_cache(self.categories, start, num, force)
         if categories is not None:
             return categories
@@ -412,7 +392,7 @@ class WPApi:
         return categories
 
     def get_users(self, start=None, num=None, force=False):
-        """Retrieves all users or the specified ones"""
+        """Retrieves all users or the specified ones."""
         users = self.get_from_cache(self.users, start, num, force)
         if users is not None:
             return users
@@ -424,7 +404,7 @@ class WPApi:
         return users
 
     def get_media(self, start=None, num=None, force=False):
-        """Retrieves all media objects"""
+        """Retrieves all media objects."""
         media = self.get_from_cache(self.media, start, num, force)
         if media is not None:
             return media
@@ -436,7 +416,7 @@ class WPApi:
         return media
 
     def get_media_urls(self, ids, cache=True):
-        """Retrieves the media download URLs for specified IDs or all or from cache"""
+        """Retrieves the media download URLs for specified IDs or all or from cache."""
         media = []
         if ids == "all":
             media = self.get_media(force=(not cache))
@@ -469,7 +449,7 @@ class WPApi:
         return urls, slugs
 
     def get_pages(self, start=None, num=None, force=False):
-        """Retrieves all pages"""
+        """Retrieves all pages."""
         pages = self.get_from_cache(self.pages, start, num, force)
         if pages is not None:
             return pages
@@ -481,7 +461,7 @@ class WPApi:
         return pages
 
     def get_namespaces(self, start=None, num=None, force=False):
-        """Retrieves an array of namespaces"""
+        """Retrieves an array of namespaces."""
         if self.has_v2 is None or force:
             self.get_basic_info()
         if "namespaces" in self.basic_info.keys():
@@ -496,7 +476,7 @@ class WPApi:
         return []
 
     def get_routes(self):
-        """Retrieves an array of routes"""
+        """Retrieves an array of routes."""
         if self.has_v2 is None:
             self.get_basic_info()
         if "routes" in self.basic_info.keys():
@@ -539,7 +519,18 @@ class WPApi:
                         continue
         return ns_data
 
-    def get_obj_by_id_helper(self, cache, obj_id, url, use_cache=True):  # noqa: D102
+    def get_obj_by_id_helper(self, cache, obj_id, url, use_cache=True) -> list[dict]:
+        """Retrieve an object from the cache or get it if not present.
+
+        Args:
+            cache: cache object for this type
+            obj_id: id of the object to fetch
+            url: URL formatting template containing "%d" where the ID should be substituted
+            use_cache: whether to use the cache or force a re-fetch
+
+        Returns:
+            A list containing the returned object, empty if not retrievable.
+        """
         if use_cache and cache is not None:
             obj = get_by_id(cache, obj_id)
             if obj is not None:

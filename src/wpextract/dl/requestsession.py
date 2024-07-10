@@ -1,29 +1,8 @@
-"""Copyright (c) 2018-2020 Mickaël "Kilawyn" Walter
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import logging
 import random
 import time
 from http.cookies import SimpleCookie
-from typing import Tuple, Union
+from typing import Optional, Union
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -34,54 +13,87 @@ DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 
 
 class ConnectionCouldNotResolve(Exception):
+    """The remote host could not be resolved."""
+
     pass
 
 
 class ConnectionReset(Exception):
+    """The connection was reset during the request."""
+
     pass
 
 
 class ConnectionRefused(Exception):
+    """The connection was refused by the server."""
+
     pass
 
 
 class ConnectionTimeout(Exception):
+    """A connection timeout occurred."""
+
     pass
 
 
 class HTTPError400(Exception):
+    """HTTP Bad Request.
+
+    See Also:
+        HTTPErrorInvalidPage for a special case of this error.
+    """
+
     pass
 
 
 class HTTPErrorInvalidPage(Exception):
+    """Special case of HTTP 400 if the error is caused by a nonexistent page.
+
+    This indicates the last page has been passed and all items have been retrieved.
+    """
+
     pass
 
 
 class HTTPError401(Exception):
+    """HTTP Unauthorized."""
+
     pass
 
 
 class HTTPError403(Exception):
+    """HTTP Forbidden."""
+
     pass
 
 
 class HTTPError404(Exception):
+    """HTTP Not Found."""
+
     pass
 
 
 class HTTPError500(Exception):
+    """HTTP Internal Server Error."""
+
     pass
 
 
 class HTTPError502(Exception):
+    """HTTP Bad Gateway."""
+
     pass
 
 
 class HTTPError(Exception):
+    """A generic HTTP error with an unexpected code."""
+
     pass
 
 
 class HTTPTooManyRedirects(Exception):
+    """Raised if the number of allowed redirects exceeds the configured maximum value."""
+
     pass
 
 
@@ -149,7 +161,11 @@ def _handle_status(url, status_code, n_tries=None):
 
 
 class RequestWait:
-    def __init__(self, wait: float = None, random_wait: bool = False):
+    """Manages waiting between requests."""
+
+    def __init__(
+        self, wait: Optional[float] = None, random_wait: Optional[bool] = False
+    ):
         """Create a new waiting instance.
 
         Args:
@@ -171,25 +187,25 @@ class RequestWait:
         time.sleep(self.wait_s * wait_factor)
 
 
-AuthorizationType = Union[Tuple[str, str], HTTPBasicAuth, HTTPDigestAuth]
+AuthorizationType = Union[tuple[str, str], HTTPBasicAuth, HTTPDigestAuth]
 
 
 class RequestSession:
-    """Wrapper to handle the requests library with session support"""
+    """Manages HTTP requests and their behaviour."""
 
     def __init__(
         self,
-        proxy: str = None,
-        cookies: str = None,
-        authorization: AuthorizationType = None,
-        timeout: float = 30,
-        wait: float = None,
+        proxy: Optional[str] = None,
+        cookies: Optional[str] = None,
+        authorization: Optional[AuthorizationType] = None,
+        timeout: Optional[float] = 30,
+        wait: Optional[float] = None,
         random_wait: bool = False,
         max_retries: int = 10,
         backoff_factor: float = 0.1,
         max_redirects: int = 20,
     ):
-        """Creates a new RequestSession instance
+        """Create a new request session.
 
         Args:
             proxy: a dict containing a proxy server string for HTTP and/or HTTPS connection
@@ -253,13 +269,13 @@ class RequestSession:
                 )
         except requests.ConnectionError as e:
             if "Errno -5" in str(e) or "Errno -2" in str(e) or "Errno -3" in str(e):
-                logging.error("Could not resolve host %s" % url)
+                logging.error(f"Could not resolve host {url}")
                 raise ConnectionCouldNotResolve from e
             elif "Errno 111" in str(e):
-                logging.error("Connection refused by %s" % url)
+                logging.error(f"Connection refused by {url}")
                 raise ConnectionRefused from e
             elif "RemoteDisconnected" in str(e):
-                logging.error("Connection reset by %s" % url)
+                logging.error(f"Connection reset by {url}")
                 raise ConnectionReset from e
             else:
                 print(e)
@@ -289,27 +305,40 @@ class RequestSession:
         self.waiter.wait()
         return response
 
-    def set_cookies(self, cookies):
-        """Sets new cookies from a string"""
+    def set_cookies(self, cookies: str) -> None:
+        """Sets new cookies from a string.
+
+        Args:
+            cookies: Cookies in a format usable by [http.cookies.SimpleCookie.load][]
+        """
         c = SimpleCookie()
         c.load(cookies)
         for key, m in c.items():
             self.s.cookies.set(key, m.value)
 
-    def get_cookies(self):  # noqa: D102
+    def get_cookies(self) -> dict[str, str]:
+        """Retrieve cookies in the cookie jar.
+
+        Returns:
+            Cookies in dictionary format.
+        """
         return self.s.cookies.get_dict()
 
-    def set_proxy(self, proxy):  # noqa: D102
+    def set_proxy(self, proxy) -> None:
+        """Set a proxy to use for the request.
+
+        Args:
+            proxy: proxy URL In the format supported by requests
+        """
         prot = "http"
         if proxy[:5].lower() == "https":
             prot = "https"
         self.s.proxies = {prot: proxy}
 
-    def get_proxies(self):  # noqa: D102
-        return self.s.proxies
+    def set_creds(self, credentials: AuthorizationType) -> None:
+        """Set new credentials for the request.
 
-    def set_creds(self, credentials):  # noqa: D102
+        Args:
+            credentials: credentials as an HTTPBasic tuple or supported requests HTTP auth instance
+        """
         self.s.auth = credentials
-
-    def get_creds(self):  # noqa: D102
-        return self.s.auth

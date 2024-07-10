@@ -1,8 +1,5 @@
 import pytest
-
-# from dl.conftest import mock_request_session
 from wpextract import WPDownloader
-from wpextract.dl.exporter import Exporter
 from wpextract.dl.requestsession import ConnectionRefused
 from wpextract.dl.wpapi import WPApi
 
@@ -98,6 +95,5 @@ def test_prefix(datadir, mocker, mock_request_session, prefix, expected_name):
 
     exporter.assert_called_once_with(
         _fake_api_return(),
-        Exporter.JSON,
         datadir / expected_name,
     )
