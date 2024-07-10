@@ -48,8 +48,8 @@ mkdocstrings-python = "^1.10.5"
 black = "^24.4.2"
 
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 target-version = "py39"
