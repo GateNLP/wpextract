@@ -129,7 +129,7 @@ class WPDownloader:
 
             WPDownloader.export_decorator(
                 export_func=prop["export_func"],
-                export_str=prop["obj_name"].lower(),
+                file_name=prop["obj_name"].lower(),
                 json_path=self.out_path,
                 json_prefix=self.json_prefix,
                 values=obj_list,
@@ -143,7 +143,7 @@ class WPDownloader:
     @staticmethod
     def export_decorator(
         export_func: Callable,
-        file_name,
+        file_name: str,
         json_path: Path,
         json_prefix: str,
         values: Any,
