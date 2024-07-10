@@ -10,8 +10,8 @@ from wpextract.parse.translations._resolver import TranslationLink
 @pytest.mark.parametrize(
     ("picker_cls", "picker_file"),
     [
-        (pickers.Polylang, "polylang.html"),
-        (pickers.GenericLangSwitcher, "generic_polylang.html"),
+        (pickers.PolylangWidget, "polylang_widget.html"),
+        (pickers.PolylangCustomDropdown, "polylang_custom_dropdown.html"),
     ],
 )
 def test_picker(datadir: Path, picker_cls: type[pickers.LangPicker], picker_file: str):

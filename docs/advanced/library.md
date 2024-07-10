@@ -15,13 +15,15 @@ Examples of usage are available in the CLI scripts in the `wpextract.cli` module
 
 Use the [`wpextract.WPDownloader`][wpextract.WPDownloader] class.
 
-Possible customisations include:
+Compared to the CLI, you can:
 
-- Implement highly custom request behaviour by subclassing [`RequestSession`][wpextract.dl.RequestSession] and passing to the `session` parameter.
+- implement highly custom request behaviour by subclassing [`RequestSession`][wpextract.dl.RequestSession] and passing to the `session` argument.
 
 
 ## Extractor
 
 Use the [`wpextract.WPExtractor`][wpextract.WPExtractor] class.
 
-When using this approach, it's possible to use [customised translation pickers](../advanced/multilingual.md#adding-support) by passing subclasses of [`LanguagePicker`][wpextract.parse.translations.LangPicker] to the
+Compared to the CLI, you can:
+
+ - set [customised translation pickers](../advanced/multilingual.md#adding-support) by passing subclasses of [`LanguagePicker`][wpextract.parse.translations.LangPicker] to the `translation_pickers` argument.

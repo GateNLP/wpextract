@@ -89,27 +89,28 @@ class LangPicker(ABC):
         )
 
 
-class Polylang(LangPicker):
-    """Language picker from the plugin Polylang.
+class PolylangWidget(LangPicker):
+    """Language picker from the plugin Polylang used as a widget.
 
-     `WordPress plugin page <https://wordpress.org/plugins/polylang/>`.
+    [WordPress plugin page](https://wordpress.org/plugins/polylang/)
 
-    Has the structure::
+    Has the structure:
 
-        <div id="polylang" class="widget widget_polylang">
-            <ul>
-                <li class="lang-item lang-item-en current-lang lang-item-first">
-                    <a lang="en-US" hreflang="en-US" href="URL">\
-                    <img><span>English</span></a>
-                </li>
-                <li class="lang-item lang-item-20 lang-item-fr">
-                    <a lang="fr-FR" hreflang="fr-FR" href="URL">\
-                    <img><span>Français</span></a>
-                </li>
-                ...
-            </ul>
-        </div>
-
+    ```html
+    <div id="polylang" class="widget widget_polylang">
+        <ul>
+            <li class="lang-item lang-item-en current-lang lang-item-first">
+                <a lang="en-US" hreflang="en-US" href="URL">\
+                <img><span>English</span></a>
+            </li>
+            <li class="lang-item lang-item-20 lang-item-fr">
+                <a lang="fr-FR" hreflang="fr-FR" href="URL">\
+                <img><span>Français</span></a>
+            </li>
+            ...
+        </ul>
+    </div>
+    ```
     """
 
     def get_root(self) -> PageElement:
@@ -145,21 +146,25 @@ class Polylang(LangPicker):
             self.add_translation(href, lang)
 
 
-class GenericLangSwitcher(LangPicker):
-    """A language picker in Polylang-style but using some different markup.
+class PolylangCustomDropdown(LangPicker):
+    """Language picker for an in-the-wild version of polylang.
 
-    Finds language pickers in the form:::
+    This was implemented to support a specific site of interest.
 
-        <div class="header-lang_switcher switcher-ltr">
-            <div class="current-lang-switcher">
-                <img><span>en</span>
-            </div>
-            <ul>
-                <li class="lang-item lang-item-fr lang-item-first">
-                    <a lang="fr-FR" hreflang="fr-FR" href="">Français</a>
-                </li>
-            </ul>
+    Finds language pickers in the form:
+
+    ```html
+    <div class="header-lang_switcher switcher-ltr">
+        <div class="current-lang-switcher">
+            <img><span>en</span>
         </div>
+        <ul>
+            <li class="lang-item lang-item-fr lang-item-first">
+                <a lang="fr-FR" hreflang="fr-FR" href="">Français</a>
+            </li>
+        </ul>
+    </div>
+    ```
     """
 
     def get_root(self) -> PageElement:

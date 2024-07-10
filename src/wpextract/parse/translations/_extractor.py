@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 import wpextract.parse.translations._pickers as pickers
 
-PICKERS = [pickers.Polylang, pickers.GenericLangSwitcher]
+DEFAULT_PICKERS = [pickers.PolylangWidget, pickers.PolylangCustomDropdown]
 PickerListType = list[type[pickers.LangPicker]]
 
 PageTranslationData = pd.Series
@@ -28,7 +28,7 @@ def extract_translations(
         The doc's language and list of translation links
     """
     if translation_pickers is None:
-        translation_pickers = PICKERS
+        translation_pickers = DEFAULT_PICKERS
 
     if page_doc is None:
         return pd.Series([None, []])

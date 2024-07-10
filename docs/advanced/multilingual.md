@@ -36,7 +36,7 @@ Currently the following plugins are supported:
 
     ??? example
         ```html
-        --8<-- "tests/parse/translations/test_pickers/polylang.html:struct"
+        --8<-- "tests/parse/translations/test_pickers/polylang_widget.html:struct"
         ```
 
 
@@ -44,7 +44,7 @@ Currently the following plugins are supported:
 
     ??? example
         ```html
-        --8<-- "tests/parse/translations/test_pickers/generic_polylang.html:struct"
+        --8<-- "tests/parse/translations/test_pickers/polylang_custom_dropdown.html:struct"
         ```
 
 **Does not support**:
@@ -56,16 +56,16 @@ Currently the following plugins are supported:
 ## Adding Support
 
 !!! info "See also"
-    [Using WPextract as a library](library.md) for information on how to run wpextract as a library using additional pickers.
+    To use additional pickers, you must [use WPextract as a library](library.md).
 
-Support can be added by creating a new picker definition inheriting from [`LangPicker`][wpextract.parse.translations.LangPicker].
+Support can be added by creating a new picker definition inheriting from [`LangPicker`][wpextract.parse.translations.LangPicker], and passing to the `translation_pickers` argument of [`WPExtractor`][wpextract.WPExtractor]
 
 This parent class defines two abstract methods which must be implemented:
 
 - [`LangPicker.get_root`][wpextract.parse.translations.LangPicker.get_root] - returns the root element of the picker
 - [`LangPicker.extract`][wpextract.parse.translations.LangPicker.extract] - find the languages, call [`LangPicker.set_current_lang`][wpextract.parse.translations.LangPicker.set_current_lang] and call [`LangPicker.add_translation`][wpextract.parse.translations.LangPicker.add_translation] for each
 
-More complicted pickers may need to override additional methods of the class, but should still ultimately populate the [`LangPicker.translations`][wpextract.parse.translations.LangPicker.translations] and [`LangPicker.current_language`][wpextract.parse.translations.LangPicker.current_language] attributes as the parent class does.
+More complicated pickers may need to override additional methods of the class, but should still ultimately populate the [`LangPicker.translations`][wpextract.parse.translations.LangPicker.translations] and [`LangPicker.current_language`][wpextract.parse.translations.LangPicker.current_language] attributes as the parent class does.
 
 This section will show implementing a new picker with the following simplified markup:
 
