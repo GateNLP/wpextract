@@ -1,5 +1,5 @@
 import logging
-from typing import List, Optional, Type
+from typing import Optional
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import wpextract.parse.translations._pickers as pickers
 
 PICKERS = [pickers.Polylang, pickers.GenericLangSwitcher]
-PickerListType = List[Type[pickers.LangPicker]]
+PickerListType = list[type[pickers.LangPicker]]
 
 PageTranslationData = pd.Series
 

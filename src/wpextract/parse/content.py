@@ -1,6 +1,5 @@
 import copy
 import logging
-from typing import List, Tuple
 from urllib.parse import urljoin, urlparse, urlunparse
 
 import pandas as pd
@@ -15,13 +14,13 @@ EXCLUDED_CONTENT_TAGS = {"figcaption"}
 NEWLINE_TAGS = {"br", "p"}
 
 
-InternalLinks = List[ResolvableLink]
-ExternalLinks = List[Link]
+InternalLinks = list[ResolvableLink]
+ExternalLinks = list[Link]
 
 
 def extract_links(
     doc: BeautifulSoup, self_link: str
-) -> Tuple[InternalLinks, ExternalLinks]:
+) -> tuple[InternalLinks, ExternalLinks]:
     """Get the internal and external links of the document.
 
     Args:
@@ -60,7 +59,7 @@ def extract_links(
     return internal_links, external_links
 
 
-Embeds = List[str]
+Embeds = list[str]
 
 
 def extract_embeds(doc: BeautifulSoup) -> Embeds:
@@ -75,7 +74,7 @@ def extract_embeds(doc: BeautifulSoup) -> Embeds:
     return [iframe["src"] for iframe in doc.find_all("iframe")]
 
 
-Images = List[MediaUse]
+Images = list[MediaUse]
 
 
 def extract_images(doc: BeautifulSoup, self_link: str) -> Images:

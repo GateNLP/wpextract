@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Optional
 
 import pandas as pd
 from pandas import DataFrame
@@ -57,7 +57,7 @@ RENAME_COLUMNS = {
 def load_posts(
     path: Path,
     link_registry: LinkRegistry,
-    scrape_urls_files: Dict[str, Path],
+    scrape_urls_files: dict[str, Path],
     translation_pickers: Optional[PickerListType] = None,
 ) -> Optional[pd.DataFrame]:
     """Load the posts from a JSON file.

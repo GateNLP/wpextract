@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 
 from wpextract.dl.exceptions import WordPressApiNotV2
 from wpextract.dl.exporter import Exporter
@@ -15,7 +15,7 @@ class WPDownloader:
         self,
         target: str,
         out_path: Path,
-        data_types: List[str],
+        data_types: list[str],
         session: Optional[RequestSession] = None,
         json_prefix: Optional[str] = None,
     ):
@@ -136,7 +136,7 @@ class WPDownloader:
             )
         except WordPressApiNotV2:
             logging.error("The API does not support WP V2")
-        except IOError as e:
+        except OSError as e:
             logging.error(f"Could not open {e.filename} for writing")
         print()
 

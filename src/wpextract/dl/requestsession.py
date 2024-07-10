@@ -2,7 +2,7 @@ import logging
 import random
 import time
 from http.cookies import SimpleCookie
-from typing import Tuple, Union
+from typing import Union
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -14,21 +14,25 @@ DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 
 class ConnectionCouldNotResolve(Exception):
     """The remote host could not be resolved."""
+
     pass
 
 
 class ConnectionReset(Exception):
     """The connection was reset during the request."""
+
     pass
 
 
 class ConnectionRefused(Exception):
     """The connection was refused by the server."""
+
     pass
 
 
 class ConnectionTimeout(Exception):
     """A connection timeout occurred."""
+
     pass
 
 
@@ -38,6 +42,7 @@ class HTTPError400(Exception):
     See Also:
         HTTPErrorInvalidPage for a special case of this error.
     """
+
     pass
 
 
@@ -46,41 +51,49 @@ class HTTPErrorInvalidPage(Exception):
 
     This indicates the last page has been passed and all items have been retrieved.
     """
+
     pass
 
 
 class HTTPError401(Exception):
     """HTTP Unauthorized."""
+
     pass
 
 
 class HTTPError403(Exception):
     """HTTP Forbidden."""
+
     pass
 
 
 class HTTPError404(Exception):
     """HTTP Not Found."""
+
     pass
 
 
 class HTTPError500(Exception):
     """HTTP Internal Server Error."""
+
     pass
 
 
 class HTTPError502(Exception):
     """HTTP Bad Gateway."""
+
     pass
 
 
 class HTTPError(Exception):
     """A generic HTTP error with an unexpected code."""
+
     pass
 
 
 class HTTPTooManyRedirects(Exception):
     """Raised if the number of allowed redirects exceeds the configured maximum value."""
+
     pass
 
 
@@ -172,11 +185,12 @@ class RequestWait:
         time.sleep(self.wait_s * wait_factor)
 
 
-AuthorizationType = Union[Tuple[str, str], HTTPBasicAuth, HTTPDigestAuth]
+AuthorizationType = Union[tuple[str, str], HTTPBasicAuth, HTTPDigestAuth]
 
 
 class RequestSession:
     """Manages HTTP requests and their behaviour."""
+
     def __init__(
         self,
         proxy: str = None,
@@ -253,13 +267,13 @@ class RequestSession:
                 )
         except requests.ConnectionError as e:
             if "Errno -5" in str(e) or "Errno -2" in str(e) or "Errno -3" in str(e):
-                logging.error("Could not resolve host %s" % url)
+                logging.error(f"Could not resolve host {url}")
                 raise ConnectionCouldNotResolve from e
             elif "Errno 111" in str(e):
-                logging.error("Connection refused by %s" % url)
+                logging.error(f"Connection refused by {url}")
                 raise ConnectionRefused from e
             elif "RemoteDisconnected" in str(e):
-                logging.error("Connection reset by %s" % url)
+                logging.error(f"Connection reset by {url}")
                 raise ConnectionReset from e
             else:
                 print(e)

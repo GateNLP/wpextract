@@ -1,7 +1,6 @@
 import json
 import logging
 from pathlib import Path
-from typing import Dict, List
 
 from bs4 import BeautifulSoup
 from tqdm.auto import tqdm
@@ -28,8 +27,8 @@ class ScrapeCrawl:
             not be discovered.
     """
 
-    found_pages: Dict[str, str]
-    failed_docs: List[str]
+    found_pages: dict[str, str]
+    failed_docs: list[str]
     crawled = False
 
     def __init__(self, root_path: Path):
@@ -66,7 +65,7 @@ class ScrapeCrawl:
             )
 
     def _import(self):
-        with open(self._get_cache_path(), "r") as f:
+        with open(self._get_cache_path()) as f:
             data = json.load(f)
 
         if "version" not in data or data["version"] != SCRAPE_CRAWL_VERSION:
@@ -111,7 +110,7 @@ class ScrapeCrawl:
 
         self._export()
 
-    def get_link_abs_path(self) -> Dict[str, Path]:
+    def get_link_abs_path(self) -> dict[str, Path]:
         """Get the mapping as original link to absolute file path.
 
         Absolute paths are resolved with the ``root_path`` and relative path from the

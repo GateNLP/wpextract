@@ -2,7 +2,6 @@ import copy
 import html
 import json
 import os
-from typing import List
 from urllib import parse as urlparse
 
 from tqdm.auto import tqdm
@@ -18,7 +17,7 @@ class Exporter:
 
     @staticmethod
     def download_media(
-        session: RequestSession, media: List[str], output_folder: str
+        session: RequestSession, media: list[str], output_folder: str
     ) -> int:
         """Downloads the media files based on the given URLs.
 
@@ -139,7 +138,7 @@ class Exporter:
 
     @staticmethod
     def export_posts(
-        posts: List[dict],
+        posts: list[dict],
         filename: str,
     ):
         """Exports posts to the specified file.

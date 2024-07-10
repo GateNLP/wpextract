@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Optional
 
 
 @dataclass
@@ -29,8 +29,8 @@ class ResolvableLink(Link):
 class LinkRegistry:
     """A collection of all known links on the site."""
 
-    links: List[Linkable]
-    url_index_cache: Dict[str, int]
+    links: list[Linkable]
+    url_index_cache: dict[str, int]
 
     def __init__(self):
         """Init a new registry."""
@@ -59,7 +59,7 @@ class LinkRegistry:
         if _refresh_cache:
             self._refresh_cache()
 
-    def add_linkables(self, data_type: str, links: List[str], idxes: List[str]) -> None:
+    def add_linkables(self, data_type: str, links: list[str], idxes: list[str]) -> None:
         """Add multiple linkable items at once.
 
         Args:
