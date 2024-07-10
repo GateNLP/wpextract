@@ -342,4 +342,3 @@ class RequestSession:
             credentials: credentials as an HTTPBasic tuple or supported requests HTTP auth instance
         """
         self.s.auth = credentials
-

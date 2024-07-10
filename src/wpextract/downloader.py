@@ -142,7 +142,12 @@ class WPDownloader:
 
     @staticmethod
     def export_decorator(
-        export_func: Callable, file_name, json_path: Path, json_prefix: str, values: Any, kwargs=None
+        export_func: Callable,
+        file_name,
+        json_path: Path,
+        json_prefix: str,
+        values: Any,
+        kwargs=None,
     ) -> None:
         """Call the export function with a constructed filename.
 
