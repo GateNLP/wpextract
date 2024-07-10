@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Optional
+from typing import Any, Callable, Optional
 
 from wpextract.dl.exceptions import WordPressApiNotV2
 from wpextract.dl.exporter import Exporter
@@ -141,12 +141,22 @@ class WPDownloader:
         print()
 
     @staticmethod
-    def export_decorator(  # noqa: D102
-        export_func, export_str, json_path: Path, json_prefix: str, values, kwargs=None
-    ):
+    def export_decorator(
+        export_func: Callable, file_name, json_path: Path, json_prefix: str, values: Any, kwargs=None
+    ) -> None:
+        """Call the export function with a constructed filename.
+
+        Args:
+            export_func: the function to run
+            file_name: the name of the export file
+            json_path: the path to the output directory
+            json_prefix: a prefix for the export file
+            values: data to be exported
+            kwargs: arguments to pass to the export function
+        """
         kwargs = kwargs or {}
 
-        filename = export_str + ".json"
+        filename = file_name + ".json"
         if json_prefix is not None:
             filename = json_prefix + "-" + filename
 

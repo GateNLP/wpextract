@@ -305,27 +305,41 @@ class RequestSession:
         self.waiter.wait()
         return response
 
-    def set_cookies(self, cookies):
-        """Sets new cookies from a string."""
+    def set_cookies(self, cookies: str) -> None:
+        """Sets new cookies from a string.
+
+        Args:
+            cookies: Cookies in a format usable by [http.cookies.SimpleCookie.load][]
+        """
         c = SimpleCookie()
         c.load(cookies)
         for key, m in c.items():
             self.s.cookies.set(key, m.value)
 
-    def get_cookies(self):  # noqa: D102
+    def get_cookies(self) -> dict[str, str]:
+        """Retrieve cookies in the cookie jar.
+
+        Returns:
+            Cookies in dictionary format.
+        """
         return self.s.cookies.get_dict()
 
-    def set_proxy(self, proxy):  # noqa: D102
+    def set_proxy(self, proxy) -> None:
+        """Set a proxy to use for the request.
+
+        Args:
+            proxy: proxy URL In the format supported by requests
+        """
         prot = "http"
         if proxy[:5].lower() == "https":
             prot = "https"
         self.s.proxies = {prot: proxy}
 
-    def get_proxies(self):  # noqa: D102
-        return self.s.proxies
+    def set_creds(self, credentials: AuthorizationType) -> None:
+        """Set new credentials for the request.
 
-    def set_creds(self, credentials):  # noqa: D102
+        Args:
+            credentials: credentials as an HTTPBasic tuple or supported requests HTTP auth instance
+        """
         self.s.auth = credentials
 
-    def get_creds(self):  # noqa: D102
-        return self.s.auth

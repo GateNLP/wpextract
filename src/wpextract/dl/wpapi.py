@@ -281,7 +281,8 @@ class WPApi:
 
         return None
 
-    def update_cache(self, cache, values, total_entries, start=None, num=None):  # noqa: D102
+    def update_cache(self, cache, values, total_entries, start=None, num=None):
+        """Push new values to the cache."""
         if cache is None:
             cache = values
         elif len(values) > 0:
@@ -518,7 +519,18 @@ class WPApi:
                         continue
         return ns_data
 
-    def get_obj_by_id_helper(self, cache, obj_id, url, use_cache=True):  # noqa: D102
+    def get_obj_by_id_helper(self, cache, obj_id, url, use_cache=True) -> list[dict]:
+        """Retrieve an object from the cache or get it if not present.
+
+        Args:
+            cache: cache object for this type
+            obj_id: id of the object to fetch
+            url: URL formatting template containing "%d" where the ID should be substituted
+            use_cache: whether to use the cache or force a re-fetch
+
+        Returns:
+            A list containing the returned object, empty if not retrievable.
+        """
         if use_cache and cache is not None:
             obj = get_by_id(cache, obj_id)
             if obj is not None:
