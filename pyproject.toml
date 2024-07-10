@@ -1,6 +1,6 @@
 [tool.poetry]
 name="wpextract"
-version="1.0.0a0"
+version="1.0.0rc1"
 description="Create a dataset from the WordPress API"
 authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
 packages=[

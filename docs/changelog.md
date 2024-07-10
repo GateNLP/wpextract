@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 <small>(upcoming)</small> { id="1.0.0" }
+## 1.0.0rc1 <small>(upcoming)</small> { id="1.0.0" }
 
 This release is a major overhaul of the tool including built-in download functionality.
 
