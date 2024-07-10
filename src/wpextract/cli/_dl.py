@@ -1,7 +1,7 @@
 from argparse import Namespace
 
 from wpextract.cli._shared import _register_shared
-from wpextract.dl.downloader import WPDownloader
+from wpextract.downloader import WPDownloader
 from wpextract.dl.requestsession import RequestSession
 from wpextract.util.args import empty_directory
 
