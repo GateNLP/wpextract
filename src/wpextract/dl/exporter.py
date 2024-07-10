@@ -1,7 +1,7 @@
 import copy
 import html
 import json
-import os
+from pathlib import Path
 from urllib import parse as urlparse
 
 from tqdm.auto import tqdm
@@ -17,31 +17,29 @@ class Exporter:
 
     @staticmethod
     def download_media(
-        session: RequestSession, media: list[str], output_folder: str
+        session: RequestSession, media: list[str], out_path: Path
     ) -> int:
         """Downloads the media files based on the given URLs.
 
         Args:
             session: the request session to use
             media: the URLs as a list
-            output_folder: the path to the folder where the files are being saved, it is assumed as existing
+            out_path: the path to the folder where the files are being saved, it is assumed as existing
 
         Returns:
             the number of files written
         """
         files_number = 0
         for m in tqdm(media, unit="media"):
-            # TODO: make this use the same session as the initial download
             r = session.do_request("get", m, stream=True)
             if r.status_code == 200:
                 http_path = urlparse.urlparse(m).path.split("/")
-                local_path = output_folder
+                local_path = out_path
                 if len(http_path) > 1:
                     for el in http_path[:-1]:
-                        local_path = os.path.join(local_path, el)
-                        if not os.path.isdir(local_path):
-                            os.mkdir(local_path)
-                local_path = os.path.join(local_path, http_path[-1])
+                        local_path = local_path / el
+                        local_path.mkdir(exist_ok=True)
+                local_path = local_path / http_path[-1]
                 with open(local_path, "wb") as f:
                     i = 0
                     content_size = int(r.headers.get("Content-Length", -1))

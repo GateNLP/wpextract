@@ -21,11 +21,11 @@ def register_dl_parser(subparsers):
     parser_dl.add_argument(
         "out_json",
         type=empty_directory,
-        help="the path of the output JSON file",
+        help="Path to output JSON files to",
     )
     parser_dl.add_argument(
         "--media-dest",
-        type=str,
+        type=empty_directory,
         default=None,
         help="Path to download media files, skipped if not supplied.",
     )

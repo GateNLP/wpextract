@@ -61,7 +61,7 @@ class WPDownloader:
         if "media" in self.data_types:
             self._list_obj(WPApi.MEDIA)
 
-    def download_media_files(self, session: RequestSession, dest: str):
+    def download_media_files(self, session: RequestSession, dest: Path):
         """Download site media files.
 
         Args:
