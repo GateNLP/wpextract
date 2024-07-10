@@ -1,4 +1,6 @@
 import pytest
+
+# from dl.conftest import mock_request_session
 from wpextract import WPDownloader
 from wpextract.dl.exporter import Exporter
 from wpextract.dl.requestsession import ConnectionRefused
@@ -40,13 +42,6 @@ def _mocked_exporter(mocker, datatype):
         method = cls + f"export_{datatype}"
 
     return mocker.patch(method)
-
-
-@pytest.fixture()
-def mock_request_session(mocker):
-    mock_session_cls = mocker.patch("wpextract.dl.downloader.RequestSession")
-    mock_session_cls = mock_session_cls.return_value
-    return mock_session_cls
 
 
 def test_session_test_working(mock_request_session, downloader):
@@ -93,10 +88,7 @@ def test_download_data_type(datadir, mocker, mock_request_session, datatype, val
 
 @pytest.mark.parametrize(
     ("prefix", "expected_name"),
-    [
-        ("myprefix", "myprefix-pages.json"),
-        (None, "pages.json")
-    ]
+    [("myprefix", "myprefix-pages.json"), (None, "pages.json")],
 )
 def test_prefix(datadir, mocker, mock_request_session, prefix, expected_name):
     downloader = _make_downloader(datadir, mocker, ["pages"], prefix)

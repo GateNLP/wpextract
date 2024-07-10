@@ -36,7 +36,7 @@ pytest-datadir = "~1.5.0"
 pytest-mock = "~3.14.0"
 ruff = "^0.5.0"
 coverage = "^7.5.4"
-requests-mock = "^1.12.1"
+responses = "^0.25.3"
 
 
 [tool.poetry.group.docs]

@@ -280,7 +280,7 @@ class RequestSession:
                 raise HTTPErrorInvalidPage
 
         n_tries = None
-        if hasattr(response.raw, "retries"):
+        if hasattr(response.raw, "retries") and response.raw.retries is not None:
             # initial request + n retires = n+1 tries
             n_tries = len(response.raw.retries.history) + 1
 

@@ -105,59 +105,6 @@ class WPApi:
         else:
             self.s = RequestSession()
 
-    @staticmethod
-    def str_type_to_native(str_type):
-        """Converts a single object type as str to its corresponding native type.
-
-        If the object type is unknown, this returns None as a fallback.
-        This may have to be modified in cases of bugs.
-
-        Args:
-            str_type: the object type as string
-
-        Returns:
-            the object type as native constant
-
-        ```
-        str_type_to_native("post") # returns WPApi.POST
-        ```
-        """
-        if str_type == "user":
-            return WPApi.USER
-        elif str_type == "tag":
-            return WPApi.TAG
-        elif str_type == "category":
-            return WPApi.CATEGORY
-        elif str_type == "post":
-            return WPApi.POST
-        elif str_type == "page":
-            return WPApi.PAGE
-        elif str_type == "comment":
-            return WPApi.COMMENT
-        elif str_type == "media":
-            return WPApi.MEDIA
-        elif str_type == "post_revision":
-            return WPApi.POST_REVISION
-        elif str_type == "block":
-            return WPApi.WP_BLOCK
-        elif str_type == "theme":
-            return WPApi.THEME
-        elif str_type == "namespace":
-            return WPApi.NAMESPACE
-        return None
-
-    @staticmethod
-    def convert_obj_types_to_list(str_types):
-        """Converts a list of object type as list to a list of native constants representing the object types."""
-        out = []
-        if str_types is None or len(str_types) == 0 or "all" in str_types:
-            return [WPApi.ALL_TYPES]
-        for el in str_types:
-            current = WPApi.str_type_to_native(el)
-            if current is not None:
-                out.append(current)
-        return out
-
     def get_orphans_comments(self):
         """Returns the list of comments for which a post hasn't been found"""
         return self.orphan_comments
