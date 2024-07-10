@@ -18,6 +18,9 @@ $ wpextract dl target out_json
 `--json-prefix JSON_PREFIX`
 : Output files with a prefix, e.g. supplying _20240101-example_ will output posts to `out_dir/20240101-example-posts.json`
 
+`--media-dest`
+: Path to download media files to, skipped if not supplied. Must be an empty directory
+
 **skip data**
 
 `--no-categories` `--no-media` `--no-pages` `--no-posts` `--no-tags` `--no-users`

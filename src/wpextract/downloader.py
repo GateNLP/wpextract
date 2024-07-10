@@ -147,7 +147,7 @@ class WPDownloader:
         json_path: Path,
         json_prefix: str,
         values: Any,
-        kwargs=None,
+        kwargs: Optional[dict] = None,
     ) -> None:
         """Call the export function with a constructed filename.
 

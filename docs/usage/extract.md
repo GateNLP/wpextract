@@ -36,7 +36,7 @@ $ wpextract extract json_root out_dir
 
 ### 1. Scrape Crawling (optional)
 
-If a scrape is provided with the `--scrape-root` argument, it is first crawled to map the correspondance between the HTML files on disk and the post URLs.
+If a scrape is provided with the `--scrape-root` argument, it is first crawled to map the correspondence between the HTML files on disk and the post URLs.
 
 Website scraping tools may store a webpage at a path that is not easy to derive from the URL (e.g. because of path length limits). For this reason, we crawl the scrape directory and build a mapping of URL to path.
 
@@ -62,7 +62,7 @@ The extraction process is applied to all posts simultaneously in the following o
    * Translations are detected using the translation pickers (implementing [`LangPicker`][wpextract.parse.translations.LangPicker])
    * Custom pickers can be added if using this tool as a library
    * Any extracted translations are stored as unresolved links
-5. Add the post's link to the link registry
+5. Add the post's link to the link registry[^linkregistry]
 6. Using the parsed API content response, extract:
    * Internal links (stored as unresolved links)
    * External links (stored as resolved links)
@@ -72,6 +72,8 @@ The extraction process is applied to all posts simultaneously in the following o
      1. Remove tags which contain unwanted text (e.g. `figcaptions`)
      2. Replace `<br>` tags and `<p>` tags with newline characters
      3. Combine all page text
+
+[^linkregistry]: The link registry stores a map between URLs of posts, pages, media etc. and their data type and ID. This is later used to resolve hyperlinks and media use.
 
 Other types are extracted in similar ways. Any additional user-supplied fields with HTML formatting (such as media captions) are also extracted as plain text.
 
