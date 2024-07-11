@@ -1,4 +1,5 @@
 import copy
+import logging
 import math
 from json.decoder import JSONDecodeError
 from urllib.parse import urlencode
@@ -156,7 +157,7 @@ class WPApi:
                 ) and "X-WP-Total" in req.headers:
                     total_entries = int(req.headers["X-WP-Total"])
                     total_pages = int(req.headers["X-WP-TotalPages"])
-                    print("Total number of entries: %d" % total_entries)
+                    logging.info("Total number of entries: %d" % total_entries)
                     if start is not None and total_entries < start:
                         start = total_entries - 1
             except HTTPErrorInvalidPage:

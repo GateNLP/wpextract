@@ -278,7 +278,6 @@ class RequestSession:
                 logging.error(f"Connection reset by {url}")
                 raise ConnectionReset from e
             else:
-                print(e)
                 raise e
         except requests.Timeout as e:
             logging.error(f"Request timed out fetching {url}")
