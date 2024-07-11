@@ -68,16 +68,16 @@ class WPDownloader:
             session: the request session to use
             dest: destination directory for media
         """
-        print("Pulling media URLs")
+        logging.info("Pulling media URLs")
         media, slugs = self.scanner.get_media_urls("all", cache=True)
 
         if len(media) == 0:
             logging.warning("No media found corresponding to the criteria")
             return
-        print(f"{len(media)} media URLs found")
+        logging.info(f"{len(media)} media URLs found")
 
         number_dl = Exporter.download_media(session, media, dest)
-        print(f"Downloaded {number_dl} media files")
+        logging.info(f"Downloaded {number_dl} media files")
 
     def _get_fetch_or_list_type(self, obj_type, plural=False):
         """Returns a dict containing all necessary metadata about the obj_type to list and fetch data.
@@ -117,7 +117,7 @@ class WPDownloader:
 
     def _list_obj(self, obj_type, start=None, limit=None, cache=True):
         prop = self._get_fetch_or_list_type(obj_type, plural=True)
-        print(prop["obj_name"] + " details")
+        logging.info(f"Downloading {prop['obj_name']}")
 
         try:
             kwargs = {}
@@ -138,7 +138,7 @@ class WPDownloader:
             logging.error("The API does not support WP V2")
         except OSError as e:
             logging.error(f"Could not open {e.filename} for writing")
-        print()
+        logging.info(f"Completed downloading {prop['obj_name']}")
 
     @staticmethod
     def export_decorator(

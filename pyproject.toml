@@ -77,7 +77,8 @@ select = [
     "PT",
     "B",
     "UP",
-    "RUF"
+    "RUF",
+    "T20"
 ]
 
 ignore = [

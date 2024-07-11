@@ -142,7 +142,6 @@ def download(
     OUT_JSON is the directory to output the downloaded JSON to. It must be an existing empty directory or a non-existent directory which will be created.
     """
     setup_logging(verbose, log)
-    print(verbose)
 
     types_to_dl = set(dl_types) - set(skip_types)
 
