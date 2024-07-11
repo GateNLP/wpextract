@@ -9,7 +9,7 @@ license="Apache-2.0"
 readme = "README.md"
 authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
 classifiers = [
-    "Development Status :: 5 - Production/Stablec",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
