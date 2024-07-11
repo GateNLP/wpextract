@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: testpypi
-      url: https://pypi.org/p/wpextract
+      url: https://test.pypi.org/p/wpextract
     permissions:
       id-token: write
     steps:
