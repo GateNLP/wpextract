@@ -2,9 +2,9 @@
 name="wpextract"
 version="1.0.0"
 description="Create datasets from WordPress sites"
-homepage="https://gatenlp.github.io/wordpress-site-extractor/"
-documentation="https://gatenlp.github.io/wordpress-site-extractor/"
-repository="https://github.com/GateNLP/wordpress-site-extractor"
+homepage="https://gatenlp.github.io/wpextract/"
+documentation="https://gatenlp.github.io/wpextract/"
+repository="https://github.com/GateNLP/wpextract"
 license="Apache-2.0"
 readme = "README.md"
 authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]

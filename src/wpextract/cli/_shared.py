@@ -10,7 +10,7 @@ from click_option_group import optgroup
 from tqdm.contrib.logging import logging_redirect_tqdm
 
 CMD_ARGS = {
-    "epilog": "See https://gatenlp.github.io/wordpress-site-extractor/ for documentation.",
+    "epilog": "See https://gatenlp.github.io/wpextract/ for documentation.",
 }
 
 
