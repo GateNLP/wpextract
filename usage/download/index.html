@@ -6,7 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Create datasets from WordPress sites for research or archiving">
       
+      
+      
+        <link rel="canonical" href="https://gatenlp.github.io/wpextract/usage/download/">
       
       
         <link rel="prev" href="../../intro/start/">
@@ -161,7 +165,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -207,7 +211,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -939,39 +943,46 @@
   
 
 
-<h1 id="download-command">Download Command</h1>
-<p>The <code>wpextract dl</code> command downloads the content of a site using the REST API.</p>
-<h2 id="command-usage">Command Usage</h2>
-<div class="language-shell-session highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>wpextract<span class="w"> </span>dl<span class="w"> </span>target<span class="w"> </span>out_json
+<h1 id="download-command">Download Command<a class="headerlink" href="#download-command" title="Permanent link">&para;</a></h1>
+<p>The <code>wpextract download</code> command downloads the content of a site using the REST API.</p>
+<h2 id="command-usage">Command Usage<a class="headerlink" href="#command-usage" title="Permanent link">&para;</a></h2>
+<div class="language-shell-session highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>wpextract<span class="w"> </span>download<span class="w"> </span>TARGET<span class="w"> </span>OUT_JSON
 </span></code></pre></div>
 <dl>
-<dt><code>target</code></dt>
-<dd>The HTTP(S) URL of the WordPress site.</dd>
-<dt><code>out_json</code></dt>
-<dd>Directory to output to</dd>
+<dt><code>TARGET</code></dt>
+<dd>The base path of the WordPress installation, e.g.
+  "<a href="https://example.org/">https://example.org/</a>"</dd>
+<dt><code>OUT_JSON</code></dt>
+<dd>Directory to output the downloaded JSON to. It must be an
+  existing empty directory or a non-existent directory which will be created.</dd>
+<dt><strong>optional arguments</strong></dt>
+<dt><code>--media-dest</code></dt>
+<dd>Path to a directory to download media files to, skipped if not supplied</dd>
+<dt><code>--json-prefix JSON_PREFIX</code></dt>
+<dd>Prefix to add to output file names, e.g. supplying <em>20240101-example</em> will output posts to <code>out_dir/20240101-example-posts.json</code></dd>
 </dl>
 <p><strong>skip data</strong></p>
 <dl>
-<dt><code>--no-categories</code> <code>--no-media</code> <code>--no-pages</code> <code>--no-posts</code> <code>--no-tags</code> <code>--no-users</code></dt>
-<dd>Skip downloading the given data type</dd>
+<dt><code>--skip-type [categories|media|pages|posts|tags|users]</code></dt>
+<dd>Don't download the provided types. All others will be downloaded, default is to download all.</dd>
 </dl>
 <p><strong>authentication</strong></p>
 <dl>
-<dt><code>--auth AUTH</code></dt>
-<dd>Define HTTP Basic credentials in format username:password</dd>
-<dt><code>--cookies COOKIES</code></dt>
-<dd>Define cookies to send with request in the format "cookie1=foo; cookie2=bar"</dd>
 <dt><code>--proxy PROXY</code></dt>
-<dd>Define a proxy server to use</dd>
+<dd>Proxy server for requests</dd>
+<dt><code>--auth AUTH</code></dt>
+<dd>HTTP Basic credentials for requests (format <code>username:password</code>)</dd>
+<dt><code>--cookies COOKIES</code></dt>
+<dd>Cookies for requests (format <code>cookie1=foo; cookie2=bar</code>)</dd>
 </dl>
 <p><strong>request behaviour</strong></p>
 <dl>
 <dt><code>--timeout TIMEOUT</code></dt>
-<dd>Stop waiting for a response after a given number of seconds (default: 30)</dd>
+<dd>Timeout for request in seconds (default: 30)</dd>
 <dt><code>--wait WAIT</code></dt>
-<dd>Wait the specified number of seconds between retrievals (default: None)</dd>
+<dd>Time to wait between requests in seconds. Does not affect retries. (default: 0)</dd>
 <dt><code>--random-wait</code></dt>
-<dd>Randomly varies the time between requests to between 0.5 and 1.5 times the number of seconds set by –wait</dd>
+<dd>Randomly varies the time between requests to between 0.5 and 1.5 times the number of seconds set by --wait</dd>
 <dt><code>--max-retries MAX_RETRIES</code></dt>
 <dd>Maximum number of retries before giving up (default: 10)</dd>
 <dt><code>--backoff-factor BACKOFF_FACTOR</code></dt>
@@ -981,14 +992,14 @@
 </dl>
 <p><strong>logging</strong></p>
 <dl>
-<dt><code>--log LOG</code>, <code>-l LOG</code></dt>
-<dd>Log outputs to this file instead of stdout.</dd>
+<dt><code>--log FILE</code>, <code>-l FILE</code></dt>
+<dd>File to log to, will suppress stdout.</dd>
 <dt><code>--verbose</code>, <code>-v</code></dt>
-<dd>Show additional debug logs</dd>
+<dd>Increase log level to include debug logs</dd>
 </dl>
-<h2 id="download-process">Download Process</h2>
+<h2 id="download-process">Download Process<a class="headerlink" href="#download-process" title="Permanent link">&para;</a></h2>
 <p>For each enabled data type (categories, media, pages, posts, tags, users; all by default), the command will use the REST API to download the data. The API is paginated and the command will show a progress bar for each page of data.</p>
-<h2 id="endpoints">Endpoints</h2>
+<h2 id="endpoints">Endpoints<a class="headerlink" href="#endpoints" title="Permanent link">&para;</a></h2>
 <p>To produce each file, the following list endpoints are used:</p>
 <table>
 <thead>
@@ -1028,7 +1039,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="bot-protection-and-considerate-scraping">Bot Protection and Considerate Scraping</h3>
+<h3 id="bot-protection-and-considerate-scraping">Bot Protection and Considerate Scraping<a class="headerlink" href="#bot-protection-and-considerate-scraping" title="Permanent link">&para;</a></h3>
 <p>It's unlikely this will trigger bot protection mechanisms for the following reasons:</p>
 <ul>
 <li>it is accessing intended API endpoints, which are likely to have lower levels of bot protection</li>
@@ -1043,7 +1054,7 @@
 <li><code>--wait</code> to space out requests</li>
 <li><code>--random-wait</code> to vary the time between requests to avoid patterns</li>
 </ul>
-<h3 id="error-handling">Error Handling</h3>
+<h3 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h3>
 <p>If an HTTP error occurs, the command will retry the request up to <code>--max-retries</code> times, with the backoff set by <code>--backoff-factor</code>. If the maximum number of retries is reached, the command will output the error, stop collecting the given data type, and start collecting the following data type. This is because it's presumed that if a given page is non-functional, the following one will be too.</p>
 <p>To ensure the integrity of the scrape, it is suggested to check the logs for errors afterwards.</p>
 <p>There is currently no mechanism to resume interrupted downloads.</p>
@@ -1116,7 +1127,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2022 - 2024 The University of Sheffield.
+      Copyright &copy; 2022-24 The University of Sheffield.
     </div>
   
   

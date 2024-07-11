@@ -6,7 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Create datasets from WordPress sites for research or archiving">
       
+      
+      
+        <link rel="canonical" href="https://gatenlp.github.io/wpextract/intro/install/">
       
       
         <link rel="prev" href="../why/">
@@ -161,7 +165,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -207,7 +211,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -891,10 +895,10 @@
   
 
 
-<h1 id="installing">Installing</h1>
+<h1 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h1>
 <p>WPextract is available on the PyPI and Anaconda package indexes.</p>
 <p>The minimum supported Python version is 3.9. WPextract should work on any Python-supported operating system.</p>
-<h2 id="with-pipx-recommended-for-end-users">With <code>pipx</code> (recommended for end-users)</h2>
+<h2 id="with-pipx-recommended-for-end-users">With <code>pipx</code> (recommended for end-users)<a class="headerlink" href="#with-pipx-recommended-for-end-users" title="Permanent link">&para;</a></h2>
 <p><a href="https://pipx.pypa.io/stable/">pipx</a> will automatically install WPextract and its dependencies in an isolated yet globally-accessible environment.</p>
 <p>We recommend this method for those wishing to use WPextract through its command line interface.</p>
 <ol>
@@ -932,7 +936,7 @@ The suffix is user-specified and does not necessarily have to match the version 
 </span></code></pre></div>
 This will cleanly uninstall the package and delete its environment</p>
 </details>
-<h2 id="with-pip-or-conda">With <code>pip</code> or <code>conda</code></h2>
+<h2 id="with-pip-or-conda">With <code>pip</code> or <code>conda</code><a class="headerlink" href="#with-pip-or-conda" title="Permanent link">&para;</a></h2>
 <p>To install within an existing environment, which is necessary to use WPextract as a library.</p>
 <p>WPextract can be manually installed with:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Pip</label><label for="__tabbed_1_2">Conda</label></div>
@@ -955,7 +959,7 @@ This will cleanly uninstall the package and delete its environment</p>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">wpextract</span><span class="o">.</span><span class="n">__version__</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">1.0.0</span>
 </span></code></pre></div>
-<h2 id="for-development">For Development</h2>
+<h2 id="for-development">For Development<a class="headerlink" href="#for-development" title="Permanent link">&para;</a></h2>
 <p>Dependencies for development and packaging are managed through <a href="https://python-poetry.org/">Poetry</a>.</p>
 <p>Poetry will automatically install dependencies and the package itself in editable mode:</p>
 <div class="language-shell-session highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="gp">$ </span>poetry<span class="w"> </span>install
@@ -1031,7 +1035,7 @@ This will cleanly uninstall the package and delete its environment</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2022 - 2024 The University of Sheffield.
+      Copyright &copy; 2022-24 The University of Sheffield.
     </div>
   
   

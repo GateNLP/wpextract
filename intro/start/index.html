@@ -6,7 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Create datasets from WordPress sites for research or archiving">
       
+      
+      
+        <link rel="canonical" href="https://gatenlp.github.io/wpextract/intro/start/">
       
       
         <link rel="prev" href="../install/">
@@ -161,7 +165,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -207,7 +211,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -927,29 +931,29 @@
   
 
 
-<h1 id="getting-started">Getting Started</h1>
+<h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
 <p>In this guide we will use the command-line interface (CLI) of WPextract to download a copy of a WordPress site and produce a usable cross-referenced dataset. Afterwards, you should be ready to use WPextract for your own research or archiving.</p>
 <div class="admonition warning">
 <p class="admonition-title">Be considerate when using this tool.</p>
 <p>It is your responsibility to ensure any usage of this tool is ethical and compliant with the law. In general, you should only scrape sites with permission of the owner, or for appropriate research following your institution's ethical guidelines.</p>
-<p>You should use the options included in the <code>dl</code> command to minimise the impact of this tool on servers.</p>
+<p>You should use the options included in the <code>download</code> command to minimise the impact of this tool on servers.</p>
 </div>
-<h2 id="installation">Installation</h2>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>See the <a href="../install/">installation instructions</a> for requirements and alternative methods.</p>
 <p>WPExtract can be quickly installed in a sandboxed environment with <a href="https://pipx.pypa.io/stable/docs/">pipx</a>:</p>
 <div class="language-shell-session highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>pipx<span class="w"> </span>install<span class="w"> </span>wpextract
 </span></code></pre></div>
-<h2 id="wpextract-stages">WPextract Stages</h2>
+<h2 id="wpextract-stages">WPextract Stages<a class="headerlink" href="#wpextract-stages" title="Permanent link">&para;</a></h2>
 <p>WPextract works in two steps:</p>
 <ol>
 <li>The <strong>downloader</strong> uses the WordPress REST API to obtain all content on the site, which is stored as a single, long file</li>
 <li>The <strong>extractor</strong> converts this into a usable dataset by enriching the downloaded content. This includes extracting text, images, resolving links to posts/pages, and finding translated versions<sup id="fnref:lang"><a class="footnote-ref" href="#fn:lang">1</a></sup></li>
 </ol>
-<p>We call these two stages using two CLI commands (<a href="../../usage/download/#command-usage"><code>wpextract dl</code></a> and <a href="../../usage/extract/#command-usage"><code>wpextract extract</code></a>). Alternatively, WPExtract can be integrated into a project by <a href="../../advanced/library/">using it as a library</a>.</p>
-<h2 id="1-downloading">1. Downloading</h2>
+<p>We call these two stages using two CLI commands (<a href="../../usage/download/#command-usage"><code>wpextract download</code></a> and <a href="../../usage/extract/#command-usage"><code>wpextract extract</code></a>). Alternatively, WPExtract can be integrated into a project by <a href="../../advanced/library/">using it as a library</a>.</p>
+<h2 id="1-downloading">1. Downloading<a class="headerlink" href="#1-downloading" title="Permanent link">&para;</a></h2>
 <p>For the purposes of this guide, we'll use the URL <code>https://example.org</code> - in reality this isn't a WordPress site, so you should replace it with the URL of the site you're interested in.</p>
 <p>To download the contents of <code>https://example.org</code> to the directory <code>./example.org</code>, run:</p>
-<div class="language-shell-session highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>wpextract<span class="w"> </span>dl<span class="w"> </span><span class="s2">&quot;https://example.org&quot;</span><span class="w"> </span>./example.org
+<div class="language-shell-session highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>wpextract<span class="w"> </span>download<span class="w"> </span><span class="s2">&quot;https://example.org&quot;</span><span class="w"> </span>./example.org
 </span></code></pre></div>
 <p>Progress bars will be displayed as it iterates through the pages of each content type until completed.</p>
 <p>The <code>./example.org</code> directory will now contain 6 JSON files containing the categories, media, pages, posts, tags and users data. These are simply all the pages retrieved from the API, concatenated together.</p>
@@ -960,7 +964,7 @@
 <li><em>Data may be missing</em> - Data from some plugins may not be present in the API response, so an HTML scrape needs to be performed and somehow connected to the API response.</li>
 </ul>
 <p>To rectify this, we use the extract command to build a usable dataset.</p>
-<h2 id="2-extraction">2. Extraction</h2>
+<h2 id="2-extraction">2. Extraction<a class="headerlink" href="#2-extraction" title="Permanent link">&para;</a></h2>
 <p>Now, we call the second command passing in the output directory from the first (<code>./example.org</code>) and an output directory for our data (<code>./example.org-data</code>)</p>
 <div class="language-shell-session highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>wpextract<span class="w"> </span>extract<span class="w"> </span>./example.org<span class="w"> </span>./example.org-data
 </span></code></pre></div>
@@ -973,7 +977,7 @@
 <li>many unnecessary fields are removed</li>
 <li>some fields provided by plugins are kept and used if available</li>
 </ul>
-<h2 id="further-information">Further Information</h2>
+<h2 id="further-information">Further Information<a class="headerlink" href="#further-information" title="Permanent link">&para;</a></h2>
 <p>This guide only covered the basic use-case of WPextract, for further information see:</p>
 <ul>
 <li>More comprehensive documentation of the <a href="../../usage/download/">download</a> and <a href="../../usage/extract/">extract</a> commands</li>
@@ -1056,7 +1060,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2022 - 2024 The University of Sheffield.
+      Copyright &copy; 2022-24 The University of Sheffield.
     </div>
   
   

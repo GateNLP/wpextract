@@ -6,7 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Create datasets from WordPress sites for research or archiving">
       
+      
+      
+        <link rel="canonical" href="https://gatenlp.github.io/wpextract/intro/why/">
       
       
         <link rel="prev" href="../..">
@@ -161,7 +165,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -207,7 +211,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -891,7 +895,7 @@
   
 
 
-<h1 id="why-wpextract">Why WPextract?</h1>
+<h1 id="why-wpextract">Why WPextract?<a class="headerlink" href="#why-wpextract" title="Permanent link">&para;</a></h1>
 <p>Scraping websites for research is a common practice in the Natural Language Processing, Computational Social Science, and Digital Humanities fields.</p>
 <p>A typical scraping operation might be performed recursively using a tool such as <a href="https://www.gnu.org/software/wget/manual/html_node/Recursive-Retrieval-Options.html"><code>wget</code></a> or <a href="https://www.httrack.com/">HTTrack</a>, where the homepage of the site is visited, then all pages linked on the homepage, then all pages linked on those pages, and so on to a maximum depth. Each page's HTML is downloaded and stored in a structure resembling its URL.</p>
 <p>This approach presents several issues:</p>
@@ -901,7 +905,7 @@
 <li><strong>Only metadata exposed on the page is collected</strong> - or if the site is operated by a bad actor (such as in disinformation study), the metadata shown on the page may be false</li>
 </ul>
 <p>Some other approaches partially resolve these issues, like using a sitemap to obtain a list of all webpages, but this is still imperfect.</p>
-<h2 id="wordpress">WordPress</h2>
+<h2 id="wordpress">WordPress<a class="headerlink" href="#wordpress" title="Permanent link">&para;</a></h2>
 <p>WordPress is a popular open-source content management system (CMS). It is widely popular due to the availability of cheap hosting, expertise, and a wide range of themes and plugins. Therefore, inevitably, it is a popular tool for bad actors.</p>
 <p>WordPress exposes a <a href="https://developer.wordpress.org/rest-api/">REST API</a>, which can be used to list the posts, pages, and other content types of the site. Using this API instead of an HTML scrape:</p>
 <ul>
@@ -909,14 +913,14 @@
 <li><strong>Clean content is provided</strong> exactly as was entered into the editor box</li>
 <li><strong>Additional metadata is available</strong>, including precise timestamps, incremental IDs, exact authorship data, and more.</li>
 </ul>
-<h2 id="limitations">Limitations</h2>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Only WordPress sites are supported</strong> - this is an inherent limitation of using the WordPress API</li>
 <li><strong>Some security/performance plugins may block the API</strong></li>
 <li><strong>Certain types of data are not present in the API</strong> - e.g. <a href="../../advanced/multilingual/">multilingual data</a>, some comment plugins.</li>
 <li><strong>Custom data types will not be extracted</strong> - the tool specifically works on the standard WordPress data types. Even if a plugin exposes a new data type in the same way, it will not be extracted.</li>
 </ul>
-<h2 id="use-in-research">Use in Research</h2>
+<h2 id="use-in-research">Use in Research<a class="headerlink" href="#use-in-research" title="Permanent link">&para;</a></h2>
 <p>WPextract was built initially to study two state-backed propaganda sites, subsequently published in the paper <a href="https://aclanthology.org/2023.emnlp-main.349/">Analysing State-Backed Propaganda Websites: a New Dataset and Linguistic Study</a> at EMNLP 2023.</p>
 <p>In this example, a disinformation article is shown. On the left, various potential parts of interest are highlighted, which would require relatively complex parsing written specifically for this site. On the right, the data extracted by WPextract via the API is shown. This includes data not present on the page (modification time) or obscured by the site owners (author).</p>
 <p><a href="../../img/rrn-data.png"><img alt="" src="../../img/rrn-data.png" /></a></p>
@@ -989,7 +993,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2022 - 2024 The University of Sheffield.
+      Copyright &copy; 2022-24 The University of Sheffield.
     </div>
   
   

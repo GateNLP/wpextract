@@ -6,7 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Create datasets from WordPress sites for research or archiving">
       
+      
+      
+        <link rel="canonical" href="https://gatenlp.github.io/wpextract/advanced/multilingual/">
       
       
         <link rel="prev" href="../../usage/extract/">
@@ -161,7 +165,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -207,7 +211,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/GateNLP/wordpress-site-extractor" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/GateNLP/wpextract" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -987,9 +991,9 @@
   
 
 
-<h1 id="multilingual-sites">Multilingual Sites</h1>
+<h1 id="multilingual-sites">Multilingual Sites<a class="headerlink" href="#multilingual-sites" title="Permanent link">&para;</a></h1>
 <p>If sites publish in multiple languages and use a plugin to present a list of language versions, wpextract can parse this and add multilingual data in the output dataset.</p>
-<h2 id="extraction-process">Extraction Process</h2>
+<h2 id="extraction-process">Extraction Process<a class="headerlink" href="#extraction-process" title="Permanent link">&para;</a></h2>
 <p>Extracting multilingual data is performed during the <a href="../../usage/extract/">extract command</a>. This data isn't available in the WordPress REST API response, so instead must be obtained from scraped HTML.</p>
 <p>Obtaining the scraped HTML is relatively straightforward, as we already have a list of all posts from the <a href="../../usage/download/">download command</a>.</p>
 <p>One way this could be scraped is using <code>jq</code> to parse the downloaded posts file and produce a URL list, then <code>wget</code> to download each page:</p>
@@ -1000,10 +1004,10 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">     </span>--rejected-log<span class="o">=</span>rejected.log
 </span></code></pre></div>
 <p>When running <a href="../../usage/extract/">the extract command</a>, pass this directory as the <code>--scrape-root</code> argument. The scrape will be crawled to match URLs to downloaded HTML files following <a href="../../usage/extract/#1-scrape-crawling-optional">this process</a>.</p>
-<h2 id="supported-plugins">Supported Plugins</h2>
+<h2 id="supported-plugins">Supported Plugins<a class="headerlink" href="#supported-plugins" title="Permanent link">&para;</a></h2>
 <p>wpextract uses an extensible system of parsers to find language picker elements and extract their data.</p>
 <p>Currently the following plugins are supported:</p>
-<h3 id="polylang">Polylang</h3>
+<h3 id="polylang">Polylang<a class="headerlink" href="#polylang" title="Permanent link">&para;</a></h3>
 <p><a href="https://wordpress.org/plugins/polylang/">Plugin Page</a> &middot; <a href="https://polylang.pro/">Website</a></p>
 <p><strong>Supports</strong>:</p>
 <ul>
@@ -1153,18 +1157,18 @@
 <ul>
 <li>Methods which show the picker as a <code>&lt;select&gt;</code> element</li>
 </ul>
-<h2 id="adding-support">Adding Support</h2>
+<h2 id="adding-support">Adding Support<a class="headerlink" href="#adding-support" title="Permanent link">&para;</a></h2>
 <div class="admonition info">
 <p class="admonition-title">See also</p>
-<p><a href="../library/">Using WPextract as a library</a> for information on how to run wpextract as a library using additional pickers.</p>
+<p>To use additional pickers, you must <a href="../library/">use WPextract as a library</a>.</p>
 </div>
-<p>Support can be added by creating a new picker definition inheriting from <a class="autorefs autorefs-internal" href="../../api/extractor/#extractor.parse.translations.LangPicker"><code>LangPicker</code></a>.</p>
+<p>Support can be added by creating a new picker definition inheriting from <a class="autorefs autorefs-internal" href="../../api/extractor/#wpextract.parse.translations.LangPicker"><code>LangPicker</code></a>, and passing to the <code>translation_pickers</code> argument of <a class="autorefs autorefs-internal" href="../../api/extractor/#wpextract.WPExtractor"><code>WPExtractor</code></a></p>
 <p>This parent class defines two abstract methods which must be implemented:</p>
 <ul>
-<li><a class="autorefs autorefs-internal" href="../../api/extractor/#extractor.parse.translations.LangPicker.get_root"><code>LangPicker.get_root</code></a> - returns the root element of the picker</li>
-<li><a class="autorefs autorefs-internal" href="../../api/extractor/#extractor.parse.translations.LangPicker.extract"><code>LangPicker.extract</code></a> - find the languages, call <a class="autorefs autorefs-internal" href="../../api/extractor/#extractor.parse.translations.LangPicker.set_current_lang"><code>LangPicker.set_current_lang</code></a> and call <a class="autorefs autorefs-internal" href="../../api/extractor/#extractor.parse.translations.LangPicker.add_translation"><code>LangPicker.add_translation</code></a> for each</li>
+<li><a class="autorefs autorefs-internal" href="../../api/extractor/#wpextract.parse.translations.LangPicker.get_root"><code>LangPicker.get_root</code></a> - returns the root element of the picker</li>
+<li><a class="autorefs autorefs-internal" href="../../api/extractor/#wpextract.parse.translations.LangPicker.extract"><code>LangPicker.extract</code></a> - find the languages, call <a class="autorefs autorefs-internal" href="../../api/extractor/#wpextract.parse.translations.LangPicker.set_current_lang"><code>LangPicker.set_current_lang</code></a> and call <a class="autorefs autorefs-internal" href="../../api/extractor/#wpextract.parse.translations.LangPicker.add_translation"><code>LangPicker.add_translation</code></a> for each</li>
 </ul>
-<p>More complicted pickers may need to override additional methods of the class, but should still ultimately populate the <a class="autorefs autorefs-internal" href="../../api/extractor/#extractor.parse.translations.LangPicker.translations"><code>LangPicker.translations</code></a> and <a class="autorefs autorefs-internal" href="../../api/extractor/#extractor.parse.translations.LangPicker.current_language"><code>LangPicker.current_language</code></a> attributes as the parent class does.</p>
+<p>More complicated pickers may need to override additional methods of the class, but should still ultimately populate the <a class="autorefs autorefs-internal" href="../../api/extractor/#wpextract.parse.translations.LangPicker.translations"><code>LangPicker.translations</code></a> and <a class="autorefs autorefs-internal" href="../../api/extractor/#wpextract.parse.translations.LangPicker.current_language"><code>LangPicker.current_language</code></a> attributes as the parent class does.</p>
 <p>This section will show implementing a new picker with the following simplified markup:</p>
 <p><div class="language-html highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;translations&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/page/&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;lang current-lang&quot;</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>English<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
@@ -1173,7 +1177,7 @@
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </span></code></pre></div>
 The correct parse of this picker should set the current language to English, add German as a translation, and ignore French.</p>
-<h3 id="get_root"><code>get_root()</code></h3>
+<h3 id="get_root"><code>get_root()</code><a class="headerlink" href="#get_root" title="Permanent link">&para;</a></h3>
 <p>Using the <code>self.page_doc</code> attribute, a <a class="autorefs autorefs-external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.html#bs4.BeautifulSoup"><code>BeautifulSoup</code></a> object representing the page, the root element of the picker should be found and returned.</p>
 <p>The <code>select_one</code> method is used to find the root element, and will return <code>None</code> if no element is found, which will be intepreted as the picker not being present on the page.</p>
 <p>If a value is returned, the <code>self.root_el</code> attribute will be populated with the result of this method.</p>
@@ -1185,7 +1189,7 @@ The correct parse of this picker should set the current language to English, add
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_doc</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;translations&#39;</span><span class="p">)</span>
 </span></code></pre></div>
 </details>
-<h3 id="extract"><code>extract()</code></h3>
+<h3 id="extract"><code>extract()</code><a class="headerlink" href="#extract" title="Permanent link">&para;</a></h3>
 <p>Using the <code>self.root_el</code> attribute, the languages should be found and added to the dataset.</p>
 <p>Be careful to avoid:
 - Adding the current language
@@ -1203,7 +1207,7 @@ The correct parse of this picker should set the current language to English, add
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">add_translation</span><span class="p">(</span><span class="n">lang_a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">),</span> <span class="n">lang_a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lang&#39;</span><span class="p">))</span>
 </span></code></pre></div>
 </details>
-<h3 id="contributing-pickers">Contributing Pickers</h3>
+<h3 id="contributing-pickers">Contributing Pickers<a class="headerlink" href="#contributing-pickers" title="Permanent link">&para;</a></h3>
 <p>We welcome contributions via a GitHub PR so long as the picker is not overly specific to a single site. </p>
 <div class="footnote">
 <hr />
@@ -1282,7 +1286,7 @@ The correct parse of this picker should set the current language to English, add
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2022 - 2024 The University of Sheffield.
+      Copyright &copy; 2022-24 The University of Sheffield.
     </div>
   
   
