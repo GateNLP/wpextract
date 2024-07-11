@@ -1,48 +1,52 @@
-from wpextract.cli._shared import _register_shared
-from wpextract.extract import WPExtractor
-from wpextract.util.args import directory, empty_directory
+from pathlib import Path
+from typing import Optional
+
+import click
+
+from wpextract import WPExtractor
+from wpextract.cli._shared import (
+    CMD_ARGS,
+    directory,
+    empty_directory,
+    logging_options,
+    setup_logging,
+    setup_tqdm_redirect,
+)
 
 
-def register_extract_parser(subparsers):
-    """Register the `extract` subcommand."""
-    parser_extract = subparsers.add_parser(
-        "extract", help="Convert the downloaded data files into a dataset."
-    )
+@click.command(short_help="Extract site to a dataset.", **CMD_ARGS)
+@click.argument("json_root", type=directory)
+@click.argument(
+    "out_dir", type=click.Path(), callback=empty_directory, metavar="DIRECTORY"
+)
+@click.option(
+    "-S", "--scrape-root", help="Root directory of an HTML scrape", type=directory
+)
+@click.option(
+    "-P", "--json-prefix", help="Prefix to use for input and output filenames"
+)
+@logging_options
+def extract(
+    json_root: Path,
+    out_dir: Path,
+    scrape_root: Optional[Path],
+    json_prefix: Optional[str],
+    log: Optional[Path],
+    verbose: bool,
+):
+    """Converts the downloaded data files into a dataset.
 
-    parser_extract.add_argument(
-        "json_root", help="JSON dump of the site", type=directory
-    )
-    parser_extract.add_argument(
-        "out_dir", help="Output directory", type=empty_directory
-    )
-    parser_extract.add_argument(
-        "--scrape-root",
-        "-S",
-        help="Root directory of an HTML scrape",
-        type=directory,
-        required=False,
-        default=None,
-    )
-    parser_extract.add_argument(
-        "--json-prefix",
-        "-P",
-        help="Prefix to the JSON files",
-        type=str,
-        required=False,
-        default=None,
-    )
+    JSON_ROOT is a directory containing a JSON dump of the data files, such as one generated with wpextract download.
 
-    parser_extract.set_defaults(feature=True)
+    OUT_DIR is the directory to output the extracted JSON to. It must be an existing empty directory or a non-existent directory which will be created.
+    """
+    setup_logging(verbose, log)
 
-    _register_shared(parser_extract)
-
-
-def do_extract(parser, args):
-    """Perform the extract command."""
-    extractor = WPExtractor(
-        json_root=args.json_root,
-        scrape_root=args.scrape_root,
-        json_prefix=args.json_prefix,
-    )
-    extractor.extract()
-    extractor.export(args.out_dir)
+    with setup_tqdm_redirect(log is None):
+        extractor = WPExtractor(
+            json_root=json_root,
+            scrape_root=scrape_root,
+            json_prefix=json_prefix,
+        )
+        extractor.extract()
+        extractor.export(out_dir)

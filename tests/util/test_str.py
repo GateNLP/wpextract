@@ -1,5 +1,7 @@
 import pytest
 from wpextract.util.str import (
+    ensure_prefix,
+    ensure_prefixes,
     ensure_suffix,
     remove_ends,
     remove_prefix,
@@ -21,6 +23,26 @@ def test_remove_suffix():
 def test_remove_ends():
     assert remove_ends("pypythonpy", "py") == "python"
     assert remove_ends("python", "foo") == "python"
+
+
+def test_ensure_prefixes():
+    assert (
+        ensure_prefixes("http://example.org", ("http://", "https://"), "http://")
+        == "http://example.org"
+    )
+    assert (
+        ensure_prefixes("https://example.org", ("http://", "https://"), "http://")
+        == "https://example.org"
+    )
+    assert (
+        ensure_prefixes("example.org", ("http://", "https://"), "http://")
+        == "http://example.org"
+    )
+
+
+def test_ensure_prefix():
+    assert ensure_prefix("python", "foo") == "foopython"
+    assert ensure_prefix("foopython", "foo") == "foopython"
 
 
 def test_ensure_suffix():

@@ -12,7 +12,7 @@ license="Apache-2.0"
 readme = "README.md"
 
 [tool.poetry.scripts]
-wpextract = "wpextract.cli.cli:main"
+wpextract = "wpextract.cli:cli"
 
 # Workaround for https://github.com/python-poetry/poetry/issues/9293
 [[tool.poetry.source]]
@@ -28,6 +28,8 @@ numpy = ">=1.23.0"
 pandas = ">=1.5.2"
 tqdm = ">=4.65.0"
 requests = ">=2.32.3"
+click = ">=8.0.1"
+click-option-group = ">=0.5.3"
 
 [tool.poetry.group.dev.dependencies]
 build = "==0.9.*,>=0.9.0"
@@ -79,7 +81,7 @@ ignore = [
     "D103", # Ignore method docstring errors in tests
     "PD901", # Allow `df` variable name in tests
 ]
-#"src/wpextract/dl/*" = [
+#"src/wpextract/download/*" = [
 #    "D415",
 #    "D103",
 #    "D101",

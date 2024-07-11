@@ -22,7 +22,7 @@ hide:
     ```
 2. Download site data
     ```shell-session
-    $ wpextract dl "https://example.org" out_dl
+    $ wpextract download "https://example.org" out_dl
     ```
 3. Process into a dataset
     ```shell-session

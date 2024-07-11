@@ -6,7 +6,7 @@ from urllib import parse as urlparse
 
 from tqdm.auto import tqdm
 
-from wpextract.dl.requestsession import RequestSession
+from wpextract.download.requestsession import RequestSession
 
 
 class Exporter:
