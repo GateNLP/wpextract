@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1
+
+_Released: 11th July 2024_
+
+### Bug Fixes
+- Fixed an incorrect repository URL in the package metadata and CLI epilog (!29)
+
 ## 1.0.0
 
 _Released: 11th July 2024_
