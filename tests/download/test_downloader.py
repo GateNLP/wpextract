@@ -1,7 +1,7 @@
 import pytest
 from wpextract import WPDownloader
-from wpextract.dl.requestsession import ConnectionRefused
-from wpextract.dl.wpapi import WPApi
+from wpextract.download.requestsession import ConnectionRefused
+from wpextract.download.wpapi import WPApi
 
 
 def _make_downloader(datadir, mocker, datatypes, json_prefix=None):
@@ -32,7 +32,7 @@ def _export_method(datatype):
 
 
 def _mocked_exporter(mocker, datatype):
-    cls = "wpextract.dl.exporter.Exporter."
+    cls = "wpextract.download.exporter.Exporter."
     if datatype == "comments":
         method = cls + "export_comments_interactive"
     else:

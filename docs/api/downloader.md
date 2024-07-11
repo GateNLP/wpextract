@@ -6,8 +6,8 @@
 
 ## Configuring Request Behaviour
 
-::: wpextract.dl.RequestSession
+::: wpextract.download.RequestSession
     options:
         members: false
 
-::: wpextract.dl.AuthorizationType
+::: wpextract.download.AuthorizationType

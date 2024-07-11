@@ -13,7 +13,7 @@ from wpextract.cli._shared import (
     setup_logging,
     setup_tqdm_redirect,
 )
-from wpextract.dl import RequestSession
+from wpextract.download import RequestSession
 from wpextract.util.str import ensure_prefixes, ensure_suffix
 
 dl_types = ["categories", "media", "pages", "posts", "tags", "users"]

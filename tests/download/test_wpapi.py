@@ -1,4 +1,4 @@
-from wpextract.dl.wpapi import WPApi
+from wpextract.download.wpapi import WPApi
 
 
 def _fake_api_return(start=0):

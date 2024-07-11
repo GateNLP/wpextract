@@ -6,7 +6,7 @@ In this guide we will use the command-line interface (CLI) of WPextract to downl
 
     It is your responsibility to ensure any usage of this tool is ethical and compliant with the law. In general, you should only scrape sites with permission of the owner, or for appropriate research following your institution's ethical guidelines.
     
-    You should use the options included in the `dl` command to minimise the impact of this tool on servers.
+    You should use the options included in the `download` command to minimise the impact of this tool on servers.
 
 
 ## Installation
@@ -29,7 +29,7 @@ WPextract works in two steps:
 
 [^lang]: {-} See the specific guide for more on multilingual extraction.
 
-We call these two stages using two CLI commands ([`wpextract dl`](../usage/download.md#command-usage) and [`wpextract extract`](../usage/extract.md#command-usage)). Alternatively, WPExtract can be integrated into a project by [using it as a library](../advanced/library.md).
+We call these two stages using two CLI commands ([`wpextract download`](../usage/download.md#command-usage) and [`wpextract extract`](../usage/extract.md#command-usage)). Alternatively, WPExtract can be integrated into a project by [using it as a library](../advanced/library.md).
 
 ## 1. Downloading
 
@@ -38,7 +38,7 @@ For the purposes of this guide, we'll use the URL `https://example.org` - in rea
 To download the contents of `https://example.org` to the directory `./example.org`, run:
 
 ```shell-session
-$ wpextract dl "https://example.org" ./example.org
+$ wpextract download "https://example.org" ./example.org
 ```
 
 Progress bars will be displayed as it iterates through the pages of each content type until completed.

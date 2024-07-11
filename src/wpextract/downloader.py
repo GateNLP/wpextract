@@ -2,10 +2,10 @@ import logging
 from pathlib import Path
 from typing import Any, Callable, Optional
 
-from wpextract.dl.exceptions import WordPressApiNotV2
-from wpextract.dl.exporter import Exporter
-from wpextract.dl.requestsession import RequestSession
-from wpextract.dl.wpapi import WPApi
+from wpextract.download.exceptions import WordPressApiNotV2
+from wpextract.download.exporter import Exporter
+from wpextract.download.requestsession import RequestSession
+from wpextract.download.wpapi import WPApi
 
 
 class WPDownloader:

@@ -1,17 +1,17 @@
 # Download Command
 
-The `wpextract dl` command downloads the content of a site using the REST API.
+The `wpextract download` command downloads the content of a site using the REST API.
 
 ## Command Usage
 
 ```shell-session
-$ wpextract dl target out_json
+$ wpextract download TARGET OUT_JSON
 ```
 
-`target`
+`TARGET`
 : The HTTP(S) URL of the WordPress site.
 
-`out_json`
+`OUT_JSON`
 : Directory to output to
 
 **optional arguments**

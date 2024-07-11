@@ -17,7 +17,7 @@ Use the [`wpextract.WPDownloader`][wpextract.WPDownloader] class.
 
 Compared to the CLI, you can:
 
-- implement highly custom request behaviour by subclassing [`RequestSession`][wpextract.dl.RequestSession] and passing to the `session` argument.
+- implement highly custom request behaviour by subclassing [`RequestSession`][wpextract.download.RequestSession] and passing to the `session` argument.
 
 
 ## Extractor

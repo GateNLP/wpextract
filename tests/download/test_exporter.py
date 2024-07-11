@@ -1,4 +1,4 @@
-from wpextract.dl.exporter import Exporter
+from wpextract.download.exporter import Exporter
 
 
 def test_setup_escaping():
