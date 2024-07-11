@@ -1,6 +1,6 @@
 [tool.poetry]
 name="wpextract"
-version="1.0.0"
+version="1.0.0rc1"
 description="Create datasets from WordPress sites"
 homepage="https://gatenlp.github.io/wordpress-site-extractor/"
 documentation="https://gatenlp.github.io/wordpress-site-extractor/"
