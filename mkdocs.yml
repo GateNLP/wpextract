@@ -1,0 +1,95 @@
+site_name: WPextract
+copyright: Copyright &copy; 2022-24 The University of Sheffield.
+repo_url: https://github.com/GateNLP/wpextract
+site_url: https://gatenlp.github.io/wpextract/
+site_description: Create datasets from WordPress sites for research or archiving
+edit_uri: edit/main/docs/
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.footer
+  palette:
+    primary: 'green'
+
+
+nav:
+  - Home: index.md
+  - 'Intro':
+    - 'Why WPextract?': 'intro/why.md'
+    - 'Installing': 'intro/install.md'
+    - 'Getting Started': 'intro/start.md'
+  - 'Usage':
+    - 'Download Command': 'usage/download.md'
+    - 'Extract Command': 'usage/extract.md'
+  - 'Advanced':
+    - 'Multilingual Sites': 'advanced/multilingual.md'
+    - 'Using as a Library': 'advanced/library.md'
+  - 'Reference':
+    - 'API':
+      - 'Downloader': 'api/downloader.md'
+      - 'Extractor': 'api/extractor.md'
+  - 'About':
+    - 'Changelog': 'changelog.md'
+    - 'License & Acknowledgements': 'license.md'
+
+extra_css:
+  - styles/custom.css
+
+markdown_extensions: 
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - footnotes
+  - def_list
+  - pymdownx.snippets:
+      dedent_subsections: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: GateNLP
+      repo: wpextract
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [src]
+          import:
+            - https://www.crummy.com/software/BeautifulSoup/bs4/doc/objects.inv
+            - https://docs.python.org/3/objects.inv
+            - https://requests.readthedocs.io/en/latest/objects.inv
+            - https://pandas.pydata.org/docs/objects.inv
+          options: 
+            docstring_options:
+              ignore_init_summary: true
+            docstring_section_style: spacy
+            # filters: ["!^_"]
+            preload_modules: ["wpextract"]
+            heading_level: 3
+            inherited_members: true
+            merge_init_into_class: true
+            parameter_headings: true
+            separate_signature: true
+            show_root_heading: true
+            show_root_full_path: true
+            show_signature_annotations: true
+            show_source: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            show_submodules: true
+            # show_if_no_docstring: true
+            signature_crossrefs: true
+            summary: true
+            unwrap_annotated: true

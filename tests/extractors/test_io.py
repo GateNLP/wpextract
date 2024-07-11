@@ -1,7 +1,6 @@
 import pandas as pd
 from helpers.df import ordered_col
-
-from extractor.extractors.io import (
+from wpextract.extractors.io import (
     df_denormalize_to_dict,
     export_df,
     load_df,
@@ -14,6 +13,12 @@ def test_load_from_path(datadir):
 
     assert len(loaded) == 2
     assert loaded[0]["entry"] == "one"
+
+
+def test_load_from_path_doesnt_exist(datadir):
+    loaded = load_from_path(datadir / "notreal.json")
+
+    assert loaded is None
 
 
 def test_load_df(datadir):

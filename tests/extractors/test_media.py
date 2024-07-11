@@ -2,18 +2,17 @@ from datetime import datetime
 
 import pandas as pd
 import pytest
+from wpextract.extractors.data.links import LinkRegistry
+from wpextract.extractors.media import load_media
 
-from extractor.extractors.data.links import LinkRegistry
-from extractor.extractors.media import load_media
 
-
-@pytest.fixture
+@pytest.fixture()
 def media_df_and_registry(datadir):
     link_registry = LinkRegistry()
     return load_media(datadir / "media.json", link_registry), link_registry
 
 
-@pytest.fixture
+@pytest.fixture()
 def media_df(media_df_and_registry):
     media_df, _ = media_df_and_registry
     return media_df
@@ -21,8 +20,8 @@ def media_df(media_df_and_registry):
 
 def test_media_times(media_df):
     media_1 = media_df.loc[1]
-    assert type(media_1.date_gmt) == pd.Timestamp
-    assert type(media_1.modified_gmt) == pd.Timestamp
+    assert isinstance(media_1.date_gmt, pd.Timestamp)
+    assert isinstance(media_1.modified_gmt, pd.Timestamp)
 
     assert media_1.date_gmt.tzinfo is None, "date_gmt had timezone information"
     assert media_1.modified_gmt.tzinfo is None, "modified_gmt had timezone information"

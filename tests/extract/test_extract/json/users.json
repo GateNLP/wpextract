@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Author1",
+    "url": "https://author1.gate.ac.uk",
+    "description": "An author",
+    "link": "https://example.org/author/author1/",
+    "slug": "author1",
+    "meta": [],
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "Author1 example.org",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/author/author1/",
+      "og_locale": "en_US",
+      "og_type": "profile",
+      "og_title": "Author1 example.org",
+      "og_url": "https://example.org/author/author1/",
+      "og_site_name": "example.org",
+      "og_image": [
+        {
+          "url": "https://secure.gravatar.com/avatar/f72c502e0d657f363b5f2dc79dd8ceea?s=500&d=mm&r=g"
+        }
+      ],
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/users/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/users"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,179 @@
+[
+  {
+    "id": 1,
+    "count": 3,
+    "description": "About Test Category One",
+    "link": "https://example.org/test-category-one/",
+    "name": "Test Category One",
+    "slug": "test-category-one",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "Test Category One - example.org",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/test-category-one/",
+      "og_locale": "en_US",
+      "og_type": "article",
+      "og_title": "Test Category One - example.org",
+      "og_url": "https://example.org/test-category-one/",
+      "og_site_name": "example.org",
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/categories/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/posts?categories=1"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "count": 3,
+    "description": "About Test Category Two",
+    "link": "https://example.org/fr/test-category-two/",
+    "name": "Test Category Two",
+    "slug": "test-category-two",
+    "taxonomy": "category",
+    "parent": 0,
+    "meta": [],
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "Test Category One - example.org",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/fr/test-category-two/",
+      "og_locale": "en_FR",
+      "og_type": "article",
+      "og_title": "Test Category Three - example.org",
+      "og_url": "https://example.org/fr/test-category-two/",
+      "og_site_name": "example.org",
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/categories/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/posts?categories=2"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "count": 3,
+    "description": "About Test Category Three",
+    "link": "https://example.org/fr/test-category-three/",
+    "name": "Test Category Three",
+    "slug": "test-category-three",
+    "taxonomy": "category",
+    "parent": 2,
+    "meta": [],
+    "yoast_head": "<!-- whole load of stuff -->",
+    "yoast_head_json": {
+      "title": "Test Category Three - example.org",
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://example.org/fr/test-category-three/",
+      "og_locale": "en_US",
+      "og_type": "article",
+      "og_title": "Test Category One - example.org",
+      "og_url": "https://example.org/fr/test-category-three/",
+      "og_site_name": "example.org",
+      "twitter_card": "summary_large_image",
+      "schema": "..."
+    },
+    "_links": {
+      "self": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/categories/3"
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/taxonomies/category"
+        }
+      ],
+      "wp:post_type": [
+        {
+          "href": "https://example.org/wp-json/wp/v2/posts?categories=3"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }
+]

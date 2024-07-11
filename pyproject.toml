@@ -1,8 +1,109 @@
-[tool.isort]
-profile = "black"
+[tool.poetry]
+name="wpextract"
+version="1.0.0rc1"
+description="Create datasets from WordPress sites"
+homepage="https://gatenlp.github.io/wordpress-site-extractor/"
+documentation="https://gatenlp.github.io/wordpress-site-extractor/"
+repository="https://github.com/GateNLP/wordpress-site-extractor"
+license="Apache-2.0"
+readme = "README.md"
+authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
+classifiers = [
+    "Development Status :: 5 - Production/Stablec",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+packages=[
+    { include = "wpextract", from = "src"}
+]
+
+[tool.poetry.scripts]
+wpextract = "wpextract.cli:cli"
+
+# Workaround for https://github.com/python-poetry/poetry/issues/9293
+[[tool.poetry.source]]
+name = "pypi-public"
+url = "https://pypi.org/simple/"
+
+[tool.poetry.dependencies]
+python = ">=3.9.0,<3.13"
+beautifulsoup4 = ">=4.12.0"
+langcodes = ">=3.3.0"
+lxml = ">=5.0.0"
+numpy = ">=1.23.0"
+pandas = ">=1.5.2"
+tqdm = ">=4.65.0"
+requests = ">=2.32.3"
+click = ">=8.0.1"
+click-option-group = ">=0.5.3"
+
+[tool.poetry.group.dev.dependencies]
+build = "==0.9.*,>=0.9.0"
+pytest = "~8.2.2"
+pytest-datadir = "~1.5.0"
+pytest-mock = "~3.14.0"
+ruff = "^0.5.0"
+coverage = "^7.5.4"
+responses = "^0.25.3"
+
+
+[tool.poetry.group.docs]
+optional = true
+[tool.poetry.group.docs.dependencies]
+mkdocs-material = "^9.5.28"
+mkdocstrings = "^0.25.1"
+mkdocstrings-python = "^1.10.5"
+black = "^24.4.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
+    "E4",
+    "E7",
+    "E9",
+    "F",
+    "D",
+    "PD",
+    "I",
+    "PT",
+    "B",
+    "UP",
+    "RUF",
+    "T20"
+]
+
+ignore = [
+    "D100", # Missing docstring in public module
+    "D104", # Missing docstring in public package
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/*" = [
+    "D103", # Ignore method docstring errors in tests
+    "PD901", # Allow `df` variable name in tests
+]
+#"src/wpextract/download/*" = [
+#    "D415",
+#    "D103",
+#    "D101",
+#    "D107"
+#]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
 
 [tool.pytest.ini_options]
-pythonpath = "src tests"
+pythonpath = "tests"
 addopts = [
     "--import-mode=importlib",
 ]

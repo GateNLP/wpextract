@@ -1,19 +1,28 @@
-.PHONY: black
-black:
-	black .
-
-.PHONY: flake8
-flake8:
-	flake8 .
-
-.PHONY: isort
-isort:
-	isort .
+.PHONY: format
+format:
+	poetry run ruff format
 
 .PHONY: lint
-lint: isort black flake8
+lint:
+	poetry run ruff check --fix
 
+.PHONY: docdev
+docdev:
+	poetry run mkdocs serve --watch src
+
+.PHONY: testonly
+testonly:
+	poetry run pytest
+
+.PHONY: testcov
+testcov:
+	poetry run coverage run -m pytest
+
+.PHONY: covreport
+covreport: testcov
+	coverage report
 
 .PHONY: test
-test:
-	pytest
+test: testcov
+	coverage html
+	poetry run python -m webbrowser ./htmlcov/index.html

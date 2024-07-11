@@ -3,19 +3,19 @@ from pathlib import Path
 
 import pandas as pd
 import pytest
+import wpextract
 from bs4 import BeautifulSoup
 from helpers.df import ordered_col
+from helpers.file import json_without_cols
 from pytest_mock import MockerFixture
-
-import extractor
-from extractor.extractors.data.links import Linkable, LinkRegistry
-from extractor.extractors.posts import (
+from wpextract.extractors.data.links import Linkable, LinkRegistry
+from wpextract.extractors.posts import (
     ensure_translations_undirected,
     load_posts,
     resolve_post_media,
     resolve_post_translations,
 )
-from extractor.parse.translations._resolver import TranslationLink
+from wpextract.parse.translations._resolver import TranslationLink
 
 
 def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pickers):
@@ -49,14 +49,14 @@ def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pi
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def _do_mock_translation_extractor(mocker: MockerFixture):
     mocker.patch(
-        "extractor.extractors.posts.extract_translations", mock_translation_extractor
+        "wpextract.extractors.posts.extract_translations", mock_translation_extractor
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def scrape_urls_files(datadir: Path):
     def _scrape_path(slug):
         return (datadir / "scrape" / slug / "index.html").resolve()
@@ -70,7 +70,7 @@ def scrape_urls_files(datadir: Path):
     }
 
 
-@pytest.fixture
+@pytest.fixture()
 def posts_df_and_registry(_do_mock_translation_extractor, datadir, scrape_urls_files):
     link_registry = LinkRegistry()
     return (
@@ -79,7 +79,7 @@ def posts_df_and_registry(_do_mock_translation_extractor, datadir, scrape_urls_f
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def posts_df(posts_df_and_registry):
     posts_df, _ = posts_df_and_registry
     return posts_df
@@ -87,8 +87,8 @@ def posts_df(posts_df_and_registry):
 
 def test_post_times(posts_df):
     post_1 = posts_df.loc[1]
-    assert type(post_1.date_gmt) == pd.Timestamp
-    assert type(post_1.modified_gmt) == pd.Timestamp
+    assert isinstance(post_1.date_gmt, pd.Timestamp)
+    assert isinstance(post_1.modified_gmt, pd.Timestamp)
 
     assert post_1.date_gmt.tzinfo is None, "date_gmt had timezone information"
     assert post_1.modified_gmt.tzinfo is None, "modified_gmt had timezone information"
@@ -129,9 +129,9 @@ def test_language(posts_df):
     assert posts_df["language"].equals(ordered_col(["en", "fr", None]))
 
 
-@pytest.fixture
+@pytest.fixture()
 def spy_extractor_data(mocker: MockerFixture):
-    return mocker.spy(extractor.extractors.posts, "extract_content_data")
+    return mocker.spy(wpextract.extractors.posts, "extract_content_data")
 
 
 def test_extract_content_call(spy_extractor_data, posts_df):
@@ -173,7 +173,7 @@ def test_translations_bidirectional(posts_df_and_registry):
     posts_df, registry = posts_df_and_registry
     posts_df = resolve_post_translations(registry, posts_df)
     # Currently 1 <-> 2, let's remove 1 <- 2
-    posts_df.at[2, "translations"] = []
+    posts_df.at[2, "translations"] = []  # noqa: PD008
 
     posts_df = ensure_translations_undirected(posts_df)
 
@@ -199,3 +199,10 @@ def test_resolves_media(posts_df_and_registry):
         data_type="media",
         idx=1,
     )
+
+
+def test_no_yoast_columns(datadir, scrape_urls_files):
+    path = json_without_cols(datadir / "posts.json", {"yoast_head", "yoast_head_json"})
+
+    posts_df = load_posts(path, LinkRegistry(), scrape_urls_files, None)
+    assert posts_df.iloc[0].og_image_url is None

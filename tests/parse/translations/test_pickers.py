@@ -1,22 +1,20 @@
 from pathlib import Path
-from typing import Type
 
 import pytest
+import wpextract.parse.translations._pickers as pickers
 from bs4 import BeautifulSoup
 from langcodes import Language
-
-import extractor.parse.translations._pickers as pickers
-from extractor.parse.translations._resolver import TranslationLink
+from wpextract.parse.translations._resolver import TranslationLink
 
 
 @pytest.mark.parametrize(
     ("picker_cls", "picker_file"),
     [
-        (pickers.Polylang, "polylang.html"),
-        (pickers.GenericLangSwitcher, "generic_polylang.html"),
+        (pickers.PolylangWidget, "polylang_widget.html"),
+        (pickers.PolylangCustomDropdown, "polylang_custom_dropdown.html"),
     ],
 )
-def test_picker(datadir: Path, picker_cls: Type[pickers.LangPicker], picker_file: str):
+def test_picker(datadir: Path, picker_cls: type[pickers.LangPicker], picker_file: str):
     doc = BeautifulSoup((datadir / picker_file).read_text(), "lxml")
 
     picker = picker_cls(doc)

@@ -1,0 +1,4 @@
+WPextract
+Copyright 2022-2024 The University of Sheffield
+
+Portions of this code are derived from WPJsonScraper, which is available under the MIT license. For details, see src/wpextract/download/LICENSE.

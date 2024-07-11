@@ -1,4 +1,4 @@
-from extractor.util.file import prefix_filename
+from wpextract.util.file import prefix_filename
 
 
 def test_prefix_filename():

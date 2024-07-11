@@ -1,0 +1,74 @@
+{
+  "schema":{
+    "fields":[
+      {
+        "name":"id",
+        "type":"integer"
+      },
+      {
+        "name":"count",
+        "type":"integer"
+      },
+      {
+        "name":"description",
+        "type":"string"
+      },
+      {
+        "name":"link",
+        "type":"string"
+      },
+      {
+        "name":"name",
+        "type":"string"
+      },
+      {
+        "name":"slug",
+        "type":"string"
+      },
+      {
+        "name":"parent",
+        "type":"number"
+      },
+      {
+        "name":"link_locale",
+        "type":"string"
+      }
+    ],
+    "primaryKey":[
+      "id"
+    ],
+    "pandas_version":"1.4.0"
+  },
+  "data":[
+    {
+      "id":1,
+      "count":3,
+      "description":"About Test Category One",
+      "link":"https:\/\/example.org\/test-category-one\/",
+      "name":"Test Category One",
+      "slug":"test-category-one",
+      "parent":null,
+      "link_locale":null
+    },
+    {
+      "id":2,
+      "count":3,
+      "description":"About Test Category Two",
+      "link":"https:\/\/example.org\/fr\/test-category-two\/",
+      "name":"Test Category Two",
+      "slug":"test-category-two",
+      "parent":null,
+      "link_locale":"fr"
+    },
+    {
+      "id":3,
+      "count":3,
+      "description":"About Test Category Three",
+      "link":"https:\/\/example.org\/fr\/test-category-three\/",
+      "name":"Test Category Three",
+      "slug":"test-category-three",
+      "parent":2.0,
+      "link_locale":"fr"
+    }
+  ]
+}
