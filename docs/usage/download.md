@@ -9,44 +9,46 @@ $ wpextract download TARGET OUT_JSON
 ```
 
 `TARGET`
-: The HTTP(S) URL of the WordPress site.
+:  The base path of the WordPress installation, e.g.
+  "https://example.org/"
 
 `OUT_JSON`
-: Directory to output to
+: Directory to output the downloaded JSON to. It must be an
+  existing empty directory or a non-existent directory which will be created.
 
 **optional arguments**
-`--json-prefix JSON_PREFIX`
-: Output files with a prefix, e.g. supplying _20240101-example_ will output posts to `out_dir/20240101-example-posts.json`
-
 `--media-dest`
-: Path to download media files to, skipped if not supplied. Must be an empty directory
+: Path to a directory to download media files to, skipped if not supplied
+
+`--json-prefix JSON_PREFIX`
+:  Prefix to add to output file names, e.g. supplying _20240101-example_ will output posts to `out_dir/20240101-example-posts.json`
 
 **skip data**
 
-`--no-categories` `--no-media` `--no-pages` `--no-posts` `--no-tags` `--no-users`
-: Skip downloading the given data type
+`--skip-type [categories|media|pages|posts|tags|users]`
+:  Don't download the provided types. All others will be downloaded, default is to download all.
 
 **authentication**
 
+`--proxy PROXY`
+: Proxy server for requests
+
 `--auth AUTH`
-: Define HTTP Basic credentials in format username:password
+: HTTP Basic credentials for requests (format `username:password`)
 
 `--cookies COOKIES`
-: Define cookies to send with request in the format "cookie1=foo; cookie2=bar"
-
-`--proxy PROXY`
-: Define a proxy server to use
+:  Cookies for requests (format `cookie1=foo; cookie2=bar`)
 
 **request behaviour**
 
 `--timeout TIMEOUT`
-: Stop waiting for a response after a given number of seconds (default: 30)
+: Timeout for request in seconds (default: 30)
 
 `--wait WAIT`
-: Wait the specified number of seconds between retrievals (default: None)
+:  Time to wait between requests in seconds. Does not affect retries. (default: 0)
 
 `--random-wait`
-: Randomly varies the time between requests to between 0.5 and 1.5 times the number of seconds set by –wait
+: Randomly varies the time between requests to between 0.5 and 1.5 times the number of seconds set by --wait
 
 `--max-retries MAX_RETRIES`
 : Maximum number of retries before giving up (default: 10)
@@ -59,11 +61,11 @@ $ wpextract download TARGET OUT_JSON
 
 **logging**
 
-`--log LOG`, `-l LOG`
-: Log outputs to this file instead of stdout.
+`--log FILE`, `-l FILE`
+: File to log to, will suppress stdout.
 
 `--verbose`, `-v`
-: Show additional debug logs
+: Increase log level to include debug logs
 
 ## Download Process
 

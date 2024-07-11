@@ -42,13 +42,14 @@ def validate_wait(ctx, param, value):
 
 @click.command(short_help="Download a WordPress site.", **CMD_ARGS)
 @click.argument("target", type=str)
-@click.argument("out_json", type=click.UNPROCESSED, callback=empty_directory)
+@click.argument("out_json", type=click.Path(), callback=empty_directory)
 @click.option(
     "--media-dest",
-    type=click.UNPROCESSED,
+    type=click.Path(),
     callback=empty_directory,
     required=False,
     help="Path to a directory to download media files to, skipped if not supplied",
+    metavar="DIRECTORY"
 )
 @click.option(
     "-P", "--json-prefix", type=str, help="Prefix to add to output file names"
@@ -141,6 +142,7 @@ def download(
     OUT_JSON is the directory to output the downloaded JSON to. It must be an existing empty directory or a non-existent directory which will be created.
     """
     setup_logging(verbose, log)
+    print(verbose)
 
     types_to_dl = set(dl_types) - set(skip_types)
 
