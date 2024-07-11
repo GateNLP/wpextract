@@ -49,7 +49,7 @@ def validate_wait(ctx, param, value):
     callback=empty_directory,
     required=False,
     help="Path to a directory to download media files to, skipped if not supplied",
-    metavar="DIRECTORY"
+    metavar="DIRECTORY",
 )
 @click.option(
     "-P", "--json-prefix", type=str, help="Prefix to add to output file names"

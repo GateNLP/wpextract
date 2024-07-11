@@ -16,7 +16,9 @@ from wpextract.cli._shared import (
 
 @click.command(short_help="Extract site to a dataset.", **CMD_ARGS)
 @click.argument("json_root", type=directory)
-@click.argument("out_dir", type=click.Path(), callback=empty_directory, metavar="DIRECTORY")
+@click.argument(
+    "out_dir", type=click.Path(), callback=empty_directory, metavar="DIRECTORY"
+)
 @click.option(
     "-S", "--scrape-root", help="Root directory of an HTML scrape", type=directory
 )
