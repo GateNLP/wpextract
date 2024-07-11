@@ -40,3 +40,5 @@ We'd love to hear about your use of our tool, you can [email us](mailto:frheppel
 If you use this tool in published work, please cite [our EMNLP paper](https://aclanthology.org/2023.emnlp-main.349/):
 
 > Freddy Heppell, Kalina Bontcheva, and Carolina Scarton. 2023. Analysing State-Backed Propaganda Websites: a New Dataset and Linguistic Study. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, pages 5729–5741, Singapore. Association for Computational Linguistics.
+
+Permanent references to each release of this software are available from [Zenodo](https://zenodo.org/doi/10.5281/zenodo.12725781).
