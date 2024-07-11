@@ -1,6 +1,8 @@
 # Changelog
 
-## 1.0.0rc1 <small>(upcoming)</small> { id="1.0.0" }
+## 1.0.0
+
+_Released: 11th July 2024_
 
 This release is a major overhaul of the tool including built-in download functionality.
 
