@@ -1,7 +1,7 @@
 site_name: WPextract
 copyright: Copyright &copy; 2022-24 The University of Sheffield.
 repo_url: https://github.com/GateNLP/wpextract
-site_url: https://gatenlp.github.io/wpextract/
+site_url: https://wpextract.readthedocs.io/
 site_description: Create datasets from WordPress sites for research or archiving
 edit_uri: edit/main/docs/
 theme:

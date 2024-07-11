@@ -14,7 +14,7 @@
 
 ## Quickstart
 
-See the [complete documentation](https://gatenlp.github.io/wpextract/) for more detailed usage.
+See the [complete documentation](https://wpextract.readthedocs.io/) for more detailed usage.
 
 1. Install with `pipx`
     ```shell-session
