@@ -1,6 +1,6 @@
 [tool.poetry]
 name="wpextract"
-version="1.0.1"
+version="1.0.1post1"
 description="Create datasets from WordPress sites"
 homepage="https://wpextract.readthedocs.io/"
 documentation="https://wpextract.readthedocs.io/"
