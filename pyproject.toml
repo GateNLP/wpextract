@@ -1,15 +1,24 @@
 [tool.poetry]
 name="wpextract"
 version="1.0.0rc1"
-description="Create a dataset from the WordPress API"
-authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
-packages=[
-    { include = "wpextract", from = "src"}
-]
+description="Create datasets from WordPress sites"
 homepage="https://gatenlp.github.io/wordpress-site-extractor/"
+documentation="https://gatenlp.github.io/wordpress-site-extractor/"
 repository="https://github.com/GateNLP/wordpress-site-extractor"
 license="Apache-2.0"
 readme = "README.md"
+authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
+classifiers = [
+    "Development Status :: 5 - Production/Stablec",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+packages=[
+    { include = "wpextract", from = "src"}
+]
 
 [tool.poetry.scripts]
 wpextract = "wpextract.cli:cli"
