@@ -11,11 +11,6 @@ theme:
     - navigation.footer
   palette:
     primary: 'green'
-  custom_dir: docs/overrides
-extra:
-  version:
-    provider: mike
-    alias: true
 
 nav:
   - Home: index.md
