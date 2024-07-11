@@ -10,4 +10,4 @@ This release is a major overhaul of the tool including built-in download functio
 - Support extraction without an HTML scrape if translations aren't needed
 - Support extracting only some of the possible data types
 - Support sites without Yoast SEO plugin
-- Added [online documentation](https://gatenlp.github.io/wordpress-site-extractor/)
+- Added [online documentation](https://gatenlp.github.io/wpextract/)

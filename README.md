@@ -13,7 +13,7 @@
 
 ## Quickstart
 
-See the [complete documentation](https://gatenlp.github.io/wordpress-site-extractor/) for more detailed usage.
+See the [complete documentation](https://gatenlp.github.io/wpextract/) for more detailed usage.
 
 1. Install with `pipx`
     ```shell-session

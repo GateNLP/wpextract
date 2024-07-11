@@ -10,11 +10,11 @@ authors:
   - given-names: Carolina
     family-names: Scarton
     orcid: 'https://orcid.org/0000-0002-0103-4072'
-title: "wordpress-site-extractor"
+title: "WPextract"
 version: 1.0.0
 doi: 10.5281/zenodo.10008086
 date-released: 2023-10-20
-url: "https://github.com/GateNLP/wordpress-site-extractor"
+url: "https://github.com/GateNLP/wpextract"
 preferred-citation:
   type: conference-paper
   authors:
