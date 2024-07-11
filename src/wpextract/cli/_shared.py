@@ -14,8 +14,18 @@ CMD_ARGS = {
 }
 
 
-file = click.Path(exists=False, dir_okay=False, file_okay=True, writable=True, path_type=pathlib.Path)
-directory = click.Path(exists=True, file_okay=False, dir_okay=True, readable=True, writable=False, path_type=pathlib.Path)
+file = click.Path(
+    exists=False, dir_okay=False, file_okay=True, writable=True, path_type=pathlib.Path
+)
+directory = click.Path(
+    exists=True,
+    file_okay=False,
+    dir_okay=True,
+    readable=True,
+    writable=False,
+    path_type=pathlib.Path,
+)
+
 
 def empty_directory(ctx, param, value: str):
     if value is None:
@@ -36,14 +46,21 @@ def empty_directory(ctx, param, value: str):
 
     return path
 
+
 def logging_options(cmd_func: Callable) -> Callable:
-    @optgroup.group('logging')
-    @optgroup.option("-l", "--log", type=file, help="File to log to, will suppress stdout.")
-    @optgroup.option("-v", "--verbose", is_flag=True, help="Increase log level to include debug logs")
+    @optgroup.group("logging")
+    @optgroup.option(
+        "-l", "--log", type=file, help="File to log to, will suppress stdout."
+    )
+    @optgroup.option(
+        "-v", "--verbose", is_flag=True, help="Increase log level to include debug logs"
+    )
     @functools.wraps(cmd_func)
     def wrapper(*args, **kwargs):
         return cmd_func(*args, **kwargs)
+
     return wrapper
+
 
 def setup_logging(verbose: bool, log_path: Optional[pathlib.Path]) -> None:
     log_level = logging.DEBUG if verbose else logging.INFO
@@ -52,6 +69,7 @@ def setup_logging(verbose: bool, log_path: Optional[pathlib.Path]) -> None:
         logging.basicConfig(filename=log_path, level=log_level)
     else:
         logging.basicConfig(level=log_level)
+
 
 @contextmanager
 def setup_tqdm_redirect(should_redirect: bool):

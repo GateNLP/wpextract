@@ -1,13 +1,18 @@
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 
 import click
 from click import Choice
 from click_option_group import optgroup
-from tqdm.contrib.logging import logging_redirect_tqdm
 
 from wpextract import WPDownloader
-from wpextract.cli._shared import empty_directory, logging_options, setup_logging, setup_tqdm_redirect, CMD_ARGS
+from wpextract.cli._shared import (
+    CMD_ARGS,
+    empty_directory,
+    logging_options,
+    setup_logging,
+    setup_tqdm_redirect,
+)
 from wpextract.dl import RequestSession
 from wpextract.util.str import ensure_prefixes, ensure_suffix
 
@@ -28,10 +33,12 @@ def data_type_opts(cmd_func):
         cmd_func = opt(cmd_func)
     return cmd_func
 
+
 def validate_wait(ctx, param, value):
     if ctx.params.get("wait") is None and value is not False:
         raise click.BadParameter("cannot be used unless --wait/-w is also set.")
     return value
+
 
 @click.command(short_help="Download a WordPress site.", **CMD_ARGS)
 @click.argument("target", type=str)
@@ -48,7 +55,7 @@ def validate_wait(ctx, param, value):
 )
 @click.option(
     "--skip-type",
-    'skip_types',
+    "skip_types",
     type=Choice(dl_types, case_sensitive=False),
     default=[],
     multiple=True,
@@ -79,7 +86,7 @@ def validate_wait(ctx, param, value):
     "--wait",
     type=int,
     help="Time to wait between requests in seconds. Does not affect retries.",
-    is_eager=True, # to permit --random-wait validation
+    is_eager=True,  # to permit --random-wait validation
 )
 @optgroup.option(
     "--random-wait",
@@ -133,7 +140,6 @@ def download(
 
     OUT_JSON is the directory to output the downloaded JSON to. It must be an existing empty directory or a non-existent directory which will be created.
     """
-
     setup_logging(verbose, log)
 
     types_to_dl = set(dl_types) - set(skip_types)
@@ -157,7 +163,7 @@ def download(
         random_wait=random_wait,
         max_retries=max_retries,
         backoff_factor=backoff_factor,
-        max_redirects=max_redirects
+        max_redirects=max_redirects,
     )
 
     with setup_tqdm_redirect(log is None):
@@ -166,9 +172,8 @@ def download(
             out_path=out_json,
             data_types=list(types_to_dl),
             session=session,
-            json_prefix=json_prefix
+            json_prefix=json_prefix,
         )
-
 
         downloader.download()
 

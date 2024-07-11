@@ -1,10 +1,12 @@
 import pytest
 from wpextract.util.str import (
+    ensure_prefix,
+    ensure_prefixes,
     ensure_suffix,
     remove_ends,
     remove_prefix,
     remove_suffix,
-    squash_whitespace, ensure_prefix, ensure_prefixes,
+    squash_whitespace,
 )
 
 
@@ -24,18 +26,29 @@ def test_remove_ends():
 
 
 def test_ensure_prefixes():
-    assert ensure_prefixes("http://example.org", ("http://", "https://"), "http://") == "http://example.org"
-    assert ensure_prefixes("https://example.org", ("http://", "https://"), "http://") == "https://example.org"
-    assert ensure_prefixes("example.org", ("http://", "https://"), "http://") == "http://example.org"
+    assert (
+        ensure_prefixes("http://example.org", ("http://", "https://"), "http://")
+        == "http://example.org"
+    )
+    assert (
+        ensure_prefixes("https://example.org", ("http://", "https://"), "http://")
+        == "https://example.org"
+    )
+    assert (
+        ensure_prefixes("example.org", ("http://", "https://"), "http://")
+        == "http://example.org"
+    )
 
 
 def test_ensure_prefix():
     assert ensure_prefix("python", "foo") == "foopython"
     assert ensure_prefix("foopython", "foo") == "foopython"
 
+
 def test_ensure_suffix():
     assert ensure_suffix("python", "foo") == "pythonfoo"
     assert ensure_suffix("pythonfoo", "foo") == "pythonfoo"
+
 
 @pytest.mark.parametrize(
     ("trial", "expected", "message"),

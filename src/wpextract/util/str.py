@@ -52,10 +52,22 @@ def remove_ends(text: str, affix: str):
     """
     return remove_prefix(remove_suffix(text, affix), affix)
 
+
 def ensure_prefixes(text: str, prefixes: tuple[str], default: str):
+    """Ensure the text starts with one of several prefixes, or prepend a default.
+
+    Args:
+        text: The string to process
+        prefixes: acceptable prefixes to the string
+        default: a prefix to prepend if none of the prefixes are present
+
+    Returns:
+        The prefixed string, or original string if no prefixes are present.
+    """
     if not text.startswith(prefixes):
         return default + text
     return text
+
 
 def ensure_prefix(text: str, prefix: str) -> str:
     """Ensure the text starts with a prefix.
@@ -69,10 +81,10 @@ def ensure_prefix(text: str, prefix: str) -> str:
     Returns:
         The text with the given prefix ensured.
     """
-
     if not text.startswith(prefix):
         return prefix + text
     return text
+
 
 def ensure_suffix(text: str, suffix: str) -> str:
     """Ensure the text ends with the suffix.
