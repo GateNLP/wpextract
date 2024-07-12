@@ -2005,4 +2005,4 @@ reference = "pypi-public"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9.0,<3.13"
-content-hash = "23663a2aae6f478acac6eb564ca96dd518c0450d391355f5aa1d3be92a8aac5b"
+content-hash = "8aed5d5c0c22866983f9ac6bd9083cec748cfa2534c93209f5e719d493164710"
