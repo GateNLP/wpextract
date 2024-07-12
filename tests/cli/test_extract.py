@@ -10,7 +10,9 @@ def mock_cls_invoke(mocker, runner, datadir, args=None, mkdirs=True):
 
     if args is None:
         args = []
-    dl_mock = mocker.patch("wpextract.cli._extract.WPExtractor")
+
+    # Patch at source since the CLI imports within a function
+    dl_mock = mocker.patch("wpextract.WPExtractor")
 
     result = runner.invoke(cli, ["extract", str(in_dir), str(out_dir), *args])
 
@@ -21,6 +23,7 @@ def test_default_args(mocker, runner, datadir):
     dl_mock, result = mock_cls_invoke(mocker, runner, datadir)
     assert result.exit_code == 0
 
+    dl_mock.assert_called_once()
     assert dl_mock.call_args.kwargs["json_root"] == datadir / "json_in"
     assert dl_mock.call_args.kwargs["scrape_root"] is None
     assert dl_mock.call_args.kwargs["json_prefix"] is None
