@@ -5,7 +5,6 @@ import click
 from click import Choice
 from click_option_group import optgroup
 
-
 from wpextract.cli._shared import (
     CMD_ARGS,
     empty_directory,
@@ -13,7 +12,6 @@ from wpextract.cli._shared import (
     setup_logging,
     setup_tqdm_redirect,
 )
-
 from wpextract.util.str import ensure_prefixes, ensure_suffix
 
 dl_types = ["categories", "media", "pages", "posts", "tags", "users"]

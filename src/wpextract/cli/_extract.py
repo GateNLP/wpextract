@@ -3,7 +3,6 @@ from typing import Optional
 
 import click
 
-
 from wpextract.cli._shared import (
     CMD_ARGS,
     directory,
