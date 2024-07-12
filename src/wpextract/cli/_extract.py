@@ -3,7 +3,7 @@ from typing import Optional
 
 import click
 
-from wpextract import WPExtractor
+
 from wpextract.cli._shared import (
     CMD_ARGS,
     directory,
@@ -40,6 +40,8 @@ def extract(
 
     OUT_DIR is the directory to output the extracted JSON to. It must be an existing empty directory or a non-existent directory which will be created.
     """
+    from wpextract import WPExtractor
+
     setup_logging(verbose, log)
 
     with setup_tqdm_redirect(log is None):
