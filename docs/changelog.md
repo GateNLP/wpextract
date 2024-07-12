@@ -1,15 +1,15 @@
 # Changelog
 
-## 1.0.1
+## 1.0.2 (2024-07-12)
 
-_Released: 11th July 2024_
+- Fixed not explicitly declaring dependency on `urllib3` (!32)
+- Improved CLI performance with lazy imports of library functionality (!33)
 
-### Bug Fixes
+## 1.0.1 (2024-07-11)
+
 - Fixed an incorrect repository URL in the package metadata and CLI epilog (!29)
 
-## 1.0.0
-
-_Released: 11th July 2024_
+## 1.0.0 (2024-07-11)
 
 This release is a major overhaul of the tool including built-in download functionality.
 
