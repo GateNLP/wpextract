@@ -4,7 +4,8 @@ from wpextract.cli import cli
 def mock_cls_invoke(mocker, runner, datadir, args=None):
     if args is None:
         args = []
-    dl_mock = mocker.patch("wpextract.cli._download.WPDownloader")
+    # Patch at source since the CLI imports within a function
+    dl_mock = mocker.patch("wpextract.WPDownloader")
 
     result = runner.invoke(
         cli, ["download", "https://example.org", str(datadir), *args]
@@ -17,6 +18,7 @@ def test_default_args(mocker, runner, datadir):
     dl_mock, result = mock_cls_invoke(mocker, runner, datadir)
     assert result.exit_code == 0
 
+    dl_mock.assert_called_once()
     assert dl_mock.call_args.kwargs["target"] == "https://example.org/"
     assert dl_mock.call_args.kwargs["out_path"] == datadir
     assert len(dl_mock.call_args.kwargs["data_types"]) == 6

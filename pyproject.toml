@@ -1,6 +1,6 @@
 [tool.poetry]
 name="wpextract"
-version="1.0.1post1"
+version="1.0.2"
 description="Create datasets from WordPress sites"
 homepage="https://wpextract.readthedocs.io/"
 documentation="https://wpextract.readthedocs.io/"
@@ -39,6 +39,7 @@ tqdm = ">=4.65.0"
 requests = ">=2.32.3"
 click = ">=8.0.1"
 click-option-group = ">=0.5.3"
+urllib3 = ">1.21.3,<3"
 
 [tool.poetry.group.dev.dependencies]
 build = "==0.9.*,>=0.9.0"
