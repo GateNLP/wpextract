@@ -1,6 +1,6 @@
 # Multilingual Sites
 
-If sites publish in multiple languages and use a plugin to present a list of language versions, wpextract can parse this and add multilingual data in the output dataset.
+If sites publish in multiple languages and use a plugin to present a list of language versions, wpextract can parse this and add links between translated versions in the output dataset.
 
 ## Extraction Process
 
