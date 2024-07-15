@@ -14,5 +14,9 @@ class TranslationLink(ResolvableLink):
 
     @property
     def language(self) -> Language:
-        """Parsed and normalized language. Populated automatically post-init."""
+        """Parsed and normalized language. Populated automatically post-init.
+
+        See Also:
+            [`langcodes` documentation](https://github.com/georgkrause/langcodes?tab=readme-ov-file#language-objects)
+        """
         return Language.get(self.lang, normalize=True)
