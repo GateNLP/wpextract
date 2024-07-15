@@ -25,9 +25,7 @@ $ pipx install wpextract
 WPextract works in two steps:
 
 1. The **downloader** uses the WordPress REST API to obtain all content on the site, which is stored as a single, long file
-2. The **extractor** converts this into a usable dataset by enriching the downloaded content. This includes extracting text, images, resolving links to posts/pages, and finding translated versions[^lang]
-
-[^lang]: {-} See the specific guide for more on multilingual extraction.
+2. The **extractor** converts this into a usable dataset by enriching the downloaded content. This includes extracting text, images, resolving links to posts/pages, and finding translated versions ([more on translation extraction](../advanced/multilingual.md))
 
 We call these two stages using two CLI commands ([`wpextract download`](../usage/download.md#command-usage) and [`wpextract extract`](../usage/extract.md#command-usage)). Alternatively, WPExtract can be integrated into a project by [using it as a library](../advanced/library.md).
 
