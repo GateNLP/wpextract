@@ -73,12 +73,8 @@ or through importing as a library:
 
 ```pycon
 >>> import wpextract
->>> help(wpextract)
-Help on package wpextract:
-
-NAME
-    wpextract
-# etc...
+>>> wpextract.__version__
+1.0.0
 ```
 
 ## For Development

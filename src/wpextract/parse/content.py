@@ -10,7 +10,7 @@ from wpextract.extractors.data.links import Link, ResolvableLink
 from wpextract.extractors.media import get_caption
 from wpextract.util.str import squash_whitespace
 
-EXCLUDED_CONTENT_TAGS = {"figcaption"}
+EXCLUDED_CONTENT_TAGS = {"figcaption", "table"}
 NEWLINE_TAGS = {"br", "p"}
 
 
@@ -136,7 +136,7 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
     """Extract the links, embeds, images and text content of the document.
 
     Args:
-        doc: A parsed document.
+        doc: A parsed document body.
         self_link: The URL of the page.
 
     Returns:
@@ -147,12 +147,12 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
     images = extract_images(doc, self_link)
 
     doc_c = copy.copy(doc)
-    for child in doc_c.descendants:
-        if type(child) == NavigableString:
+    for child in list(doc_c.descendants):
+        if child.decomposed or type(child) == NavigableString:
             continue
 
         if child.name in EXCLUDED_CONTENT_TAGS:
-            child.extract()
+            child.decompose()
 
     content_text = squash_whitespace(_get_text(doc_c))
 
