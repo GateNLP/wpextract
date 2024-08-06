@@ -82,7 +82,6 @@ def test_extract_image_without_src(datadir: Path):
 
 def test_extract_content(datadir: Path):
     doc = BeautifulSoup((datadir / "content_extraction.html").read_text(), "lxml")
-
     content_series = extract_content_data(doc, "https://example.org/home")
     text = content_series[0]
 
