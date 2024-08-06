@@ -3,13 +3,16 @@
 ## 1.0.3 (2024-08-06)
 
 **Changes**
+
 - Added missing `wpextract.__version__` attribute (!36)
 - Added `<table>`s to the elements to be ignored when extracting article text (!40)
 
 **Fixes**
+
 - Fixed incorrect behaviour extracting article text where only the first element to ignore (e.g. `figcaption`) would be ignored (!40)
 
 **Documentation**
+
 - Added proper references to the documentation of the [`langcodes`](https://github.com/georgkrause/langcodes) library (!38)
 
 ## 1.0.2 (2024-07-12)
