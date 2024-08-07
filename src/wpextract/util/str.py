@@ -53,7 +53,7 @@ def remove_ends(text: str, affix: str):
     return remove_prefix(remove_suffix(text, affix), affix)
 
 
-def ensure_prefixes(text: str, prefixes: tuple[str], default: str):
+def ensure_prefixes(text: str, prefixes: tuple[str, ...], default: str):
     """Ensure the text starts with one of several prefixes, or prepend a default.
 
     Args:

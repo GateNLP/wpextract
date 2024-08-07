@@ -28,7 +28,7 @@ class ScrapeCrawl:
     """
 
     found_pages: dict[str, str]
-    failed_docs: list[str]
+    failed_docs: list[Path]
     crawled = False
 
     def __init__(self, root_path: Path):

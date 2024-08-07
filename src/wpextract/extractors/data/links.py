@@ -1,6 +1,7 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Union
 
+ItemIdx = Union[str, int]
 
 @dataclass
 class Linkable:
@@ -8,7 +9,7 @@ class Linkable:
 
     link: str
     data_type: str
-    idx: str
+    idx: ItemIdx
 
 
 @dataclass
@@ -30,14 +31,14 @@ class LinkRegistry:
     """A collection of all known links on the site."""
 
     links: list[Linkable]
-    url_index_cache: dict[str, int]
+    url_index_cache: dict[str, ItemIdx]
 
     def __init__(self):
         """Init a new registry."""
         self.links = []
 
     def add_linkable(
-        self, url: str, data_type: str, idx: str, _refresh_cache: bool = True
+        self, url: str, data_type: str, idx: ItemIdx, _refresh_cache: bool = True
     ) -> None:
         """Add a single linkable item to the registry.
 
@@ -59,7 +60,7 @@ class LinkRegistry:
         if _refresh_cache:
             self._refresh_cache()
 
-    def add_linkables(self, data_type: str, links: list[str], idxes: list[str]) -> None:
+    def add_linkables(self, data_type: str, links: list[str], idxes: list[ItemIdx]) -> None:
         """Add multiple linkable items at once.
 
         Args:

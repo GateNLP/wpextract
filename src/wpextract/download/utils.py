@@ -2,12 +2,12 @@ import json
 from urllib.parse import urlsplit, urlunsplit
 
 
-def get_by_id(value, id):
+def get_by_id(value, idx):
     """Utility function to retrieve a value by and ID in a list of dicts.
 
     Args:
         value: the dict to process
-        id: the id to get
+        idx: the id to get
 
     Returns:
         The matching value or None if no match is found
@@ -15,7 +15,7 @@ def get_by_id(value, id):
     if value is None:
         return None
     for val in value:
-        if "id" in val.keys() and val["id"] == id:
+        if "id" in val.keys() and val["id"] == idx:
             return val
     return None
 
