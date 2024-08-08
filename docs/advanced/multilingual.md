@@ -82,7 +82,7 @@ The correct parse of this picker should set the current language to English, add
 
 Using the `self.page_doc` attribute, a [`BeautifulSoup`][bs4.BeautifulSoup] object representing the page, the root element of the picker should be found and returned.
 
-The `select_one` method is used to find the root element, and will return `None` if no element is found, which will be intepreted as the picker not being present on the page.
+The `select_one` method is used to find the root element, and will return `None` if no element is found, which will be interpreted as the picker not being present on the page.
 
 If a value is returned, the `self.root_el` attribute will be populated with the result of this method.
 
@@ -92,7 +92,7 @@ If a value is returned, the `self.root_el` attribute will be populated with the 
     class MyPicker(LangPicker):
         ...
         def get_root(self) -> Tag:
-            return self.page_doc.select_one('ul', class_='translations')
+            return self.page_doc.select_one('ul.translations')
     ```
 
 ### `extract()`
@@ -100,7 +100,8 @@ If a value is returned, the `self.root_el` attribute will be populated with the 
 Using the `self.root_el` attribute, the languages should be found and added to the dataset.
 
 Be careful to avoid:
-- Adding the current language
+
+- Adding the current language as a translation
 - Adding languages which are listed but don't have translations
 
 ??? example "Example `extract` implementation"
@@ -112,7 +113,7 @@ Be careful to avoid:
             for lang_el in self.root_el.select('li'):
                 lang_a = lang_el.select_one('a')
                 if 'current-lang' in lang_a.get('class'):
-                    self.set_current_lang(lang)
+                    self.set_current_lang(lang_a.get('lang'))
                 elif 'no-translation' not in lang_a.get('class'):
                     self.add_translation(lang_a.get('href'), lang_a.get('lang'))
     ```
