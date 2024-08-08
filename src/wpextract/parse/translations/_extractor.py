@@ -36,7 +36,11 @@ def extract_translations(
         if not picker.matches():
             continue
 
-        picker.extract()
+        try:
+            picker.extract()
+        except pickers.ExtractionFailedError as e:
+            logging.warning(e)
+            break
 
         return pd.Series([picker.current_language, picker.translations])
 

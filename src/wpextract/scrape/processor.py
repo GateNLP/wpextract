@@ -3,7 +3,7 @@ from typing import Optional
 
 from bs4 import BeautifulSoup, SoupStrainer, Tag
 
-from wpextract.util.html import attribute_list_guard
+from wpextract.util.html import attr_concat
 
 self_url_strainer = SoupStrainer(["head", "link", "meta"])
 
@@ -37,7 +37,7 @@ def get_link_canonical(doc: BeautifulSoup) -> Optional[str]:
 
     url = link_canonical["href"]
 
-    url = attribute_list_guard(url)
+    url = attr_concat(url)
 
     return url if _is_url_valid(url) else None
 
@@ -60,7 +60,7 @@ def get_og_url(doc: BeautifulSoup) -> Optional[str]:
         return None
 
     url = og_url["content"]
-    url = attribute_list_guard(url)
+    url = attr_concat(url)
 
     return url if _is_url_valid(url) else None
 

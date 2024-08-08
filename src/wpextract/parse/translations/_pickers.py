@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Any, Optional, Sequence
 
 from bs4 import BeautifulSoup, Tag
 from langcodes import Language
 
 from wpextract.parse.translations._resolver import TranslationLink
-from wpextract.util.html import attribute_list_guard
+from wpextract.util.html import attr_concat
 from wpextract.util.str import squash_whitespace
 
 
@@ -17,6 +17,9 @@ class LangPicker(ABC):
     """Abstract class of a language picker style.
 
     Support for a new language picker can be added by creating a new class inheriting from this one.
+
+    See Also:
+        * [Creating a new picker](../advanced/multilingual.md#adding-support) guide
     """
 
     page_doc: BeautifulSoup
@@ -72,7 +75,21 @@ class LangPicker(ABC):
 
     @abstractmethod
     def extract(self) -> None:
-        """Extract the current language and translations from the doc."""
+        """Extract the current language and translations from the doc.
+
+        Instead of directly selecting on `root_el`, consider using the helper methods
+        [`_root_select`][wpextract.parse.translations.LangPicker._root_select] and
+        [`_root_select_one`][wpextract.parse.translations.LangPicker._root_select_one]
+        to extract elements. These are the equivalent of directly calling `select` or `select_one`, but
+        will raise a formatted error if the element is not found. Don't use these methods if no results is an expected
+        outcome, e.g. a post may have no translations.
+
+        If using other selectors, you can construct the exception using the helper
+        [`_build_extraction_fail_err`][wpextract.parse.translations.LangPicker._build_extraction_fail_err].
+
+        Raises:
+            ExtractionFailedError: If the picker is unable to find an element it expects to be present.
+        """
         pass
 
     def set_current_lang(self, lang: str | list[str]) -> None:
@@ -81,29 +98,65 @@ class LangPicker(ABC):
         Args:
             lang: The locale string
         """
-        lang = attribute_list_guard(lang)
+        lang = attr_concat(lang)
 
         self.current_language = Language.get(lang, normalize=True)
 
-    def add_translation(self, href: str | list[str], lang: str | list[str]) -> None:
+    def add_translation(self, href: str, lang: str) -> None:
         """Add a translation from the picker.
 
         Args:
             href: The link to the translated page.
             lang: The provided language code.
         """
-        href = attribute_list_guard(href)
-        lang = attribute_list_guard(lang)
 
         self.translations.append(
             TranslationLink(text=None, href=href, destination=None, lang=lang)
         )
 
     def _build_extraction_fail_err(self, selector: str) -> ExtractionFailedError:
-        message = f"{self.__class__.__name__} reported it could extract but failed to extract {selector}"
+        """Create an error for when an expected element is missing.
+
+        Args:
+            selector: a string describing the attempted selection criteria
+
+        Returns:
+            An instance of the exception to be raised.
+        """
+        message = f"{self.__class__.__name__} reported it could extract but failed to select element with: {selector}"
         return ExtractionFailedError(message)
 
-    def _extract_el(self, selector: str) -> Tag:
+    def _root_select(self, selector: str) -> Sequence[Tag]:
+        """Helper to extract elements from the root element.
+
+        Args:
+            selector: a CSS selector to be passed to `Tag.select`
+
+        Raises:
+            ExtractionFailedError: If no matching elements were found. This indicates this picker was activated when it should not have been.
+
+        Returns:
+            The elements found by the selector.
+        """
+        els = self.root_el.select(selector)
+
+        if len(els) == 0:
+            raise self._build_extraction_fail_err(selector)
+
+        return els
+
+    def _root_select_one(self, selector: str) -> Tag:
+        """Helper to extract an element from the root element.
+
+        Args:
+            selector: a CSS selector to be passed to `Tag.select_one`
+
+        Raises:
+            ExtractionFailedError: If the element was not found. This indicates this picker was activated when it should not have been.
+
+        Returns:
+            The element found by the selector.
+        """
         el = self.root_el.select_one(selector)
 
         if el is None:
@@ -155,7 +208,7 @@ class PolylangWidget(LangPicker):
             will usually go to the language's homepage
         * have the ``.current-lang`` class - this is the current language.
         """
-        current_lang = self._extract_el(".lang-item.current-lang a")
+        current_lang = self._root_select_one(".lang-item.current-lang a")
 
         self.set_current_lang(current_lang["lang"])
 
@@ -164,8 +217,8 @@ class PolylangWidget(LangPicker):
         )
 
         for lang_a in other_langs:
-            href = lang_a["href"]
-            lang = lang_a["lang"]
+            href = attr_concat(lang_a["href"])
+            lang = attr_concat(lang_a["lang"])
 
             self.add_translation(href, lang)
 
@@ -206,13 +259,13 @@ class PolylangCustomDropdown(LangPicker):
         * have the ``.no-translation`` class
         * have the ``current-lang`` class
         """
-        current_lang = self._extract_el(".current-lang-switcher")
+        current_lang = self._root_select_one(".current-lang-switcher")
         self.set_current_lang(squash_whitespace(current_lang.get_text()))
 
         other_langs = self.root_el.select(".lang-item:not(.no-translation) a")
 
         for lang_a in other_langs:
-            href = lang_a["href"]
-            lang = lang_a["lang"]
+            href = attr_concat(lang_a["href"])
+            lang = attr_concat(lang_a["lang"])
 
             self.add_translation(href, lang)
