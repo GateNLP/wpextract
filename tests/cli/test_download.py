@@ -14,6 +14,14 @@ def mock_cls_invoke(mocker, runner, datadir, args=None):
     return dl_mock, result
 
 
+def mock_cls_invoke_req_sess(mocker, runner, datadir, args=None):
+    rq_mock = mocker.patch("wpextract.download.RequestSession")
+
+    dl_mock, result = mock_cls_invoke(mocker, runner, datadir, args)
+
+    return rq_mock, dl_mock, result
+
+
 def test_default_args(mocker, runner, datadir):
     dl_mock, result = mock_cls_invoke(mocker, runner, datadir)
     assert result.exit_code == 0
@@ -40,3 +48,13 @@ def test_wait_random_validation(mocker, runner, datadir):
         mocker, runner, datadir, ["--random-wait", "--wait", "1"]
     )
     assert result.exit_code == 0
+
+
+def test_custom_ua(mocker, runner, datadir):
+    req_mock, dl_mock, result = mock_cls_invoke_req_sess(
+        mocker, runner, datadir, ["--user-agent", "test"]
+    )
+    assert result.exit_code == 0
+
+    req_mock.assert_called_once()
+    assert req_mock.call_args.kwargs["user_agent"] == "test"

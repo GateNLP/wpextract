@@ -9,7 +9,7 @@ from requests.adapters import HTTPAdapter
 from requests.auth import HTTPBasicAuth, HTTPDigestAuth
 from urllib3 import Retry
 
-DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
 
 
 class ConnectionCouldNotResolve(Exception):
@@ -204,6 +204,7 @@ class RequestSession:
         max_retries: int = 10,
         backoff_factor: float = 0.1,
         max_redirects: int = 20,
+        user_agent: str = DEFAULT_UA,
     ):
         """Create a new request session.
 
@@ -217,6 +218,7 @@ class RequestSession:
             max_retries: the maximum number of retries before failing
             backoff_factor: Factor to wait between successive retries
             max_redirects: maximum number of redirects to follow
+            user_agent: User agent to use for requests. Set to [`DEFAULT_UA`][wpextract.download.requestsession.DEFAULT_UA] by default.
         """
         self.s = requests.Session()
         if proxy is not None:
@@ -234,6 +236,7 @@ class RequestSession:
         self.timeout = timeout
         self._mount_retry(backoff_factor, max_redirects, max_retries)
         self.waiter = RequestWait(wait, random_wait)
+        self.user_agent = user_agent
 
     def _mount_retry(self, backoff_factor, max_redirects, max_retries):
         retry = Retry(
@@ -258,7 +261,7 @@ class RequestSession:
 
     def do_request(self, method, url, data=None, stream=False):
         """Helper class to regroup requests and handle exceptions at the same location."""
-        headers = {"User-Agent": DEFAULT_UA}
+        headers = {"User-Agent": self.user_agent}
         response = None
         try:
             if method == "post":
