@@ -14,8 +14,10 @@ from wpextract.parse.translations._resolver import TranslationLink
         (pickers.PolylangCustomDropdown, "polylang_custom_dropdown.html"),
     ],
 )
-def test_picker(datadir: Path, picker_cls: type[pickers.LangPicker], picker_file: str):
-    doc = BeautifulSoup((datadir / picker_file).read_text(), "lxml")
+def test_picker(
+    shared_datadir: Path, picker_cls: type[pickers.LangPicker], picker_file: str
+):
+    doc = BeautifulSoup((shared_datadir / picker_file).read_text(), "lxml")
 
     picker = picker_cls(doc)
 
@@ -48,8 +50,10 @@ class FaultyExtractPickerSelectOne(pickers.PolylangWidget):
 @pytest.mark.parametrize(
     "picker_cls", [FaultyExtractPickerSelect, FaultyExtractPickerSelectOne]
 )
-def test_picker_extract_error(datadir: Path, picker_cls: type[pickers.LangPicker]):
-    doc = BeautifulSoup((datadir / "polylang_widget.html").read_text(), "lxml")
+def test_picker_extract_error(
+    shared_datadir: Path, picker_cls: type[pickers.LangPicker]
+):
+    doc = BeautifulSoup((shared_datadir / "polylang_widget.html").read_text(), "lxml")
 
     picker = picker_cls(doc)
     assert picker.matches()

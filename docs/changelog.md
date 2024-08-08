@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0 (upcoming)
+
+**Fixes**
+
+- Fixed the scrape crawling step crashing if a page didn't have a canonical link or `og:url` meta tag
+- Fixed the scrape crawling not correctly recognising when duplicate URLs were encountered. Previously duplicates would be included, but only one would be used. Now, they will be correctly logged. As a result of this change, the `SCRAPE_CRAWL_VERSION` has been incremented, meaning running extraction on a scrape will cause it to be re-crawled.
+
 ## 1.0.3 (2024-08-06)
 
 **Changes**

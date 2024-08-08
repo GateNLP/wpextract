@@ -25,12 +25,6 @@ def _fake_api_return():
     return [{"id": idx, "title": "dummy return"} for idx in range(20)]
 
 
-def _export_method(datatype):
-    if datatype == "comments":
-        return "export_comments_interactive"
-    return f"export_{datatype}"
-
-
 def _mocked_exporter(mocker, datatype):
     cls = "wpextract.download.exporter.Exporter."
     if datatype == "comments":
