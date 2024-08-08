@@ -141,11 +141,14 @@ class JSONEncoder(json.JSONEncoder):
     def default(self, o: Any) -> Any:
         """Serialise custom objects.
 
-        .. list-table
-            :header-rows: 1
-            * Type, Strategy
-            * - ``pd.Timestamp``, ``isoformat()``
-            * - Dataclasses, ``dataclasses.asdict()``
+        - pd.Timestamp: converted with the isoformat method
+        - Dataclasses: converted with asdict
+        - langcodes.Language: converted to a string
+
+        Calls the default method of the superclass for other types.
+
+        Returns:
+            Serializable form of the object
         """
         if isinstance(o, PdTimestamp):
             return o.isoformat()

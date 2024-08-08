@@ -3,7 +3,7 @@ import logging
 import math
 from collections.abc import Sequence
 from json.decoder import JSONDecodeError
-from typing import Any, Optional, Union, cast
+from typing import Any, Literal, Optional, Union, cast
 from urllib.parse import urlencode
 
 from tqdm.auto import tqdm
@@ -96,11 +96,22 @@ class WPApi:
             self.s = RequestSession()
 
     def get_orphans_comments(self) -> list[dict[Any, Any]]:
-        """Returns the list of comments for which a post hasn't been found."""
+        """Returns the list of comments for which a post hasn't been found.
+
+        Returns:
+            The list of orphan comments
+        """
         return self.orphan_comments
 
     def get_basic_info(self) -> dict[Any, Any]:
-        """Collects and stores basic information about the target."""
+        """Collects and stores basic information about the target.
+
+        Raises:
+            NoWordpressApi: The target does not have a reachable WordPress API
+
+        Returns:
+            The basic information about the target
+        """
         rest_url = url_path_join(self.url, self.api_path)
         if self.basic_info is not None:
             return self.basic_info
@@ -138,7 +149,21 @@ class WPApi:
         search_terms: Optional[str] = None,
         display_progress: bool = True,
     ) -> tuple[list[WPObject], int]:
-        """Crawls all pages while there is at least one result for the given endpoint or tries to get pages from start to end."""
+        """Crawls all pages while there is at least one result for the given endpoint or tries to get pages from start to end.
+
+        Args:
+            url: the URL to crawl
+            start: the start index
+            num: the number of entries to retrieve
+            search_terms: the search terms to use
+            display_progress: whether to display a progress bar
+
+        Raises:
+            WordPressApiNotV2: The target does not support the WordPress API v2
+
+        Returns:
+            A tuple containing the list of entries and the total number of entries
+        """
         if search_terms is None:
             search_terms = self.search_terms
         page = 1
@@ -180,6 +205,7 @@ class WPApi:
             except HTTPErrorInvalidPage:
                 break
             except Exception as e:
+                # TODO: wrong error?
                 raise WordPressApiNotV2 from e
 
             try:
@@ -243,7 +269,17 @@ class WPApi:
         return (entries, total_entries)
 
     def crawl_single_page(self, url: str) -> Any:
-        """Crawls a single URL."""
+        """Crawls a single URL.
+
+        Args:
+            url: the URL to crawl
+
+        Raises:
+            WordPressApiNotV2: The target does not support the WordPress API v2
+
+        Returns:
+            The content of the page
+        """
         content = None
         rest_url = url_path_join(self.url, self.api_path, url)
         try:
@@ -268,7 +304,20 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> Optional[list[WPObject]]:
-        """Tries to fetch data from the given cache, also verifies first if WP-JSON is supported."""
+        """Tries to fetch data from the given cache, also verifies first if WP-JSON is supported.
+
+        Args:
+            cache: the cache to fetch from
+            start: the start index
+            num: the number of entries to retrieve
+            force: whether to force a re-fetch
+
+        Raises:
+            WordPressApiNotV2: The target does not support the WordPress API v2
+
+        Returns:
+            The cached data if available, None otherwise
+        """
         if self.has_v2 is None:
             self.get_basic_info()
         if not self.has_v2:
@@ -314,7 +363,18 @@ class WPApi:
         start: Optional[int] = None,
         num: Optional[int] = None,
     ) -> list[Union[WPObject, None]]:
-        """Push new values to the cache."""
+        """Push new values to the cache.
+
+        Args:
+            cache: the cache to update
+            values: the values to push
+            total_entries: the total number of entries
+            start: the start index
+            num: the number of entries to retrieve
+
+        Returns:
+            The updated cache
+        """
         if cache is None:
             cache = list(values)
         elif len(values) > 0:
@@ -345,7 +405,16 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> list[WPObject]:
-        """Retrieves all comments."""
+        """Retrieves all comments.
+
+        Args:
+            start: the start index
+            num: the number of entries to retrieve
+            force: ignore cache and force a re-fetch
+
+        Returns:
+            The list of comments
+        """
         cached_comments: Optional[list[WPObject]] = self.get_from_cache(
             self.comments, start, num, force
         )
@@ -364,7 +433,20 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> list[WPObject]:
-        """Retrieves all posts or the specified ones."""
+        """Retrieves all posts.
+
+        Args:
+            comments: whether to retrieve comments
+            start: the start index
+            num: the number of entries to retrieve
+            force: ignore cache and force a re-fetch
+
+        Raises:
+            WordPressApiNotV2: The target does not support the WordPress API v2
+
+        Returns:
+            The list of posts
+        """
         if self.has_v2 is None:
             self.get_basic_info()
         if not self.has_v2:
@@ -417,7 +499,16 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> list[WPObject]:
-        """Retrieves all tags."""
+        """Retrieves all tags.
+
+        Args:
+            start: the start index
+            num: the number of entries to retrieve
+            force: ignore cache and force a re-fetch
+
+        Returns:
+            The list of tags
+        """
         tags = self.get_from_cache(self.tags, start, num, force)
         if tags is not None:
             return tags
@@ -432,7 +523,16 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> list[WPObject]:
-        """Retrieves all categories or the specified ones."""
+        """Retrieves all categories.
+
+        Args:
+            start: the start index
+            num: the number of entries to retrieve
+            force: ignore cache and force a re-fetch
+
+        Returns:
+            The list of categories
+        """
         categories = self.get_from_cache(self.categories, start, num, force)
         if categories is not None:
             return categories
@@ -451,7 +551,16 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> list[WPObject]:
-        """Retrieves all users or the specified ones."""
+        """Retrieves all users.
+
+        Args:
+            start: the start index
+            num: the number of entries to retrieve
+            force: ignore cache and force a re-fetch
+
+        Returns:
+            The list of users
+        """
         users = self.get_from_cache(self.users, start, num, force)
         if users is not None:
             return users
@@ -468,7 +577,16 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> list[WPObject]:
-        """Retrieves all media objects."""
+        """Retrieves all media objects.
+
+        Args:
+            start: the start index
+            num: the number of entries to retrieve
+            force: ignore cache and force a re-fetch
+
+        Returns:
+            The list of media objects
+        """
         media = self.get_from_cache(self.media, start, num, force)
         if media is not None:
             return media
@@ -480,9 +598,20 @@ class WPApi:
         return media
 
     def get_media_urls(
-        self, ids: str, cache: bool = True
+        self, ids: Union[Literal["all", "cache"], str], cache: bool = True
     ) -> tuple[list[str], list[str]]:
-        """Retrieves the media download URLs for specified IDs or all or from cache."""
+        """Retrieves the media download URLs for specified IDs or all or from cache.
+
+        Args:
+            ids: the IDs of the media objects to retrieve, "all" for all, "cache" for cached, or a comma-separated list of IDs
+            cache: whether to use the cache or force a re-fetch
+
+        Raises:
+            ValueError: If `ids="cache"` but the cache is empty
+
+        Returns:
+            A tuple containing the list of URLs and the list of slugs
+        """
         media = []
         if ids == "all":
             media = self.get_media(force=(not cache))
@@ -523,7 +652,16 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> list[WPObject]:
-        """Retrieves all pages."""
+        """Retrieves all pages.
+
+        Args:
+            start: the start index
+            num: the number of entries to retrieve
+            force: ignore cache and force a re-fetch
+
+        Returns:
+            The list of pages
+        """
         pages = self.get_from_cache(self.pages, start, num, force)
         if pages is not None:
             return pages
@@ -540,7 +678,16 @@ class WPApi:
         num: Optional[int] = None,
         force: bool = False,
     ) -> list[str]:
-        """Retrieves an array of namespaces."""
+        """Retrieves an array of namespaces.
+
+        Args:
+            start: the start index
+            num: the number of entries to retrieve
+            force: ignore cache and force a re-fetch
+
+        Returns:
+            The list of namespaces
+        """
         if self.has_v2 is None or force:
             self.get_basic_info()
         if self.basic_info is None:
@@ -557,7 +704,11 @@ class WPApi:
         return []
 
     def get_routes(self) -> dict[str, Any]:
-        """Retrieves a dictionary of routes."""
+        """Retrieves a dictionary of routes.
+
+        Returns:
+            The dictionary of routes
+        """
         if self.has_v2 is None:
             self.get_basic_info()
         if self.basic_info is None:
@@ -566,8 +717,18 @@ class WPApi:
             return self.basic_info["routes"]  # type: ignore[no-any-return]
         return {}
 
-    def crawl_namespaces(self, ns: str) -> dict[str, Any]:
-        """Crawls all accessible get routes defined for the specified namespace."""
+    def crawl_namespaces(self, ns: Union[Literal["all"], str]) -> dict[str, Any]:
+        """Crawls all accessible get routes defined for the specified namespace.
+
+        Args:
+            ns: the namespace to crawl, or "all" for all namespaces
+
+        Raises:
+            NSNotFoundException: If a namespace was specified but not found
+
+        Returns:
+            A dictionary containing the data for the specified namespace
+        """
         namespaces = self.get_namespaces()
         routes = self.get_routes()
         ns_data = {}
@@ -636,6 +797,9 @@ class WPApi:
             obj_id: the ID of the object to fetch
             use_cache: if the cache should be used to avoid useless
                 requests
+
+        Returns:
+            A list containing the returned object, empty if not retrievable.
         """
         if obj_type == WPApi.USER:
             return self.get_obj_by_id_helper(
@@ -684,6 +848,9 @@ class WPApi:
             cache: if the cache should be used to avoid useless requests
             kwargs: additional parameters to pass to the function (for
                 POST only)
+
+        Returns:
+            A list of the returned objects
         """
         kwargs = kwargs or {}
 

@@ -70,13 +70,16 @@ class Exporter:
     ) -> list[dict[str, Any]]:
         """Sets up the right values for a list export.
 
-        This function flattens alist of objects before its serialization in the expected format.
+        This function flattens a list of objects before its serialization in the expected format.
         It also makes a deepcopy to ensure that the original vlist is not altered.
 
         Args:
             vlist: the list to prepare for exporting
             parameters_to_unescape: parameters to unescape (ex.
                 ["param1", ["param2"]["rendered"]])
+
+        Returns:
+            the list of objects ready to be exported
         """
         exported_list = []
 

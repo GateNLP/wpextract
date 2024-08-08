@@ -2,7 +2,7 @@ import logging
 import random
 import time
 from http.cookies import SimpleCookie
-from typing import TYPE_CHECKING, Optional, Union
+from typing import TYPE_CHECKING, Literal, Optional, Union
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -254,21 +254,54 @@ class RequestSession:
         self.s.mount("https://", adapter)
 
     def get(self, url: str) -> "Response":
-        """Calls the get function from requests but handles errors to raise proper exception following the context."""
+        """Calls the get function from requests but handles errors to raise proper exception following the context.
+
+        Args:
+            url: URL to fetch
+
+        Returns:
+            the Response object
+        """
         return self.do_request("get", url)
 
     def post(self, url: str, data: Optional["RequestDataType"] = None) -> "Response":
-        """Calls the post function from requests but handles errors to raise proper exception following the context."""
+        """Calls the post function from requests but handles errors to raise proper exception following the context.
+
+        Args:
+            url: URL to fetch
+            data: optional data to send
+
+        Returns:
+            the Response object
+        """
         return self.do_request("post", url, data)
 
     def do_request(
         self,
-        method: str,
+        method: Literal["get", "post"],
         url: str,
         data: Optional["RequestDataType"] = None,
         stream: bool = False,
     ) -> "Response":
-        """Helper class to regroup requests and handle exceptions at the same location."""
+        """Helper class to regroup requests and handle exceptions at the same location.
+
+        Args:
+            method: HTTP method to use
+            url: URL to fetch
+            data: optional data to send
+            stream: if True, the response will be streamed
+
+        Raises:
+            ConnectionCouldNotResolve: The remote host could not be resolved.
+            ConnectionRefused: The connection was refused by the server.
+            ConnectionReset: The connection was reset during the request.
+            ConnectionTimeout: Exceeded the configured timeout
+            HTTPErrorInvalidPage: Special case of HTTP 400 if the error is caused by a nonexistent page.
+                This usually signals that available pages have been exhausted.
+
+        Returns:
+            the Response object
+        """
         headers = {"User-Agent": DEFAULT_UA}
         response = None
         try:

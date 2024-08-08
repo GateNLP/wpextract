@@ -99,6 +99,7 @@ ignore = [
 "**/tests/*" = [
     "D103", # Ignore method docstring errors in tests
     "PD901", # Allow `df` variable name in tests
+    "DOC"
 ]
 
 [tool.ruff.lint.pydocstyle]

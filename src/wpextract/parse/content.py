@@ -122,6 +122,9 @@ def _get_text(doc: BeautifulSoup) -> str:
     """Custom function to get document text.
 
     Extracts text from all elements, inserting newlines for <p> and <br> tags.
+
+    Returns:
+        The extracted text content
     """
     text = ""
     for e in doc.descendants:

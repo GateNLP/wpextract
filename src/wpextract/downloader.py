@@ -94,6 +94,12 @@ class WPDownloader:
         Args:
             obj_type: the type of the object
             plural: whether the name must be plural or not
+
+        Raises:
+            ValueError: if the object type is unknown
+
+        Returns:
+            A dict containing the export function (`export_func`) and the object name (`obj_name`)
         """
         export_func: Optional[ExportCallable] = None
         obj_name = ""

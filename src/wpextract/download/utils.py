@@ -30,7 +30,15 @@ def get_by_id(
 
 # Neat code part from https://codereview.stackexchange.com/questions/13027/joining-url-path-components-intelligently
 def url_path_join(*parts: str) -> str:
-    """Normalize url parts and join them with a slash."""
+    """Normalize url parts and join them with a slash.
+
+    Args:
+        parts: the parts of the url to join
+
+    Returns:
+        a normalized url
+
+    """
     schemes, netlocs, paths, queries, fragments = zip(
         *(urlsplit(part) for part in parts)
     )

@@ -14,6 +14,10 @@ doclint:
 docdev:
 	poetry run mkdocs serve --watch src
 
+.PHONY: types
+types:
+	poetry run mypy src/wpextract
+
 .PHONY: testonly
 testonly:
 	poetry run pytest

@@ -40,6 +40,24 @@ $ make lint
 
 Both library code and tests are linted (although tests are slightly less restrictive, see `pyproject.toml`).
 
+### Docstring Validation
+
+Additional checks for missing `Returns` and `Raises` sections in the docstrings can be run with:
+
+```shell-session
+$ make doclint
+```
+
+This will raise false positives for returns in abstract methods, and should be considered experimental
+
+## Type Checking
+
+To check types with mypy, run:
+
+```shell-session
+$ make types
+```
+
 ## Branch Management
 
 Generally your contribution should be made to the `dev` branch. We will then merge it into `main` only when it's time to release.
