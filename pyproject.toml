@@ -98,7 +98,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "**/tests/*" = [
-    "D103", # Ignore method docstring errors in tests
+    "D", # Ignore docstring errors in tests
     "PD901", # Allow `df` variable name in tests
     "DOC"
 ]

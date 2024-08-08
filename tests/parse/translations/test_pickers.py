@@ -33,3 +33,26 @@ def test_picker(datadir: Path, picker_cls: type[pickers.LangPicker], picker_file
         destination=None,
         lang="fr-FR",
     )
+
+
+class FaultyExtractPickerSelect(pickers.PolylangWidget):
+    def extract(self) -> None:
+        self._root_select(".not-a-real-element")
+
+
+class FaultyExtractPickerSelectOne(pickers.PolylangWidget):
+    def extract(self) -> None:
+        self._root_select_one(".not-a-real-element")
+
+
+@pytest.mark.parametrize(
+    "picker_cls", [FaultyExtractPickerSelect, FaultyExtractPickerSelectOne]
+)
+def test_picker_extract_error(datadir: Path, picker_cls: type[pickers.LangPicker]):
+    doc = BeautifulSoup((datadir / "polylang_widget.html").read_text(), "lxml")
+
+    picker = picker_cls(doc)
+    assert picker.matches()
+
+    with pytest.raises(pickers.ExtractionFailedError):
+        picker.extract()
