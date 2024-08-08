@@ -150,7 +150,7 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> "pd.Series[Any]"
 
     doc_c = copy.copy(doc)
     for child in list(doc_c.descendants):
-        if child.decomposed or type(child) == NavigableString:
+        if child.decomposed or isinstance(child, NavigableString):
             continue
 
         if isinstance(child, Tag) and child.name in EXCLUDED_CONTENT_TAGS:

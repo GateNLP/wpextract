@@ -147,11 +147,11 @@ class JSONEncoder(json.JSONEncoder):
             * - ``pd.Timestamp``, ``isoformat()``
             * - Dataclasses, ``dataclasses.asdict()``
         """
-        if type(o) == PdTimestamp:
+        if isinstance(o, PdTimestamp):
             return o.isoformat()
         if dataclasses.is_dataclass(o) and not isinstance(o, type):
             return dataclasses.asdict(o)
-        if type(o) == Language:
+        if isinstance(o, Language):
             return str(o)
 
         return super().default(o)
