@@ -2,12 +2,16 @@ import logging
 import random
 import time
 from http.cookies import SimpleCookie
-from typing import Optional, Union
+from typing import TYPE_CHECKING, Optional, Union
 
 import requests
 from requests.adapters import HTTPAdapter
 from requests.auth import HTTPBasicAuth, HTTPDigestAuth
 from urllib3 import Retry
+
+if TYPE_CHECKING:
+    from requests.models import Response
+    from requests.sessions import _Data as RequestDataType
 
 DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
 
@@ -131,7 +135,7 @@ EXCEPTION_CLS = {
 }
 
 
-def _handle_status(url, status_code, n_tries=None):
+def _handle_status(url: str, status_code: int, n_tries: Optional[int] = None) -> None:
     if 300 <= status_code < 400:
         logging.error(
             f'Too many redirects (status code {status_code}) while fetching "{url}"'
@@ -175,12 +179,12 @@ class RequestWait:
         self.wait_s = wait or 0
         self.random_wait = random_wait
 
-    def wait(self):
+    def wait(self) -> None:
         """Perform the specified wait."""
         if self.wait is None:
             return
 
-        wait_factor = 1
+        wait_factor = 1.0
         if self.random_wait:
             wait_factor = random.uniform(0.5, 1.5)
 
@@ -224,8 +228,7 @@ class RequestSession:
         if cookies is not None:
             self.set_cookies(cookies)
         if authorization is not None and (
-            type(authorization) is tuple
-            and len(authorization) == 2
+            (type(authorization) is tuple and len(authorization) == 2)
             or type(authorization) is HTTPBasicAuth
             or type(authorization) is HTTPDigestAuth
         ):
@@ -235,7 +238,9 @@ class RequestSession:
         self._mount_retry(backoff_factor, max_redirects, max_retries)
         self.waiter = RequestWait(wait, random_wait)
 
-    def _mount_retry(self, backoff_factor, max_redirects, max_retries):
+    def _mount_retry(
+        self, backoff_factor: float, max_redirects: int, max_retries: int
+    ) -> None:
         retry = Retry(
             total=max_retries,
             backoff_factor=backoff_factor,
@@ -248,15 +253,21 @@ class RequestSession:
         self.s.mount("http://", adapter)
         self.s.mount("https://", adapter)
 
-    def get(self, url):
+    def get(self, url: str) -> "Response":
         """Calls the get function from requests but handles errors to raise proper exception following the context."""
         return self.do_request("get", url)
 
-    def post(self, url, data=None):
+    def post(self, url: str, data: Optional["RequestDataType"] = None) -> "Response":
         """Calls the post function from requests but handles errors to raise proper exception following the context."""
         return self.do_request("post", url, data)
 
-    def do_request(self, method, url, data=None, stream=False):
+    def do_request(
+        self,
+        method: str,
+        url: str,
+        data: Optional["RequestDataType"] = None,
+        stream: bool = False,
+    ) -> "Response":
         """Helper class to regroup requests and handle exceptions at the same location."""
         headers = {"User-Agent": DEFAULT_UA}
         response = None
@@ -323,7 +334,7 @@ class RequestSession:
         """
         return self.s.cookies.get_dict()
 
-    def set_proxy(self, proxy) -> None:
+    def set_proxy(self, proxy: str) -> None:
         """Set a proxy to use for the request.
 
         Args:

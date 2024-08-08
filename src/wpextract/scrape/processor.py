@@ -1,7 +1,9 @@
 import urllib.parse
 from typing import Optional
 
-from bs4 import BeautifulSoup, SoupStrainer
+from bs4 import BeautifulSoup, SoupStrainer, Tag
+
+from wpextract.util.html import attribute_list_guard
 
 self_url_strainer = SoupStrainer(["head", "link", "meta"])
 
@@ -21,12 +23,21 @@ def get_link_canonical(doc: BeautifulSoup) -> Optional[str]:
     Returns:
         The canonical link or None if not present.
     """
+    if not doc.head:
+        return None
+
     link_canonical = doc.head.find("link", rel="canonical")
 
-    if link_canonical is None or not link_canonical.has_attr("href"):
+    if (
+        link_canonical is None
+        or not isinstance(link_canonical, Tag)
+        or not link_canonical.has_attr("href")
+    ):
         return None
 
     url = link_canonical["href"]
+
+    url = attribute_list_guard(url)
 
     return url if _is_url_valid(url) else None
 
@@ -40,12 +51,16 @@ def get_og_url(doc: BeautifulSoup) -> Optional[str]:
     Returns:
         The og:url or None if not present.
     """
+    if not doc.head:
+        return None
+
     og_url = doc.head.find("meta", property="og:url")
 
-    if og_url is None or not og_url.has_attr("content"):
+    if og_url is None or not isinstance(og_url, Tag) or not og_url.has_attr("content"):
         return None
 
     url = og_url["content"]
+    url = attribute_list_guard(url)
 
     return url if _is_url_valid(url) else None
 

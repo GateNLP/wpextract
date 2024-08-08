@@ -1,10 +1,16 @@
 from abc import ABC, abstractmethod
+from typing import Optional
 
-from bs4 import BeautifulSoup, PageElement, Tag
+from bs4 import BeautifulSoup, Tag
 from langcodes import Language
 
 from wpextract.parse.translations._resolver import TranslationLink
+from wpextract.util.html import attribute_list_guard
 from wpextract.util.str import squash_whitespace
+
+
+class ExtractionFailedError(Exception):
+    pass
 
 
 class LangPicker(ABC):
@@ -47,14 +53,14 @@ class LangPicker(ABC):
         if root is None:
             return False
 
-        if type(root) is Tag or len(root.children) == 1:
+        if isinstance(root, Tag):
             self.root_el = root
             return True
         else:
             raise TypeError(f"Root is not a tag, is {type(root)}")
 
     @abstractmethod
-    def get_root(self) -> PageElement:
+    def get_root(self) -> Optional[Tag]:
         """Retrieve the root element of the translation picker.
 
         Using the [`LangPicker.page_doc`][wpextract.parse.translations.LangPicker.page_doc] attribute (a [`bs4.BeautifulSoup`][bs4.BeautifulSoup] object representing the whole page), the root element of the picker shoudl be found and returned.
@@ -69,24 +75,41 @@ class LangPicker(ABC):
         """Extract the current language and translations from the doc."""
         pass
 
-    def set_current_lang(self, lang: str) -> None:
+    def set_current_lang(self, lang: str | list[str]) -> None:
         """Set the language of this doc.
 
         Args:
             lang: The locale string
         """
+        lang = attribute_list_guard(lang)
+
         self.current_language = Language.get(lang, normalize=True)
 
-    def add_translation(self, href: str, lang: str) -> None:
+    def add_translation(self, href: str | list[str], lang: str | list[str]) -> None:
         """Add a translation from the picker.
 
         Args:
             href: The link to the translated page.
             lang: The provided language code.
         """
+        href = attribute_list_guard(href)
+        lang = attribute_list_guard(lang)
+
         self.translations.append(
             TranslationLink(text=None, href=href, destination=None, lang=lang)
         )
+
+    def _build_extraction_fail_err(self, selector: str) -> ExtractionFailedError:
+        message = f"{self.__class__.__name__} reported it could extract but failed to extract {selector}"
+        return ExtractionFailedError(message)
+
+    def _extract_el(self, selector: str) -> Tag:
+        el = self.root_el.select_one(selector)
+
+        if el is None:
+            raise self._build_extraction_fail_err(selector)
+
+        return el
 
 
 class PolylangWidget(LangPicker):
@@ -113,7 +136,7 @@ class PolylangWidget(LangPicker):
     ```
     """
 
-    def get_root(self) -> PageElement:
+    def get_root(self) -> Optional[Tag]:
         """Get the root element.
 
         Returns:
@@ -132,7 +155,8 @@ class PolylangWidget(LangPicker):
             will usually go to the language's homepage
         * have the ``.current-lang`` class - this is the current language.
         """
-        current_lang = self.root_el.select_one(".lang-item.current-lang a")
+        current_lang = self._extract_el(".lang-item.current-lang a")
+
         self.set_current_lang(current_lang["lang"])
 
         other_langs = self.root_el.select(
@@ -167,7 +191,7 @@ class PolylangCustomDropdown(LangPicker):
     ```
     """
 
-    def get_root(self) -> PageElement:
+    def get_root(self) -> Optional[Tag]:
         """Get the root element of the picker.
 
         Returns:
@@ -182,7 +206,7 @@ class PolylangCustomDropdown(LangPicker):
         * have the ``.no-translation`` class
         * have the ``current-lang`` class
         """
-        current_lang = self.root_el.select_one(".current-lang-switcher")
+        current_lang = self._extract_el(".current-lang-switcher")
         self.set_current_lang(squash_whitespace(current_lang.get_text()))
 
         other_langs = self.root_el.select(".lang-item:not(.no-translation) a")

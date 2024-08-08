@@ -1,13 +1,19 @@
 import json
+from collections.abc import Iterable
+from typing import Any, Optional, Union
 from urllib.parse import urlsplit, urlunsplit
 
+from requests import Response
 
-def get_by_id(value, id):
+
+def get_by_id(
+    value: list[Union[dict[Any, Any], None]], idx: Any
+) -> Optional[dict[Any, Any]]:
     """Utility function to retrieve a value by and ID in a list of dicts.
 
     Args:
-        value: the dict to process
-        id: the id to get
+        value: the list of dicts to process
+        idx: the id to get
 
     Returns:
         The matching value or None if no match is found
@@ -15,14 +21,15 @@ def get_by_id(value, id):
     if value is None:
         return None
     for val in value:
-        if "id" in val.keys() and val["id"] == id:
+        if val is None:
+            continue
+        if "id" in val.keys() and val["id"] == idx:
             return val
     return None
 
 
-# Neat code part from https://codereview.stackexchange.com/questions/13027/joini
-# ng-url-path-components-intelligently
-def url_path_join(*parts):
+# Neat code part from https://codereview.stackexchange.com/questions/13027/joining-url-path-components-intelligently
+def url_path_join(*parts: str) -> str:
     """Normalize url parts and join them with a slash."""
     schemes, netlocs, paths, queries, fragments = zip(
         *(urlsplit(part) for part in parts)
@@ -35,7 +42,7 @@ def url_path_join(*parts):
     return urlunsplit((scheme, netloc, path, query, fragment))
 
 
-def first(sequence, default=""):
+def first(sequence: Iterable[str], default: str = "") -> str:
     """Return the first element of an iterable sequence or a default value.
 
     Args:
@@ -48,7 +55,7 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
-def get_content_as_json(response_obj):
+def get_content_as_json(response_obj: Response) -> Any:
     """Returns a json value even if a BOM is present in UTF-8 text.
 
     When a BOM is present (see issue #2), UTF-8 is not properly decoded by

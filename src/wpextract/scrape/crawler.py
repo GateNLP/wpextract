@@ -28,10 +28,10 @@ class ScrapeCrawl:
     """
 
     found_pages: dict[str, str]
-    failed_docs: list[str]
+    failed_docs: list[Path]
     crawled = False
 
-    def __init__(self, root_path: Path):
+    def __init__(self, root_path: Path) -> None:
         """Init a new crawl instance.
 
         Args:
@@ -53,7 +53,7 @@ class ScrapeCrawl:
     def _get_cache_path(self) -> Path:
         return self.root_path / "url_cache.json"
 
-    def _export(self):
+    def _export(self) -> None:
         with open(self._get_cache_path(), "w") as f:
             json.dump(
                 {
@@ -64,7 +64,7 @@ class ScrapeCrawl:
                 f,
             )
 
-    def _import(self):
+    def _import(self) -> None:
         with open(self._get_cache_path()) as f:
             data = json.load(f)
 

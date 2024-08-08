@@ -6,6 +6,10 @@ format:
 lint:
 	poetry run ruff check --fix
 
+.PHONY: doclint
+doclint:
+	poetry run ruff check --preview --select DOC
+
 .PHONY: docdev
 docdev:
 	poetry run mkdocs serve --watch src
