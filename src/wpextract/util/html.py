@@ -1,5 +1,5 @@
-from _warnings import warn
-from typing import TypeVar, Union
+from typing import Union
+
 
 def attr_concat(val: Union[str, list[str]]) -> str:
     """Concatenate attribute values if they are a list.
@@ -16,5 +16,5 @@ def attr_concat(val: Union[str, list[str]]) -> str:
         the value or the values concatenated
     """
     if isinstance(val, list):
-        return ' '.join(val)
+        return " ".join(val)
     return val

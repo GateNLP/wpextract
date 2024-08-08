@@ -3,12 +3,24 @@ import logging
 import pathlib
 from collections.abc import Generator
 from contextlib import contextmanager, nullcontext
-from typing import Any, Callable, Optional, ParamSpec, TypeVar
+from typing import TYPE_CHECKING, Any, Callable, Optional
 
 import click
 from click import BadParameter, Context, Parameter
 from click_option_group import optgroup
 from tqdm.contrib.logging import logging_redirect_tqdm
+
+if TYPE_CHECKING:
+    import sys
+    from typing import TypeVar
+
+    if sys.version_info >= (3, 10):
+        from typing import ParamSpec
+    else:
+        from typing_extensions import ParamSpec
+
+    P = ParamSpec("P")
+    R = TypeVar("R")
 
 EPILOG = "See https://wpextract.readthedocs.io/ for documentation."
 
@@ -47,11 +59,7 @@ def empty_directory(
     return path
 
 
-P = ParamSpec("P")
-R = TypeVar("R")
-
-
-def logging_options(cmd_func: Callable[P, R]) -> Callable[P, R]:
+def logging_options(cmd_func: "Callable[P, R]") -> "Callable[P, R]":
     @optgroup.group("logging")  # type: ignore[misc]
     @optgroup.option(
         "-l", "--log", type=file, help="File to log to, will suppress stdout."
@@ -60,7 +68,7 @@ def logging_options(cmd_func: Callable[P, R]) -> Callable[P, R]:
         "-v", "--verbose", is_flag=True, help="Increase log level to include debug logs"
     )
     @functools.wraps(cmd_func)
-    def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
+    def wrapper(*args: "P.args", **kwargs: "P.kwargs") -> "R":
         return cmd_func(*args, **kwargs)
 
     return wrapper  # type: ignore[no-any-return]

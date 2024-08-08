@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import Any, Optional, Sequence
+from collections.abc import Sequence
+from typing import Optional, Union
 
 from bs4 import BeautifulSoup, Tag
 from langcodes import Language
@@ -92,7 +93,7 @@ class LangPicker(ABC):
         """
         pass
 
-    def set_current_lang(self, lang: str | list[str]) -> None:
+    def set_current_lang(self, lang: Union[str, list[str]]) -> None:
         """Set the language of this doc.
 
         Args:
@@ -109,7 +110,6 @@ class LangPicker(ABC):
             href: The link to the translated page.
             lang: The provided language code.
         """
-
         self.translations.append(
             TranslationLink(text=None, href=href, destination=None, lang=lang)
         )

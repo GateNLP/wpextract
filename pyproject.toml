@@ -54,6 +54,7 @@ types-tqdm = "^4.66.0.20240417"
 types-beautifulsoup4 = "^4.12.0.20240511"
 pandas-stubs = "^2.2.2.240603"
 types-requests = "^2.32.0.20240712"
+typing-extensions = ">=4.0.0"
 
 
 [tool.poetry.group.docs]
