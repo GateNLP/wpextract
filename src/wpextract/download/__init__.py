@@ -1,2 +1,2 @@
-from .requestsession import AuthorizationType as AuthorizationType
-from .requestsession import RequestSession as RequestSession
+from wpextract.download.requestsession import AuthorizationType as AuthorizationType
+from wpextract.download.requestsession import RequestSession as RequestSession

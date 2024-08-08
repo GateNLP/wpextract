@@ -15,6 +15,20 @@
 ## Multilingual Extraction
 
 ::: wpextract.parse.translations.LangPicker
+    options:
+        members:
+            - current_language
+            - page_doc
+            - root_el
+            - translations
+            - add_translation
+            - extract
+            - get_root
+            - matches
+            - set_current_lang
+            - _root_select_one
+            - _root_select
+            - _build_extraction_fail_err
 
 ::: wpextract.parse.translations.PickerListType
 

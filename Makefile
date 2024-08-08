@@ -6,9 +6,17 @@ format:
 lint:
 	poetry run ruff check --fix
 
+.PHONY: doclint
+doclint:
+	poetry run ruff check --preview --select DOC
+
 .PHONY: docdev
 docdev:
 	poetry run mkdocs serve --watch src
+
+.PHONY: types
+types:
+	poetry run mypy src/wpextract
 
 .PHONY: testonly
 testonly:

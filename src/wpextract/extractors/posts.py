@@ -1,8 +1,9 @@
 import logging
 from pathlib import Path
-from typing import Optional
+from typing import NamedTuple, Optional
 
 import pandas as pd
+from langcodes import Language
 from pandas import DataFrame
 from tqdm.auto import tqdm
 
@@ -125,7 +126,8 @@ def load_posts(
         ["content.text", "links.internal", "links.external", "embeds", "images"]
     ] = posts_df.progress_apply(
         lambda r: extract_content_data(r["content.bs"], r["link"]), axis=1
-    )
+    )  # type: ignore[operator]
+    #   progress_apply is not stubbed, so mypy believes it is an attribute returning a series
 
     posts_df = posts_df[posts_df.columns.intersection(EXPORT_COLUMNS)]
     posts_df = posts_df.rename(columns=RENAME_COLUMNS, errors="ignore")
@@ -167,6 +169,13 @@ def resolve_post_media(registry: LinkRegistry, posts_df: DataFrame) -> DataFrame
     return posts_df
 
 
+class _PostRow(NamedTuple):
+    Index: int
+    translations: list[TranslationLink]
+    link: str
+    language: Language
+
+
 def ensure_translations_undirected(posts_df: DataFrame) -> DataFrame:
     """Create translation relationships if they are not bidirectional.
 
@@ -181,7 +190,8 @@ def ensure_translations_undirected(posts_df: DataFrame) -> DataFrame:
         The posts dataframe with bidirectional translations.
     """
     new_translations = []
-    for post in posts_df.itertuples():
+    post: _PostRow
+    for post in posts_df.itertuples():  # type: ignore[assignment]
         for translation_obj in post.translations:
             if translation_obj.destination is None:
                 logging.debug(
@@ -216,7 +226,7 @@ def ensure_translations_undirected(posts_df: DataFrame) -> DataFrame:
                 )
 
     for new_t_id, new_t_link in new_translations:
-        posts_df.loc[new_t_id, "translations"].append(new_t_link)
+        posts_df.loc[new_t_id, "translations"].append(new_t_link)  # type: ignore[union-attr]
 
     return posts_df
 

@@ -1,26 +1,26 @@
 import logging
-from typing import Optional
 from urllib.parse import urlparse, urlunparse
 
 from wpextract.extractors.data.links import LinkRegistry, ResolvableLink
 from wpextract.util.str import remove_ends
 
 
-def resolve_link(
-    registry: LinkRegistry, link: ResolvableLink
-) -> Optional[ResolvableLink]:
+def resolve_link(registry: LinkRegistry, link: ResolvableLink) -> ResolvableLink:
     """Find the linkable item from the registry the link refers to.
 
-    Will not resolve a link if it already has a destination.
+    Will not resolve a link if it already has a destination, or if it has no href.
 
     Args:
         registry: A link registry.
         link: A resolvable link
 
     Returns:
-        The resolved link.
+        The link with a destination if found.
     """
     if link.destination is not None:
+        return link
+
+    if link.href is None:
         return link
 
     href_parsed = urlparse(link.href)

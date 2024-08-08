@@ -1,7 +1,7 @@
 from typing import Optional
 
 
-def prefix_filename(file_name: str, prefix: Optional[str]):
+def prefix_filename(file_name: str, prefix: Optional[str]) -> str:
     """Adds an optional prefix to the file name.
 
     If the prefix is ``None``, no prefix will be added.

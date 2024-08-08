@@ -1,12 +1,12 @@
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import click
-from click import Choice
+from click import Choice, Context, Parameter
 from click_option_group import optgroup
 
 from wpextract.cli._shared import (
-    CMD_ARGS,
+    EPILOG,
     empty_directory,
     logging_options,
     setup_logging,
@@ -17,28 +17,13 @@ from wpextract.util.str import ensure_prefixes, ensure_suffix
 dl_types = ["categories", "media", "pages", "posts", "tags", "users"]
 
 
-def data_type_opts(cmd_func):
-    opts = [
-        click.option(
-            f"--{dl_type}/--no-{dl_type}",
-            default=True,
-            help=f"Enable or disable downloading {dl_type}",
-        )
-        for dl_type in dl_types
-    ]
-
-    for opt in opts:
-        cmd_func = opt(cmd_func)
-    return cmd_func
-
-
-def validate_wait(ctx, param, value):
+def validate_wait(ctx: Context, param: Parameter, value: Any) -> Any:
     if ctx.params.get("wait") is None and value is not False:
         raise click.BadParameter("cannot be used unless --wait/-w is also set.")
     return value
 
 
-@click.command(short_help="Download a WordPress site.", **CMD_ARGS)
+@click.command(short_help="Download a WordPress site.", epilog=EPILOG)
 @click.argument("target", type=str)
 @click.argument("out_json", type=click.Path(), callback=empty_directory)
 @click.option(
@@ -60,7 +45,7 @@ def validate_wait(ctx, param, value):
     multiple=True,
     help="Don't download the provided types. All others will be downloaded, default is to download all.",
 )
-@optgroup.group("authentication")
+@optgroup.group("authentication")  # type: ignore[misc]
 @optgroup.option("--proxy", type=str, help="Proxy server for requests")
 @optgroup.option(
     "--auth",
@@ -72,7 +57,7 @@ def validate_wait(ctx, param, value):
     type=str,
     help='Cookies for requests (format "cookie1=foo; cookie2=bar")',
 )
-@optgroup.group("request behaviour")
+@optgroup.group("request behaviour")  # type: ignore[misc]
 @optgroup.option(
     "--timeout",
     type=int,
@@ -132,7 +117,7 @@ def download(
     max_redirects: int,
     log: Optional[Path],
     verbose: bool,
-):
+) -> None:
     """Download a site's content using the WordPress REST API.
 
     TARGET is the base path of the WordPress installation, e.g. "https://example.org/"
@@ -149,17 +134,18 @@ def download(
     target = ensure_prefixes(target, ("http://", "https://"), "http://")
     target = ensure_suffix(target, "/")
 
+    auth_parsed: Optional[tuple[str, str]] = None
     if auth is not None:
         auth_list = auth.split(":")
         if len(auth_list) == 1:
-            auth = (auth_list[0], "")
+            auth_parsed = (auth_list[0], "")
         elif len(auth_list) >= 2:
-            auth = (auth_list[0], ":".join(auth_list[1:]))
+            auth_parsed = (auth_list[0], ":".join(auth_list[1:]))
 
     session = RequestSession(
         proxy=proxy,
         cookies=cookies,
-        authorization=auth,
+        authorization=auth_parsed,
         timeout=timeout,
         wait=wait,
         random_wait=random_wait,

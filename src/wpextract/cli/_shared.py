@@ -1,18 +1,28 @@
 import functools
 import logging
 import pathlib
+from collections.abc import Generator
 from contextlib import contextmanager, nullcontext
-from typing import Callable, Optional
+from typing import TYPE_CHECKING, Any, Callable, Optional
 
 import click
-from click import BadParameter
+from click import BadParameter, Context, Parameter
 from click_option_group import optgroup
 from tqdm.contrib.logging import logging_redirect_tqdm
 
-CMD_ARGS = {
-    "epilog": "See https://wpextract.readthedocs.io/ for documentation.",
-}
+if TYPE_CHECKING:
+    import sys
+    from typing import TypeVar
 
+    if sys.version_info >= (3, 10):
+        from typing import ParamSpec
+    else:
+        from typing_extensions import ParamSpec
+
+    P = ParamSpec("P")
+    R = TypeVar("R")
+
+EPILOG = "See https://wpextract.readthedocs.io/ for documentation."
 
 file = click.Path(
     exists=False, dir_okay=False, file_okay=True, writable=True, path_type=pathlib.Path
@@ -27,7 +37,9 @@ directory = click.Path(
 )
 
 
-def empty_directory(ctx, param, value: str):
+def empty_directory(
+    ctx: Context, param: Parameter, value: Any
+) -> Optional[pathlib.Path]:
     if value is None:
         return value
 
@@ -47,8 +59,8 @@ def empty_directory(ctx, param, value: str):
     return path
 
 
-def logging_options(cmd_func: Callable) -> Callable:
-    @optgroup.group("logging")
+def logging_options(cmd_func: "Callable[P, R]") -> "Callable[P, R]":
+    @optgroup.group("logging")  # type: ignore[misc]
     @optgroup.option(
         "-l", "--log", type=file, help="File to log to, will suppress stdout."
     )
@@ -56,10 +68,10 @@ def logging_options(cmd_func: Callable) -> Callable:
         "-v", "--verbose", is_flag=True, help="Increase log level to include debug logs"
     )
     @functools.wraps(cmd_func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args: "P.args", **kwargs: "P.kwargs") -> "R":
         return cmd_func(*args, **kwargs)
 
-    return wrapper
+    return wrapper  # type: ignore[no-any-return]
 
 
 def setup_logging(verbose: bool, log_path: Optional[pathlib.Path]) -> None:
@@ -72,7 +84,7 @@ def setup_logging(verbose: bool, log_path: Optional[pathlib.Path]) -> None:
 
 
 @contextmanager
-def setup_tqdm_redirect(should_redirect: bool):
+def setup_tqdm_redirect(should_redirect: bool) -> Generator[None, None, None]:
     """Conditionally yields the tqdm log redirect context.
 
     If `should_redirect` is false, the [`nullcontext`][contextlib.nullcontext] is yielded.

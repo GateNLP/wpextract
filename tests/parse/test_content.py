@@ -35,6 +35,17 @@ def test_extract_links(datadir: Path):
     assert external == [Link(text="An external link", href="https://gate.ac.uk")]
 
 
+def test_extract_links_no_href():
+    doc = BeautifulSoup("<a>No href</a>", "lxml")
+
+    internal, external = extract_links(doc, "https://example.org/home")
+
+    assert internal == []
+    assert external == [
+        Link(text="No href", href=None),
+    ]
+
+
 def test_extract_embeds(datadir: Path):
     doc = BeautifulSoup((datadir / "embeds.html").read_text(), "lxml")
 
@@ -70,7 +81,7 @@ def test_extract_images(datadir: Path):
     ]
 
 
-def test_extract_image_without_src(datadir: Path):
+def test_extract_image_without_src():
     doc = BeautifulSoup("<img alt='No src'>", "lxml")
 
     images = extract_images(doc, "https://example.org/home")

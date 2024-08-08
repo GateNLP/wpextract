@@ -54,7 +54,7 @@ class WPExtractor:
         scrape_root: Optional[Path] = None,
         json_prefix: Optional[str] = None,
         translation_pickers: Optional[PickerListType] = None,
-    ):
+    ) -> None:
         """Create a new extractor.
 
         Args:
@@ -90,10 +90,10 @@ class WPExtractor:
         self._resolve_post_links()
         logging.info("Extraction complete")
 
-    def _prefix_filename(self, file_name):
+    def _prefix_filename(self, file_name: str) -> str:
         return prefix_filename(file_name, self.json_prefix)
 
-    def _crawl_scrape(self):
+    def _crawl_scrape(self) -> None:
         if self.scrape_root is None:
             logging.info("No scrape root specified, skipping")
             self.scrape_url_mapping = {}
@@ -103,7 +103,7 @@ class WPExtractor:
         crawl.crawl()
         self.scrape_url_mapping = crawl.get_link_abs_path()
 
-    def _extract_posts(self):
+    def _extract_posts(self) -> None:
         json_file = self.json_root / self._prefix_filename("posts.json")
         self.posts = load_posts(
             path=json_file,
@@ -112,27 +112,29 @@ class WPExtractor:
             translation_pickers=self.translation_pickers,
         )
 
-    def _extract_media(self):
+    def _extract_media(self) -> None:
         json_file = self.json_root / self._prefix_filename("media.json")
         self.media = load_media(json_file, self.link_registry)
 
-    def _extract_tags(self):
+    def _extract_tags(self) -> None:
         json_file = self.json_root / self._prefix_filename("tags.json")
         self.tags = load_tags(json_file, self.link_registry)
 
-    def _extract_categories(self):
+    def _extract_categories(self) -> None:
         json_file = self.json_root / self._prefix_filename("categories.json")
         self.categories = load_categories(json_file, self.link_registry)
 
-    def _extract_users(self):
+    def _extract_users(self) -> None:
         json_file = self.json_root / self._prefix_filename("users.json")
         self.users = load_users(json_file)
 
-    def _extract_pages(self):
+    def _extract_pages(self) -> None:
         json_file = self.json_root / self._prefix_filename("pages.json")
         self.pages = load_pages(json_file, self.link_registry)
 
-    def _resolve_post_links(self):
+    def _resolve_post_links(self) -> None:
+        if self.posts is None:
+            raise ValueError("Posts must be extracted before resolving links")
         self.posts = resolve_post_links(self.link_registry, self.posts)
         if "translations" in self.posts.columns:
             self.posts = resolve_post_translations(self.link_registry, self.posts)

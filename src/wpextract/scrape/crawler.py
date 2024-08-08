@@ -8,7 +8,7 @@ from tqdm.auto import tqdm
 from wpextract.scrape.processor import extract_self_url, self_url_strainer
 
 # Increment to invalidate old caches
-SCRAPE_CRAWL_VERSION = 1
+SCRAPE_CRAWL_VERSION = 2
 
 
 class ScrapeCrawl:
@@ -31,7 +31,7 @@ class ScrapeCrawl:
     failed_docs: list[str]
     crawled = False
 
-    def __init__(self, root_path: Path):
+    def __init__(self, root_path: Path) -> None:
         """Init a new crawl instance.
 
         Args:
@@ -53,7 +53,7 @@ class ScrapeCrawl:
     def _get_cache_path(self) -> Path:
         return self.root_path / "url_cache.json"
 
-    def _export(self):
+    def _export(self) -> None:
         with open(self._get_cache_path(), "w") as f:
             json.dump(
                 {
@@ -64,7 +64,7 @@ class ScrapeCrawl:
                 f,
             )
 
-    def _import(self):
+    def _import(self) -> None:
         with open(self._get_cache_path()) as f:
             data = json.load(f)
 
@@ -95,14 +95,13 @@ class ScrapeCrawl:
             doc_url = extract_self_url(doc)
 
             if doc_url is None:
-                self.failed_docs.append(path)
-                logging.warning(f'Failed to find self-URL in doc "{path}"')
+                self.failed_docs.append(relative_path)
+                logging.warning(f'Failed to find self-URL in doc "{relative_path}"')
                 continue
 
-            if doc_url in self.found_pages:
+            if doc_url in self.found_pages.values():
                 logging.info(
-                    f"URL {doc_url} retrieved for {relative_path}, but has already been"
-                    f"found for {self.found_pages[relative_path]}"
+                    f"URL {doc_url} retrieved for {relative_path}, but has already been found"
                 )
                 continue
 

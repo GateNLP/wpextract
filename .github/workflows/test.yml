@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main", "dev"]
   pull_request:
-    branches: ["main", "dev"]
+    branches: [ "main", "dev", "release/*" ]
 
 permissions:
   contents: read
@@ -32,5 +32,7 @@ jobs:
         run: poetry install --no-interaction
       - name: Build Project
         run: poetry build
+      - name: Type check
+        run: poetry run mypy src/wpextract
       - name: Run tests
         run: poetry run pytest

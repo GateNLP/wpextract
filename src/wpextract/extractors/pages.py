@@ -75,7 +75,8 @@ def load_pages(path: Path, link_registry: LinkRegistry) -> Optional[pd.DataFrame
         ["content.text", "links.internal", "links.external", "embeds", "images"]
     ] = pages_df.progress_apply(
         lambda r: extract_content_data(r["content.bs"], r["link"]), axis=1
-    )
+    )  # type: ignore[operator]
+    #   progress_apply is not stubbed, so mypy believes it is an attribute returning a series
 
     pages_df = pages_df[pages_df.columns.intersection(EXPORT_COLUMNS)]
     pages_df = pages_df.rename(columns=RENAME_COLUMNS, errors="ignore")

@@ -1,5 +1,5 @@
 import logging
-from typing import Optional
+from typing import Any, Optional
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -9,14 +9,12 @@ import wpextract.parse.translations._pickers as pickers
 DEFAULT_PICKERS = [pickers.PolylangWidget, pickers.PolylangCustomDropdown]
 PickerListType = list[type[pickers.LangPicker]]
 
-PageTranslationData = pd.Series
-
 
 def extract_translations(
     page_doc: Optional[BeautifulSoup],
     link: str,
     translation_pickers: Optional[PickerListType],
-) -> PageTranslationData:
+) -> "pd.Series[Any]":
     """Get a list of URLs linked as translations.
 
     Args:
@@ -38,7 +36,11 @@ def extract_translations(
         if not picker.matches():
             continue
 
-        picker.extract()
+        try:
+            picker.extract()
+        except pickers.ExtractionFailedError as e:
+            logging.warning(e)
+            break
 
         return pd.Series([picker.current_language, picker.translations])
 

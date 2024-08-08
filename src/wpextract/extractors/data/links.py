@@ -32,7 +32,7 @@ class LinkRegistry:
     links: list[Linkable]
     url_index_cache: dict[str, int]
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Init a new registry."""
         self.links = []
 
@@ -82,7 +82,7 @@ class LinkRegistry:
             )
         self._refresh_cache()
 
-    def _refresh_cache(self):
+    def _refresh_cache(self) -> None:
         self.url_index_cache = {}
 
         for i, link in enumerate(self.links):

@@ -4,7 +4,7 @@ from typing import Optional
 import click
 
 from wpextract.cli._shared import (
-    CMD_ARGS,
+    EPILOG,
     directory,
     empty_directory,
     logging_options,
@@ -13,7 +13,7 @@ from wpextract.cli._shared import (
 )
 
 
-@click.command(short_help="Extract site to a dataset.", **CMD_ARGS)
+@click.command(short_help="Extract site to a dataset.", epilog=EPILOG)
 @click.argument("json_root", type=directory)
 @click.argument(
     "out_dir", type=click.Path(), callback=empty_directory, metavar="DIRECTORY"
@@ -32,7 +32,7 @@ def extract(
     json_prefix: Optional[str],
     log: Optional[Path],
     verbose: bool,
-):
+) -> None:
     """Converts the downloaded data files into a dataset.
 
     JSON_ROOT is a directory containing a JSON dump of the data files, such as one generated with wpextract download.

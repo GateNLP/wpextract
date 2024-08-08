@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Union
 
 from langcodes import Language
 
@@ -9,8 +10,8 @@ from wpextract.extractors.data.links import ResolvableLink
 class TranslationLink(ResolvableLink):
     """A link to an alternative version of this article in a different language."""
 
-    lang: str
-    """Raw language code."""
+    lang: Union[str, Language]
+    """Raw language code, or existing language object if derived from another source."""
 
     @property
     def language(self) -> Language:
