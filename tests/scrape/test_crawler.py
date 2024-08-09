@@ -31,7 +31,9 @@ def test_scrape_crawl(shared_datadir):
     assert crawl.get_link_abs_path() == expected_link_abs_path(root_path)
 
     assert (root_path / "url_cache.json").is_file()
-    assert json.loads((root_path / "url_cache.json").read_text()) == json.loads((shared_datadir / "expected_url_cache.json" ).read_text())
+    assert json.loads((root_path / "url_cache.json").read_text()) == json.loads(
+        (shared_datadir / "expected_url_cache.json").read_text()
+    )
 
 
 def test_recrawl_different_version(caplog, shared_datadir: Path):
