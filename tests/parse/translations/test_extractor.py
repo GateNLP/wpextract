@@ -48,3 +48,11 @@ def test_error_extracting(caplog, parsed_page):
 
     assert res.iloc[0] is None
     assert "but failed to select element with: .dummy" in caplog.text
+
+
+def test_doc_is_done():
+    res = extract_translations(
+        None, "https://example.org/current-lang-page/", translation_pickers=None
+    )
+    assert res.iloc[0] is None
+    assert res.iloc[1] == []
