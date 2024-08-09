@@ -25,7 +25,7 @@ def downloader(datadir, mocker):
 
 
 def _fake_api_return():
-    return [{"id": idx, "title": "dummy return"} for idx in range(20)]
+    return [{"id": idx, "title": "dummy return"} for idx in range(20)], 20
 
 
 def _mocked_exporter(mocker, datatype):
@@ -75,8 +75,6 @@ def test_download_data_type(datadir, mocker, mock_request_session, datatype, val
         value,
         None,
         None,
-        True,
-        kwargs={"comments": False} if datatype == "posts" else {},
     )
 
     exporter_func.assert_called_once()
@@ -100,7 +98,7 @@ def test_prefix(datadir, mocker, mock_request_session, prefix, expected_name):
     downloader.download()
 
     exporter_func.assert_called_once_with(
-        _fake_api_return(),
+        _fake_api_return()[0],
         datadir / expected_name,
     )
 

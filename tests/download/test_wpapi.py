@@ -3,21 +3,28 @@ import json
 import pytest
 from responses import matchers
 from wpextract.download.exceptions import NoWordpressApi
+from wpextract.download.requestsession import HTTPError
 from wpextract.download.wpapi import WPApi
 
 FAKE_TARGET = "https://example.org"
+WP_POSTS_ENDPOINT = f"{FAKE_TARGET}/wp-json/wp/v2/posts"
 
 
-def _get_page_url(p, datatype="posts", add_per_page=False):
+def _get_page_url(p, datatype="posts"):
     return f"{FAKE_TARGET}/wp-json/wp/v2/{datatype}?page={p}"
+
+
+def _fake_data_resp(n, start_idx):
+    return [
+        {"id": idx, "title": f"dummy return {idx}"}
+        for idx in range(start_idx, start_idx + n)
+    ]
 
 
 def _fake_api_page(page=1, per_page=10):
     assert page > 0
-    return [
-        {"id": idx + (page - 1) * per_page, "title": "dummy return"}
-        for idx in range(1, per_page + 1)
-    ]
+
+    return _fake_data_resp(per_page, (page - 1) * per_page + 1)
 
 
 no_more_pages_body = {
@@ -25,6 +32,13 @@ no_more_pages_body = {
     "message": "The page number requested is larger than the number of pages available.",
     "data": {"status": 400},
 }
+
+
+def test_data_resp():
+    data = _fake_data_resp(10, 1)
+    assert data[0]["id"] == 1
+    assert data[9]["id"] == 10
+    assert len(data) == 10
 
 
 def test_api_page_fake():
@@ -40,11 +54,12 @@ def test_api_page_fake():
         _fake_api_page(0)
 
 
-class TestBasicInfo:
-    @pytest.fixture()
-    def mock_api_root(self, datadir):
-        return json.loads((datadir / "api_root.json").read_text())
+@pytest.fixture()
+def mock_api_root(datadir):
+    return json.loads((datadir / "api_root.json").read_text())
 
+
+class TestBasicInfo:
     def test_happy(self, mock_api_root, mocked_responses):
         mocked_responses.get(f"{FAKE_TARGET}/wp-json", json=mock_api_root)
         wpapi = WPApi(target=FAKE_TARGET)
@@ -106,8 +121,6 @@ class TestCrawl:
 
     def _mock_n_pages(self, responses, n, with_per_page):
         headers = {"X-WP-Total": "30", "X-WP-TotalPages": "3"}
-        endpoint = f"{FAKE_TARGET}/wp-json/wp/v2/posts"
-
         resps = []
 
         for i in range(1, n + 1):
@@ -117,7 +130,7 @@ class TestCrawl:
 
             resps.append(
                 responses.get(
-                    endpoint,
+                    WP_POSTS_ENDPOINT,
                     match=[matchers.query_param_matcher(params)],
                     json=_fake_api_page(i),
                     headers=headers,
@@ -130,7 +143,7 @@ class TestCrawl:
 
         resps.append(
             responses.get(
-                endpoint,
+                WP_POSTS_ENDPOINT,
                 match=[matchers.query_param_matcher(params)],
                 status=400,
                 json=no_more_pages_body,
@@ -155,7 +168,7 @@ class TestCrawl:
 
     def test_start_page_2(self, wpapi, mock_optional_3_pages_with_per_page):
         entries, total_entries = wpapi.crawl_pages(POSTS_API_PATH, start=11)
-        self._assert_ids(entries, 11, 30)
+        self._assert_ids(entries, 12, 30)
 
         resps = mock_optional_3_pages_with_per_page
         _assert_none_called(resps[0])
@@ -197,7 +210,7 @@ class TestCrawl:
     def test_start_limit_across_pages(self, wpapi, mock_optional_3_pages_with_per_page):
         entries, total_entries = wpapi.crawl_pages(POSTS_API_PATH, start=5, num=10)
         assert len(entries) == 10
-        self._assert_ids(entries, 5, 14)
+        self._assert_ids(entries, 6, 15)
 
         # Should only call the first 2 pages
         resps = mock_optional_3_pages_with_per_page
@@ -209,7 +222,7 @@ class TestCrawl:
     ):
         entries, total_entries = wpapi.crawl_pages(POSTS_API_PATH, start=5, num=5)
         assert len(entries) == 5
-        self._assert_ids(entries, 5, 9)
+        self._assert_ids(entries, 6, 10)
 
         resps = mock_optional_3_pages_with_per_page
         _assert_all_called(resps[0])
@@ -243,3 +256,92 @@ class TestCrawl:
         entries, total_entries = wpapi.crawl_pages(POSTS_API_PATH)
         assert len(entries) == 5
         self._assert_ids(entries, 1, 5)
+
+    def test_http_error_first_page(self, wpapi, mocked_responses):
+        mocked_responses.get(WP_POSTS_ENDPOINT, status=500)
+        with pytest.raises(HTTPError):
+            wpapi.crawl_pages(POSTS_API_PATH)
+
+    def test_http_error_after_first_page(self, caplog, wpapi, mocked_responses):
+        headers = {"X-WP-Total": "30", "X-WP-TotalPages": "3"}
+        mocked_responses.get(
+            WP_POSTS_ENDPOINT,
+            match=[matchers.query_param_matcher({"page": 1})],
+            json=_fake_api_page(1),
+            headers=headers,
+        )
+        mocked_responses.get(
+            WP_POSTS_ENDPOINT,
+            match=[matchers.query_param_matcher({"page": 2})],
+            status=500,
+            headers=headers,
+        )
+
+        entries, total_entries = wpapi.crawl_pages(POSTS_API_PATH)
+        assert len(entries) == 10
+        assert total_entries == 30
+        self._assert_ids(entries, 1, 10)
+
+        assert "HTTPError500" in caplog.text
+
+
+data_type_params = [
+    pytest.param(f"get_{data_type}", data_type, id=data_type)
+    for data_type in [
+        "comments",
+        "posts",
+        "tags",
+        "categories",
+        "users",
+        "media",
+        "pages",
+    ]
+]
+
+
+@pytest.mark.parametrize(("test_method", "cache_prop"), data_type_params)
+@pytest.mark.parametrize(
+    ("start", "num"),
+    [
+        pytest.param(None, None, id="fetch all"),
+        pytest.param(1, None, id="fetch all from start"),
+        pytest.param(5, None, id="fetch all from mid-first page"),
+        pytest.param(11, None, id="fetch all from second page "),
+        pytest.param(5, 10, id="fetch across pages"),
+        pytest.param(None, 15, id="fetch from start with limit"),
+    ],
+)
+class TestGetData:
+    @pytest.fixture()
+    def wpapi(self, mocker, mock_api_root, start, num):
+        # start, num = req_opts
+        api = WPApi(target=FAKE_TARGET)
+        api.has_v2 = True
+        api.get_basic_info = mocker.Mock()
+        start = 0 if start is None else start
+        start_idx = start + 1
+        num = (30 - start) if num is None else num
+        fake_data = _fake_data_resp(num, start_idx)
+        api.crawl_pages = mocker.Mock(return_value=(fake_data, 30))
+
+        return api
+
+    @pytest.fixture()
+    def wpapi_method(self, wpapi, test_method):
+        return getattr(wpapi, test_method)
+
+    @pytest.fixture()
+    def get_wpapi_cache(self, wpapi, cache_prop):
+        return lambda: getattr(wpapi, cache_prop)
+
+    def test_get_data(self, wpapi_method, get_wpapi_cache, start, num):
+        data, n_max = wpapi_method(start=start, num=num)
+
+        start = 0 if start is None else start
+        start_idx = start + 1
+        num = 30 - start if num is None else num
+
+        assert len(data) == num
+        assert data[0]["id"] == start_idx
+        assert data[-1]["id"] == start + num
+        assert n_max == 30

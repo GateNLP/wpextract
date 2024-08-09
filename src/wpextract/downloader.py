@@ -42,6 +42,7 @@ class WPDownloader:
         self._test_session()
         self.scanner = WPApi(self.target, session=self.session)
         self.json_prefix = json_prefix
+        self.media_cache: Optional[list[WPObject]] = None
 
     def _test_session(self) -> None:
         try:
@@ -76,7 +77,7 @@ class WPDownloader:
             dest: destination directory for media
         """
         logging.info("Pulling media URLs")
-        media, slugs = self.scanner.get_media_urls("all", cache=True)
+        media, slugs = self.scanner.get_media_urls("all", media_cache=self.media_cache)
 
         if len(media) == 0:
             logging.warning("No media found corresponding to the criteria")
@@ -137,18 +138,12 @@ class WPDownloader:
         obj_type: int,
         start: Optional[int] = None,
         limit: Optional[int] = None,
-        cache: bool = True,
     ) -> None:
         prop = self._get_fetch_or_list_type(obj_type, plural=True)
         logging.info(f"Downloading {prop['obj_name']}")
 
         try:
-            kwargs = {}
-            if obj_type == WPApi.POST:
-                kwargs = {"comments": False}
-            obj_list = self.scanner.get_obj_list(
-                obj_type, start, limit, cache, kwargs=kwargs
-            )
+            obj_list, _ = self.scanner.get_obj_list(obj_type, start, limit)
 
             WPDownloader.export_decorator(
                 export_func=prop["export_func"],
@@ -157,6 +152,8 @@ class WPDownloader:
                 json_prefix=self.json_prefix,
                 values=obj_list,
             )
+            if obj_type == WPApi.MEDIA:
+                self.media_cache = obj_list
         except WordPressApiNotV2:
             logging.error("The API does not support WP V2")
         except OSError as e:

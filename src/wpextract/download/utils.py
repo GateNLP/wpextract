@@ -1,5 +1,5 @@
 import json
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from typing import Any, Optional, Union
 from urllib.parse import urlsplit, urlunsplit
 
@@ -7,7 +7,7 @@ from requests import Response
 
 
 def get_by_id(
-    value: list[Union[dict[Any, Any], None]], idx: Any
+    value: Sequence[Union[dict[Any, Any], None]], idx: Any
 ) -> Optional[dict[Any, Any]]:
     """Utility function to retrieve a value by and ID in a list of dicts.
 

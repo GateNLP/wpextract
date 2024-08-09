@@ -40,7 +40,13 @@ class ConnectionTimeout(Exception):
     pass
 
 
-class HTTPError400(Exception):
+class HTTPError(Exception):
+    """Base class for HTTP errors."""
+
+    pass
+
+
+class HTTPError400(HTTPError):
     """HTTP Bad Request.
 
     See Also:
@@ -50,7 +56,7 @@ class HTTPError400(Exception):
     pass
 
 
-class HTTPErrorInvalidPage(Exception):
+class HTTPErrorInvalidPage(HTTPError):
     """Special case of HTTP 400 if the error is caused by a nonexistent page.
 
     This indicates the last page has been passed and all items have been retrieved.
@@ -59,38 +65,32 @@ class HTTPErrorInvalidPage(Exception):
     pass
 
 
-class HTTPError401(Exception):
+class HTTPError401(HTTPError):
     """HTTP Unauthorized."""
 
     pass
 
 
-class HTTPError403(Exception):
+class HTTPError403(HTTPError):
     """HTTP Forbidden."""
 
     pass
 
 
-class HTTPError404(Exception):
+class HTTPError404(HTTPError):
     """HTTP Not Found."""
 
     pass
 
 
-class HTTPError500(Exception):
+class HTTPError500(HTTPError):
     """HTTP Internal Server Error."""
 
     pass
 
 
-class HTTPError502(Exception):
+class HTTPError502(HTTPError):
     """HTTP Bad Gateway."""
-
-    pass
-
-
-class HTTPError(Exception):
-    """A generic HTTP error with an unexpected code."""
 
     pass
 
@@ -333,9 +333,6 @@ class RequestSession:
         ):
             json_body = response.json()
             if "code" in json_body and "invalid_page_number" in json_body["code"]:
-                logging.debug(
-                    "Received HTTP 400 error which appears to be an invalid page error, probably reached the end."
-                )
                 raise HTTPErrorInvalidPage
 
         n_tries = None

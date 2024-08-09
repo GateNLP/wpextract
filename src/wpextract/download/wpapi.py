@@ -3,7 +3,7 @@ import logging
 import math
 from collections.abc import Sequence
 from json.decoder import JSONDecodeError
-from typing import Any, Literal, Optional, Union, cast
+from typing import Any, Literal, Optional, Union
 from urllib.parse import urlencode
 
 from tqdm.auto import tqdm
@@ -14,6 +14,7 @@ from wpextract.download.exceptions import (
     WordPressApiNotV2,
 )
 from wpextract.download.requestsession import (
+    HTTPError,
     HTTPError404,
     HTTPErrorInvalidPage,
     RequestSession,
@@ -25,7 +26,7 @@ from wpextract.download.utils import (
 )
 
 WPObject = dict[str, Any]
-ObjectCache = Optional[list[Optional[WPObject]]]
+ObjectsAndTotal = tuple[list[WPObject], Optional[int]]
 
 
 class WPApi:
@@ -80,28 +81,11 @@ class WPApi:
         self.description = None
         self.url = target
         self.basic_info: Optional[dict[str, Any]] = None
-        self.posts: ObjectCache = None
-        self.tags: ObjectCache = None
-        self.categories: ObjectCache = None
-        self.users: ObjectCache = None
-        self.media: ObjectCache = None
-        self.pages: ObjectCache = None
-        self.comments_loaded = False
-        self.orphan_comments: list[WPObject] = []
-        self.comments: ObjectCache = None
 
         if session is not None:
             self.s = session
         else:
             self.s = RequestSession()
-
-    def get_orphans_comments(self) -> list[dict[Any, Any]]:
-        """Returns the list of comments for which a post hasn't been found.
-
-        Returns:
-            The list of orphan comments
-        """
-        return self.orphan_comments
 
     def get_basic_info(self) -> dict[Any, Any]:
         """Collects and stores basic information about the target.
@@ -161,6 +145,7 @@ class WPApi:
 
         Raises:
             WordPressApiNotV2: The target does not support the WordPress API v2
+            HTTPError: An HTTP error is encountered before any content is retrieved
 
         Returns:
             A tuple containing the list of entries and the total number of entries
@@ -171,7 +156,7 @@ class WPApi:
         total_entries = 0
         total_pages = 0
         more_entries = True
-        entries = []
+        entries: list[WPObject] = []
         base_url = url
         entries_left = 1
         per_page = 10
@@ -204,7 +189,19 @@ class WPApi:
                     if start is not None and total_entries < start:
                         start = total_entries - 1
             except HTTPErrorInvalidPage:
+                logging.debug(
+                    "Received HTTP 400 error which appears to be an invalid page error, probably reached the end."
+                )
                 break
+            except HTTPError as e:
+                if len(entries) == 0:
+                    raise e
+
+                logging.exception(
+                    f"Error while fetching page {page}. Stopping at {len(entries)} entries."
+                )
+                break
+
             except Exception as e:
                 # TODO: wrong error?
                 raise WordPressApiNotV2 from e
@@ -223,7 +220,7 @@ class WPApi:
                         if start is not None:
                             entries_left -= len(json_content)
                     elif start is not None and page == math.floor(start / per_page) + 1:
-                        first_idx = (start % per_page) - 1
+                        first_idx = start % per_page
                         if num is None or (
                             num is not None and len(json_content[first_idx:]) < num
                         ):
@@ -296,314 +293,121 @@ class WPApi:
 
         return content
 
-    def get_from_cache(
-        self,
-        cache: Optional[Sequence[Union[WPObject, None]]],
-        start: Optional[int] = None,
-        num: Optional[int] = None,
-        force: bool = False,
-    ) -> Optional[list[WPObject]]:
-        """Tries to fetch data from the given cache, also verifies first if WP-JSON is supported.
-
-        Args:
-            cache: the cache to fetch from
-            start: the start index
-            num: the number of entries to retrieve
-            force: whether to force a re-fetch
-
-        Raises:
-            WordPressApiNotV2: The target does not support the WordPress API v2
-
-        Returns:
-            The cached data if available, None otherwise
-        """
-        if self.has_v2 is None:
-            self.get_basic_info()
-        if not self.has_v2:
-            raise WordPressApiNotV2
-        if cache is not None and start is not None and len(cache) <= start:
-            start = len(cache) - 1
-        if cache is not None and not force:
-            if (
-                start is not None
-                and num is None
-                and len(cache) > start
-                and None not in cache[start:]
-            ):
-                # If start is specified and not num, we want to return the posts in cache only if they were already cached
-                return cache[start:]  # type: ignore
-            elif (
-                start is None
-                and num is not None
-                and len(cache) > num
-                and None not in cache[:num]
-            ):
-                # If num is specified and not start, we want to do something similar to the above
-                return cache[:num]  # type: ignore
-            elif (
-                start is not None
-                and num is not None
-                and len(cache) > start + num
-                and None not in cache[start:num]
-            ):
-                return cache[start : start + num]  # type: ignore
-            elif (
-                start is None and (num is None or num > len(cache))
-            ) and None not in cache:
-                return cache  # type: ignore
-
-        return None
-
-    def update_cache(
-        self,
-        cache: ObjectCache,
-        values: Sequence[Optional[WPObject]],
-        total_entries: int,
-        start: Optional[int] = None,
-        num: Optional[int] = None,
-    ) -> list[Union[WPObject, None]]:
-        """Push new values to the cache.
-
-        Args:
-            cache: the cache to update
-            values: the values to push
-            total_entries: the total number of entries
-            start: the start index
-            num: the number of entries to retrieve
-
-        Returns:
-            The updated cache
-        """
-        if cache is None:
-            cache = list(values)
-        elif len(values) > 0:
-            s = 0 if start is None else start
-            if start is not None and start >= total_entries:
-                s = total_entries - 1
-            n = total_entries if num is None else num
-            if n is not None and s + n > total_entries:
-                n = total_entries - s
-            if n > len(cache):
-                cache += [None] * (n - len(cache))
-            for el in values:
-                cache[s] = el
-                s += 1
-                if s == n:
-                    break
-        if len(cache) != total_entries:
-            if start is not None and start < total_entries:
-                empty_sec: list[Union[WPObject, None]] = [None] * start
-                cache = empty_sec + cache
-            if num is not None:
-                cache += [None] * (total_entries - len(cache))
-        return cache
-
     def get_comments(
         self,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        force: bool = False,
-    ) -> list[WPObject]:
+    ) -> ObjectsAndTotal:
         """Retrieves all comments.
 
         Args:
             start: the start index
             num: the number of entries to retrieve
-            force: ignore cache and force a re-fetch
 
         Returns:
-            The list of comments
+            The list of comments and total number of comments available
         """
-        cached_comments: Optional[list[WPObject]] = self.get_from_cache(
-            self.comments, start, num, force
-        )
-        if cached_comments is not None:
-            return cached_comments
-        comments, total_entries = self.crawl_pages("wp/v2/comments?page=%d", start, num)
-        self.comments = self.update_cache(
-            self.comments, comments, total_entries, start, num
-        )
-        return comments
+        return self.crawl_pages("wp/v2/comments?page=%d", start, num)
 
     def get_posts(
         self,
-        comments: bool = False,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        force: bool = False,
-    ) -> list[WPObject]:
+    ) -> ObjectsAndTotal:
         """Retrieves all posts.
 
         Args:
             comments: whether to retrieve comments
             start: the start index
             num: the number of entries to retrieve
-            force: ignore cache and force a re-fetch
 
         Raises:
             WordPressApiNotV2: The target does not support the WordPress API v2
 
         Returns:
-            The list of posts
+            The list of posts and total number of posts available
         """
         if self.has_v2 is None:
             self.get_basic_info()
         if not self.has_v2:
             raise WordPressApiNotV2
-        if self.posts is not None and start is not None and len(self.posts) < start:
-            start = len(self.posts) - 1
-        if (
-            self.posts is not None
-            and ((self.comments_loaded and comments) or not comments)
-            and not force
-        ):
-            posts = self.get_from_cache(self.posts, start, num)
-            if posts is not None:
-                return posts
-        posts, total_entries = self.crawl_pages(
-            "wp/v2/posts?page=%d", start=start, num=num
-        )
 
-        self.posts = self.update_cache(self.posts, posts, total_entries, start, num)
-
-        if self.posts is not None and not self.comments_loaded and comments:
-            # Load comments
-            comment_list = self.crawl_pages("wp/v2/comments?page=%d")[0]
-            for comment in comment_list:
-                found_post = False
-                for i in range(0, len(self.posts)):
-                    if (
-                        self.posts[i] is not None
-                        and self.posts[i]["id"] == comment["post"]  # type: ignore[index]
-                    ):
-                        if "comments" not in self.posts[i]:  # type: ignore[operator]
-                            self.posts[i]["comments"] = []  # type: ignore[index]
-                        self.posts[i]["comments"].append(comment)  # type: ignore[index]
-                        found_post = True
-                        break
-                if not found_post:
-                    self.orphan_comments.append(comment)
-            self.comments_loaded = True
-
-        return_posts = self.posts
-        if start is not None and start < len(return_posts):
-            return_posts = return_posts[start:]
-        if num is not None and num < len(return_posts):
-            return_posts = return_posts[:num]
-        return cast(list[WPObject], return_posts)
+        return self.crawl_pages("wp/v2/posts?page=%d", start=start, num=num)
 
     def get_tags(
         self,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        force: bool = False,
-    ) -> list[WPObject]:
+    ) -> ObjectsAndTotal:
         """Retrieves all tags.
 
         Args:
             start: the start index
             num: the number of entries to retrieve
-            force: ignore cache and force a re-fetch
 
         Returns:
-            The list of tags
+            The list of tags and total number of tags available
         """
-        tags = self.get_from_cache(self.tags, start, num, force)
-        if tags is not None:
-            return tags
-
-        tags, total_entries = self.crawl_pages("wp/v2/tags?page=%d", start, num)
-        self.tags = self.update_cache(self.tags, tags, total_entries, start, num)
-        return tags
+        return self.crawl_pages("wp/v2/tags?page=%d", start, num)
 
     def get_categories(
         self,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        force: bool = False,
-    ) -> list[WPObject]:
+    ) -> ObjectsAndTotal:
         """Retrieves all categories.
 
         Args:
             start: the start index
             num: the number of entries to retrieve
-            force: ignore cache and force a re-fetch
 
         Returns:
-            The list of categories
+            The list of categories and total number of categories available
         """
-        categories = self.get_from_cache(self.categories, start, num, force)
-        if categories is not None:
-            return categories
-
-        categories, total_entries = self.crawl_pages(
-            "wp/v2/categories?page=%d", start=start, num=num
-        )
-        self.categories = self.update_cache(
-            self.categories, categories, total_entries, start, num
-        )
-        return categories
+        return self.crawl_pages("wp/v2/categories?page=%d", start=start, num=num)
 
     def get_users(
         self,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        force: bool = False,
-    ) -> list[WPObject]:
+    ) -> ObjectsAndTotal:
         """Retrieves all users.
 
         Args:
             start: the start index
             num: the number of entries to retrieve
-            force: ignore cache and force a re-fetch
 
         Returns:
-            The list of users
+            The list of users and total number of users available
         """
-        users = self.get_from_cache(self.users, start, num, force)
-        if users is not None:
-            return users
-
-        users, total_entries = self.crawl_pages(
-            "wp/v2/users?page=%d", start=start, num=num
-        )
-        self.users = self.update_cache(self.users, users, total_entries, start, num)
-        return users
+        return self.crawl_pages("wp/v2/users?page=%d", start=start, num=num)
 
     def get_media(
         self,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        force: bool = False,
-    ) -> list[WPObject]:
+    ) -> ObjectsAndTotal:
         """Retrieves all media objects.
 
         Args:
             start: the start index
             num: the number of entries to retrieve
-            force: ignore cache and force a re-fetch
 
         Returns:
             The list of media objects
         """
-        media = self.get_from_cache(self.media, start, num, force)
-        if media is not None:
-            return media
-
-        media, total_entries = self.crawl_pages(
-            "wp/v2/media?page=%d", start=start, num=num
-        )
-        self.media = self.update_cache(self.media, media, total_entries, start, num)
-        return media
+        return self.crawl_pages("wp/v2/media?page=%d", start=start, num=num)
 
     def get_media_urls(
-        self, ids: Union[Literal["all", "cache"], str], cache: bool = True
+        self,
+        ids: Union[Literal["all"], str],
+        media_cache: Optional[list[WPObject]] = None,
     ) -> tuple[list[str], list[str]]:
         """Retrieves the media download URLs for specified IDs or all or from cache.
 
         Args:
             ids: the IDs of the media objects to retrieve, "all" for all, "cache" for cached, or a comma-separated list of IDs
-            cache: whether to use the cache or force a re-fetch
+            media_cache: a list of previously retrieved media to use
 
         Raises:
             ValueError: If `ids="cache"` but the cache is empty
@@ -611,21 +415,23 @@ class WPApi:
         Returns:
             A tuple containing the list of URLs and the list of slugs
         """
-        media = []
+        media: list[WPObject] = []
         if ids == "all":
-            media = self.get_media(force=(not cache))
-        elif ids == "cache":
-            media_cache = self.get_from_cache(self.media, force=(not cache))
             if media_cache is None:
-                raise ValueError("Requested media from cache but cache is empty.")
-            media = media_cache
+                media, _ = self.get_media()
+            else:
+                media = media_cache
         else:
             id_list = ids.split(",")
             media = []
             for i in id_list:
                 try:
                     if int(i) > 0:
-                        m = self.get_obj_by_id(WPApi.MEDIA, int(i), cache)
+                        m = self.get_obj_by_id(
+                            WPApi.MEDIA,
+                            int(i),
+                            media_cache,
+                        )
                         if m is not None and len(m) > 0 and type(m[0]) is dict:
                             media.append(m[0])
                 except ValueError:
@@ -633,7 +439,7 @@ class WPApi:
         urls = []
         slugs = []
         if media is None:
-            return []
+            return [], []
         for m_item in media:
             if (
                 m_item is not None
@@ -649,8 +455,7 @@ class WPApi:
         self,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        force: bool = False,
-    ) -> list[WPObject]:
+    ) -> ObjectsAndTotal:
         """Retrieves all pages.
 
         Args:
@@ -661,21 +466,12 @@ class WPApi:
         Returns:
             The list of pages
         """
-        pages = self.get_from_cache(self.pages, start, num, force)
-        if pages is not None:
-            return pages
-
-        pages, total_entries = self.crawl_pages(
-            "wp/v2/pages?page=%d", start=start, num=num
-        )
-        self.pages = self.update_cache(self.pages, pages, total_entries, start, num)
-        return pages
+        return self.crawl_pages("wp/v2/pages?page=%d", start=start, num=num)
 
     def get_namespaces(
         self,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        force: bool = False,
     ) -> list[str]:
         """Retrieves an array of namespaces.
 
@@ -687,7 +483,7 @@ class WPApi:
         Returns:
             The list of namespaces
         """
-        if self.has_v2 is None or force:
+        if self.has_v2 is None:
             self.get_basic_info()
         if self.basic_info is None:
             return []
@@ -762,12 +558,12 @@ class WPApi:
         return ns_data
 
     def get_obj_by_id_helper(
-        self, cache: ObjectCache, obj_id: int, url: str, use_cache: bool = True
+        self, obj_id: int, url: str, cache: list[WPObject]
     ) -> list[WPObject]:
         """Retrieve an object from the cache or get it if not present.
 
         Args:
-            cache: cache object for this type
+            cache: list of objects to use as cache
             obj_id: id of the object to fetch
             url: URL formatting template containing "%d" where the ID should be substituted
             use_cache: whether to use the cache or force a re-fetch
@@ -775,17 +571,17 @@ class WPApi:
         Returns:
             A list containing the returned object, empty if not retrievable.
         """
-        if use_cache and cache is not None:
-            obj = get_by_id(cache, obj_id)
-            if obj is not None:
-                return [obj]
+        obj = get_by_id(cache, obj_id)
+        if obj is not None:
+            return [obj]
+
         obj = self.crawl_single_page(url % obj_id)
         if type(obj) is dict:
             return [obj]
         return []
 
     def get_obj_by_id(
-        self, obj_type: int, obj_id: int, use_cache: bool = True
+        self, obj_type: int, obj_id: int, obj_cache: Optional[list[WPObject]]
     ) -> list[WPObject]:
         """Returns a list of maximum one object specified by its type and ID.
 
@@ -794,39 +590,46 @@ class WPApi:
         Args:
             obj_type: the type of the object (ex. POST)
             obj_id: the ID of the object to fetch
-            use_cache: if the cache should be used to avoid useless
-                requests
+            obj_cache: a list of cached objects
 
         Returns:
             A list containing the returned object, empty if not retrievable.
         """
+        obj_cache = [] if obj_cache is None else obj_cache
+
         if obj_type == WPApi.USER:
-            return self.get_obj_by_id_helper(
-                self.users, obj_id, "wp/v2/users/%d", use_cache
-            )
+            return self.get_obj_by_id_helper(obj_id, "wp/v2/users/%d", obj_cache)
         if obj_type == WPApi.TAG:
-            return self.get_obj_by_id_helper(
-                self.tags, obj_id, "wp/v2/tags/%d", use_cache
-            )
+            return self.get_obj_by_id_helper(obj_id, "wp/v2/tags/%d", obj_cache)
         if obj_type == WPApi.CATEGORY:
             return self.get_obj_by_id_helper(
-                self.categories, obj_id, "wp/v2/categories/%d", use_cache
+                obj_id,
+                "wp/v2/categories/%d",
+                obj_cache,
             )
         if obj_type == WPApi.POST:
             return self.get_obj_by_id_helper(
-                self.posts, obj_id, "wp/v2/posts/%d", use_cache
+                obj_id,
+                "wp/v2/posts/%d",
+                obj_cache,
             )
         if obj_type == WPApi.PAGE:
             return self.get_obj_by_id_helper(
-                self.pages, obj_id, "wp/v2/pages/%d", use_cache
+                obj_id,
+                "wp/v2/pages/%d",
+                obj_cache,
             )
         if obj_type == WPApi.COMMENT:
             return self.get_obj_by_id_helper(
-                self.comments, obj_id, "wp/v2/comments/%d", use_cache
+                obj_id,
+                "wp/v2/comments/%d",
+                obj_cache,
             )
         if obj_type == WPApi.MEDIA:
             return self.get_obj_by_id_helper(
-                self.comments, obj_id, "wp/v2/media/%d", use_cache
+                obj_id,
+                "wp/v2/media/%d",
+                obj_cache,
             )
         return []
 
@@ -835,24 +638,18 @@ class WPApi:
         obj_type: int,
         start: Optional[int],
         limit: Optional[int],
-        cache: bool,
-        kwargs: Optional[dict[Any, Any]] = None,
-    ) -> list[WPObject]:
+    ) -> ObjectsAndTotal:
         """Returns a list of maximum limit objects specified by the starting object offset.
 
         Args:
             obj_type: the type of the object (ex. POST)
             start: the offset of the first object to return
             limit: the maximum number of objects to return
-            cache: if the cache should be used to avoid useless requests
-            kwargs: additional parameters to pass to the function (for
-                POST only)
+
 
         Returns:
             A list of the returned objects
         """
-        kwargs = kwargs or {}
-
         get_func = None
         if obj_type == WPApi.USER:
             get_func = self.get_users
@@ -862,6 +659,8 @@ class WPApi:
             get_func = self.get_categories
         elif obj_type == WPApi.PAGE:
             get_func = self.get_pages
+        elif obj_type == WPApi.POST:
+            get_func = self.get_posts
         elif obj_type == WPApi.COMMENT:
             get_func = self.get_comments
         elif obj_type == WPApi.MEDIA:
@@ -870,10 +669,9 @@ class WPApi:
             get_func = self.get_namespaces  # type: ignore[assignment]
 
         if get_func is not None:
-            return get_func(start=start, num=limit, force=not cache)
-        elif obj_type == WPApi.POST:
-            return self.get_posts(start=start, num=limit, force=not cache, **kwargs)
-        return []
+            return get_func(start=start, num=limit)
+
+        return [], None
 
     def search(
         self,
