@@ -122,10 +122,11 @@ class WPApi:
             raise NoWordpressApi from e
         if req.status_code >= 400:
             raise NoWordpressApi
-        self.basic_info = get_content_as_json(req)
 
-        if not isinstance(self.basic_info, dict):
-            raise NoWordpressApi
+        try:
+            self.basic_info = get_content_as_json(req)
+        except JSONDecodeError as e:
+            raise NoWordpressApi from e
 
         if "name" in self.basic_info.keys():
             self.name = self.basic_info["name"]
@@ -222,17 +223,15 @@ class WPApi:
                         if start is not None:
                             entries_left -= len(json_content)
                     elif start is not None and page == math.floor(start / per_page) + 1:
+                        first_idx = (start % per_page) - 1
                         if num is None or (
-                            num is not None
-                            and len(json_content[start % per_page :]) < num
+                            num is not None and len(json_content[first_idx:]) < num
                         ):
-                            entries += json_content[start % per_page :]
+                            entries += json_content[first_idx:]
                             if num is not None:
-                                entries_left -= len(json_content[start % per_page :])
+                                entries_left -= len(json_content[first_idx:])
                         else:
-                            entries += json_content[
-                                start % per_page : (start % per_page) + num
-                            ]
+                            entries += json_content[first_idx : first_idx + num]
                             entries_left = 0
                     else:
                         if num is not None and entries_left > len(json_content):

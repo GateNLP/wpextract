@@ -24,7 +24,7 @@ testonly:
 
 .PHONY: testcov
 testcov:
-	poetry run coverage run -m pytest
+	poetry run coverage run --branch -m pytest
 
 .PHONY: covreport
 covreport: testcov

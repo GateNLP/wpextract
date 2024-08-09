@@ -1,5 +1,8 @@
+import logging
+
 import pytest
 from wpextract import WPDownloader
+from wpextract.download.exceptions import WordPressApiNotV2
 from wpextract.download.requestsession import ConnectionRefused
 from wpextract.download.wpapi import WPApi
 
@@ -29,6 +32,8 @@ def _mocked_exporter(mocker, datatype):
     cls = "wpextract.download.exporter.Exporter."
     if datatype == "comments":
         method = cls + "export_comments_interactive"
+    elif datatype == "media_files":
+        method = cls + "download_media"
     else:
         method = cls + f"export_{datatype}"
 
@@ -62,7 +67,7 @@ def test_session_test_fail(datadir, mock_request_session, caplog, mocker):
 )
 def test_download_data_type(datadir, mocker, mock_request_session, datatype, value):
     downloader = _make_downloader(datadir, mocker, [datatype])
-    exporter = _mocked_exporter(mocker, datatype)
+    exporter_func = _mocked_exporter(mocker, datatype)
 
     downloader.download()
 
@@ -74,7 +79,14 @@ def test_download_data_type(datadir, mocker, mock_request_session, datatype, val
         kwargs={"comments": False} if datatype == "posts" else {},
     )
 
-    exporter.assert_called_once()
+    exporter_func.assert_called_once()
+
+
+def test_download_invalid_data_type(datadir, mocker, mock_request_session):
+    downloader = _make_downloader(datadir, mocker, ["invalid"])
+    downloader._list_obj = mocker.Mock()
+    downloader.download()
+    downloader._list_obj.assert_not_called()
 
 
 @pytest.mark.parametrize(
@@ -83,11 +95,45 @@ def test_download_data_type(datadir, mocker, mock_request_session, datatype, val
 )
 def test_prefix(datadir, mocker, mock_request_session, prefix, expected_name):
     downloader = _make_downloader(datadir, mocker, ["pages"], prefix)
-    exporter = _mocked_exporter(mocker, "pages")
+    exporter_func = _mocked_exporter(mocker, "pages")
 
     downloader.download()
 
-    exporter.assert_called_once_with(
+    exporter_func.assert_called_once_with(
         _fake_api_return(),
         datadir / expected_name,
     )
+
+
+def test_wpapi_not_v2(datadir, mocker, caplog, mock_request_session):
+    downloader = _make_downloader(datadir, mocker, ["posts"])
+    downloader.scanner.get_obj_list.side_effect = WordPressApiNotV2
+    with caplog.at_level(logging.ERROR):
+        downloader.download()
+
+    assert "The API does not support WP V2" in caplog.text
+
+
+MEDIA_DATA = (
+    [f"https://example.org/wp-content/uploads/2024/01/image{n}.jpg" for n in range(10)],
+    [f"image{n}" for n in range(10)],
+)
+
+
+def test_download_media_files(datadir, mocker, mock_request_session):
+    downloader = _make_downloader(datadir, mocker, ["media"])
+    downloader.scanner.get_media_urls.return_value = MEDIA_DATA
+    exporter_func = _mocked_exporter(mocker, "media_files")
+
+    downloader.download_media_files(mock_request_session, datadir)
+
+    exporter_func.assert_called_once_with(mock_request_session, MEDIA_DATA[0], datadir)
+
+
+def test_download_media_files_no_media(datadir, mocker, caplog, mock_request_session):
+    downloader = _make_downloader(datadir, mocker, ["media"])
+    downloader.scanner.get_media_urls.return_value = ([], [])
+
+    downloader.download_media_files(mock_request_session, datadir)
+
+    assert "No media found" in caplog.text

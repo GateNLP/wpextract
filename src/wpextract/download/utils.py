@@ -80,7 +80,4 @@ def get_content_as_json(response_obj: Response) -> Any:
         content = response_obj.content.decode("utf-8-sig")
         return json.loads(content)
     else:
-        try:
-            return response_obj.json()
-        except:  # noqa: E722
-            return {}
+        return response_obj.json()
