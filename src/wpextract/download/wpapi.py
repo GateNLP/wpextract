@@ -1,10 +1,8 @@
 import copy
 import logging
 import math
-from collections.abc import Sequence
 from json.decoder import JSONDecodeError
 from typing import Any, Literal, Optional, Union
-from urllib.parse import urlencode
 
 from tqdm.auto import tqdm
 
@@ -64,7 +62,6 @@ class WPApi:
         target: str,
         api_path: str = "wp-json/",
         session: Optional[RequestSession] = None,
-        search_terms: Optional[str] = None,
     ) -> None:
         """Creates a new instance of WPApi.
 
@@ -72,10 +69,8 @@ class WPApi:
             target: the target of the scan
             api_path: the api path, if non-default
             session: the requests session object to use for HTTP requests
-            search_terms : the terms of the keyword search, if any
         """
         self.api_path = api_path
-        self.search_terms = search_terms
         self.has_v2: Optional[bool] = None
         self.name = None
         self.description = None
@@ -131,7 +126,6 @@ class WPApi:
         url: str,
         start: Optional[int] = None,
         num: Optional[int] = None,
-        search_terms: Optional[str] = None,
         display_progress: bool = True,
     ) -> tuple[list[WPObject], int]:
         """Crawls all pages while there is at least one result for the given endpoint or tries to get pages from start to end.
@@ -140,7 +134,6 @@ class WPApi:
             url: the URL to crawl
             start: the start index
             num: the number of entries to retrieve
-            search_terms: the search terms to use
             display_progress: whether to display a progress bar
 
         Raises:
@@ -150,8 +143,6 @@ class WPApi:
         Returns:
             A tuple containing the list of entries and the total number of entries
         """
-        if search_terms is None:
-            search_terms = self.search_terms
         page = 1
         total_entries = 0
         total_pages = 0
@@ -160,11 +151,6 @@ class WPApi:
         base_url = url
         entries_left = 1
         per_page = 10
-        if search_terms is not None:
-            if "?" in base_url:
-                base_url += "&" + urlencode({"search": search_terms})
-            else:
-                base_url += "?" + urlencode({"search": search_terms})
         if start is not None:
             page = math.floor(start / per_page) + 1
         if num is not None:
@@ -672,91 +658,3 @@ class WPApi:
             return get_func(start=start, num=limit)
 
         return [], None
-
-    def search(
-        self,
-        obj_types: Sequence[int],
-        keywords: str,
-        start: Optional[int],
-        limit: Optional[int],
-    ) -> dict[int, list[WPObject]]:
-        """Looks for data with the specified keywords of the given types.
-
-        Args:
-            obj_types: a list of the desired object types to look for
-            keywords: the keywords to look for
-            start: a start index
-            limit: the max number to return
-
-        Returns:
-            a dict of lists of objects sorted by types
-        """
-        out = {}
-        if WPApi.ALL_TYPES in obj_types or len(obj_types) == 0:
-            obj_types = [
-                WPApi.POST,
-                WPApi.CATEGORY,
-                WPApi.TAG,
-                WPApi.PAGE,
-                WPApi.COMMENT,
-                WPApi.MEDIA,
-                WPApi.USER,
-            ]  # All supported types for search
-        for t in obj_types:
-            if t == WPApi.POST:
-                out[t] = self.crawl_pages(
-                    "wp/v2/posts?page=%d",
-                    start=start,
-                    num=limit,
-                    search_terms=keywords,
-                    display_progress=False,
-                )[0]
-            elif t == WPApi.CATEGORY:
-                out[t] = self.crawl_pages(
-                    "wp/v2/categories?page=%d",
-                    start=start,
-                    num=limit,
-                    search_terms=keywords,
-                    display_progress=False,
-                )[0]
-            elif t == WPApi.TAG:
-                out[t] = self.crawl_pages(
-                    "wp/v2/tags?page=%d",
-                    start=start,
-                    num=limit,
-                    search_terms=keywords,
-                    display_progress=False,
-                )[0]
-            elif t == WPApi.PAGE:
-                out[t] = self.crawl_pages(
-                    "wp/v2/pages?page=%d",
-                    start=start,
-                    num=limit,
-                    search_terms=keywords,
-                    display_progress=False,
-                )[0]
-            elif t == WPApi.COMMENT:
-                out[t] = self.crawl_pages(
-                    "wp/v2/comments?page=%d",
-                    start=start,
-                    num=limit,
-                    search_terms=keywords,
-                    display_progress=False,
-                )[0]
-            elif t == WPApi.MEDIA:
-                out[t] = self.crawl_pages(
-                    "wp/v2/media?page=%d",
-                    start=start,
-                    num=limit,
-                    search_terms=keywords,
-                    display_progress=False,
-                )[0]
-            elif t == WPApi.USER:
-                out[t] = self.crawl_pages(
-                    "wp/v2/users?page=%d",
-                    start=start,
-                    num=limit,
-                    search_terms=keywords,
-                    display_progress=False,
-                )[0]
-        return out

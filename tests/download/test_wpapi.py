@@ -285,35 +285,42 @@ class TestCrawl:
         assert "HTTPError500" in caplog.text
 
 
-data_type_params = [
-    pytest.param(f"get_{data_type}", data_type, id=data_type)
-    for data_type in [
-        "comments",
-        "posts",
-        "tags",
-        "categories",
-        "users",
-        "media",
-        "pages",
-    ]
-]
-
-
-@pytest.mark.parametrize(("test_method", "cache_prop"), data_type_params)
 @pytest.mark.parametrize(
-    ("start", "num"),
+    ("obj_type", "test_method"),
     [
-        pytest.param(None, None, id="fetch all"),
-        pytest.param(1, None, id="fetch all from start"),
-        pytest.param(5, None, id="fetch all from mid-first page"),
-        pytest.param(11, None, id="fetch all from second page "),
-        pytest.param(5, 10, id="fetch across pages"),
-        pytest.param(None, 15, id="fetch from start with limit"),
+        (
+            WPApi.COMMENT,
+            "get_comments",
+        ),
+        (
+            WPApi.POST,
+            "get_posts",
+        ),
+        (
+            WPApi.TAG,
+            "get_tags",
+        ),
+        (
+            WPApi.CATEGORY,
+            "get_categories",
+        ),
+        (
+            WPApi.USER,
+            "get_users",
+        ),
+        (
+            WPApi.MEDIA,
+            "get_media",
+        ),
+        (
+            WPApi.PAGE,
+            "get_pages",
+        ),
     ],
 )
 class TestGetData:
     @pytest.fixture()
-    def wpapi(self, mocker, mock_api_root, start, num):
+    def wpapi_mocked_crawl(self, mocker, mock_api_root, start, num):
         # start, num = req_opts
         api = WPApi(target=FAKE_TARGET)
         api.has_v2 = True
@@ -327,14 +334,35 @@ class TestGetData:
         return api
 
     @pytest.fixture()
-    def wpapi_method(self, wpapi, test_method):
-        return getattr(wpapi, test_method)
+    def wpapi(self, mocker):
+        api = WPApi(target=FAKE_TARGET)
+        api.has_v2 = True
+        api.get_basic_info = mocker.Mock()
+        api.crawl_pages = mocker.Mock(return_value=([], 0))
+        return api
 
     @pytest.fixture()
-    def get_wpapi_cache(self, wpapi, cache_prop):
-        return lambda: getattr(wpapi, cache_prop)
+    def wpapi_method(self, wpapi_mocked_crawl, test_method):
+        return getattr(wpapi_mocked_crawl, test_method)
 
-    def test_get_data(self, wpapi_method, get_wpapi_cache, start, num):
+    def test_get_obj_list(self, wpapi, obj_type, test_method, mocker):
+        get_f_mock = mocker.patch.object(wpapi, test_method)
+        wpapi.get_obj_list(obj_type, None, None)
+
+        assert get_f_mock.call_count == 1
+
+    @pytest.mark.parametrize(
+        ("start", "num"),
+        [
+            pytest.param(None, None, id="fetch all"),
+            pytest.param(1, None, id="fetch all from start"),
+            pytest.param(5, None, id="fetch all from mid-first page"),
+            pytest.param(11, None, id="fetch all from second page "),
+            pytest.param(5, 10, id="fetch across pages"),
+            pytest.param(None, 15, id="fetch from start with limit"),
+        ],
+    )
+    def test_get_data(self, obj_type, wpapi_method, start, num):
         data, n_max = wpapi_method(start=start, num=num)
 
         start = 0 if start is None else start
