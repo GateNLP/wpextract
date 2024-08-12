@@ -24,8 +24,7 @@ class WPDownloader:
         out_path: Path,
         data_types: list[str],
         session: Optional[RequestSession] = None,
-        json_prefix: Optional[str] = None,
-        user_agent: Optional[str] = None,
+        json_prefix: Optional[str] = None
     ) -> None:
         """Initializes the WPDownloader object.
 
@@ -35,7 +34,6 @@ class WPDownloader:
             data_types: set of data types to download
             session : request session. Will be created from default constructor if not provided.
             json_prefix: prefix to prepend to JSON file names
-            user_agent: User agent to use for requests. See [`RequestSession`][wpextract.download.requestsession.RequestSession].
         """
         self.target = target
         self.out_path = out_path
