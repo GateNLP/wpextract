@@ -59,6 +59,9 @@ $ wpextract download TARGET OUT_JSON
 `--max-redirects MAX_REDIRECTS`
 : Maximum number of redirects before giving up (default: 20)
 
+`--user-agent USER_AGENT`
+: User agent to use for requests. Default is a recent version of Chrome on Linux (see [`requestsession.DEFAULT_UA`][wpextract.download.requestsession.DEFAULT_UA])
+
 **logging**
 
 `--log FILE`, `-l FILE`
@@ -108,6 +111,11 @@ We would also suggest enabling the following options, with consideration for how
 
 - `--wait` to space out requests
 - `--random-wait` to vary the time between requests to avoid patterns
+
+You may also wish to consider:
+
+- The reputation of the IP used to make requests. IPs in ranges belonging to common VPS providers, e.g. DigitalOcean or AWS, may be more likely to be rate limited.
+- `--user-agent` to set a custom user agent. The default is a recent version of Chrome on Linux, but this may become outdated. If using authentication, this may need to match the user agent of the browser used to log in.
 
 ### Error Handling
 

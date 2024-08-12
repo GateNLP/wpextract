@@ -15,3 +15,5 @@
         members: false
 
 ::: wpextract.download.AuthorizationType
+
+::: wpextract.download.requestsession.DEFAULT_UA

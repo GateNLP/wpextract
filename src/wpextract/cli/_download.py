@@ -99,6 +99,11 @@ def validate_wait(ctx: Context, param: Parameter, value: Any) -> Any:
     help="Maximum number of redirects before giving up",
     show_default=True,
 )
+@optgroup.option(
+    "--user-agent",
+    type=str,
+    help="User-Agent string to use for requests. Set to a recent version of Chrome on Linux by default.",
+)
 @logging_options
 def download(
     target: str,
@@ -115,6 +120,7 @@ def download(
     max_retries: int,
     backoff_factor: float,
     max_redirects: int,
+    user_agent: Optional[str],
     log: Optional[Path],
     verbose: bool,
 ) -> None:
@@ -152,6 +158,7 @@ def download(
         max_retries=max_retries,
         backoff_factor=backoff_factor,
         max_redirects=max_redirects,
+        user_agent=user_agent,
     )
 
     with setup_tqdm_redirect(log is None):
