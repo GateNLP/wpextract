@@ -32,7 +32,7 @@ class WPDownloader:
             target: the target WordPress site URL
             out_path: the output path for the downloaded data
             data_types: set of data types to download
-            session : request session. Will be created from default constructor if not provided.
+            session: request session. Will be created from default constructor if not provided.
             json_prefix: prefix to prepend to JSON file names
         """
         self.target = target
