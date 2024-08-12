@@ -49,6 +49,7 @@ def test_wait_random_validation(mocker, runner, datadir):
     )
     assert result.exit_code == 0
 
+
 def test_custom_ua(mocker, runner, datadir):
     req_mock, dl_mock, result = mock_cls_invoke_req_sess(
         mocker, runner, datadir, ["--user-agent", "test"]
