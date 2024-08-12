@@ -15,7 +15,7 @@ The responses library is used to mock HTTP requests recorded from a real run of 
 3. Import `tools/test_site.xml`
 4. Use `tools/gen_resp_record.py` to run the download command on the test site and record the responses.
 5. Copy the recorded yml to `data/dl_requests_record.yaml`
-6. Copy the download output to `data/download_out`
+6. Copy the output of the download command to `data/download_out`
 
 ## `wpextract extract`
 
@@ -25,4 +25,8 @@ The model output from the download command is used to test the behaviour of the 
 
 1. Use `tools/posts_dl.sh` to download the webpages from the test site
 2. Copy the output directory to `data/site_scrape`
-
+3. Run the `wpextract extract` command:
+   ```shell
+    wpextract extract tools/download_out tools/extract_out --scrape-root tools/site_scrape/
+    ```
+3. Copy the output of the extract command to `data/extract_out`
