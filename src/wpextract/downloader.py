@@ -4,7 +4,7 @@ from typing import Any, Callable, Optional, TypedDict
 
 from wpextract.download.exceptions import WordPressApiNotV2
 from wpextract.download.exporter import Exporter
-from wpextract.download.requestsession import RequestSession
+from wpextract.download.requestsession import HTTPError, RequestSession
 from wpextract.download.wpapi import WPApi, WPObject
 
 ExportCallable = Callable[[list[WPObject], Path], int]
@@ -154,6 +154,10 @@ class WPDownloader:
             )
             if obj_type == WPApi.MEDIA:
                 self.media_cache = obj_list
+        except HTTPError:
+            logging.exception(
+                f"An HTTP error was encountered while downloading {prop['obj_name']}"
+            )
         except WordPressApiNotV2:
             logging.error("The API does not support WP V2")
         except OSError as e:

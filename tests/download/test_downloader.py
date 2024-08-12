@@ -3,7 +3,7 @@ import logging
 import pytest
 from wpextract import WPDownloader
 from wpextract.download.exceptions import WordPressApiNotV2
-from wpextract.download.requestsession import ConnectionRefused
+from wpextract.download.requestsession import ConnectionRefused, HTTPError500
 from wpextract.download.wpapi import WPApi
 
 
@@ -135,3 +135,15 @@ def test_download_media_files_no_media(datadir, mocker, caplog, mock_request_ses
     downloader.download_media_files(mock_request_session, datadir)
 
     assert "No media found" in caplog.text
+
+
+def test_http_error_getting_object(datadir, mocker, caplog, mock_request_session):
+    downloader = _make_downloader(datadir, mocker, ["posts", "pages"])
+    posts_exporter = _mocked_exporter(mocker, "posts")
+    posts_exporter.side_effect = HTTPError500
+    pages_exporter = _mocked_exporter(mocker, "pages")
+    downloader.download()
+
+    pages_exporter.assert_called_once()
+
+    assert "while downloading Posts" in caplog.text
