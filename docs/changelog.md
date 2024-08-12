@@ -2,10 +2,27 @@
 
 ## 1.1.0 (upcoming)
 
+**Features & Improvements**
+
+- Added `--user-agent` argument to `wpextract download` to allow customisation of the user agent string
+- Added complete type hints to the library and a `py.typed` file to indicate this
+- HTTP errors raised when downloading now all inherit from a common `HTTPError` class
+- If an HTTP error is encountered while downloading, it will no longer end the whole scrape process. A warning will be logged and the scrape will continue, and if some data was obtained for that type, it will be saved as normal. HTTP transit errors (e.g. connection timeouts) will still end the scrape process.
+- Improved the resiliency of HTML parsing and extraction by better checking for edge cases like missing attributes
+  - Translation picker extractors will now raise an exception if elements are missing during the extraction process.
+- Simplified the WordPress API library by removing now-unused cache functionality. This will likely improve memory usage of the download process.
+- Significantly more tests have been added, particularly for the download process
+
+
 **Fixes**
 
 - Fixed the scrape crawling step crashing if a page didn't have a canonical link or `og:url` meta tag
 - Fixed the scrape crawling not correctly recognising when duplicate URLs were encountered. Previously duplicates would be included, but only one would be used. Now, they will be correctly logged. As a result of this change, the `SCRAPE_CRAWL_VERSION` has been incremented, meaning running extraction on a scrape will cause it to be re-crawled.
+- Fixed the return type annotation `LangPicker.get_root()`: the actual return (`bs4.Tag` or `None`) is unchanged, but was previously annotated as `bs4.PageElement`
+- Type of `TranslationLink.lang` changed to reflect that it can accept a string to resolve or an already resolved `Language` instance
+
+**Documentation**
+- Improved guide on translation parsing, correcting some errors and adding information on parse robustness and performance
 
 ## 1.0.3 (2024-08-06)
 
