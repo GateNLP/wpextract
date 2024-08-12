@@ -208,7 +208,7 @@ class RequestSession:
         max_retries: int = 10,
         backoff_factor: float = 0.1,
         max_redirects: int = 20,
-        user_agent: str = DEFAULT_UA,
+        user_agent: Optional[str] = None,
     ):
         """Create a new request session.
 
@@ -239,7 +239,7 @@ class RequestSession:
         self.timeout = timeout
         self._mount_retry(backoff_factor, max_redirects, max_retries)
         self.waiter = RequestWait(wait, random_wait)
-        self.user_agent = user_agent
+        self.user_agent = user_agent if user_agent is not None else DEFAULT_UA
 
     def _mount_retry(
         self, backoff_factor: float, max_redirects: int, max_retries: int
