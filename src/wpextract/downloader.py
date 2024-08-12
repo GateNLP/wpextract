@@ -24,7 +24,7 @@ class WPDownloader:
         out_path: Path,
         data_types: list[str],
         session: Optional[RequestSession] = None,
-        json_prefix: Optional[str] = None
+        json_prefix: Optional[str] = None,
     ) -> None:
         """Initializes the WPDownloader object.
 
