@@ -284,6 +284,25 @@ class TestCrawl:
 
         assert "HTTPError500" in caplog.text
 
+    def test_pagination_ends_empty(self, caplog, wpapi, mocked_responses):
+        headers = {"X-WP-Total": "5", "X-WP-TotalPages": "1"}
+        mocked_responses.get(
+            WP_POSTS_ENDPOINT,
+            match=[matchers.query_param_matcher({"page": 1})],
+            json=_fake_api_page(1, 5),
+            headers=headers,
+        )
+        mocked_responses.get(
+            WP_POSTS_ENDPOINT,
+            match=[matchers.query_param_matcher({"page": 2})],
+            json=[],
+            headers=headers,
+        )
+        entries, total_entries = wpapi.crawl_pages(POSTS_API_PATH)
+        assert len(entries) == 5
+        assert total_entries == 5
+        self._assert_ids(entries, 1, 5)
+
 
 @pytest.mark.parametrize(
     ("obj_type", "test_method"),
