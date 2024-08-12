@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from collections.abc import Sequence
-from typing import Optional, Union
+from typing import Optional
 
 from bs4 import BeautifulSoup, Tag
 from langcodes import Language
@@ -93,14 +93,12 @@ class LangPicker(ABC):
         """
         pass
 
-    def set_current_lang(self, lang: Union[str, list[str]]) -> None:
+    def set_current_lang(self, lang: str) -> None:
         """Set the language of this doc.
 
         Args:
             lang: The locale string
         """
-        lang = attr_concat(lang)
-
         self.current_language = Language.get(lang, normalize=True)
 
     def add_translation(self, href: str, lang: str) -> None:
@@ -210,7 +208,7 @@ class PolylangWidget(LangPicker):
         """
         current_lang = self._root_select_one(".lang-item.current-lang a")
 
-        self.set_current_lang(current_lang["lang"])
+        self.set_current_lang(attr_concat(current_lang["lang"]))
 
         other_langs = self.root_el.select(
             ".lang-item:not(.no-translation):not(.current-lang) a"
