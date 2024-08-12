@@ -187,10 +187,9 @@ class WPApi:
                     f"Error while fetching page {page}. Stopping at {len(entries)} entries."
                 )
                 break
-
             except Exception as e:
-                # TODO: wrong error?
-                raise WordPressApiNotV2 from e
+                logging.error(f"Error while fetching page {page}.")
+                raise e
 
             try:
                 json_content = get_content_as_json(req)
@@ -270,8 +269,7 @@ class WPApi:
             return None
         except HTTPError404:
             return None
-        except Exception as e:
-            raise WordPressApiNotV2 from e
+
         try:
             content = get_content_as_json(req)
         except JSONDecodeError:
@@ -394,9 +392,6 @@ class WPApi:
         Args:
             ids: the IDs of the media objects to retrieve, "all" for all, "cache" for cached, or a comma-separated list of IDs
             media_cache: a list of previously retrieved media to use
-
-        Raises:
-            ValueError: If `ids="cache"` but the cache is empty
 
         Returns:
             A tuple containing the list of URLs and the list of slugs
