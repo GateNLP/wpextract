@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Portions of this code are derived from [WPJsonScraper](https://github.com/MickaelWalter/wp-json-scraper), which is available under the MIT license. For details, see [src/wpextract/download/ORIGINAL_LICENSE](https://github.com/GateNLP/wpextract/blob/main/src/wpextract/dl/ORIGINAL_LICENSE).
+Portions of this code are derived from [WPJsonScraper](https://github.com/MickaelWalter/wp-json-scraper), which is available under the MIT license. For details, see [src/wpextract/download/ORIGINAL_LICENSE](https://github.com/GateNLP/wpextract/blob/main/src/wpextract/download/ORIGINAL_LICENSE).
 
 ## Acknowledgements
 
