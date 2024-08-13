@@ -109,7 +109,7 @@ Using the `self.root_el` attribute, the languages should be found and added to t
 
 Be careful to avoid:
 
-- Adding the current language
+- Adding the current language as a translation
 - Adding languages which are listed but don't have translations
 
 !!! example "Example `extract` implementation"
