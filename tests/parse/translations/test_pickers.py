@@ -14,8 +14,10 @@ from wpextract.parse.translations._resolver import TranslationLink
         (pickers.PolylangCustomDropdown, "polylang_custom_dropdown.html"),
     ],
 )
-def test_picker(datadir: Path, picker_cls: type[pickers.LangPicker], picker_file: str):
-    doc = BeautifulSoup((datadir / picker_file).read_text(), "lxml")
+def test_picker(
+    shared_datadir: Path, picker_cls: type[pickers.LangPicker], picker_file: str
+):
+    doc = BeautifulSoup((shared_datadir / picker_file).read_text(), "lxml")
 
     picker = picker_cls(doc)
 
@@ -33,3 +35,28 @@ def test_picker(datadir: Path, picker_cls: type[pickers.LangPicker], picker_file
         destination=None,
         lang="fr-FR",
     )
+
+
+class FaultyExtractPickerSelect(pickers.PolylangWidget):
+    def extract(self) -> None:
+        self._root_select(".not-a-real-element")
+
+
+class FaultyExtractPickerSelectOne(pickers.PolylangWidget):
+    def extract(self) -> None:
+        self._root_select_one(".not-a-real-element")
+
+
+@pytest.mark.parametrize(
+    "picker_cls", [FaultyExtractPickerSelect, FaultyExtractPickerSelectOne]
+)
+def test_picker_extract_error(
+    shared_datadir: Path, picker_cls: type[pickers.LangPicker]
+):
+    doc = BeautifulSoup((shared_datadir / "polylang_widget.html").read_text(), "lxml")
+
+    picker = picker_cls(doc)
+    assert picker.matches()
+
+    with pytest.raises(pickers.ExtractionFailedError):
+        picker.extract()

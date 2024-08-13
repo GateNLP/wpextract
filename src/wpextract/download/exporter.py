@@ -2,6 +2,7 @@ import copy
 import html
 import json
 from pathlib import Path
+from typing import Any, Optional, Union
 from urllib import parse as urlparse
 
 from tqdm.auto import tqdm
@@ -64,16 +65,21 @@ class Exporter:
         return files_number
 
     @staticmethod
-    def setup_export(vlist, parameters_to_unescape):
+    def setup_export(
+        vlist: list[dict[str, Any]], parameters_to_unescape: list[Union[str, list[str]]]
+    ) -> list[dict[str, Any]]:
         """Sets up the right values for a list export.
 
-        This function flattens alist of objects before its serialization in the expected format.
+        This function flattens a list of objects before its serialization in the expected format.
         It also makes a deepcopy to ensure that the original vlist is not altered.
 
         Args:
             vlist: the list to prepare for exporting
             parameters_to_unescape: parameters to unescape (ex.
                 ["param1", ["param2"]["rendered"]])
+
+        Returns:
+            the list of objects ready to be exported
         """
         exported_list = []
 
@@ -86,9 +92,9 @@ class Exporter:
                     if type(key) is str:  # If the parameter is at the root
                         exported_el[key] = html.unescape(exported_el[key])
                     elif type(key) is list:  # If the parameter is nested
-                        selected = exported_el
+                        selected: Optional[Union[dict[str, Any], str]] = exported_el
                         siblings = []
-                        fullpath = {}
+                        fullpath: dict[str, Any] = {}
                         # We look for the leaf first, not forgetting sibling branches for rebuilding the tree later
                         for k in key:
                             if type(selected) is dict and k in selected.keys():
@@ -122,7 +128,7 @@ class Exporter:
         return exported_list
 
     @staticmethod
-    def write_file(filename, data):
+    def write_file(filename: Path, data: Any) -> None:
         """Writes content to the given file in JSON format.
 
         The key mapping must be a dict of keys or lists of keys to ensure proper mapping.
@@ -136,9 +142,9 @@ class Exporter:
 
     @staticmethod
     def export_posts(
-        posts: list[dict],
-        filename: str,
-    ):
+        posts: list[dict[str, Any]],
+        filename: Path,
+    ) -> int:
         """Exports posts to the specified file.
 
         Args:
@@ -157,7 +163,7 @@ class Exporter:
         return len(exported_posts)
 
     @staticmethod
-    def export_categories(categories, filename):
+    def export_categories(categories: list[dict[str, Any]], filename: Path) -> int:
         """Exports categories to the specified file.
 
         Args:
@@ -176,7 +182,7 @@ class Exporter:
         return len(exported_categories)
 
     @staticmethod
-    def export_tags(tags, filename):
+    def export_tags(tags: list[dict[str, Any]], filename: Path) -> int:
         """Exports tags to the specified file.
 
         Args:
@@ -191,7 +197,7 @@ class Exporter:
         return len(exported_tags)
 
     @staticmethod
-    def export_users(users, filename):
+    def export_users(users: list[dict[str, Any]], filename: Path) -> int:
         """Exports users to the specified file.
 
         Args:
@@ -206,7 +212,7 @@ class Exporter:
         return len(exported_users)
 
     @staticmethod
-    def export_pages(pages, filename):
+    def export_pages(pages: list[dict[str, Any]], filename: Path) -> int:
         """Exports pages to the specified file.
 
         Args:
@@ -230,7 +236,7 @@ class Exporter:
         return len(exported_pages)
 
     @staticmethod
-    def export_media(media, filename):
+    def export_media(media: list[dict[str, Any]], filename: Path) -> int:
         """Exports media to the specified file.
 
         Args:
@@ -255,7 +261,9 @@ class Exporter:
 
     # FIXME to be refactored
     @staticmethod
-    def export_comments_interactive(comments, filename):
+    def export_comments_interactive(
+        comments: list[dict[str, Any]], filename: Path
+    ) -> int:
         """Exports comments to the specified file.
 
         Args:

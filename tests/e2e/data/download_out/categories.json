@@ -1,0 +1,2084 @@
+[
+    {
+        "id": 5,
+        "count": 7,
+        "description": "Consectetur numquam fugiat tempora porro et quo aut illum itaque deleniti autem velit et et quibusdam perferendis rerum eligendi rerum suscipit rerum non iste molestiae et atque nemo nihil aut quasi reprehenderit natus ab magnam quidem dolorem debitis dicta dolore blanditiis sit harum optio voluptates vel molestiae architecto architecto et quo nesciunt dicta omnis autem quas voluptatem libero",
+        "link": "http://localhost/category/commodi-quasi/",
+        "name": "Commodi quasi",
+        "slug": "commodi-quasi",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Commodi quasi Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/commodi-quasi/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Commodi quasi Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Consectetur numquam fugiat tempora porro et quo aut illum itaque deleniti autem velit et et quibusdam perferendis rerum eligendi rerum suscipit rerum non iste molestiae et atque nemo nihil aut quasi reprehenderit natus ab magnam quidem dolorem debitis dicta dolore blanditiis sit harum optio voluptates vel molestiae architecto architecto et quo nesciunt dicta omnis autem quas voluptatem libero\" />\n<meta property=\"og:url\" content=\"http://localhost/category/commodi-quasi/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/commodi-quasi/\",\n\t            \"url\": \"http://localhost/category/commodi-quasi/\",\n\t            \"name\": \"Commodi quasi Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/commodi-quasi/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/commodi-quasi/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Commodi quasi\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Commodi quasi Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/commodi-quasi/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Commodi quasi Archives - Test WordPress Site",
+            "og_description": "Consectetur numquam fugiat tempora porro et quo aut illum itaque deleniti autem velit et et quibusdam perferendis rerum eligendi rerum suscipit rerum non iste molestiae et atque nemo nihil aut quasi reprehenderit natus ab magnam quidem dolorem debitis dicta dolore blanditiis sit harum optio voluptates vel molestiae architecto architecto et quo nesciunt dicta omnis autem quas voluptatem libero",
+            "og_url": "http://localhost/category/commodi-quasi/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/commodi-quasi/",
+                        "url": "http://localhost/category/commodi-quasi/",
+                        "name": "Commodi quasi Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/commodi-quasi/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/commodi-quasi/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Commodi quasi"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/5"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=5"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 10,
+        "count": 6,
+        "description": "Quod officiis reprehenderit placeat beatae temporibus id quibusdam quis quo cum ad quis repudiandae dolores assumenda fugit aut veniam nisi autem ex animi suscipit facilis quo consectetur quia alias qui ipsam",
+        "link": "http://localhost/category/consectetur-consequuntur-et/",
+        "name": "Consectetur consequuntur et",
+        "slug": "consectetur-consequuntur-et",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Consectetur consequuntur et Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/consectetur-consequuntur-et/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Consectetur consequuntur et Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Quod officiis reprehenderit placeat beatae temporibus id quibusdam quis quo cum ad quis repudiandae dolores assumenda fugit aut veniam nisi autem ex animi suscipit facilis quo consectetur quia alias qui ipsam\" />\n<meta property=\"og:url\" content=\"http://localhost/category/consectetur-consequuntur-et/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/consectetur-consequuntur-et/\",\n\t            \"url\": \"http://localhost/category/consectetur-consequuntur-et/\",\n\t            \"name\": \"Consectetur consequuntur et Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/consectetur-consequuntur-et/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/consectetur-consequuntur-et/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Consectetur consequuntur et\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Consectetur consequuntur et Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/consectetur-consequuntur-et/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Consectetur consequuntur et Archives - Test WordPress Site",
+            "og_description": "Quod officiis reprehenderit placeat beatae temporibus id quibusdam quis quo cum ad quis repudiandae dolores assumenda fugit aut veniam nisi autem ex animi suscipit facilis quo consectetur quia alias qui ipsam",
+            "og_url": "http://localhost/category/consectetur-consequuntur-et/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/consectetur-consequuntur-et/",
+                        "url": "http://localhost/category/consectetur-consequuntur-et/",
+                        "name": "Consectetur consequuntur et Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/consectetur-consequuntur-et/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/consectetur-consequuntur-et/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Consectetur consequuntur et"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/10"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=10"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 15,
+        "count": 3,
+        "description": "Beatae sequi ut nulla et doloremque consectetur quia at necessitatibus voluptatum non non id expedita vitae ut eum facilis aut et animi rem nisi aut",
+        "link": "http://localhost/category/earum-tempore-maxime-numquam/",
+        "name": "Earum tempore maxime numquam",
+        "slug": "earum-tempore-maxime-numquam",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Earum tempore maxime numquam Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/earum-tempore-maxime-numquam/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Earum tempore maxime numquam Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Beatae sequi ut nulla et doloremque consectetur quia at necessitatibus voluptatum non non id expedita vitae ut eum facilis aut et animi rem nisi aut\" />\n<meta property=\"og:url\" content=\"http://localhost/category/earum-tempore-maxime-numquam/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/earum-tempore-maxime-numquam/\",\n\t            \"url\": \"http://localhost/category/earum-tempore-maxime-numquam/\",\n\t            \"name\": \"Earum tempore maxime numquam Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/earum-tempore-maxime-numquam/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/earum-tempore-maxime-numquam/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Earum tempore maxime numquam\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Earum tempore maxime numquam Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/earum-tempore-maxime-numquam/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Earum tempore maxime numquam Archives - Test WordPress Site",
+            "og_description": "Beatae sequi ut nulla et doloremque consectetur quia at necessitatibus voluptatum non non id expedita vitae ut eum facilis aut et animi rem nisi aut",
+            "og_url": "http://localhost/category/earum-tempore-maxime-numquam/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/earum-tempore-maxime-numquam/",
+                        "url": "http://localhost/category/earum-tempore-maxime-numquam/",
+                        "name": "Earum tempore maxime numquam Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/earum-tempore-maxime-numquam/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/earum-tempore-maxime-numquam/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Earum tempore maxime numquam"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/15"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=15"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 18,
+        "count": 7,
+        "description": "Ad error consequatur adipisci sapiente repellat qui suscipit qui placeat in exercitationem sit vitae minus nihil nemo consequatur vel accusantium ut labore qui eos qui asperiores dicta nemo id aliquam",
+        "link": "http://localhost/category/et-est-sunt-consequatur-rerum/",
+        "name": "Et est sunt consequatur rerum",
+        "slug": "et-est-sunt-consequatur-rerum",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Et est sunt consequatur rerum Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/et-est-sunt-consequatur-rerum/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Et est sunt consequatur rerum Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Ad error consequatur adipisci sapiente repellat qui suscipit qui placeat in exercitationem sit vitae minus nihil nemo consequatur vel accusantium ut labore qui eos qui asperiores dicta nemo id aliquam\" />\n<meta property=\"og:url\" content=\"http://localhost/category/et-est-sunt-consequatur-rerum/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/et-est-sunt-consequatur-rerum/\",\n\t            \"url\": \"http://localhost/category/et-est-sunt-consequatur-rerum/\",\n\t            \"name\": \"Et est sunt consequatur rerum Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/et-est-sunt-consequatur-rerum/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/et-est-sunt-consequatur-rerum/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Et est sunt consequatur rerum\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Et est sunt consequatur rerum Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/et-est-sunt-consequatur-rerum/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Et est sunt consequatur rerum Archives - Test WordPress Site",
+            "og_description": "Ad error consequatur adipisci sapiente repellat qui suscipit qui placeat in exercitationem sit vitae minus nihil nemo consequatur vel accusantium ut labore qui eos qui asperiores dicta nemo id aliquam",
+            "og_url": "http://localhost/category/et-est-sunt-consequatur-rerum/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/et-est-sunt-consequatur-rerum/",
+                        "url": "http://localhost/category/et-est-sunt-consequatur-rerum/",
+                        "name": "Et est sunt consequatur rerum Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/et-est-sunt-consequatur-rerum/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/et-est-sunt-consequatur-rerum/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Et est sunt consequatur rerum"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/18"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=18"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 14,
+        "count": 10,
+        "description": "Ut necessitatibus ducimus molestias dolorum consequatur repellat eaque quia cum ex accusantium doloremque eaque consequuntur blanditiis commodi beatae quidem rerum libero et aliquid deleniti officiis omnis consequatur eos dolores assumenda aut aut consequatur id",
+        "link": "http://localhost/category/itaque-cupiditate-fugit-in-officia/",
+        "name": "Itaque cupiditate fugit in officia",
+        "slug": "itaque-cupiditate-fugit-in-officia",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Itaque cupiditate fugit in officia Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/itaque-cupiditate-fugit-in-officia/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Itaque cupiditate fugit in officia Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Ut necessitatibus ducimus molestias dolorum consequatur repellat eaque quia cum ex accusantium doloremque eaque consequuntur blanditiis commodi beatae quidem rerum libero et aliquid deleniti officiis omnis consequatur eos dolores assumenda aut aut consequatur id\" />\n<meta property=\"og:url\" content=\"http://localhost/category/itaque-cupiditate-fugit-in-officia/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/itaque-cupiditate-fugit-in-officia/\",\n\t            \"url\": \"http://localhost/category/itaque-cupiditate-fugit-in-officia/\",\n\t            \"name\": \"Itaque cupiditate fugit in officia Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/itaque-cupiditate-fugit-in-officia/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/itaque-cupiditate-fugit-in-officia/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Itaque cupiditate fugit in officia\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Itaque cupiditate fugit in officia Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/itaque-cupiditate-fugit-in-officia/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Itaque cupiditate fugit in officia Archives - Test WordPress Site",
+            "og_description": "Ut necessitatibus ducimus molestias dolorum consequatur repellat eaque quia cum ex accusantium doloremque eaque consequuntur blanditiis commodi beatae quidem rerum libero et aliquid deleniti officiis omnis consequatur eos dolores assumenda aut aut consequatur id",
+            "og_url": "http://localhost/category/itaque-cupiditate-fugit-in-officia/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/itaque-cupiditate-fugit-in-officia/",
+                        "url": "http://localhost/category/itaque-cupiditate-fugit-in-officia/",
+                        "name": "Itaque cupiditate fugit in officia Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/itaque-cupiditate-fugit-in-officia/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/itaque-cupiditate-fugit-in-officia/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Itaque cupiditate fugit in officia"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/14"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=14"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 8,
+        "count": 7,
+        "description": "Porro aut placeat est atque est dolore corrupti tenetur amet ipsam aut pariatur consequatur unde voluptas sed mollitia commodi sequi a minus fugit et ducimus aperiam nihil est dicta iure itaque velit ipsam minima fugit pariatur aut odit iste nihil laborum nesciunt quis aliquam quod mollitia mollitia laborum officia",
+        "link": "http://localhost/category/libero-molestias-et/",
+        "name": "Libero molestias et",
+        "slug": "libero-molestias-et",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Libero molestias et Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/libero-molestias-et/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Libero molestias et Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Porro aut placeat est atque est dolore corrupti tenetur amet ipsam aut pariatur consequatur unde voluptas sed mollitia commodi sequi a minus fugit et ducimus aperiam nihil est dicta iure itaque velit ipsam minima fugit pariatur aut odit iste nihil laborum nesciunt quis aliquam quod mollitia mollitia laborum officia\" />\n<meta property=\"og:url\" content=\"http://localhost/category/libero-molestias-et/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/libero-molestias-et/\",\n\t            \"url\": \"http://localhost/category/libero-molestias-et/\",\n\t            \"name\": \"Libero molestias et Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/libero-molestias-et/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/libero-molestias-et/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Libero molestias et\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Libero molestias et Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/libero-molestias-et/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Libero molestias et Archives - Test WordPress Site",
+            "og_description": "Porro aut placeat est atque est dolore corrupti tenetur amet ipsam aut pariatur consequatur unde voluptas sed mollitia commodi sequi a minus fugit et ducimus aperiam nihil est dicta iure itaque velit ipsam minima fugit pariatur aut odit iste nihil laborum nesciunt quis aliquam quod mollitia mollitia laborum officia",
+            "og_url": "http://localhost/category/libero-molestias-et/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/libero-molestias-et/",
+                        "url": "http://localhost/category/libero-molestias-et/",
+                        "name": "Libero molestias et Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/libero-molestias-et/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/libero-molestias-et/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Libero molestias et"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/8"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=8"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 11,
+        "count": 7,
+        "description": "Repellendus nihil quo aut sed molestias nesciunt asperiores inventore beatae ut voluptatum quam qui sed alias voluptatem dolores saepe aut tempora eligendi velit consequatur et et quas ut nisi qui voluptatem illum",
+        "link": "http://localhost/category/maxime-eos-incidunt/",
+        "name": "Maxime eos incidunt",
+        "slug": "maxime-eos-incidunt",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Maxime eos incidunt Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/maxime-eos-incidunt/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Maxime eos incidunt Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Repellendus nihil quo aut sed molestias nesciunt asperiores inventore beatae ut voluptatum quam qui sed alias voluptatem dolores saepe aut tempora eligendi velit consequatur et et quas ut nisi qui voluptatem illum\" />\n<meta property=\"og:url\" content=\"http://localhost/category/maxime-eos-incidunt/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/maxime-eos-incidunt/\",\n\t            \"url\": \"http://localhost/category/maxime-eos-incidunt/\",\n\t            \"name\": \"Maxime eos incidunt Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/maxime-eos-incidunt/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/maxime-eos-incidunt/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Maxime eos incidunt\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Maxime eos incidunt Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/maxime-eos-incidunt/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Maxime eos incidunt Archives - Test WordPress Site",
+            "og_description": "Repellendus nihil quo aut sed molestias nesciunt asperiores inventore beatae ut voluptatum quam qui sed alias voluptatem dolores saepe aut tempora eligendi velit consequatur et et quas ut nisi qui voluptatem illum",
+            "og_url": "http://localhost/category/maxime-eos-incidunt/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/maxime-eos-incidunt/",
+                        "url": "http://localhost/category/maxime-eos-incidunt/",
+                        "name": "Maxime eos incidunt Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/maxime-eos-incidunt/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/maxime-eos-incidunt/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Maxime eos incidunt"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/11"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=11"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "count": 7,
+        "description": "Cumque iste deserunt in cum mollitia ipsa",
+        "link": "http://localhost/category/tempora-doloribus-ad/",
+        "name": "Tempora doloribus ad",
+        "slug": "tempora-doloribus-ad",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Tempora doloribus ad Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/tempora-doloribus-ad/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Tempora doloribus ad Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Cumque iste deserunt in cum mollitia ipsa\" />\n<meta property=\"og:url\" content=\"http://localhost/category/tempora-doloribus-ad/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/tempora-doloribus-ad/\",\n\t            \"url\": \"http://localhost/category/tempora-doloribus-ad/\",\n\t            \"name\": \"Tempora doloribus ad Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/tempora-doloribus-ad/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/tempora-doloribus-ad/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Tempora doloribus ad\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Tempora doloribus ad Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/tempora-doloribus-ad/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Tempora doloribus ad Archives - Test WordPress Site",
+            "og_description": "Cumque iste deserunt in cum mollitia ipsa",
+            "og_url": "http://localhost/category/tempora-doloribus-ad/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/tempora-doloribus-ad/",
+                        "url": "http://localhost/category/tempora-doloribus-ad/",
+                        "name": "Tempora doloribus ad Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/tempora-doloribus-ad/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/tempora-doloribus-ad/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Tempora doloribus ad"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/4"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=4"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 28,
+        "count": 1,
+        "description": "",
+        "link": "http://localhost/de/category/uncategorized-de/",
+        "name": "Uncategorized",
+        "slug": "uncategorized-de",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Uncategorized Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/de/category/uncategorized-de/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Uncategorized Archives - Test WordPress Site\" />\n<meta property=\"og:url\" content=\"http://localhost/de/category/uncategorized-de/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/de/category/uncategorized-de/\",\n\t            \"url\": \"http://localhost/de/category/uncategorized-de/\",\n\t            \"name\": \"Uncategorized Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/de/category/uncategorized-de/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/de/category/uncategorized-de/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Uncategorized\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Uncategorized Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/de/category/uncategorized-de/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Uncategorized Archives - Test WordPress Site",
+            "og_url": "http://localhost/de/category/uncategorized-de/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/de/category/uncategorized-de/",
+                        "url": "http://localhost/de/category/uncategorized-de/",
+                        "name": "Uncategorized Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/de/category/uncategorized-de/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/de/category/uncategorized-de/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Uncategorized"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/28"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=28"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 32,
+        "count": 1,
+        "description": "",
+        "link": "http://localhost/fr/category/uncategorized-fr/",
+        "name": "Uncategorized",
+        "slug": "uncategorized-fr",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Uncategorized Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/fr/category/uncategorized-fr/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Uncategorized Archives - Test WordPress Site\" />\n<meta property=\"og:url\" content=\"http://localhost/fr/category/uncategorized-fr/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/fr/category/uncategorized-fr/\",\n\t            \"url\": \"http://localhost/fr/category/uncategorized-fr/\",\n\t            \"name\": \"Uncategorized Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/fr/category/uncategorized-fr/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/fr/category/uncategorized-fr/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Uncategorized\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Uncategorized Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/fr/category/uncategorized-fr/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Uncategorized Archives - Test WordPress Site",
+            "og_url": "http://localhost/fr/category/uncategorized-fr/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/fr/category/uncategorized-fr/",
+                        "url": "http://localhost/fr/category/uncategorized-fr/",
+                        "name": "Uncategorized Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/fr/category/uncategorized-fr/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/fr/category/uncategorized-fr/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Uncategorized"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/32"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=32"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 1,
+        "count": 10,
+        "description": "",
+        "link": "http://localhost/category/uncategorized/",
+        "name": "Uncategorized",
+        "slug": "uncategorized",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Uncategorized Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/uncategorized/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Uncategorized Archives - Test WordPress Site\" />\n<meta property=\"og:url\" content=\"http://localhost/category/uncategorized/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/uncategorized/\",\n\t            \"url\": \"http://localhost/category/uncategorized/\",\n\t            \"name\": \"Uncategorized Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/uncategorized/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/uncategorized/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Uncategorized\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Uncategorized Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/uncategorized/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Uncategorized Archives - Test WordPress Site",
+            "og_url": "http://localhost/category/uncategorized/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/uncategorized/",
+                        "url": "http://localhost/category/uncategorized/",
+                        "name": "Uncategorized Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/uncategorized/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/uncategorized/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Uncategorized"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/1"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=1"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 12,
+        "count": 5,
+        "description": "Est non autem deserunt dicta eveniet et sequi hic",
+        "link": "http://localhost/category/velit-ut-deserunt-ut/",
+        "name": "Velit ut deserunt ut",
+        "slug": "velit-ut-deserunt-ut",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Velit ut deserunt ut Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/velit-ut-deserunt-ut/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Velit ut deserunt ut Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Est non autem deserunt dicta eveniet et sequi hic\" />\n<meta property=\"og:url\" content=\"http://localhost/category/velit-ut-deserunt-ut/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/velit-ut-deserunt-ut/\",\n\t            \"url\": \"http://localhost/category/velit-ut-deserunt-ut/\",\n\t            \"name\": \"Velit ut deserunt ut Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/velit-ut-deserunt-ut/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/velit-ut-deserunt-ut/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Velit ut deserunt ut\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Velit ut deserunt ut Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/velit-ut-deserunt-ut/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Velit ut deserunt ut Archives - Test WordPress Site",
+            "og_description": "Est non autem deserunt dicta eveniet et sequi hic",
+            "og_url": "http://localhost/category/velit-ut-deserunt-ut/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/velit-ut-deserunt-ut/",
+                        "url": "http://localhost/category/velit-ut-deserunt-ut/",
+                        "name": "Velit ut deserunt ut Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/velit-ut-deserunt-ut/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/velit-ut-deserunt-ut/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Velit ut deserunt ut"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/12"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=12"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 20,
+        "count": 10,
+        "description": "Ea quo mollitia libero expedita rerum amet eius qui ipsam sed iste magnam sit et consequatur ullam voluptate corrupti voluptas harum sed accusamus ut sint voluptates ea",
+        "link": "http://localhost/category/voluptas-soluta/",
+        "name": "Voluptas soluta",
+        "slug": "voluptas-soluta",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Voluptas soluta Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/voluptas-soluta/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Voluptas soluta Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Ea quo mollitia libero expedita rerum amet eius qui ipsam sed iste magnam sit et consequatur ullam voluptate corrupti voluptas harum sed accusamus ut sint voluptates ea\" />\n<meta property=\"og:url\" content=\"http://localhost/category/voluptas-soluta/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/voluptas-soluta/\",\n\t            \"url\": \"http://localhost/category/voluptas-soluta/\",\n\t            \"name\": \"Voluptas soluta Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/voluptas-soluta/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/voluptas-soluta/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Voluptas soluta\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Voluptas soluta Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/voluptas-soluta/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Voluptas soluta Archives - Test WordPress Site",
+            "og_description": "Ea quo mollitia libero expedita rerum amet eius qui ipsam sed iste magnam sit et consequatur ullam voluptate corrupti voluptas harum sed accusamus ut sint voluptates ea",
+            "og_url": "http://localhost/category/voluptas-soluta/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/voluptas-soluta/",
+                        "url": "http://localhost/category/voluptas-soluta/",
+                        "name": "Voluptas soluta Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/voluptas-soluta/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/voluptas-soluta/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Voluptas soluta"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/20"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=20"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 7,
+        "count": 9,
+        "description": "Et excepturi nulla sed sint autem neque ut a praesentium nobis aspernatur ab omnis voluptatibus laboriosam mollitia tempore vel repellendus omnis quae maxime possimus labore voluptas voluptatem officiis eius qui ea voluptatem minima minus ut expedita sed qui est quia deserunt explicabo dolorum earum et sit",
+        "link": "http://localhost/category/voluptatem-asperiores-iste-rerum/",
+        "name": "Voluptatem asperiores iste rerum",
+        "slug": "voluptatem-asperiores-iste-rerum",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Voluptatem asperiores iste rerum Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/voluptatem-asperiores-iste-rerum/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Voluptatem asperiores iste rerum Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Et excepturi nulla sed sint autem neque ut a praesentium nobis aspernatur ab omnis voluptatibus laboriosam mollitia tempore vel repellendus omnis quae maxime possimus labore voluptas voluptatem officiis eius qui ea voluptatem minima minus ut expedita sed qui est quia deserunt explicabo dolorum earum et sit\" />\n<meta property=\"og:url\" content=\"http://localhost/category/voluptatem-asperiores-iste-rerum/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/voluptatem-asperiores-iste-rerum/\",\n\t            \"url\": \"http://localhost/category/voluptatem-asperiores-iste-rerum/\",\n\t            \"name\": \"Voluptatem asperiores iste rerum Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/voluptatem-asperiores-iste-rerum/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/voluptatem-asperiores-iste-rerum/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Voluptatem asperiores iste rerum\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Voluptatem asperiores iste rerum Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/voluptatem-asperiores-iste-rerum/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Voluptatem asperiores iste rerum Archives - Test WordPress Site",
+            "og_description": "Et excepturi nulla sed sint autem neque ut a praesentium nobis aspernatur ab omnis voluptatibus laboriosam mollitia tempore vel repellendus omnis quae maxime possimus labore voluptas voluptatem officiis eius qui ea voluptatem minima minus ut expedita sed qui est quia deserunt explicabo dolorum earum et sit",
+            "og_url": "http://localhost/category/voluptatem-asperiores-iste-rerum/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/voluptatem-asperiores-iste-rerum/",
+                        "url": "http://localhost/category/voluptatem-asperiores-iste-rerum/",
+                        "name": "Voluptatem asperiores iste rerum Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/voluptatem-asperiores-iste-rerum/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/voluptatem-asperiores-iste-rerum/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Voluptatem asperiores iste rerum"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/7"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=7"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 17,
+        "count": 10,
+        "description": "Impedit minima praesentium vel sint non magni nesciunt qui placeat reiciendis suscipit debitis eos consequatur iusto et voluptas at eveniet nam ullam quaerat ut rerum corrupti libero fugiat voluptas nulla hic iste reprehenderit ut incidunt",
+        "link": "http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/",
+        "name": "Voluptatem neque tempora illo perferendis voluptatem sint",
+        "slug": "voluptatem-neque-tempora-illo-perferendis-voluptatem-sint",
+        "taxonomy": "category",
+        "parent": 0,
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Voluptatem neque tempora illo perferendis voluptatem sint Archives - Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Voluptatem neque tempora illo perferendis voluptatem sint Archives - Test WordPress Site\" />\n<meta property=\"og:description\" content=\"Impedit minima praesentium vel sint non magni nesciunt qui placeat reiciendis suscipit debitis eos consequatur iusto et voluptas at eveniet nam ullam quaerat ut rerum corrupti libero fugiat voluptas nulla hic iste reprehenderit ut incidunt\" />\n<meta property=\"og:url\" content=\"http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"CollectionPage\",\n\t            \"@id\": \"http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/\",\n\t            \"url\": \"http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/\",\n\t            \"name\": \"Voluptatem neque tempora illo perferendis voluptatem sint Archives - Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Voluptatem neque tempora illo perferendis voluptatem sint\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Voluptatem neque tempora illo perferendis voluptatem sint Archives - Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Voluptatem neque tempora illo perferendis voluptatem sint Archives - Test WordPress Site",
+            "og_description": "Impedit minima praesentium vel sint non magni nesciunt qui placeat reiciendis suscipit debitis eos consequatur iusto et voluptas at eveniet nam ullam quaerat ut rerum corrupti libero fugiat voluptas nulla hic iste reprehenderit ut incidunt",
+            "og_url": "http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/",
+            "og_site_name": "Test WordPress Site",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "CollectionPage",
+                        "@id": "http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/",
+                        "url": "http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/",
+                        "name": "Voluptatem neque tempora illo perferendis voluptatem sint Archives - Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/#breadcrumb"
+                        },
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Voluptatem neque tempora illo perferendis voluptatem sint"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories/17"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/categories"
+                }
+            ],
+            "about": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/taxonomies/category"
+                }
+            ],
+            "wp:post_type": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/posts?categories=17"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    }
+]

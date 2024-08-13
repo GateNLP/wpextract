@@ -1,6 +1,6 @@
 [tool.poetry]
 name="wpextract"
-version="1.0.3"
+version="1.1.0"
 description="Create datasets from WordPress sites"
 homepage="https://wpextract.readthedocs.io/"
 documentation="https://wpextract.readthedocs.io/"
@@ -46,9 +46,15 @@ build = "==0.9.*,>=0.9.0"
 pytest = "~8.2.2"
 pytest-datadir = "~1.5.0"
 pytest-mock = "~3.14.0"
-ruff = "^0.5.0"
+ruff = "^0.5.6"
 coverage = "^7.5.4"
 responses = "^0.25.3"
+mypy = "^1.11.1"
+types-tqdm = "^4.66.0.20240417"
+types-beautifulsoup4 = "^4.12.0.20240511"
+pandas-stubs = "^2.2.2.240603"
+types-requests = "^2.32.0.20240712"
+typing-extensions = ">=4.0.0"
 
 
 [tool.poetry.group.docs]
@@ -68,18 +74,21 @@ target-version = "py39"
 
 [tool.ruff.lint]
 select = [
-    "E4",
-    "E7",
-    "E9",
-    "F",
-    "D",
-    "PD",
-    "I",
-    "PT",
-    "B",
-    "UP",
-    "RUF",
-    "T20"
+           # --- Default rules ---
+    "E4",  # pycodestyle - Import
+    "E7",  # pycodestyle - Statement
+    "E9",  # pycodestyle - Runtime
+    "F",   # pyflakes
+           # --- End default rules ---
+    "D",   # pydocstyle (Subset of rules enabled by pydocstyle.convention)
+    "PD",  # pandas-vet
+    "I",   # isort
+    "PT",  # flake8-pytest-style
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "RUF", # ruff custom
+    "T20", # flake8-print
+    "TCH", # flake8-type-checking
 ]
 
 ignore = [
@@ -89,8 +98,9 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "**/tests/*" = [
-    "D103", # Ignore method docstring errors in tests
+    "D", # Ignore docstring errors in tests
     "PD901", # Allow `df` variable name in tests
+    "DOC"
 ]
 
 [tool.ruff.lint.pydocstyle]
@@ -102,3 +112,6 @@ pythonpath = "tests"
 addopts = [
     "--import-mode=importlib",
 ]
+
+[tool.mypy]
+strict = true

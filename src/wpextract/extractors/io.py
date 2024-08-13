@@ -11,7 +11,7 @@ from pandas import DataFrame
 from pandas import Timestamp as PdTimestamp
 
 
-def load_from_path(path: Path) -> Optional[dict]:
+def load_from_path(path: Path) -> Any:
     """Loads and parses a JSON file.
 
     Args:
@@ -53,7 +53,9 @@ def load_df(path: Path, index_col: str = "id") -> Optional[pd.DataFrame]:
     return pd.json_normalize(data_raw).set_index(index_col)
 
 
-def _set_nested_keys(row_dict: dict, split_key: list[str], val: Any):
+def _set_nested_keys(
+    row_dict: dict[Any, Any], split_key: list[str], val: Any
+) -> dict[Any, Any]:
     """Set a value in the dictionary with nested keys.
 
     Args:
@@ -85,7 +87,7 @@ def _set_nested_keys(row_dict: dict, split_key: list[str], val: Any):
     return row_dict
 
 
-def df_denormalize_to_dict(df: pd.DataFrame, sep: str = "."):
+def df_denormalize_to_dict(df: pd.DataFrame, sep: str = ".") -> list[dict[str, Any]]:
     """Unflatten a dataframe with dot notation keys into a nested dictionary.
 
     Opposite of ``pd.json_normalize``.
@@ -99,7 +101,7 @@ def df_denormalize_to_dict(df: pd.DataFrame, sep: str = "."):
     """
     result = []
     for _, row in df.iterrows():
-        parsed_row = {}
+        parsed_row: dict[Any, Any] = {}
         for idx, val in row.items():
             keys = str(idx).split(sep)
             parsed_row = _set_nested_keys(parsed_row, keys, val)
@@ -139,23 +141,26 @@ class JSONEncoder(json.JSONEncoder):
     def default(self, o: Any) -> Any:
         """Serialise custom objects.
 
-        .. list-table
-            :header-rows: 1
-            * Type, Strategy
-            * - ``pd.Timestamp``, ``isoformat()``
-            * - Dataclasses, ``dataclasses.asdict()``
+        - pd.Timestamp: converted with the isoformat method
+        - Dataclasses: converted with asdict
+        - langcodes.Language: converted to a string
+
+        Calls the default method of the superclass for other types.
+
+        Returns:
+            Serializable form of the object
         """
-        if type(o) == PdTimestamp:
+        if isinstance(o, PdTimestamp):
             return o.isoformat()
-        if dataclasses.is_dataclass(o):
+        if dataclasses.is_dataclass(o) and not isinstance(o, type):
             return dataclasses.asdict(o)
-        if type(o) == Language:
+        if isinstance(o, Language):
             return str(o)
 
         return super().default(o)
 
 
-def _export_file(raw: Any, path: Path):
+def _export_file(raw: Any, path: Path) -> None:
     with open(path, "w") as f:
         json.dump(raw, f, cls=JSONEncoder, indent=2, allow_nan=False)
 

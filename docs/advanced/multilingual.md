@@ -36,7 +36,7 @@ Currently the following plugins are supported:
 
     ??? example
         ```html
-        --8<-- "tests/parse/translations/test_pickers/polylang_widget.html:struct"
+        --8<-- "tests/parse/translations/data/polylang_widget.html:struct"
         ```
 
 
@@ -44,7 +44,7 @@ Currently the following plugins are supported:
 
     ??? example
         ```html
-        --8<-- "tests/parse/translations/test_pickers/polylang_custom_dropdown.html:struct"
+        --8<-- "tests/parse/translations/data/polylang_custom_dropdown.html:struct"
         ```
 
 **Does not support**:
@@ -55,7 +55,7 @@ Currently the following plugins are supported:
 
 ## Adding Support
 
-!!! info "See also"
+!!! info "Note"
     To use additional pickers, you must [use WPextract as a library](library.md).
 
 Support can be added by creating a new picker definition inheriting from [`LangPicker`][wpextract.parse.translations.LangPicker], and passing to the `translation_pickers` argument of [`WPExtractor`][wpextract.WPExtractor]
@@ -69,16 +69,24 @@ More complicated pickers may need to override additional methods of the class, b
 
 This section will show implementing a new picker with the following simplified markup:
 
-```html
-<ul class="translations">
-  <li><a href="/page/" class="lang current-lang" lang="en">English</a></li>
-  <li><a href="/de/seite/" class="lang" lang="de">Deutsch</a></li>
-  <li><a href="/page/" class="lang no-translation" lang="fr">Français</a></li>
-</ul>
-```
+!!! example "Example picker markup"
+    ```html
+    <ul class="translations">
+      <li><a href="/page/" class="lang current-lang" lang="en">English</a></li>
+      <li><a href="/de/seite/" class="lang" lang="de">Deutsch</a></li>
+      <li><a href="/page/" class="lang no-translation" lang="fr">Français</a></li>
+    </ul>
+    ```
+
 The correct parse of this picker should set the current language to English, add German as a translation, and ignore French.
 
 ### `get_root()`
+
+!!! tip "Selector Support"
+
+    The `select()` and `select_one()` methods use [Soup Sieve](https://facelessuser.github.io/soupsieve/) internally.
+
+    This library supports many, but not all, CSS selectors. Supported selectors can be found [here](https://facelessuser.github.io/soupsieve/selectors/). Namespace selection is not supported as we use the `lxml` backend.
 
 Using the `self.page_doc` attribute, a [`BeautifulSoup`][bs4.BeautifulSoup] object representing the page, the root element of the picker should be found and returned.
 
@@ -86,12 +94,12 @@ The `select_one` method is used to find the root element, and will return `None`
 
 If a value is returned, the `self.root_el` attribute will be populated with the result of this method.
 
-??? example "Example `get_root` implementation"
+!!! example "Example `get_root` implementation"
     ```python
 
     class MyPicker(LangPicker):
         ...
-        def get_root(self) -> Tag:
+        def get_root(self):
             return self.page_doc.select_one('ul.translations')
     ```
 
@@ -104,7 +112,7 @@ Be careful to avoid:
 - Adding the current language as a translation
 - Adding languages which are listed but don't have translations
 
-??? example "Example `extract` implementation"
+!!! example "Example `extract` implementation"
     ```python
 
     class MyPicker(LangPicker):
@@ -117,6 +125,46 @@ Be careful to avoid:
                 elif 'no-translation' not in lang_a.get('class'):
                     self.add_translation(lang_a.get('href'), lang_a.get('lang'))
     ```
+
+### Parsing Robustness
+
+BeautifulSoup's `select` and `select_one` methods will silently fail if no matching elements are found (returning `None` and an empty list respectively). In some cases this may be desirable, e.g. if the picker contains no languages, `select_one` returning an empty list will probably be the correct behaviour.
+
+In cases where this _isn't_ right, like when retrieving an element which should always be present, you can instead use the [`LangPicker._root_select()`][wpextract.parse.translations.LangPicker._root_select] or [`LangPicker._root_select_one()`][wpextract.parse.translations.LangPicker._root_select_one] methods. These will raise an error if no element(s) are found.
+
+Currently, this error will be caught and the page in question will be skipped as if no translation picker could be found. In future, this may instead result in other pickers being tried instead.
+
+!!! example "Example more robust `extract` implementation"
+    ```python
+
+    class MyPicker(LangPicker):
+        ...
+        def extract(self):
+            # This should *always* be present, if it isn't this can't be the correct picker.
+            current_lang_a = self._root_select_one('li a.current-lang')
+            self.set_current_lang(current_lang_a.get('lang'))
+
+            # This could be empty
+            for lang_a in self.root_el.select('li a.lang'):
+                if (
+                    'current-lang' not in lang_a.get('class')
+                    and 'no-translation' not in lang_a.get('class')
+                ):
+                    self.add_translation(lang_a.get('href'), lang_a.get('lang'))
+    ```
+
+??? note "Using other selector methods"
+
+    BeautifulSoup's CSS selector methods should cover most use cases. However, if you need to use more complex selection logic, you can generate the same error by using the [`LangPicker._build_extraction_fail_err`][wpextract.parse.translations.LangPicker._build_extraction_fail_err] method.
+
+
+### Performance
+
+For each post in the site, the `get_root()` method of every `LangPicker` instance selected will be run, so the efficiency of this method is important.
+
+* Try and make the test as specific as possible
+* For more complex tests, consider splitting it up and failing early
+* Minimise usage of dynamic patterns. SoupSieve internally caches the compiled form of each search pattern to improve performance, but any change will invalidate this. Consider splitting the static and dynamic parts of patterns to work around this.
 
 ### Contributing Pickers
 

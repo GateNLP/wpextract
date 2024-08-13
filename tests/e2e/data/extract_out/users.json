@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "admin",
+    "url": "http://localhost",
+    "description": "",
+    "link": "http://localhost/author/admin/",
+    "slug": "admin",
+    "avatar": "https://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=500&d=mm&r=g"
+  },
+  {
+    "id": 2,
+    "name": "Briana",
+    "url": "http://www.dach.org/ipsum-ex-id-quisquam-voluptatum-voluptatem-ipsam-iusto.html",
+    "description": "Distinctio et blanditiis voluptatem et. Corrupti quis dolor consequatur quo similique. Error sequi est similique ut.\r\n\r\nFacilis distinctio perferendis omnis molestias corporis. Rem est odio explicabo ratione eveniet animi omnis. Quibusdam modi doloremque ut rerum officia blanditiis.",
+    "link": "http://localhost/author/briana-wisozk/",
+    "slug": "briana-wisozk",
+    "avatar": "https://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=500&d=mm&r=g"
+  },
+  {
+    "id": 4,
+    "name": "Kenna",
+    "url": "http://www.marvin.com/ut-sit-minus-velit-ipsa-recusandae-debitis-dolore",
+    "description": "Ab et non aut eum error ut. Est sunt quisquam aspernatur rem sunt et. Similique modi aspernatur sint alias et sit. Libero ipsum temporibus modi aliquam ducimus fugiat facere tenetur.\r\n\r\nUnde voluptatem suscipit sint doloribus consequatur. Sunt nemo laborum illum quis. Voluptas fugit libero ipsam qui nulla.",
+    "link": "http://localhost/author/kenna-schneider/",
+    "slug": "kenna-schneider",
+    "avatar": "https://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=500&d=mm&r=g"
+  },
+  {
+    "id": 3,
+    "name": "Marquis",
+    "url": "http://www.jerde.info/mollitia-optio-ullam-nemo-cum.html",
+    "description": "Tenetur eligendi ex voluptas reprehenderit labore officiis est. Recusandae sint mollitia quia ea alias pariatur enim. Sit omnis vel non soluta. In repellat qui laborum consequuntur.\r\n\r\nPerspiciatis eum dolores consequatur ipsam unde fugiat debitis. Eos quia corrupti ex occaecati suscipit tenetur quaerat. Aspernatur vel minus optio aut dolor aspernatur.",
+    "link": "http://localhost/author/marquis-schmidt/",
+    "slug": "marquis-schmidt",
+    "avatar": "https://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=500&d=mm&r=g"
+  }
+]

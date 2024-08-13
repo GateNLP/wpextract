@@ -1,0 +1,629 @@
+[
+    {
+        "id": 1,
+        "name": "admin",
+        "url": "http://localhost",
+        "description": "",
+        "link": "http://localhost/author/admin/",
+        "slug": "admin",
+        "avatar_urls": {
+            "24": "http://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=24&d=mm&r=g",
+            "48": "http://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=48&d=mm&r=g",
+            "96": "http://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=96&d=mm&r=g"
+        },
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>admin, Author at Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/author/admin/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"profile\" />\n<meta property=\"og:title\" content=\"admin, Author at Test WordPress Site\" />\n<meta property=\"og:url\" content=\"http://localhost/author/admin/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta property=\"og:image\" content=\"https://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=500&d=mm&r=g\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"ProfilePage\",\n\t            \"@id\": \"http://localhost/author/admin/\",\n\t            \"url\": \"http://localhost/author/admin/\",\n\t            \"name\": \"admin, Author at Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/author/admin/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\",\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"ReadAction\",\n\t                    \"target\": [\n\t                        \"http://localhost/author/admin/\"\n\t                    ]\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/author/admin/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Archives for admin\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"Person\",\n\t            \"@id\": \"http://localhost/#/schema/person/4b5d7a9a93948b3840768a06ec202255\",\n\t            \"name\": \"admin\",\n\t            \"image\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/person/image/\",\n\t                \"url\": \"http://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=96&d=mm&r=g\",\n\t                \"contentUrl\": \"http://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=96&d=mm&r=g\",\n\t                \"caption\": \"admin\"\n\t            },\n\t            \"sameAs\": [\n\t                \"http://localhost\"\n\t            ],\n\t            \"mainEntityOfPage\": {\n\t                \"@id\": \"http://localhost/author/admin/\"\n\t            }\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "admin, Author at Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/author/admin/",
+            "og_locale": "en_US",
+            "og_type": "profile",
+            "og_title": "admin, Author at Test WordPress Site",
+            "og_url": "http://localhost/author/admin/",
+            "og_site_name": "Test WordPress Site",
+            "og_image": [
+                {
+                    "url": "https://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=500&d=mm&r=g"
+                }
+            ],
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "ProfilePage",
+                        "@id": "http://localhost/author/admin/",
+                        "url": "http://localhost/author/admin/",
+                        "name": "admin, Author at Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/author/admin/#breadcrumb"
+                        },
+                        "inLanguage": "en-US",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "http://localhost/author/admin/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/author/admin/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Archives for admin"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    },
+                    {
+                        "@type": "Person",
+                        "@id": "http://localhost/#/schema/person/4b5d7a9a93948b3840768a06ec202255",
+                        "name": "admin",
+                        "image": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/person/image/",
+                            "url": "http://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=96&d=mm&r=g",
+                            "contentUrl": "http://0.gravatar.com/avatar/96614ec98aa0c0d2ee75796dced6df54?s=96&d=mm&r=g",
+                            "caption": "admin"
+                        },
+                        "sameAs": [
+                            "http://localhost"
+                        ],
+                        "mainEntityOfPage": {
+                            "@id": "http://localhost/author/admin/"
+                        }
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/users/1"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/users"
+                }
+            ]
+        }
+    },
+    {
+        "id": 2,
+        "name": "Briana",
+        "url": "http://www.dach.org/ipsum-ex-id-quisquam-voluptatum-voluptatem-ipsam-iusto.html",
+        "description": "Distinctio et blanditiis voluptatem et. Corrupti quis dolor consequatur quo similique. Error sequi est similique ut.\r\n\r\nFacilis distinctio perferendis omnis molestias corporis. Rem est odio explicabo ratione eveniet animi omnis. Quibusdam modi doloremque ut rerum officia blanditiis.",
+        "link": "http://localhost/author/briana-wisozk/",
+        "slug": "briana-wisozk",
+        "avatar_urls": {
+            "24": "http://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=24&d=mm&r=g",
+            "48": "http://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=48&d=mm&r=g",
+            "96": "http://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=96&d=mm&r=g"
+        },
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Briana, Author at Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/author/briana-wisozk/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"profile\" />\n<meta property=\"og:title\" content=\"Briana, Author at Test WordPress Site\" />\n<meta property=\"og:url\" content=\"http://localhost/author/briana-wisozk/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta property=\"og:image\" content=\"https://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=500&d=mm&r=g\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"ProfilePage\",\n\t            \"@id\": \"http://localhost/author/briana-wisozk/\",\n\t            \"url\": \"http://localhost/author/briana-wisozk/\",\n\t            \"name\": \"Briana, Author at Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/author/briana-wisozk/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\",\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"ReadAction\",\n\t                    \"target\": [\n\t                        \"http://localhost/author/briana-wisozk/\"\n\t                    ]\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/author/briana-wisozk/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Archives for Briana\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"Person\",\n\t            \"@id\": \"http://localhost/#/schema/person/6f71d76e7c0698678918457fa1f8bcb1\",\n\t            \"name\": \"Briana\",\n\t            \"image\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/person/image/\",\n\t                \"url\": \"http://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=96&d=mm&r=g\",\n\t                \"contentUrl\": \"http://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=96&d=mm&r=g\",\n\t                \"caption\": \"Briana\"\n\t            },\n\t            \"description\": \"Distinctio et blanditiis voluptatem et. Corrupti quis dolor consequatur quo similique. Error sequi est similique ut. Facilis distinctio perferendis omnis molestias corporis. Rem est odio explicabo ratione eveniet animi omnis. Quibusdam modi doloremque ut rerum officia blanditiis.\",\n\t            \"sameAs\": [\n\t                \"http://www.dach.org/ipsum-ex-id-quisquam-voluptatum-voluptatem-ipsam-iusto.html\"\n\t            ],\n\t            \"mainEntityOfPage\": {\n\t                \"@id\": \"http://localhost/author/briana-wisozk/\"\n\t            }\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Briana, Author at Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/author/briana-wisozk/",
+            "og_locale": "en_US",
+            "og_type": "profile",
+            "og_title": "Briana, Author at Test WordPress Site",
+            "og_url": "http://localhost/author/briana-wisozk/",
+            "og_site_name": "Test WordPress Site",
+            "og_image": [
+                {
+                    "url": "https://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=500&d=mm&r=g"
+                }
+            ],
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "ProfilePage",
+                        "@id": "http://localhost/author/briana-wisozk/",
+                        "url": "http://localhost/author/briana-wisozk/",
+                        "name": "Briana, Author at Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/author/briana-wisozk/#breadcrumb"
+                        },
+                        "inLanguage": "en-US",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "http://localhost/author/briana-wisozk/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/author/briana-wisozk/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Archives for Briana"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    },
+                    {
+                        "@type": "Person",
+                        "@id": "http://localhost/#/schema/person/6f71d76e7c0698678918457fa1f8bcb1",
+                        "name": "Briana",
+                        "image": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/person/image/",
+                            "url": "http://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=96&d=mm&r=g",
+                            "contentUrl": "http://1.gravatar.com/avatar/ac5f8bea254a88667817bfdfdb35596a?s=96&d=mm&r=g",
+                            "caption": "Briana"
+                        },
+                        "description": "Distinctio et blanditiis voluptatem et. Corrupti quis dolor consequatur quo similique. Error sequi est similique ut. Facilis distinctio perferendis omnis molestias corporis. Rem est odio explicabo ratione eveniet animi omnis. Quibusdam modi doloremque ut rerum officia blanditiis.",
+                        "sameAs": [
+                            "http://www.dach.org/ipsum-ex-id-quisquam-voluptatum-voluptatem-ipsam-iusto.html"
+                        ],
+                        "mainEntityOfPage": {
+                            "@id": "http://localhost/author/briana-wisozk/"
+                        }
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/users/2"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/users"
+                }
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "name": "Kenna",
+        "url": "http://www.marvin.com/ut-sit-minus-velit-ipsa-recusandae-debitis-dolore",
+        "description": "Ab et non aut eum error ut. Est sunt quisquam aspernatur rem sunt et. Similique modi aspernatur sint alias et sit. Libero ipsum temporibus modi aliquam ducimus fugiat facere tenetur.\r\n\r\nUnde voluptatem suscipit sint doloribus consequatur. Sunt nemo laborum illum quis. Voluptas fugit libero ipsam qui nulla.",
+        "link": "http://localhost/author/kenna-schneider/",
+        "slug": "kenna-schneider",
+        "avatar_urls": {
+            "24": "http://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=24&d=mm&r=g",
+            "48": "http://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=48&d=mm&r=g",
+            "96": "http://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=96&d=mm&r=g"
+        },
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Kenna, Author at Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/author/kenna-schneider/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"profile\" />\n<meta property=\"og:title\" content=\"Kenna, Author at Test WordPress Site\" />\n<meta property=\"og:url\" content=\"http://localhost/author/kenna-schneider/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta property=\"og:image\" content=\"https://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=500&d=mm&r=g\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"ProfilePage\",\n\t            \"@id\": \"http://localhost/author/kenna-schneider/\",\n\t            \"url\": \"http://localhost/author/kenna-schneider/\",\n\t            \"name\": \"Kenna, Author at Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/author/kenna-schneider/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\",\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"ReadAction\",\n\t                    \"target\": [\n\t                        \"http://localhost/author/kenna-schneider/\"\n\t                    ]\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/author/kenna-schneider/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Archives for Kenna\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"Person\",\n\t            \"@id\": \"http://localhost/#/schema/person/5f695121a4d6a5996e59a6e715cd0d91\",\n\t            \"name\": \"Kenna\",\n\t            \"image\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/person/image/\",\n\t                \"url\": \"http://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=96&d=mm&r=g\",\n\t                \"contentUrl\": \"http://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=96&d=mm&r=g\",\n\t                \"caption\": \"Kenna\"\n\t            },\n\t            \"description\": \"Ab et non aut eum error ut. Est sunt quisquam aspernatur rem sunt et. Similique modi aspernatur sint alias et sit. Libero ipsum temporibus modi aliquam ducimus fugiat facere tenetur. Unde voluptatem suscipit sint doloribus consequatur. Sunt nemo laborum illum quis. Voluptas fugit libero ipsam qui nulla.\",\n\t            \"sameAs\": [\n\t                \"http://www.marvin.com/ut-sit-minus-velit-ipsa-recusandae-debitis-dolore\"\n\t            ],\n\t            \"mainEntityOfPage\": {\n\t                \"@id\": \"http://localhost/author/kenna-schneider/\"\n\t            }\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Kenna, Author at Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/author/kenna-schneider/",
+            "og_locale": "en_US",
+            "og_type": "profile",
+            "og_title": "Kenna, Author at Test WordPress Site",
+            "og_url": "http://localhost/author/kenna-schneider/",
+            "og_site_name": "Test WordPress Site",
+            "og_image": [
+                {
+                    "url": "https://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=500&d=mm&r=g"
+                }
+            ],
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "ProfilePage",
+                        "@id": "http://localhost/author/kenna-schneider/",
+                        "url": "http://localhost/author/kenna-schneider/",
+                        "name": "Kenna, Author at Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/author/kenna-schneider/#breadcrumb"
+                        },
+                        "inLanguage": "en-US",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "http://localhost/author/kenna-schneider/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/author/kenna-schneider/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Archives for Kenna"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    },
+                    {
+                        "@type": "Person",
+                        "@id": "http://localhost/#/schema/person/5f695121a4d6a5996e59a6e715cd0d91",
+                        "name": "Kenna",
+                        "image": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/person/image/",
+                            "url": "http://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=96&d=mm&r=g",
+                            "contentUrl": "http://1.gravatar.com/avatar/dfa0891812835f64c28681a6ef18d1ff?s=96&d=mm&r=g",
+                            "caption": "Kenna"
+                        },
+                        "description": "Ab et non aut eum error ut. Est sunt quisquam aspernatur rem sunt et. Similique modi aspernatur sint alias et sit. Libero ipsum temporibus modi aliquam ducimus fugiat facere tenetur. Unde voluptatem suscipit sint doloribus consequatur. Sunt nemo laborum illum quis. Voluptas fugit libero ipsam qui nulla.",
+                        "sameAs": [
+                            "http://www.marvin.com/ut-sit-minus-velit-ipsa-recusandae-debitis-dolore"
+                        ],
+                        "mainEntityOfPage": {
+                            "@id": "http://localhost/author/kenna-schneider/"
+                        }
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/users/4"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/users"
+                }
+            ]
+        }
+    },
+    {
+        "id": 3,
+        "name": "Marquis",
+        "url": "http://www.jerde.info/mollitia-optio-ullam-nemo-cum.html",
+        "description": "Tenetur eligendi ex voluptas reprehenderit labore officiis est. Recusandae sint mollitia quia ea alias pariatur enim. Sit omnis vel non soluta. In repellat qui laborum consequuntur.\r\n\r\nPerspiciatis eum dolores consequatur ipsam unde fugiat debitis. Eos quia corrupti ex occaecati suscipit tenetur quaerat. Aspernatur vel minus optio aut dolor aspernatur.",
+        "link": "http://localhost/author/marquis-schmidt/",
+        "slug": "marquis-schmidt",
+        "avatar_urls": {
+            "24": "http://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=24&d=mm&r=g",
+            "48": "http://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=48&d=mm&r=g",
+            "96": "http://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=96&d=mm&r=g"
+        },
+        "meta": [],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v23.2 - https://yoast.com/wordpress/plugins/seo/ -->\n<title>Marquis, Author at Test WordPress Site</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"http://localhost/author/marquis-schmidt/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"profile\" />\n<meta property=\"og:title\" content=\"Marquis, Author at Test WordPress Site\" />\n<meta property=\"og:url\" content=\"http://localhost/author/marquis-schmidt/\" />\n<meta property=\"og:site_name\" content=\"Test WordPress Site\" />\n<meta property=\"og:image\" content=\"https://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=500&d=mm&r=g\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@exampleorg\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\n\t    \"@context\": \"https://schema.org\",\n\t    \"@graph\": [\n\t        {\n\t            \"@type\": \"ProfilePage\",\n\t            \"@id\": \"http://localhost/author/marquis-schmidt/\",\n\t            \"url\": \"http://localhost/author/marquis-schmidt/\",\n\t            \"name\": \"Marquis, Author at Test WordPress Site\",\n\t            \"isPartOf\": {\n\t                \"@id\": \"http://localhost/#website\"\n\t            },\n\t            \"breadcrumb\": {\n\t                \"@id\": \"http://localhost/author/marquis-schmidt/#breadcrumb\"\n\t            },\n\t            \"inLanguage\": \"en-US\",\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"ReadAction\",\n\t                    \"target\": [\n\t                        \"http://localhost/author/marquis-schmidt/\"\n\t                    ]\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"BreadcrumbList\",\n\t            \"@id\": \"http://localhost/author/marquis-schmidt/#breadcrumb\",\n\t            \"itemListElement\": [\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 1,\n\t                    \"name\": \"Home\",\n\t                    \"item\": \"http://localhost/\"\n\t                },\n\t                {\n\t                    \"@type\": \"ListItem\",\n\t                    \"position\": 2,\n\t                    \"name\": \"Archives for Marquis\"\n\t                }\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"WebSite\",\n\t            \"@id\": \"http://localhost/#website\",\n\t            \"url\": \"http://localhost/\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"description\": \"\",\n\t            \"publisher\": {\n\t                \"@id\": \"http://localhost/#organization\"\n\t            },\n\t            \"potentialAction\": [\n\t                {\n\t                    \"@type\": \"SearchAction\",\n\t                    \"target\": {\n\t                        \"@type\": \"EntryPoint\",\n\t                        \"urlTemplate\": \"http://localhost/?s={search_term_string}\"\n\t                    },\n\t                    \"query-input\": \"required name=search_term_string\"\n\t                }\n\t            ],\n\t            \"inLanguage\": \"en-US\"\n\t        },\n\t        {\n\t            \"@type\": \"Organization\",\n\t            \"@id\": \"http://localhost/#organization\",\n\t            \"name\": \"Test WordPress Site\",\n\t            \"url\": \"http://localhost/\",\n\t            \"logo\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\",\n\t                \"url\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"contentUrl\": \"http://localhost/wp-content/uploads/2024/08/600x400.png\",\n\t                \"width\": 600,\n\t                \"height\": 400,\n\t                \"caption\": \"Test WordPress Site\"\n\t            },\n\t            \"image\": {\n\t                \"@id\": \"http://localhost/#/schema/logo/image/\"\n\t            },\n\t            \"sameAs\": [\n\t                \"https://facebook.com/exampleorg\",\n\t                \"https://x.com/exampleorg\"\n\t            ]\n\t        },\n\t        {\n\t            \"@type\": \"Person\",\n\t            \"@id\": \"http://localhost/#/schema/person/d4e76e7c508de55c944cd482bd9fd759\",\n\t            \"name\": \"Marquis\",\n\t            \"image\": {\n\t                \"@type\": \"ImageObject\",\n\t                \"inLanguage\": \"en-US\",\n\t                \"@id\": \"http://localhost/#/schema/person/image/\",\n\t                \"url\": \"http://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=96&d=mm&r=g\",\n\t                \"contentUrl\": \"http://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=96&d=mm&r=g\",\n\t                \"caption\": \"Marquis\"\n\t            },\n\t            \"description\": \"Tenetur eligendi ex voluptas reprehenderit labore officiis est. Recusandae sint mollitia quia ea alias pariatur enim. Sit omnis vel non soluta. In repellat qui laborum consequuntur. Perspiciatis eum dolores consequatur ipsam unde fugiat debitis. Eos quia corrupti ex occaecati suscipit tenetur quaerat. Aspernatur vel minus optio aut dolor aspernatur.\",\n\t            \"sameAs\": [\n\t                \"http://www.jerde.info/mollitia-optio-ullam-nemo-cum.html\"\n\t            ],\n\t            \"mainEntityOfPage\": {\n\t                \"@id\": \"http://localhost/author/marquis-schmidt/\"\n\t            }\n\t        }\n\t    ]\n\t}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Marquis, Author at Test WordPress Site",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "http://localhost/author/marquis-schmidt/",
+            "og_locale": "en_US",
+            "og_type": "profile",
+            "og_title": "Marquis, Author at Test WordPress Site",
+            "og_url": "http://localhost/author/marquis-schmidt/",
+            "og_site_name": "Test WordPress Site",
+            "og_image": [
+                {
+                    "url": "https://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=500&d=mm&r=g"
+                }
+            ],
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@exampleorg",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "ProfilePage",
+                        "@id": "http://localhost/author/marquis-schmidt/",
+                        "url": "http://localhost/author/marquis-schmidt/",
+                        "name": "Marquis, Author at Test WordPress Site",
+                        "isPartOf": {
+                            "@id": "http://localhost/#website"
+                        },
+                        "breadcrumb": {
+                            "@id": "http://localhost/author/marquis-schmidt/#breadcrumb"
+                        },
+                        "inLanguage": "en-US",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "http://localhost/author/marquis-schmidt/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "http://localhost/author/marquis-schmidt/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "http://localhost/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Archives for Marquis"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "http://localhost/#website",
+                        "url": "http://localhost/",
+                        "name": "Test WordPress Site",
+                        "description": "",
+                        "publisher": {
+                            "@id": "http://localhost/#organization"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "http://localhost/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "http://localhost/#organization",
+                        "name": "Test WordPress Site",
+                        "url": "http://localhost/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/logo/image/",
+                            "url": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "contentUrl": "http://localhost/wp-content/uploads/2024/08/600x400.png",
+                            "width": 600,
+                            "height": 400,
+                            "caption": "Test WordPress Site"
+                        },
+                        "image": {
+                            "@id": "http://localhost/#/schema/logo/image/"
+                        },
+                        "sameAs": [
+                            "https://facebook.com/exampleorg",
+                            "https://x.com/exampleorg"
+                        ]
+                    },
+                    {
+                        "@type": "Person",
+                        "@id": "http://localhost/#/schema/person/d4e76e7c508de55c944cd482bd9fd759",
+                        "name": "Marquis",
+                        "image": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "http://localhost/#/schema/person/image/",
+                            "url": "http://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=96&d=mm&r=g",
+                            "contentUrl": "http://0.gravatar.com/avatar/69c6db7bfff0abc7ae0fc438d3f6afa1?s=96&d=mm&r=g",
+                            "caption": "Marquis"
+                        },
+                        "description": "Tenetur eligendi ex voluptas reprehenderit labore officiis est. Recusandae sint mollitia quia ea alias pariatur enim. Sit omnis vel non soluta. In repellat qui laborum consequuntur. Perspiciatis eum dolores consequatur ipsam unde fugiat debitis. Eos quia corrupti ex occaecati suscipit tenetur quaerat. Aspernatur vel minus optio aut dolor aspernatur.",
+                        "sameAs": [
+                            "http://www.jerde.info/mollitia-optio-ullam-nemo-cum.html"
+                        ],
+                        "mainEntityOfPage": {
+                            "@id": "http://localhost/author/marquis-schmidt/"
+                        }
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/users/3"
+                }
+            ],
+            "collection": [
+                {
+                    "href": "http://localhost/wp-json/wp/v2/users"
+                }
+            ]
+        }
+    }
+]

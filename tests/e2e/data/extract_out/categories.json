@@ -1,0 +1,152 @@
+[
+  {
+    "id": 5,
+    "count": 7,
+    "description": "Consectetur numquam fugiat tempora porro et quo aut illum itaque deleniti autem velit et et quibusdam perferendis rerum eligendi rerum suscipit rerum non iste molestiae et atque nemo nihil aut quasi reprehenderit natus ab magnam quidem dolorem debitis dicta dolore blanditiis sit harum optio voluptates vel molestiae architecto architecto et quo nesciunt dicta omnis autem quas voluptatem libero",
+    "link": "http://localhost/category/commodi-quasi/",
+    "name": "Commodi quasi",
+    "slug": "commodi-quasi",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 10,
+    "count": 6,
+    "description": "Quod officiis reprehenderit placeat beatae temporibus id quibusdam quis quo cum ad quis repudiandae dolores assumenda fugit aut veniam nisi autem ex animi suscipit facilis quo consectetur quia alias qui ipsam",
+    "link": "http://localhost/category/consectetur-consequuntur-et/",
+    "name": "Consectetur consequuntur et",
+    "slug": "consectetur-consequuntur-et",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 15,
+    "count": 3,
+    "description": "Beatae sequi ut nulla et doloremque consectetur quia at necessitatibus voluptatum non non id expedita vitae ut eum facilis aut et animi rem nisi aut",
+    "link": "http://localhost/category/earum-tempore-maxime-numquam/",
+    "name": "Earum tempore maxime numquam",
+    "slug": "earum-tempore-maxime-numquam",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 18,
+    "count": 7,
+    "description": "Ad error consequatur adipisci sapiente repellat qui suscipit qui placeat in exercitationem sit vitae minus nihil nemo consequatur vel accusantium ut labore qui eos qui asperiores dicta nemo id aliquam",
+    "link": "http://localhost/category/et-est-sunt-consequatur-rerum/",
+    "name": "Et est sunt consequatur rerum",
+    "slug": "et-est-sunt-consequatur-rerum",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 14,
+    "count": 10,
+    "description": "Ut necessitatibus ducimus molestias dolorum consequatur repellat eaque quia cum ex accusantium doloremque eaque consequuntur blanditiis commodi beatae quidem rerum libero et aliquid deleniti officiis omnis consequatur eos dolores assumenda aut aut consequatur id",
+    "link": "http://localhost/category/itaque-cupiditate-fugit-in-officia/",
+    "name": "Itaque cupiditate fugit in officia",
+    "slug": "itaque-cupiditate-fugit-in-officia",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 8,
+    "count": 7,
+    "description": "Porro aut placeat est atque est dolore corrupti tenetur amet ipsam aut pariatur consequatur unde voluptas sed mollitia commodi sequi a minus fugit et ducimus aperiam nihil est dicta iure itaque velit ipsam minima fugit pariatur aut odit iste nihil laborum nesciunt quis aliquam quod mollitia mollitia laborum officia",
+    "link": "http://localhost/category/libero-molestias-et/",
+    "name": "Libero molestias et",
+    "slug": "libero-molestias-et",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 11,
+    "count": 7,
+    "description": "Repellendus nihil quo aut sed molestias nesciunt asperiores inventore beatae ut voluptatum quam qui sed alias voluptatem dolores saepe aut tempora eligendi velit consequatur et et quas ut nisi qui voluptatem illum",
+    "link": "http://localhost/category/maxime-eos-incidunt/",
+    "name": "Maxime eos incidunt",
+    "slug": "maxime-eos-incidunt",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 4,
+    "count": 7,
+    "description": "Cumque iste deserunt in cum mollitia ipsa",
+    "link": "http://localhost/category/tempora-doloribus-ad/",
+    "name": "Tempora doloribus ad",
+    "slug": "tempora-doloribus-ad",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 28,
+    "count": 1,
+    "description": "",
+    "link": "http://localhost/de/category/uncategorized-de/",
+    "name": "Uncategorized",
+    "slug": "uncategorized-de",
+    "parent": null,
+    "link_locale": "de"
+  },
+  {
+    "id": 32,
+    "count": 1,
+    "description": "",
+    "link": "http://localhost/fr/category/uncategorized-fr/",
+    "name": "Uncategorized",
+    "slug": "uncategorized-fr",
+    "parent": null,
+    "link_locale": "fr"
+  },
+  {
+    "id": 1,
+    "count": 10,
+    "description": "",
+    "link": "http://localhost/category/uncategorized/",
+    "name": "Uncategorized",
+    "slug": "uncategorized",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 12,
+    "count": 5,
+    "description": "Est non autem deserunt dicta eveniet et sequi hic",
+    "link": "http://localhost/category/velit-ut-deserunt-ut/",
+    "name": "Velit ut deserunt ut",
+    "slug": "velit-ut-deserunt-ut",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 20,
+    "count": 10,
+    "description": "Ea quo mollitia libero expedita rerum amet eius qui ipsam sed iste magnam sit et consequatur ullam voluptate corrupti voluptas harum sed accusamus ut sint voluptates ea",
+    "link": "http://localhost/category/voluptas-soluta/",
+    "name": "Voluptas soluta",
+    "slug": "voluptas-soluta",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 7,
+    "count": 9,
+    "description": "Et excepturi nulla sed sint autem neque ut a praesentium nobis aspernatur ab omnis voluptatibus laboriosam mollitia tempore vel repellendus omnis quae maxime possimus labore voluptas voluptatem officiis eius qui ea voluptatem minima minus ut expedita sed qui est quia deserunt explicabo dolorum earum et sit",
+    "link": "http://localhost/category/voluptatem-asperiores-iste-rerum/",
+    "name": "Voluptatem asperiores iste rerum",
+    "slug": "voluptatem-asperiores-iste-rerum",
+    "parent": null,
+    "link_locale": null
+  },
+  {
+    "id": 17,
+    "count": 10,
+    "description": "Impedit minima praesentium vel sint non magni nesciunt qui placeat reiciendis suscipit debitis eos consequatur iusto et voluptas at eveniet nam ullam quaerat ut rerum corrupti libero fugiat voluptas nulla hic iste reprehenderit ut incidunt",
+    "link": "http://localhost/category/voluptatem-neque-tempora-illo-perferendis-voluptatem-sint/",
+    "name": "Voluptatem neque tempora illo perferendis voluptatem sint",
+    "slug": "voluptatem-neque-tempora-illo-perferendis-voluptatem-sint",
+    "parent": null,
+    "link_locale": null
+  }
+]
