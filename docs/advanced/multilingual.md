@@ -36,7 +36,7 @@ Currently the following plugins are supported:
 
     ??? example
         ```html
-        --8<-- "tests/parse/translations/test_pickers/polylang_widget.html:struct"
+        --8<-- "tests/parse/translations/data/polylang_widget.html:struct"
         ```
 
 
@@ -44,7 +44,7 @@ Currently the following plugins are supported:
 
     ??? example
         ```html
-        --8<-- "tests/parse/translations/test_pickers/polylang_custom_dropdown.html:struct"
+        --8<-- "tests/parse/translations/data/polylang_custom_dropdown.html:struct"
         ```
 
 **Does not support**:
