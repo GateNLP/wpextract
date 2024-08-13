@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0 (upcoming)
+## 1.1.0 (2024-08-13)
 
 **Features & Improvements**
 
