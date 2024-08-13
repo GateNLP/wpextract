@@ -38,3 +38,9 @@ def mocked_responses():
 def mocked_responses_optional():
     with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
         yield rsps
+
+
+@pytest.fixture()
+def mocked_responses_ordered():
+    with responses.RequestsMock(registry=responses.registries.OrderedRegistry) as rsps:
+        yield rsps

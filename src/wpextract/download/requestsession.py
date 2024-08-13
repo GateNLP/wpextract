@@ -136,12 +136,6 @@ EXCEPTION_CLS = {
 
 
 def _handle_status(url: str, status_code: int, n_tries: Optional[int] = None) -> None:
-    if 300 <= status_code < 400:
-        logging.error(
-            f'Too many redirects (status code {status_code}) while fetching "{url}"'
-        )
-        raise HTTPTooManyRedirects
-
     if status_code in ERROR_NAMES:
         log_msg = (
             f'Error {status_code} ({ERROR_NAMES[status_code]}) while fetching "{url}"'
@@ -237,19 +231,16 @@ class RequestSession:
             self.s.auth = authorization
         self.wait = wait
         self.timeout = timeout
-        self._mount_retry(backoff_factor, max_redirects, max_retries)
+        self.s.max_redirects = max_redirects
+        self._mount_retry(backoff_factor, max_retries)
         self.waiter = RequestWait(wait, random_wait)
         self.user_agent = user_agent if user_agent is not None else DEFAULT_UA
 
-    def _mount_retry(
-        self, backoff_factor: float, max_redirects: int, max_retries: int
-    ) -> None:
+    def _mount_retry(self, backoff_factor: float, max_retries: int) -> None:
         retry = Retry(
             total=max_retries,
             backoff_factor=backoff_factor,
-            redirect=max_redirects,
             status_forcelist=RETRY_AFTER_STATUS,
-            raise_on_redirect=False,
             raise_on_status=False,
         )
         adapter = HTTPAdapter(max_retries=retry)
@@ -329,6 +320,9 @@ class RequestSession:
         except requests.Timeout as e:
             logging.error(f"Request timed out fetching {url}")
             raise ConnectionTimeout from e
+        except requests.TooManyRedirects as e:
+            logging.error(f'Too many redirects while fetching "{url}"')
+            raise HTTPTooManyRedirects from e
 
         # If this is an HTTP 400 due to an invalid page, raise this special error early
         if response.status_code == 400 and "application/json" in response.headers.get(

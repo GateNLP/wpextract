@@ -20,6 +20,8 @@
 - Fixed the scrape crawling not correctly recognising when duplicate URLs were encountered. Previously duplicates would be included, but only one would be used. Now, they will be correctly logged. As a result of this change, the `SCRAPE_CRAWL_VERSION` has been incremented, meaning running extraction on a scrape will cause it to be re-crawled.
 - Fixed the return type annotation `LangPicker.get_root()`: it is now annotated as (`bs4.Tag` or `None`) instead of `bs4.PageElement`. This shouldn't be a breaking change, as the expected return type of this function was always a `Tag` object or `None`.
 - Type of `TranslationLink.lang` changed to reflect that it can accept a string to resolve or an already resolved `Language` instance
+- Fixed downloading throwing an error stating the WordPress v2 API was not supported in other error cases
+- Fixed the maximum redirects permitted not being set properly, meaning the effective value was always 30
 
 **Documentation**
 
