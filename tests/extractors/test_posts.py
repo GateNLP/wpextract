@@ -32,7 +32,7 @@ def mock_translation_extractor(post_bs: BeautifulSoup, link: str, translation_pi
         translation = {"href": "https://example.org/an-example-post/", "lang": "en"}
     elif post_id == 3:
         return pd.Series([None, []])
-    else:
+    else:  # pragma: no cover
         raise RuntimeError(f"Unknown mock post id {post_id} (type {type(post_id)})")
 
     return pd.Series(

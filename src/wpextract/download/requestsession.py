@@ -2,14 +2,18 @@ import logging
 import random
 import time
 from http.cookies import SimpleCookie
-from typing import Optional, Union
+from typing import TYPE_CHECKING, Literal, Optional, Union
 
 import requests
 from requests.adapters import HTTPAdapter
 from requests.auth import HTTPBasicAuth, HTTPDigestAuth
 from urllib3 import Retry
 
-DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+if TYPE_CHECKING:
+    from requests.models import Response
+    from requests.sessions import _Data as RequestDataType
+
+DEFAULT_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
 
 
 class ConnectionCouldNotResolve(Exception):
@@ -36,7 +40,13 @@ class ConnectionTimeout(Exception):
     pass
 
 
-class HTTPError400(Exception):
+class HTTPError(Exception):
+    """Base class for HTTP errors."""
+
+    pass
+
+
+class HTTPError400(HTTPError):
     """HTTP Bad Request.
 
     See Also:
@@ -46,7 +56,7 @@ class HTTPError400(Exception):
     pass
 
 
-class HTTPErrorInvalidPage(Exception):
+class HTTPErrorInvalidPage(HTTPError):
     """Special case of HTTP 400 if the error is caused by a nonexistent page.
 
     This indicates the last page has been passed and all items have been retrieved.
@@ -55,38 +65,32 @@ class HTTPErrorInvalidPage(Exception):
     pass
 
 
-class HTTPError401(Exception):
+class HTTPError401(HTTPError):
     """HTTP Unauthorized."""
 
     pass
 
 
-class HTTPError403(Exception):
+class HTTPError403(HTTPError):
     """HTTP Forbidden."""
 
     pass
 
 
-class HTTPError404(Exception):
+class HTTPError404(HTTPError):
     """HTTP Not Found."""
 
     pass
 
 
-class HTTPError500(Exception):
+class HTTPError500(HTTPError):
     """HTTP Internal Server Error."""
 
     pass
 
 
-class HTTPError502(Exception):
+class HTTPError502(HTTPError):
     """HTTP Bad Gateway."""
-
-    pass
-
-
-class HTTPError(Exception):
-    """A generic HTTP error with an unexpected code."""
 
     pass
 
@@ -131,13 +135,7 @@ EXCEPTION_CLS = {
 }
 
 
-def _handle_status(url, status_code, n_tries=None):
-    if 300 <= status_code < 400:
-        logging.error(
-            f'Too many redirects (status code {status_code}) while fetching "{url}"'
-        )
-        raise HTTPTooManyRedirects
-
+def _handle_status(url: str, status_code: int, n_tries: Optional[int] = None) -> None:
     if status_code in ERROR_NAMES:
         log_msg = (
             f'Error {status_code} ({ERROR_NAMES[status_code]}) while fetching "{url}"'
@@ -175,12 +173,12 @@ class RequestWait:
         self.wait_s = wait or 0
         self.random_wait = random_wait
 
-    def wait(self):
+    def wait(self) -> None:
         """Perform the specified wait."""
         if self.wait is None:
             return
 
-        wait_factor = 1
+        wait_factor = 1.0
         if self.random_wait:
             wait_factor = random.uniform(0.5, 1.5)
 
@@ -204,6 +202,7 @@ class RequestSession:
         max_retries: int = 10,
         backoff_factor: float = 0.1,
         max_redirects: int = 20,
+        user_agent: Optional[str] = None,
     ):
         """Create a new request session.
 
@@ -217,6 +216,7 @@ class RequestSession:
             max_retries: the maximum number of retries before failing
             backoff_factor: Factor to wait between successive retries
             max_redirects: maximum number of redirects to follow
+            user_agent: User agent to use for requests. Set to [`DEFAULT_UA`][wpextract.download.requestsession.DEFAULT_UA] by default.
         """
         self.s = requests.Session()
         if proxy is not None:
@@ -224,41 +224,79 @@ class RequestSession:
         if cookies is not None:
             self.set_cookies(cookies)
         if authorization is not None and (
-            type(authorization) is tuple
-            and len(authorization) == 2
+            (type(authorization) is tuple and len(authorization) == 2)
             or type(authorization) is HTTPBasicAuth
             or type(authorization) is HTTPDigestAuth
         ):
             self.s.auth = authorization
         self.wait = wait
         self.timeout = timeout
-        self._mount_retry(backoff_factor, max_redirects, max_retries)
+        self.s.max_redirects = max_redirects
+        self._mount_retry(backoff_factor, max_retries)
         self.waiter = RequestWait(wait, random_wait)
+        self.user_agent = user_agent if user_agent is not None else DEFAULT_UA
 
-    def _mount_retry(self, backoff_factor, max_redirects, max_retries):
+    def _mount_retry(self, backoff_factor: float, max_retries: int) -> None:
         retry = Retry(
             total=max_retries,
             backoff_factor=backoff_factor,
-            redirect=max_redirects,
             status_forcelist=RETRY_AFTER_STATUS,
-            raise_on_redirect=False,
             raise_on_status=False,
         )
         adapter = HTTPAdapter(max_retries=retry)
         self.s.mount("http://", adapter)
         self.s.mount("https://", adapter)
 
-    def get(self, url):
-        """Calls the get function from requests but handles errors to raise proper exception following the context."""
+    def get(self, url: str) -> "Response":
+        """Calls the get function from requests but handles errors to raise proper exception following the context.
+
+        Args:
+            url: URL to fetch
+
+        Returns:
+            the Response object
+        """
         return self.do_request("get", url)
 
-    def post(self, url, data=None):
-        """Calls the post function from requests but handles errors to raise proper exception following the context."""
+    def post(self, url: str, data: Optional["RequestDataType"] = None) -> "Response":
+        """Calls the post function from requests but handles errors to raise proper exception following the context.
+
+        Args:
+            url: URL to fetch
+            data: optional data to send
+
+        Returns:
+            the Response object
+        """
         return self.do_request("post", url, data)
 
-    def do_request(self, method, url, data=None, stream=False):
-        """Helper class to regroup requests and handle exceptions at the same location."""
-        headers = {"User-Agent": DEFAULT_UA}
+    def do_request(
+        self,
+        method: Literal["get", "post"],
+        url: str,
+        data: Optional["RequestDataType"] = None,
+        stream: bool = False,
+    ) -> "Response":
+        """Helper class to regroup requests and handle exceptions at the same location.
+
+        Args:
+            method: HTTP method to use
+            url: URL to fetch
+            data: optional data to send
+            stream: if True, the response will be streamed
+
+        Raises:
+            ConnectionCouldNotResolve: The remote host could not be resolved.
+            ConnectionRefused: The connection was refused by the server.
+            ConnectionReset: The connection was reset during the request.
+            ConnectionTimeout: Exceeded the configured timeout
+            HTTPErrorInvalidPage: Special case of HTTP 400 if the error is caused by a nonexistent page.
+                This usually signals that available pages have been exhausted.
+
+        Returns:
+            the Response object
+        """
+        headers = {"User-Agent": self.user_agent}
         response = None
         try:
             if method == "post":
@@ -282,6 +320,9 @@ class RequestSession:
         except requests.Timeout as e:
             logging.error(f"Request timed out fetching {url}")
             raise ConnectionTimeout from e
+        except requests.TooManyRedirects as e:
+            logging.error(f'Too many redirects while fetching "{url}"')
+            raise HTTPTooManyRedirects from e
 
         # If this is an HTTP 400 due to an invalid page, raise this special error early
         if response.status_code == 400 and "application/json" in response.headers.get(
@@ -289,9 +330,6 @@ class RequestSession:
         ):
             json_body = response.json()
             if "code" in json_body and "invalid_page_number" in json_body["code"]:
-                logging.debug(
-                    "Received HTTP 400 error which appears to be an invalid page error, probably reached the end."
-                )
                 raise HTTPErrorInvalidPage
 
         n_tries = None
@@ -323,7 +361,7 @@ class RequestSession:
         """
         return self.s.cookies.get_dict()
 
-    def set_proxy(self, proxy) -> None:
+    def set_proxy(self, proxy: str) -> None:
         """Set a proxy to use for the request.
 
         Args:

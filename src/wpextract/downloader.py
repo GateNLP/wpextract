@@ -1,11 +1,18 @@
 import logging
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, TypedDict
 
 from wpextract.download.exceptions import WordPressApiNotV2
 from wpextract.download.exporter import Exporter
-from wpextract.download.requestsession import RequestSession
-from wpextract.download.wpapi import WPApi
+from wpextract.download.requestsession import HTTPError, RequestSession
+from wpextract.download.wpapi import WPApi, WPObject
+
+ExportCallable = Callable[[list[WPObject], Path], int]
+
+
+class _ObjTypeFetchData(TypedDict):
+    export_func: ExportCallable
+    obj_name: str
 
 
 class WPDownloader:
@@ -18,14 +25,14 @@ class WPDownloader:
         data_types: list[str],
         session: Optional[RequestSession] = None,
         json_prefix: Optional[str] = None,
-    ):
+    ) -> None:
         """Initializes the WPDownloader object.
 
         Args:
             target: the target WordPress site URL
             out_path: the output path for the downloaded data
             data_types: set of data types to download
-            session : request session. Will be created from default constructor if not provided.
+            session: request session. Will be created from default constructor if not provided.
             json_prefix: prefix to prepend to JSON file names
         """
         self.target = target
@@ -35,8 +42,9 @@ class WPDownloader:
         self._test_session()
         self.scanner = WPApi(self.target, session=self.session)
         self.json_prefix = json_prefix
+        self.media_cache: Optional[list[WPObject]] = None
 
-    def _test_session(self):
+    def _test_session(self) -> None:
         try:
             self.session.get(self.target)
             logging.info("Connected successfully")
@@ -44,7 +52,7 @@ class WPDownloader:
             logging.error("Failed to connect to the server")
             raise e
 
-    def download(self):
+    def download(self) -> None:
         """Download and export the requested data lists."""
         if "users" in self.data_types:
             self._list_obj(WPApi.USER)
@@ -61,7 +69,7 @@ class WPDownloader:
         if "media" in self.data_types:
             self._list_obj(WPApi.MEDIA)
 
-    def download_media_files(self, session: RequestSession, dest: Path):
+    def download_media_files(self, session: RequestSession, dest: Path) -> None:
         """Download site media files.
 
         Args:
@@ -69,7 +77,7 @@ class WPDownloader:
             dest: destination directory for media
         """
         logging.info("Pulling media URLs")
-        media, slugs = self.scanner.get_media_urls("all", cache=True)
+        media, slugs = self.scanner.get_media_urls("all", media_cache=self.media_cache)
 
         if len(media) == 0:
             logging.warning("No media found corresponding to the criteria")
@@ -79,14 +87,22 @@ class WPDownloader:
         number_dl = Exporter.download_media(session, media, dest)
         logging.info(f"Downloaded {number_dl} media files")
 
-    def _get_fetch_or_list_type(self, obj_type, plural=False):
+    def _get_fetch_or_list_type(
+        self, obj_type: int, plural: bool = False
+    ) -> _ObjTypeFetchData:
         """Returns a dict containing all necessary metadata about the obj_type to list and fetch data.
 
         Args:
             obj_type: the type of the object
             plural: whether the name must be plural or not
+
+        Raises:
+            ValueError: if the object type is unknown
+
+        Returns:
+            A dict containing the export function (`export_func`) and the object name (`obj_name`)
         """
-        export_func = None
+        export_func: Optional[ExportCallable] = None
         obj_name = ""
         if obj_type == WPApi.USER:
             export_func = Exporter.export_users
@@ -109,23 +125,25 @@ class WPDownloader:
         elif obj_type == WPApi.MEDIA:
             export_func = Exporter.export_media
             obj_name = "Media"
+        else:
+            raise ValueError(f"Unknown object type {obj_type}")
 
         return {
             "export_func": export_func,
             "obj_name": obj_name,
         }
 
-    def _list_obj(self, obj_type, start=None, limit=None, cache=True):
+    def _list_obj(
+        self,
+        obj_type: int,
+        start: Optional[int] = None,
+        limit: Optional[int] = None,
+    ) -> None:
         prop = self._get_fetch_or_list_type(obj_type, plural=True)
         logging.info(f"Downloading {prop['obj_name']}")
 
         try:
-            kwargs = {}
-            if obj_type == WPApi.POST:
-                kwargs = {"comments": False}
-            obj_list = self.scanner.get_obj_list(
-                obj_type, start, limit, cache, kwargs=kwargs
-            )
+            obj_list, _ = self.scanner.get_obj_list(obj_type, start, limit)
 
             WPDownloader.export_decorator(
                 export_func=prop["export_func"],
@@ -133,6 +151,12 @@ class WPDownloader:
                 json_path=self.out_path,
                 json_prefix=self.json_prefix,
                 values=obj_list,
+            )
+            if obj_type == WPApi.MEDIA:
+                self.media_cache = obj_list
+        except HTTPError:
+            logging.exception(
+                f"An HTTP error was encountered while downloading {prop['obj_name']}"
             )
         except WordPressApiNotV2:
             logging.error("The API does not support WP V2")
@@ -142,12 +166,12 @@ class WPDownloader:
 
     @staticmethod
     def export_decorator(
-        export_func: Callable,
+        export_func: ExportCallable,
         file_name: str,
         json_path: Path,
-        json_prefix: str,
+        json_prefix: Optional[str],
         values: Any,
-        kwargs: Optional[dict] = None,
+        kwargs: Optional[dict[str, Any]] = None,
     ) -> None:
         """Call the export function with a constructed filename.
 

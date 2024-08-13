@@ -1,9 +1,10 @@
 import copy
 import logging
+from typing import Any
 from urllib.parse import urljoin, urlparse, urlunparse
 
 import pandas as pd
-from bs4 import BeautifulSoup, Comment, NavigableString
+from bs4 import BeautifulSoup, Comment, NavigableString, Tag
 
 from wpextract.extractors.data.images import MediaUse, ResolvableMediaUse
 from wpextract.extractors.data.links import Link, ResolvableLink
@@ -121,18 +122,22 @@ def _get_text(doc: BeautifulSoup) -> str:
     """Custom function to get document text.
 
     Extracts text from all elements, inserting newlines for <p> and <br> tags.
+
+    Returns:
+        The extracted text content
     """
     text = ""
     for e in doc.descendants:
         # Comments are a subtype of NavigableString, they need to be excluded
         if isinstance(e, NavigableString) and not isinstance(e, Comment):
             text += e
-        elif e.name in NEWLINE_TAGS:
+        elif isinstance(e, Tag) and e.name in NEWLINE_TAGS:
             text += "\n"
     return text
 
 
-def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
+# Return type has to be Any because the pd.Series type from pandas-stubs is generic with a single parameter
+def extract_content_data(doc: BeautifulSoup, self_link: str) -> "pd.Series[Any]":
     """Extract the links, embeds, images and text content of the document.
 
     Args:
@@ -148,10 +153,10 @@ def extract_content_data(doc: BeautifulSoup, self_link: str) -> pd.Series:
 
     doc_c = copy.copy(doc)
     for child in list(doc_c.descendants):
-        if child.decomposed or type(child) == NavigableString:
+        if child.decomposed or isinstance(child, NavigableString):
             continue
 
-        if child.name in EXCLUDED_CONTENT_TAGS:
+        if isinstance(child, Tag) and child.name in EXCLUDED_CONTENT_TAGS:
             child.decompose()
 
     content_text = squash_whitespace(_get_text(doc_c))

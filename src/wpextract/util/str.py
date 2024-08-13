@@ -4,7 +4,7 @@ ADJACENT_NEWLINE_REGEX = re.compile("\n{2,}")
 WHITESPACE_LINE_STARTING_REGEX = re.compile(r"^\s+", re.MULTILINE)
 
 
-def remove_prefix(text: str, prefix: str):
+def remove_prefix(text: str, prefix: str) -> str:
     """If the text starts with the prefix, remove it.
 
     If the prefix is not present, the original string will be returned.
@@ -21,7 +21,7 @@ def remove_prefix(text: str, prefix: str):
     return text
 
 
-def remove_suffix(text: str, suffix: str):
+def remove_suffix(text: str, suffix: str) -> str:
     """If the text ends with the suffix, remove it.
 
     If the suffix is not present, the original string will be returned.
@@ -38,7 +38,7 @@ def remove_suffix(text: str, suffix: str):
     return text
 
 
-def remove_ends(text: str, affix: str):
+def remove_ends(text: str, affix: str) -> str:
     """If the text starts or ends with the affix, remove it.
 
     If the affix is not present, the original string will be returned.
@@ -53,7 +53,7 @@ def remove_ends(text: str, affix: str):
     return remove_prefix(remove_suffix(text, affix), affix)
 
 
-def ensure_prefixes(text: str, prefixes: tuple[str], default: str):
+def ensure_prefixes(text: str, prefixes: tuple[str, ...], default: str) -> str:
     """Ensure the text starts with one of several prefixes, or prepend a default.
 
     Args:
