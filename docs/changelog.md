@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 (2025-01-20)
+
+- WPextract can now be installed with Python 3.13 and no longer specifies a hard upper Python bound.
+
 ## 1.1.0 (2024-08-13)
 
 **Features & Improvements**
