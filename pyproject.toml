@@ -1,13 +1,39 @@
-[tool.poetry]
+[project]
 name="wpextract"
 version="1.1.0"
 description="Create datasets from WordPress sites"
+authors=[
+    { name = "Freddy Heppell", email = "f.heppell@sheffield.ac.uk" }
+]
+license="Apache-2.0"
+readme = "README.md"
+dynamic = ["classifiers"]
+requires-python = ">=3.9"
+
+dependencies = [
+    "beautifulsoup4>=4.12.0",
+    "langcodes>=3.3.0",
+    "lxml>=5.0.0",
+    "numpy>=1.23.0",
+    "pandas>=1.5.2",
+    "tqdm>=4.65.0",
+    "requests>=2.32.3",
+    "click>=8.0.1",
+    "click-option-group>=0.5.3",
+    "urllib3>1.21.3,<3"
+]
+
+[project.urls]
 homepage="https://wpextract.readthedocs.io/"
 documentation="https://wpextract.readthedocs.io/"
 repository="https://github.com/GateNLP/wpextract"
-license="Apache-2.0"
-readme = "README.md"
-authors=["Freddy Heppell <frheppell1@sheffield.ac.uk>"]
+
+[project.scripts]
+wpextract = "wpextract.cli:cli"
+
+
+[tool.poetry]
+
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
@@ -20,9 +46,6 @@ packages=[
     { include = "wpextract", from = "src"}
 ]
 
-[tool.poetry.scripts]
-wpextract = "wpextract.cli:cli"
-
 # Workaround for https://github.com/python-poetry/poetry/issues/9293
 [[tool.poetry.source]]
 name = "pypi-public"
@@ -30,16 +53,6 @@ url = "https://pypi.org/simple/"
 
 [tool.poetry.dependencies]
 python = ">=3.9.0,<4.0"
-beautifulsoup4 = ">=4.12.0"
-langcodes = ">=3.3.0"
-lxml = ">=5.0.0"
-numpy = ">=1.23.0"
-pandas = ">=1.5.2"
-tqdm = ">=4.65.0"
-requests = ">=2.32.3"
-click = ">=8.0.1"
-click-option-group = ">=0.5.3"
-urllib3 = ">1.21.3,<3"
 
 [tool.poetry.group.dev.dependencies]
 build = "==0.9.*,>=0.9.0"
